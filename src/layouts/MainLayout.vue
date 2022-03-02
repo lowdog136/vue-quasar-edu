@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          SeverFans
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Сайт болельщиков ФК "Север" Мурманск</div>
       </q-toolbar>
     </q-header>
 
@@ -28,7 +28,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Навигация
         </q-item-label>
 
         <EssentialLink
@@ -50,38 +50,38 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Главная',
+    caption: 'домой',
+    icon: 'home',
+    to: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'ФК Север',
+    caption: 'О клубе, стадион, фанаты',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'Архив',
+    caption: 'Фото, видео, результаты матчей',
     icon: 'chat',
     link: 'https://chat.quasar.dev'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
+    title: 'Контакты',
+    caption: 'Связаться',
     icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    to: 'Contact'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
+    title: 'О сайте',
+    caption: 'История сайта',
+    icon: 'help',
+    to: 'AboutSite'
+  }
+/*   {
+    title: 'Vk',
+    caption: 'Клуб в Vk',
     icon: 'public',
     link: 'https://facebook.quasar.dev'
   },
@@ -90,7 +90,7 @@ const linksList = [
     caption: 'Community Quasar projects',
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
-  }
+  } */
 ]
 
 import { defineComponent, ref } from 'vue'
