@@ -2,8 +2,8 @@
   <q-page class="flex flex-center">
     <img
       alt="Quasar logo"
-      src="../assets/image/main-img.png"
-      style="width: 1000px; height: 900px"
+      src="../assets/image/fcsever_logo.png"
+      style="width: 550px; height: 500px"
     >
   </q-page>
 </template>
