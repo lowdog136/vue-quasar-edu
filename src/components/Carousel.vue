@@ -6,11 +6,13 @@
       v-model="slide"
       thumbnails
       infinite
+      autoplay="6500"
+      height="600px"
     >
-      <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-      <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-      <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-      <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+      <q-carousel-slide :name="1" img-src="~assets/carousel/1.jpg" />
+      <q-carousel-slide :name="2" img-src="~assets/carousel/2.jpg" />
+      <q-carousel-slide :name="3" img-src="~assets/carousel/3.jpg" />
+      <q-carousel-slide :name="4" img-src="~assets/carousel/4.jpg" />
     </q-carousel>
   </div>
 </template>
