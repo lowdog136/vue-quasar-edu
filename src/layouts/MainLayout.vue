@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="glossy">
         <q-btn
           flat
           dense
@@ -10,10 +10,14 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
+<!--        <q-footer reveal elevated>
+          <q-toolbar class="glossy">
+            <q-toolbar-title>Footer</q-toolbar-title>
+          </q-toolbar>
+        </q-footer>
         <q-toolbar-title>
           SeverFans
-        </q-toolbar-title>
+        </q-toolbar-title>-->
 
         <div>Сайт болельщиков ФК "Север" Мурманск</div>
       </q-toolbar>
@@ -57,15 +61,39 @@ const linksList = [
   },
   {
     title: 'ФК Север',
-    caption: 'О клубе, стадион, фанаты',
+    caption: 'О клубе',
     icon: 'sports_soccer',
-    link: 'https://github.com/quasarframework'
+    to: '/HistoryClub'
   },
   {
-    title: 'Архив',
-    caption: 'Фото, видео, результаты матчей',
+    title: 'Стадион',
+    caption: 'Стадион',
+    icon: 'sports_soccer',
+    to: '/Stadium'
+  },
+  {
+    title: 'Фанаты',
+    caption: 'Фанаты',
+    icon: 'sports_soccer',
+    to: '/Fanats'
+  },
+  {
+    title: 'Фото',
+    caption: 'Фото',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    to: '/Foto'
+  },
+  {
+    title: 'Видео',
+    caption: 'Видео',
+    icon: 'chat',
+    to: '/Video'
+  },
+  {
+    title: 'Резудьтаты матчей',
+    caption: 'Результаты матчей',
+    icon: 'chat',
+    to: '/ResultMatch'
   },
   {
     title: 'Контакты',
