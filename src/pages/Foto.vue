@@ -8,7 +8,7 @@
           </q-avatar>
 
           <q-toolbar-title>
-            О сайте
+            Фото
           </q-toolbar-title>
 
           <q-btn flat round dense icon="whatshot" />
@@ -18,11 +18,7 @@
       <q-page-container>
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            Cтраница о истории сайта severfans.ru <br>
-            Сайт был основан в 2007 году.<br>
-            Точную дату не вспомнить, но судя по Wayback Machine - 25 мая. Наверно эта дата и будет считаться датой начала. Хотя по факту все начиналось раньше.<br>
-            Как клуб, объединение болельщиков (хулсы, ультрас) - этот сайт имеет свою историю.<br>
-            О ней и будет ниже.<br>
+            <carousel />
           </p>
         </q-page>
       </q-page-container>
@@ -32,8 +28,10 @@
 
 <script>
 import { defineComponent } from 'vue'
+import Carousel from 'components/Carousel'
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: { Carousel }
 })
 </script>

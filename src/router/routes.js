@@ -12,7 +12,8 @@ const routes = [
       { path: '/HistoryClub', name: 'HistoryClub', component: () => import('pages/HistoryClub.vue') },
       { path: '/ResultMatch', name: 'ResultMatch', component: () => import('pages/ResultMatch.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
-      { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') }
+      { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
+      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },
 

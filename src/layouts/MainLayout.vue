@@ -14,10 +14,10 @@
           <q-toolbar class="glossy">
             <q-toolbar-title>Footer</q-toolbar-title>
           </q-toolbar>
-        </q-footer>
+        </q-footer>-->
         <q-toolbar-title>
           SeverFans
-        </q-toolbar-title>-->
+        </q-toolbar-title>
 
         <div>Сайт болельщиков ФК "Север" Мурманск</div>
       </q-toolbar>
