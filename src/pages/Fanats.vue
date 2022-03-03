@@ -8,7 +8,7 @@
           </q-avatar>
 
           <q-toolbar-title>
-            О сайте
+            Фанаты
           </q-toolbar-title>
 
           <q-btn flat round dense icon="whatshot" />
