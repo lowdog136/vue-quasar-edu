@@ -60,7 +60,7 @@
       v-model="expanded"
       icon="emoji_people"
       label="Фанаты"
-      caption="На главную"
+      caption="Болельщики клуба"
       to="/Fanats"
     />
     <q-expansion-item
