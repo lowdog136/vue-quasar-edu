@@ -1,11 +1,11 @@
 <template>
-  <div class="q-pa-md">
-<carousel />
+  <div class="q-pa-md" style="max-width: 350px">
+  <test-comp />
   </div>
 </template>
 <script>
-import Carousel from 'components/Carousel'
+import TestComp from 'components/TestComp'
 export default {
-  components: { Carousel }
+  components: { TestComp }
 }
 </script>
