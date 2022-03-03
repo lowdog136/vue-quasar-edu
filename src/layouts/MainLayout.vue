@@ -58,7 +58,7 @@ const linksList = [
   {
     title: 'ФК Север',
     caption: 'О клубе, стадион, фанаты',
-    icon: 'code',
+    icon: 'sports_soccer',
     link: 'https://github.com/quasarframework'
   },
   {
@@ -70,13 +70,13 @@ const linksList = [
   {
     title: 'Контакты',
     caption: 'Связаться',
-    icon: 'record_voice_over',
+    icon: 'contact_mail',
     to: 'Contact'
   },
   {
     title: 'О сайте',
     caption: 'История сайта',
-    icon: 'help',
+    icon: 'info',
     to: 'AboutSite'
   }
 /*   {
