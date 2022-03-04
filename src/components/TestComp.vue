@@ -26,6 +26,7 @@
         label="Стадион"
         caption="Стадион"
         to="/Stadium"
+        disable
       />
     </q-expansion-item>
     <q-expansion-item
@@ -47,6 +48,7 @@
         label="Видео"
         caption="Видеоматериалы"
         to="/Video"
+        disable
       />
       <q-expansion-item
         v-model="expanded"
@@ -54,6 +56,7 @@
         label="Результаты матчей"
         caption="Результаты матчей"
         to="/ResultMatch"
+        disable
       />
     </q-expansion-item>
     <q-expansion-item
@@ -62,6 +65,7 @@
       label="Фанаты"
       caption="Болельщики клуба"
       to="/Fanats"
+      disable
     />
     <q-expansion-item
       v-model="expanded"
