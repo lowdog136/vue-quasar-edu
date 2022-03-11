@@ -1,12 +1,21 @@
 <template>
   <div class="q-pa-md" style="max-width: 350px">
-    <q-expansion-item
-      v-model="expanded"
-      icon="home"
-      label="Главная"
-      caption="На главную"
-      to="/"
-     />
+    <q-item clickable v-ripple>
+      <q-item
+        to="/"
+        exact
+      >
+        <q-item-section side>
+          <q-icon
+            name="home"
+        />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Главная</q-item-label>
+          <q-item-label caption>На главную</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-item>
     <q-expansion-item
       v-model="expanded"
       icon="sports_soccer"
@@ -67,20 +76,40 @@
       to="/Fanats"
       disable
     />
-    <q-expansion-item
-      v-model="expanded"
-      icon="email"
-      label="Контакты"
-      caption="Связаться"
-      to="/Contact"
-    />
-    <q-expansion-item
-      v-model="expanded"
-      icon="info"
-      label="О сайте"
-      caption="История развития"
-      to="/AboutSite"
-    />
+    <q-item clickable v-ripple>
+      <q-item
+        to="/Contact"
+        expanded
+        exact
+      >
+        <q-item-section side>
+          <q-icon
+            name="email"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>О сайте</q-item-label>
+          <q-item-label caption>История развития</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-item>
+    <q-item clickable v-ripple>
+      <q-item
+        to="/AboutSite"
+        expanded
+        exact
+      >
+        <q-item-section side>
+          <q-icon
+            name="info"
+          />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>О сайте</q-item-label>
+          <q-item-label caption>История развития</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-item>
   </div>
 </template>
 
