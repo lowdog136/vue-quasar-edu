@@ -1,20 +1,13 @@
 <template>
   <div class="q-pa-md" style="max-width: 350px">
-    <q-item clickable v-ripple>
-      <q-item
-        to="/"
-        exact
-      >
-        <q-item-section side>
-          <q-icon
-            name="home"
-        />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Главная</q-item-label>
-          <q-item-label caption>На главную</q-item-label>
-        </q-item-section>
-      </q-item>
+    <q-item clickable v-ripple :active="active" to="/">
+      <q-item-section avatar>
+        <q-icon name="home" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>Главная</q-item-label>
+        <q-item-label caption>Оснавная страница</q-item-label>
+      </q-item-section>
     </q-item>
     <q-expansion-item
       v-model="expanded"
@@ -76,39 +69,23 @@
       to="/Fanats"
       disable
     />
-    <q-item clickable v-ripple>
-      <q-item
-        to="/Contact"
-        expanded
-        exact
-      >
-        <q-item-section side>
-          <q-icon
-            name="email"
-          />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>О сайте</q-item-label>
-          <q-item-label caption>История развития</q-item-label>
-        </q-item-section>
-      </q-item>
+    <q-item clickable v-ripple :active="active" to="/Contact">
+      <q-item-section avatar>
+        <q-icon name="email" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>Контакты</q-item-label>
+        <q-item-label caption>Связаться</q-item-label>
+      </q-item-section>
     </q-item>
-    <q-item clickable v-ripple>
-      <q-item
-        to="/AboutSite"
-        expanded
-        exact
-      >
-        <q-item-section side>
-          <q-icon
-            name="info"
-          />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>О сайте</q-item-label>
-          <q-item-label caption>История развития</q-item-label>
-        </q-item-section>
-      </q-item>
+    <q-item clickable v-ripple :active="active" to="/AboutSite">
+      <q-item-section avatar>
+        <q-icon name="info" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>О сайте</q-item-label>
+        <q-item-label caption>История развития</q-item-label>
+      </q-item-section>
     </q-item>
   </div>
 </template>
