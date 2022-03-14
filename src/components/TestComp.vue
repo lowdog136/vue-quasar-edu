@@ -22,9 +22,9 @@
         <q-item-section>
           <q-item-label>Новости клуба</q-item-label>
           <q-item-label caption>Последние известия</q-item-label>
-          <q-item-section side top>
-            <q-item-label caption>-14 марта 2022-</q-item-label>
-          </q-item-section>
+        </q-item-section>
+        <q-item-section side top>
+          <q-item-label caption>{{ DateNow }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/HistoryClub">
@@ -107,9 +107,9 @@
         <q-item-section>
           <q-item-label>Новости</q-item-label>
           <q-item-label caption>История обновления</q-item-label>
+        </q-item-section>
           <q-item-section side top>
-            <q-item-label caption>-14 марта 2022-</q-item-label>
-          </q-item-section>
+            <q-item-label caption>{{ DateNow }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/AboutSite">
@@ -137,7 +137,12 @@
 <script>
 
 export default {
-  name: 'TestComp'
+  name: 'TestComp',
+  setup () {
+    return {
+      DateNow: '14.03.22'
+    }
+  }
 }
 </script>
 
