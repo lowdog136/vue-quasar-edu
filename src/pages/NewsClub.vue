@@ -18,7 +18,7 @@
 
       <q-card-actions>
         <q-btn flat color="dark" label="14.03.22" />
-        <q-btn flat color="primary"  label="Подробно" />
+        <q-btn flat color="primary"  to="/News/140322" label="Подробно" />
 
         <q-space />
 
