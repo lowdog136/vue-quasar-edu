@@ -14,7 +14,7 @@
       </q-card-section>
 
       <q-card-actions>
-        <q-btn flat color="dark" label="Поделиться" />
+        <q-btn flat color="dark" label="14.03.22" />
         <q-btn flat color="primary"  label="vk.com/dynamo_spb" />
 
         <q-space />
