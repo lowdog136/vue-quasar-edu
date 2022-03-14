@@ -3,7 +3,7 @@
     <img
       alt="Quasar logo"
       src="../assets/image/fcsever_logo.png"
-      style="width: 550px; height: 500px"
+      style="width: 500px; height: 500px"
     >
   </q-page>
 </template>
