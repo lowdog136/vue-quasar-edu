@@ -121,6 +121,15 @@
           <q-item-label caption>История ресурса</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable v-ripple :active="active" to="/Test">
+        <q-item-section avatar>
+          <q-icon name="timeline" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Test</q-item-label>
+          <q-item-label caption>История ресурса</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-expansion-item>
   </div>
 </template>

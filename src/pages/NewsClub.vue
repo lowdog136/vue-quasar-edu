@@ -1,38 +1,62 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout view="lHh lpr lFf" container style="height: 800px" class="shadow-2 rounded-borders">
-      <q-header elevated>
-        <q-toolbar>
-          <q-avatar>
-            <img alt="logo" src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <q-card class="my-card" flat bordered>
+      <q-img
+        src="../assets/image/imgTitle/title_1.png"
+      />
 
-          <q-toolbar-title>
-            Новости клуба
-          </q-toolbar-title>
+      <q-card-section>
+        <div class="text-overline text-orange-9">Товарищеский матч</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">Матч против Динамо</div>
+        <div class="text-caption text-grey">
+          В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.
+        </div>
+      </q-card-section>
 
-          <q-btn flat round dense icon="whatshot" />
-        </q-toolbar>
-      </q-header>
+      <q-card-actions>
+        <q-btn flat color="dark" label="Поделиться" />
+        <q-btn flat color="primary" datasrc="vk.com/dynamo_spb" label="Источник" />
 
-      <q-page-container>
-        <q-page padding>
-          <p v-for="n in 1" :key="n">
-            Новость от 14 марта 2022<br><br>
-            Товарищеский матч <br>
-            ФК "Динамо" Санкт-Петербург - ФК "Север Мурманск" 4-2<br>
-            источник: vk.com/dynamo_spb<br>
-          </p>
-        </q-page>
-      </q-page-container>
-    </q-layout>
+        <q-space />
+
+        <q-btn
+          color="grey"
+          round
+          flat
+          dense
+          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="expanded = !expanded"
+        />
+      </q-card-actions>
+
+      <q-slide-transition>
+        <div v-show="expanded">
+          <q-separator />
+          <q-card-section class="text-subitle2">
+            {{ lorem }}
+          </q-card-section>
+        </div>
+      </q-slide-transition>
+    </q-card>
+
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+export default {
+  setup () {
+    return {
+      expanded: ref(false),
+      lorem: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.'
+    }
+  }
+}
 </script>
+
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
+</style>
