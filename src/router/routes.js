@@ -13,6 +13,8 @@ const routes = [
       { path: '/ResultMatch', name: 'ResultMatch', component: () => import('pages/ResultMatch.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
+      { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
+      { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },

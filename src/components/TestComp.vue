@@ -13,15 +13,26 @@
       v-model="expanded"
       icon="sports_soccer"
       label="ФК Север"
-      caption="О клубе, стадион"
+      caption="О клубе, новости, стадион"
     >
-      <q-expansion-item
-        v-model="expanded"
-        icon="people_alt"
-        label="Клуб"
-        caption="О клубе"
-        to="/HistoryClub"
-      />
+      <q-item clickable v-ripple :active="active" to="/HistoryClub">
+        <q-item-section avatar>
+          <q-icon name="people_alt" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Клуб</q-item-label>
+          <q-item-label caption>О клубе</q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-item clickable v-ripple :active="active" to="/NewsClub">
+        <q-item-section avatar>
+          <q-icon name="people_alt" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Новости клуба</q-item-label>
+          <q-item-label caption>Последние известия</q-item-label>
+        </q-item-section>
+      </q-item>
       <q-expansion-item
         v-model="expanded"
         icon="perm_identity"
@@ -37,13 +48,15 @@
       label="Архив"
       caption="Фото, видео, результаты матчей"
     >
-      <q-expansion-item
-        v-model="expanded"
-        icon="camera_alt"
-        label="Фото"
-        caption="Фотографии"
-        to="/Foto"
-      />
+      <q-item clickable v-ripple :active="active" to="/Foto">
+        <q-item-section avatar>
+          <q-icon name="camera_alt" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Фото</q-item-label>
+          <q-item-label caption>Фотографии</q-item-label>
+        </q-item-section>
+      </q-item>
       <q-expansion-item
         v-model="expanded"
         icon="movie"
