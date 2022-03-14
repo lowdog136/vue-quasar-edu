@@ -24,7 +24,7 @@
           <q-item-label caption>Последние известия</q-item-label>
         </q-item-section>
         <q-item-section side top>
-          <q-item-label caption>{{ DateNow }}</q-item-label>
+          <q-item-label caption>{{ ReleaseNewsSite }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/HistoryClub">
@@ -109,7 +109,7 @@
           <q-item-label caption>История обновления</q-item-label>
         </q-item-section>
           <q-item-section side top>
-            <q-item-label caption>{{ DateNow }}</q-item-label>
+            <q-item-label caption >{{ ReleaseDateSite }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/AboutSite">
@@ -121,16 +121,7 @@
           <q-item-label caption>История ресурса</q-item-label>
         </q-item-section>
       </q-item>
-      <q-item clickable v-ripple :active="active" to="/Test">
-        <q-item-section avatar>
-          <q-icon name="timeline" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Test</q-item-label>
-          <q-item-label caption>История ресурса</q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-expansion-item>
+     </q-expansion-item>
   </div>
 </template>
 
@@ -140,7 +131,12 @@ export default {
   name: 'TestComp',
   setup () {
     return {
-      DateNow: '14.03.22'
+      // Дата обновления сайта
+      ReleaseDateSite: '14.03.22',
+      // Дата обновления новостей о команде
+      ReleaseNewsSite: '14.03.22',
+      labelAboutSite: 'О сайте',
+      iconAboutSite: 'info'
     }
   }
 }
