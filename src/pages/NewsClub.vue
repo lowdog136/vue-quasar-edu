@@ -8,7 +8,7 @@
           </q-avatar>
 
           <q-toolbar-title>
-            Контакты
+            Новости клуба
           </q-toolbar-title>
 
           <q-btn flat round dense icon="whatshot" />
@@ -18,10 +18,10 @@
       <q-page-container>
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            Cвязаться со мной:<br>
-            Напишите мне на e-mail: lowdog{одинтришесть}@gmail.com<br>
-            Я обязательно отвечу.<br>
-            Приятного вам дня.<br>
+            Новость от 14 марта 2022<br><br>
+            Товарищеский матч <br>
+            ФК "Динамо" Санкт-Петербург - ФК "Север Мурманск" 4-2<br>
+            источник: vk.com/dynamo_spb<br>
           </p>
         </q-page>
       </q-page-container>

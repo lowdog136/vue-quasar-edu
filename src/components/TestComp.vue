@@ -15,6 +15,18 @@
       label="ФК Север"
       caption="О клубе, новости, стадион"
     >
+      <q-item clickable v-ripple :active="active" to="/NewsClub">
+        <q-item-section avatar>
+          <q-icon name="newspaper" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Новости клуба</q-item-label>
+          <q-item-label caption>Последние известия</q-item-label>
+          <q-item-section side top>
+            <q-item-label caption>-14 марта 2022-</q-item-label>
+          </q-item-section>
+        </q-item-section>
+      </q-item>
       <q-item clickable v-ripple :active="active" to="/HistoryClub">
         <q-item-section avatar>
           <q-icon name="people_alt" />
@@ -22,15 +34,6 @@
         <q-item-section>
           <q-item-label>Клуб</q-item-label>
           <q-item-label caption>О клубе</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/NewsClub">
-        <q-item-section avatar>
-          <q-icon name="people_alt" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Новости клуба</q-item-label>
-          <q-item-label caption>Последние известия</q-item-label>
         </q-item-section>
       </q-item>
       <q-expansion-item
@@ -91,15 +94,34 @@
         <q-item-label caption>Связаться</q-item-label>
       </q-item-section>
     </q-item>
-    <q-item clickable v-ripple :active="active" to="/AboutSite">
-      <q-item-section avatar>
-        <q-icon name="info" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>О сайте</q-item-label>
-        <q-item-label caption>История развития</q-item-label>
-      </q-item-section>
-    </q-item>
+    <q-expansion-item
+      v-model="expanded"
+      icon="info"
+      label="О сайте"
+      caption="Новости сайта, история развития"
+    >
+      <q-item clickable v-ripple :active="active" to="/NewsSite">
+        <q-item-section avatar>
+          <q-icon name="update" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Новости</q-item-label>
+          <q-item-label caption>История обновления</q-item-label>
+          <q-item-section side top>
+            <q-item-label caption>-14 марта 2022-</q-item-label>
+          </q-item-section>
+        </q-item-section>
+      </q-item>
+      <q-item clickable v-ripple :active="active" to="/AboutSite">
+        <q-item-section avatar>
+          <q-icon name="timeline" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>История</q-item-label>
+          <q-item-label caption>История ресурса</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-expansion-item>
   </div>
 </template>
 
