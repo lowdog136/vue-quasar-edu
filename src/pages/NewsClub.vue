@@ -9,13 +9,16 @@
         <div class="text-overline text-orange-9"> {{ statusMatch_2 }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">Матч против Динамо</div>
         <div class="text-caption text-grey">
-          В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.
+          В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Питербург.
+        </div>
+        <div class="text-caption text-grey">
+          Источник: vk.com/dynamo_spb.
         </div>
       </q-card-section>
 
       <q-card-actions>
         <q-btn flat color="dark" label="14.03.22" />
-        <q-btn flat color="primary"  label="vk.com/dynamo_spb" />
+        <q-btn flat color="primary"  label="Подробно" />
 
         <q-space />
 
@@ -38,7 +41,6 @@
         </div>
       </q-slide-transition>
     </q-card>
-
   </div>
 </template>
 
@@ -51,7 +53,7 @@ export default {
       expanded: ref(false),
       statusMatch_1: 'Товарищеский матч',
       statusMatch_2: 'Официальный матч',
-      lorem1: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.'
+      lorem1: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Питербург. Матч закончился победой хозяев со счетом 4-2.'
     }
   }
 }
