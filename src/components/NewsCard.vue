@@ -2,12 +2,12 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered>
       <q-img
-        src="../assets/image/imgTitle/title_1.png"
+        src='../assets/image/imgTitle/title_1.png'
       />
 
       <q-card-section>
-        <div class="text-overline text-orange-9"> {{ statusMatch_2 }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">Матч против Динамо</div>
+        <div class="text-overline text-orange-9"> {{ statusMatch_F }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ titleNews }}</div>
         <div class="text-caption text-grey">
           {{ prewievNews }}
         </div>
@@ -52,12 +52,20 @@
 import { ref } from 'vue'
 export default {
   name: 'NewsCard',
-  setup () {
+  data () {
     return {
       expanded: ref(false),
       dateNews: '14.03.22',
+      titleUrlImg: '../assets/image/imgTitle/title_1.png',
       prewievNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
       extNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.'
+    }
+  },
+  setup () {
+    return {
+      titleNews: 'Матч против Динамо',
+      statusMatch_F: 'Товарищеский матч',
+      statusMatch_O: 'Официальный матч'
     }
   }
 }

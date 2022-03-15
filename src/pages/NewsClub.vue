@@ -1,5 +1,5 @@
 <template>
- <NewsCard />
+  <NewsCard />
 </template>
 
 <script>
@@ -10,10 +10,7 @@ export default {
   components: { NewsCard },
   setup () {
     return {
-      expanded: ref(false),
-      statusMatch_1: 'Товарищеский матч',
-      statusMatch_2: 'Официальный матч',
-      lorem1: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Питербург. Матч закончился победой хозяев со счетом 4-2.'
+      expanded: ref(false)
     }
   }
 }
