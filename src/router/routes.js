@@ -15,10 +15,16 @@ const routes = [
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
       { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
+      {
+        path: '/News',
+        component: () => import('layouts/LayoutNewsPage.vue'),
+        children: [
+          { path: '/News/140322', name: '140322', component: () => import('pages/News/140322.vue') }
+        ]
+      },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },
-
   // Always leave this as last one,
   // but you can also remove it
   {
