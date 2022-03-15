@@ -34,7 +34,7 @@
         >
           Навигация
         </q-item-label>
-          <test-comp />
+          <NewsDrawer />
       </q-list>
     </q-drawer>
 
@@ -47,11 +47,11 @@
 <script>
 
 import { defineComponent, ref } from 'vue'
-import TestComp from 'components/TestComp'
+import NewsDrawer from 'components/NewsDrawer'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { TestComp },
+  components: { NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
 

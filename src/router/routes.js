@@ -19,12 +19,14 @@ const routes = [
         path: '/News',
         component: () => import('layouts/LayoutNewsPage.vue'),
         children: [
-          { path: '/News/140322', name: '140322', component: () => import('pages/News/140322.vue') }
+          { path: '/News/140322', name: '140322', component: () => import('pages/News/140322.vue') },
+          { path: '/News/test2', name: 'test2', component: () => import('pages/News/test2.vue') }
         ]
       },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },
+
   // Always leave this as last one,
   // but you can also remove it
   {
