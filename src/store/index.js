@@ -34,9 +34,15 @@ export default store(function (/* { ssrContext } */) {
           id: 2,
           Name: 'ФК Север',
           Caption: 'О клубе, новости, стадион'
+        },
+        {
+          id: 3,
+          Name: 'ФК Северdsf',
+          Caption: 'О клубе, новосsdfsdfти, стадион'
         }
       ],
-      count: 0
+      colorCode: 'подробно',
+      count: 'red'
     },
     mutations: {
       increment (state) {

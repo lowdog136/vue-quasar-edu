@@ -6,7 +6,7 @@
       </q-item-section>
       <q-item-section>
         <q-item-label> ds</q-item-label>
-        <q-item-label caption>Оснавная страница</q-item-label>
+        <q-item-label caption>Основная страница</q-item-label>
       </q-item-section>
     </q-item>
     <q-expansion-item
