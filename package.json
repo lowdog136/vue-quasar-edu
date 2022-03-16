@@ -1,8 +1,8 @@
 {
   "name": "vue-quasar-edu",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "SeverFans Quasar App",
   "author": "Denis Khodarev <lowdog136@gmail.com>",
   "private": true,
   "scripts": {

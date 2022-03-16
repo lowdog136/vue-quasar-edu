@@ -132,7 +132,7 @@ export default {
   setup () {
     return {
       // Дата обновления сайта
-      ReleaseDateSite: '14.03.22',
+      ReleaseDateSite: '16.03.22',
       // Дата обновления новостей о команде
       ReleaseNewsSite: '14.03.22',
       labelAboutSite: 'О сайте',
