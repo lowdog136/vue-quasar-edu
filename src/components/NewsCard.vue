@@ -6,13 +6,13 @@
       />
 
       <q-card-section>
-        <div class="text-overline text-orange-9"> {{ statusMatch_F }}</div>
+        <div class="text-overline text-orange-9"> {{ $store.state.NewsCardStatusMatch_F }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ titleNews }}</div>
         <div class="text-caption text-grey">
           {{ prewievNews }}
         </div>
         <div class="text-caption text-grey">
-          Источник: vk.com/dynamo_spb.
+          {{ cardNewsSrc }}
         </div>
       </q-card-section>
 
@@ -57,15 +57,14 @@ export default {
       expanded: ref(false),
       dateNews: '14.03.22',
       titleUrlImg: '../assets/image/imgTitle/title_1.png',
+      cardNewsSrc: 'Источник: vk.com/dynamo_spb. ',
       prewievNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
       extNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.'
     }
   },
   setup () {
     return {
-      titleNews: 'Матч против Динамо',
-      statusMatch_F: 'Товарищеский матч',
-      statusMatch_O: 'Официальный матч'
+      titleNews: 'Матч против Динамо'
     }
   }
 }

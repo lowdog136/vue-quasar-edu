@@ -5,7 +5,7 @@
         <q-icon name="home" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>Главная</q-item-label>
+        <q-item-label> ds</q-item-label>
         <q-item-label caption>Оснавная страница</q-item-label>
       </q-item-section>
     </q-item>
@@ -24,7 +24,7 @@
           <q-item-label caption>Последние известия</q-item-label>
         </q-item-section>
         <q-item-section side top>
-          <q-item-label caption>{{ ReleaseNewsSite }}</q-item-label>
+          <q-item-label caption>{{ $store.state.NavigationReleaseNewsSite }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/HistoryClub">
@@ -105,11 +105,11 @@
           <q-icon name="update" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>Новости</q-item-label>
+          <q-item-label>{{ $store.state.NavigationListMenu }}</q-item-label>
           <q-item-label caption>История обновления</q-item-label>
         </q-item-section>
           <q-item-section side top>
-            <q-item-label caption >{{ ReleaseDateSite }}</q-item-label>
+            <q-item-label caption >{{ $store.state.NavigationReleaseDateSite }}</q-item-label>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple :active="active" to="/AboutSite">
@@ -131,12 +131,7 @@ export default {
   name: 'NewsDrawer',
   setup () {
     return {
-      // Дата обновления сайта
-      ReleaseDateSite: '16.03.22',
-      // Дата обновления новостей о команде
-      ReleaseNewsSite: '14.03.22',
-      labelAboutSite: 'О сайте',
-      iconAboutSite: 'info'
+      labelAboutSite: 'О сайте'
     }
   }
 }

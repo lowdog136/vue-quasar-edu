@@ -17,6 +17,37 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       // example
     },
+    state: {
+      NewsCardStatusMatch_F: 'Товарищеский матч',
+      NewsCardStatusMatch_O: 'Официальный матч',
+      // Дата обновления новостей о сайте
+      NavigationReleaseDateSite: '16.03.22',
+      // Дата обновления новостей о команде
+      NavigationReleaseNewsSite: '14.03.22',
+      NavigationListMenu: [
+        {
+          id: 1,
+          Name: 'Главная',
+          Caption: 'Основная страница'
+        },
+        {
+          id: 2,
+          Name: 'ФК Север',
+          Caption: 'О клубе, новости, стадион'
+        }
+      ],
+      count: 0
+    },
+    mutations: {
+      increment (state) {
+        state.count++
+      }
+    },
+    actions: {
+      increment (context) {
+        context.commit('increment')
+      }
+    },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
