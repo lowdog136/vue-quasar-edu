@@ -1,29 +1,21 @@
 <template>
   <div class="q-pa-md">
-    <q-layout view="lHh lpr lFf" container style="height: 800px" class="shadow-2 rounded-borders">
-      <q-header elevated>
-        <q-toolbar>
-          <q-avatar>
-            <img  alt="logo" src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-
-          <q-toolbar-title>
-            Матч против "Динамо"
-          </q-toolbar-title>
-
-          <q-btn flat round dense icon="whatshot" />
-        </q-toolbar>
-      </q-header>
-
+    <q-layout>
       <q-page-container>
-        <q-page padding>
-          <p v-for="n in 1" :key="n">
-            В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>
-            Матч закончился победой хозяев со счетом 4-2.<br>
-            За "Север" голы забили: 33'-Миронов, 76'-Гагиев (пен).<br>
-          </p>
+        <div class="col-6">
+          <q-img src="~src/assets/image/imgTitle/title_1-w400.png" no-native-menu>
+            <div class="absolute-top text-center">
+              Матч против "Динамо
+            </div>
+          </q-img>
+        </div>
+        <q-page>
+          В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>
+          Матч закончился победой хозяев со счетом 4-2.<br>
+          За "Север" голы забили: 33'-Миронов, 76'-Гагиев (пен).<br>
         </q-page>
       </q-page-container>
+      ...
     </q-layout>
   </div>
 </template>
@@ -35,3 +27,5 @@ export default defineComponent({
   name: 'PageIndex'
 })
 </script>
+<style>
+</style>
