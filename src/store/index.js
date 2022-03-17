@@ -21,7 +21,7 @@ export default store(function (/* { ssrContext } */) {
       NewsCardStatusMatch_F: 'Товарищеский матч',
       NewsCardStatusMatch_O: 'Официальный матч',
       // Дата обновления новостей о сайте
-      NavigationReleaseDateSite: '16.03.22',
+      NavigationReleaseDateSite: '17.03.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '14.03.22',
       NavigationListMenu: [
@@ -109,7 +109,17 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardDateNews: '14.03.22',
           NewsClubNewsCardTitleUrlImg: '../assets/image/imgTitle/title_1.png',
           NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/dynamo_spb. ',
-          NewsClubNewsCardPreWievNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
+          NewsClubNewsCardPreViewNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
+          NewsClubNewsCardExtNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.',
+          NewsClubNewsCardFullNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>Матч закончился победой хозяев со счетом 4-2.<br>За "Север" голы забили: 33\'-Миронов, 76\'-Гагиев (пен).<br><br>'
+        },
+        {
+          id: 2,
+          NewsClubNewsCardTitleNews: 'Первый домашний',
+          NewsClubNewsCardDateNews: '17.02.22',
+          NewsClubNewsCardTitleUrlImg: '../assets/image/imgTitle/title_1.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/fcsever. ',
+          NewsClubNewsCardPreViewNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
           NewsClubNewsCardExtNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.',
           NewsClubNewsCardFullNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>Матч закончился победой хозяев со счетом 4-2.<br>За "Север" голы забили: 33\'-Миронов, 76\'-Гагиев (пен).<br><br>'
         }
