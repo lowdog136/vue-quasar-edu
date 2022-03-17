@@ -101,6 +101,19 @@ export default store(function (/* { ssrContext } */) {
           Caption: 'История ресурса'
         }
       ],
+      NewsClubNewsCard:
+      [
+        {
+          id: 1,
+          NewsClubNewsCardTitleNews: 'Матч против Динамо',
+          NewsClubNewsCardDateNews: '14.03.22',
+          NewsClubNewsCardTitleUrlImg: '../assets/image/imgTitle/title_1.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/dynamo_spb. ',
+          NewsClubNewsCardPreWievNews: 'В минувшее воскресенье ФК "Север" провел товарищеский матч против ФК "Динамо" Санкт-Петербург.',
+          NewsClubNewsCardExtNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2.',
+          NewsClubNewsCardFullNews: 'В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>Матч закончился победой хозяев со счетом 4-2.<br>За "Север" голы забили: 33\'-Миронов, 76\'-Гагиев (пен).<br><br>'
+        }
+      ],
       colorCode: 'подробно',
       count: 'red'
     },

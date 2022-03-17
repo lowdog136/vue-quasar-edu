@@ -5,7 +5,7 @@
         <div class="col-6">
           <q-img src="~src/assets/image/imgTitle/title_1.png" :fit="mode" spinner-color="red" :ratio="16/9" no-native-menu>
             <div class="absolute-top text-center">
-              Матч против "Динамо
+              {{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardTitleNews }}
             </div>
           </q-img>
         </div>
