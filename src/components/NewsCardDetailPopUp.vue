@@ -11,9 +11,7 @@
                 <q-img
                 src='../assets/image/imgTitle/title_1.png'
               />
-                В минувшее воскресенье ФК "Север" провел гостевой товарищеский матч против ФК "Динамо" Санкт-Петербург.<br>
-                Матч закончился победой хозяев со счетом 4-2.<br>
-                За "Север" голы забили: 33'-Миронов, 76'-Гагиев (пен).<br><br>
+                {{ NewsClubNewsCardFullNews }}
               </div>
               <div class="text-caption text-grey">
                 {{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardCardNewsSrc }}
@@ -48,8 +46,20 @@ export default {
       dialog: ref(false),
       cancelEnabled: ref(false),
       expanded: ref(false),
-      dateNews: '14.03.22'
+      dateNews1: '14.03.22'
     }
+  },
+  props: {
+    NewsClubNewsCardCardNewsSrc: String,
+    NewsClubNewsCardPreViewNews: String,
+    NewsClubNewsCardExtNews: String,
+    NewsClubNewsCardTitleUrlImg: String,
+    NewsCardStatusMatch_F: String,
+    NewsCardStatusMatch_O: String,
+    dateNews: String,
+    NewsClubNewsCardDateNews: String,
+    TitleNewsCard: String,
+    NewsClubNewsCardFullNews: String
   }
 }
 </script>

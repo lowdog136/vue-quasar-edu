@@ -71,14 +71,15 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[7].Caption }}</q-item-label>
         </q-item-section>
       </q-item>
-      <q-expansion-item
-        v-model="expanded"
-        icon="scoreboard"
-        label="Результаты матчей"
-        caption="Результаты матчей"
-        to="/ResultMatch"
-        disable
-      />
+      <q-item clickable v-ripple :active="active" to="/ResultMatch">
+        <q-item-section avatar>
+          <q-icon name="scoreboard" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $store.state.NavigationListMenu[8].Name }}</q-item-label>
+          <q-item-label caption>{{ $store.state.NavigationListMenu[8].Caption }}</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-expansion-item>
     <q-item clickable v-ripple disable :active="active" to="/Fanats">
       <q-item-section avatar>

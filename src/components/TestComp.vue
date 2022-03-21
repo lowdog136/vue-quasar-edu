@@ -1,147 +1,90 @@
 <template>
-  <div class="q-pa-md" style="max-width: 350px">
-    <q-item clickable v-ripple :active="active" to="/">
-      <q-item-section avatar>
-        <q-icon name="home" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>Главная</q-item-label>
-        <q-item-label caption>Оснавная страница</q-item-label>
-      </q-item-section>
-    </q-item>
-    <q-expansion-item
-      v-model="expanded"
-      icon="sports_soccer"
-      label="ФК Север"
-      caption="О клубе, новости, стадион"
-    >
-      <q-item clickable v-ripple :active="active" to="/NewsClub">
-        <q-item-section avatar>
-          <q-icon name="newspaper" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Новости клуба</q-item-label>
-          <q-item-label caption>Последние известия</q-item-label>
-        </q-item-section>
-        <q-item-section side top>
-          <q-item-label caption>{{ ReleaseNewsSite }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/HistoryClub">
-        <q-item-section avatar>
-          <q-icon name="people_alt" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Клуб</q-item-label>
-          <q-item-label caption>О клубе</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-expansion-item
-        v-model="expanded"
-        icon="perm_identity"
-        label="Стадион"
-        caption="Стадион"
-        to="/Stadium"
-        disable
-      />
-    </q-expansion-item>
-    <q-expansion-item
-      v-model="expanded"
-      icon="perm_identity"
-      label="Архив"
-      caption="Фото, видео, результаты матчей"
-    >
-      <q-item clickable v-ripple :active="active" to="/Foto">
-        <q-item-section avatar>
-          <q-icon name="camera_alt" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Фото</q-item-label>
-          <q-item-label caption>Фотографии</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-expansion-item
-        v-model="expanded"
-        icon="movie"
-        label="Видео"
-        caption="Видеоматериалы"
-        to="/Video"
-        disable
-      />
-      <q-expansion-item
-        v-model="expanded"
-        icon="scoreboard"
-        label="Результаты матчей"
-        caption="Результаты матчей"
-        to="/ResultMatch"
-        disable
-      />
-    </q-expansion-item>
-    <q-expansion-item
-      v-model="expanded"
-      icon="emoji_people"
-      label="Фанаты"
-      caption="Болельщики клуба"
-      to="/Fanats"
-      disable
+  <div class="q-pa-md row items-start q-gutter-md">
+    <q-inner-loading
+      :showing="visible"
+      label="Please wait..."
+      label-class="text-teal"
+      label-style="font-size: 1.1em"
     />
-    <q-item clickable v-ripple :active="active" to="/Contact">
-      <q-item-section avatar>
-        <q-icon name="email" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>Контакты</q-item-label>
-        <q-item-label caption>Связаться</q-item-label>
-      </q-item-section>
-    </q-item>
-    <q-expansion-item
-      v-model="expanded"
-      icon="info"
-      label="О сайте"
-      caption="Новости сайта, история развития"
-    >
-      <q-item clickable v-ripple :active="active" to="/NewsSite">
-        <q-item-section avatar>
-          <q-icon name="update" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Новости</q-item-label>
-          <q-item-label caption>История обновления</q-item-label>
-        </q-item-section>
-          <q-item-section side top>
-            <q-item-label caption >{{ ReleaseDateSite }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/AboutSite">
-        <q-item-section avatar>
-          <q-icon name="timeline" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>История</q-item-label>
-          <q-item-label caption>История ресурса</q-item-label>
-        </q-item-section>
-      </q-item>
-     </q-expansion-item>
+    <!--    1 news -->
+    <q-card class="my-card" flat bordered>
+      <q-img
+        src='../assets/image/imgTitle/title_1.png'
+      />
+
+      <q-card-section>
+        <div class="text-overline text-orange-9"> {{ NewsCardStatusMatch_F }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ TitleNewsCard }}</div>
+        <div class="text-caption text-grey">
+          {{ NewsClubNewsCardPreViewNews }}
+        </div>
+        <div class="text-caption text-grey">
+          {{ NewsClubNewsCardCardNewsSrc }}
+        </div>
+      </q-card-section>
+
+      <q-card-actions>
+        <q-btn flat color="dark" label="" />
+        <div class="labelDate">
+          {{ NewsClubNewsCardDateNews }}
+        </div>
+        <NewsCardDetailPopUp />
+        <q-space />
+
+        <q-btn
+          color="grey"
+          round
+          flat
+          dense
+          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="expanded = !expanded"
+        />
+      </q-card-actions>
+
+      <q-slide-transition>
+        <div v-show="expanded">
+          <q-separator />
+          <q-card-section class="text-subitle2">
+            {{ NewsClubNewsCardExtNews }}
+          </q-card-section>
+        </div>
+      </q-slide-transition>
+    </q-card>
   </div>
 </template>
 
 <script>
-
+import { ref } from 'vue'
+import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 export default {
-  name: 'TestComp',
-  setup () {
+  name: 'NewsCard',
+  components: { NewsCardDetailPopUp },
+  data () {
     return {
-      // Дата обновления сайта
-      ReleaseDateSite: '16.03.22',
-      // Дата обновления новостей о команде
-      ReleaseNewsSite: '14.03.22',
-      labelAboutSite: 'О сайте',
-      iconAboutSite: 'info'
+      dialog: ref(false),
+      cancelEnabled: ref(false),
+      expanded: ref(false),
+      dateNews222: '14.03.22'
     }
+  },
+  props: {
+    NewsClubNewsCardCardNewsSrc: String,
+    NewsClubNewsCardPreViewNews: String,
+    NewsClubNewsCardExtNews: String,
+    NewsClubNewsCardTitleUrlImg: String,
+    NewsCardStatusMatch_F: String,
+    NewsCardStatusMatch_O: String,
+    dateNews: String,
+    NewsClubNewsCardDateNews: String,
+    TitleNewsCard: String,
+    NewsClubNewsCardFullNews: String
+
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
 </style>
