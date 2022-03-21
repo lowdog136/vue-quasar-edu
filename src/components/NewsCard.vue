@@ -14,7 +14,7 @@
 
       <q-card-section>
         <div class="text-overline text-orange-9"> {{ $store.state.NewsCardStatusMatch_F }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardTitleNews }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ TitleNewsCard }}</div>
         <div class="text-caption text-grey">
           {{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardPreViewNews }}
         </div>
@@ -109,6 +109,11 @@ export default {
       expanded: ref(false),
       dateNews: '14.03.22'
     }
+  },
+  props: {
+    NewsCardStatusMatch_F: String,
+    TitleNewsCard: String
+
   }
 }
 </script>

@@ -115,7 +115,7 @@ export default store(function (/* { ssrContext } */) {
         },
         {
           id: 2,
-          NewsClubNewsCardTitleNews: 'Первый домашний',
+          NewsClubNewsCardTitleNews: 'Поражение от Звезды',
           NewsClubNewsCardDateNews: '17.02.22',
           NewsClubNewsCardTitleUrlImg: '../assets/image/imgTitle/title_1.png',
           NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/fcsever. ',

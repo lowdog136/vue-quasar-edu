@@ -1,5 +1,8 @@
 <template>
   <NewsCard />
+  <NewsCard
+  />
+  {{ $store.state.NewsClubNewsCard[1].NewsClubNewsCardDateNews }}
 </template>
 
 <script>
