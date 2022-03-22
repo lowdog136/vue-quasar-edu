@@ -8,11 +8,7 @@
     />
 <!--    1 news -->
     <q-card class="my-card" flat bordered>
-      <img v-bind:src=NewsClubNewsCardTitleUrlImg />
-      <q-img
-        src='../assets/image/imgTitle/title_1.png'
-      />
-
+      <img :src=$store.state.NewsClubNewsCard[0].NewsClubNewsCardTitleUrlImg />
       <q-card-section>
         <div class="text-overline text-orange-9"> {{ NewsCardStatusMatch_F }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ TitleNewsCard }}</div>
@@ -29,7 +25,11 @@
         <div class="labelDate">
           {{ NewsClubNewsCardDateNews }}
         </div>
-        <NewsCardDetailPopUp />
+        <NewsCardDetailPopUp
+        :NewsClubNewsCardPopUpFullNews="NewsClubNewsCardFullNews"
+        :NewsClubNewsCardPopUpTitleUrlImg="NewsClubNewsCardTitleUrlImg"
+        :NewsClubNewsCardCardPopUpNewsSrc="NewsClubNewsCardCardNewsSrc"
+        :NewsClubNewsCardPopUpTitleNews="TitleNewsCard"/>
         <q-space />
 
         <q-btn
@@ -65,7 +65,24 @@ export default {
       dialog: ref(false),
       cancelEnabled: ref(false),
       expanded: ref(false),
-      dateNews222: '14.03.22'
+      dateNews222: '14.03.22',
+      products: [
+        {
+          id: '1',
+          name: 'Name1',
+          article: 't1'
+        },
+        {
+          id: '2',
+          name: 'Name2',
+          article: 't2'
+        },
+        {
+          id: '3',
+          name: 'Name3',
+          article: 't3'
+        }
+      ]
     }
   },
   props: {
@@ -78,7 +95,9 @@ export default {
     dateNews: String,
     NewsClubNewsCardDateNews: String,
     TitleNewsCard: String,
-    NewsClubNewsCardFullNews: String
+    NewsClubNewsCardFullNews: String,
+    NewsClubNewsCardFullNews2: String,
+    NewsClubNewsCardTitleNews: String
 
   }
 }

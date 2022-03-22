@@ -6,15 +6,14 @@
           <q-card>
             <q-card-section>
               <div class="text-overline text-orange-9"> {{ $store.state.NewsCardStatusMatch_F }}</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">{{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardTitleNews }}</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">{{ NewsClubNewsCardPopUpTitleNews }}</div>
               <div class="text-caption text-grey">
-                <q-img
-                src='../assets/image/imgTitle/title_1.png'
-              />
-                {{ NewsClubNewsCardFullNews }}
+                {{ NewsClubNewsCardPopUpTitleUrlImg }}
+                <br>
+                {{ NewsClubNewsCardPopUpFullNews }}
               </div>
               <div class="text-caption text-grey">
-                {{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardCardNewsSrc }}
+                {{ NewsClubNewsCardCardPopUpNewsSrc }}
               </div>
             </q-card-section>
 
@@ -50,6 +49,12 @@ export default {
     }
   },
   props: {
+    product_data: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
     NewsClubNewsCardCardNewsSrc: String,
     NewsClubNewsCardPreViewNews: String,
     NewsClubNewsCardExtNews: String,
@@ -59,7 +64,11 @@ export default {
     dateNews: String,
     NewsClubNewsCardDateNews: String,
     TitleNewsCard: String,
-    NewsClubNewsCardFullNews: String
+    NewsClubNewsCardFullNews: String,
+    NewsClubNewsCardPopUpFullNews: String,
+    NewsClubNewsCardPopUpTitleUrlImg: String,
+    NewsClubNewsCardCardPopUpNewsSrc: String,
+    NewsClubNewsCardPopUpTitleNews: String
   }
 }
 </script>
