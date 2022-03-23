@@ -21,7 +21,7 @@ export default store(function (/* { ssrContext } */) {
       NewsCardStatusMatch_F: 'Товарищеский матч',
       NewsCardStatusMatch_O: 'Официальный матч',
       // Дата обновления новостей о сайте
-      NavigationReleaseDateSite: '17.03.22',
+      NavigationReleaseDateSite: '23.03.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '20.03.22',
       NavigationListMenu: [
