@@ -8,7 +8,8 @@
     />
 <!--    1 news -->
     <q-card class="my-card" flat bordered>
-      <img :src=$store.state.NewsClubNewsCard[0].NewsClubNewsCardTitleUrlImg />
+      <q-img :src="require('../assets/image/imgTitle/' + NewsClubNewsCardTitleUrlImg )" />
+
       <q-card-section>
         <div class="text-overline text-orange-9"> {{ NewsCardStatusMatch_F }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ TitleNewsCard }}</div>
@@ -69,7 +70,7 @@ export default {
       products: [
         {
           id: '1',
-          name: 'Name1',
+          name: 'title_1.png',
           article: 't1'
         },
         {

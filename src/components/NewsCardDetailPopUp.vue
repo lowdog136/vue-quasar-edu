@@ -8,7 +8,7 @@
               <div class="text-overline text-orange-9"> {{ $store.state.NewsCardStatusMatch_F }}</div>
               <div class="text-h5 q-mt-sm q-mb-xs">{{ NewsClubNewsCardPopUpTitleNews }}</div>
               <div class="text-caption text-grey">
-                {{ NewsClubNewsCardPopUpTitleUrlImg }}
+                <q-img :src="require('../assets/image/imgTitle/' + NewsClubNewsCardPopUpTitleUrlImg )" />
                 <br>
                 {{ NewsClubNewsCardPopUpFullNews }}
               </div>
