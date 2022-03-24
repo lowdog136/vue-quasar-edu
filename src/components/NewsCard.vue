@@ -6,31 +6,34 @@
       label-class="text-teal"
       label-style="font-size: 1.1em"
     />
-<!--    1 news -->
     <q-card class="my-card" flat bordered>
-      <q-img :src="require('../assets/image/imgTitle/' + NewsClubNewsCardTitleUrlImg )" />
+      <q-img :src="require('../assets/image/imgTitle/' + product_data.NewsClubNewsCardTitleUrlImg )" />
 
       <q-card-section>
-        <div class="text-overline text-orange-9"> {{ NewsCardStatusMatch_F }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{ TitleNewsCard }}</div>
-        <div class="text-caption text-grey">
-          {{ NewsClubNewsCardPreViewNews }}
+        <div class="text-overline text-orange-9">
+          {{ product_data.NewsCardAnnounceNews }}
+        </div>
+        <div class="text-h5 q-mt-sm q-mb-xs">
+          {{ product_data.NewsClubNewsCardTitleNews }}
         </div>
         <div class="text-caption text-grey">
-          {{ NewsClubNewsCardCardNewsSrc }}
+          {{ product_data.NewsClubNewsCardPreViewNews }}
+        </div>
+        <div class="text-caption text-grey">
+          {{ product_data.NewsClubNewsCardCardNewsSrc }}
         </div>
       </q-card-section>
 
       <q-card-actions>
         <q-btn flat color="dark" label="" />
         <div class="labelDate">
-          {{ NewsClubNewsCardDateNews }}
+          {{ product_data.NewsClubNewsCardDateNews }}
         </div>
         <NewsCardDetailPopUp
-        :NewsClubNewsCardPopUpFullNews="NewsClubNewsCardFullNews"
-        :NewsClubNewsCardPopUpTitleUrlImg="NewsClubNewsCardTitleUrlImg"
-        :NewsClubNewsCardCardPopUpNewsSrc="NewsClubNewsCardCardNewsSrc"
-        :NewsClubNewsCardPopUpTitleNews="TitleNewsCard"/>
+        :NewsClubNewsCardPopUpFullNews="product_data.NewsClubNewsCardFullNews"
+        :NewsClubNewsCardPopUpTitleUrlImg="product_data.NewsClubNewsCardTitleUrlImg"
+        :NewsClubNewsCardCardPopUpNewsSrc="product_data.NewsClubNewsCardCardNewsSrc"
+        :NewsClubNewsCardPopUpTitleNews="product_data.TitleNewsCard"/>
         <q-space />
 
         <q-btn
@@ -47,7 +50,7 @@
         <div v-show="expanded">
           <q-separator />
           <q-card-section class="text-subitle2">
-            {{ NewsClubNewsCardExtNews }}
+            {{ product_data.NewsClubNewsCardExtNews }}
           </q-card-section>
         </div>
       </q-slide-transition>
@@ -66,40 +69,29 @@ export default {
       dialog: ref(false),
       cancelEnabled: ref(false),
       expanded: ref(false),
-      dateNews222: '14.03.22',
-      products: [
-        {
-          id: '1',
-          name: 'title_1.png',
-          article: 't1'
-        },
-        {
-          id: '2',
-          name: 'Name2',
-          article: 't2'
-        },
-        {
-          id: '3',
-          name: 'Name3',
-          article: 't3'
-        }
-      ]
+      dateNews222: '14.03.22'
     }
   },
   props: {
-    NewsClubNewsCardCardNewsSrc: String,
-    NewsClubNewsCardPreViewNews: String,
-    NewsClubNewsCardExtNews: String,
-    NewsClubNewsCardTitleUrlImg: String,
-    NewsCardStatusMatch_F: String,
-    NewsCardStatusMatch_O: String,
-    dateNews: String,
-    NewsClubNewsCardDateNews: String,
-    TitleNewsCard: String,
-    NewsClubNewsCardFullNews: String,
-    NewsClubNewsCardFullNews2: String,
-    NewsClubNewsCardTitleNews: String
-
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          NewsClubNewsCardCardNewsSrc: String,
+          NewsClubNewsCardPreViewNews: String,
+          NewsClubNewsCardExtNews: String,
+          NewsClubNewsCardTitleUrlImg: String,
+          NewsCardStatusMatch_F: String,
+          NewsCardStatusMatch_O: String,
+          dateNews: String,
+          NewsClubNewsCardDateNews: String,
+          TitleNewsCard: String,
+          NewsClubNewsCardFullNews: String,
+          NewsClubNewsCardFullNews2: String,
+          NewsClubNewsCardTitleNews: String
+        }
+      }
+    }
   }
 }
 </script>

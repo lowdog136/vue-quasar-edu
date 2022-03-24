@@ -14,6 +14,7 @@ const routes = [
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
+      { path: '/MyTestNewsClub', name: 'MyTestNewsClub', component: () => import('pages/MyTestNewsClub.vue') },
       { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
       {
         path: '/News',
