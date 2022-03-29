@@ -23,7 +23,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '23.03.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '28.03.22',
+      NavigationReleaseNewsSite: '29.03.22',
       NavigationListMenu: [
         {
           id: 1,
@@ -141,6 +141,19 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardFullNews: 'Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК "Фаворит" г.Выборг 5-1. Голы : Д. Майоров, А. Некрасов-2, П. Сурков-2. Состав "Севера":О. Аврамчик, М. Слащев, М. Осипов (Э.Кубланов\'46), И. Ваганов, Г. Кравчук, Д. Миронов, М. Зайцев(И.Шилов\'46), И. Игнатенко, П. Рябоконь, А. Некрасов(А.Соловьев\'46), Д. Майоров( П. Сурков\'46) ',
           ResultCardTitle: 'Победа',
           ResultCardResult: 'ФК "Север" Мурманск - ФК   "Фаворит" Выборг 5-1 (3-1)'
+        },
+        {
+          id: 4,
+          NewsClubNewsCardTitleNews: 'Дорога в Дивноморское',
+          NewsClubNewsCardDateNews: '29.03.22',
+          NewsCardAnnounceNews: '',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: severfans',
+          NewsClubNewsCardPreViewNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
+          NewsClubNewsCardExtNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
+          NewsClubNewsCardFullNews: 'Сегодня 29 марта ФК "Север" отправится на сборы до 17 апреля в Дивноморское (Краснодарский край). Контрольные матчи будут при наличии подходящих соперников.',
+          ResultCardTitle: '',
+          ResultCardResult: ''
         }
       ],
       colorCode: 'подробно',
