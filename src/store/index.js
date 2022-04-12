@@ -23,7 +23,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '23.03.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '29.03.22',
+      NavigationReleaseNewsSite: '12.04.22',
       NavigationListMenu: [
         {
           id: 1,
@@ -152,6 +152,35 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
           NewsClubNewsCardExtNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
           NewsClubNewsCardFullNews: 'Сегодня 29 марта ФК "Север" отправится на сборы до 17 апреля в Дивноморское (Краснодарский край). Контрольные матчи будут при наличии подходящих соперников.',
+          ResultCardStatus: false,
+          ResultCardTitle: '',
+          ResultCardResult: ''
+        },
+        {
+          id: 5,
+          NewsClubNewsCardTitleNews: 'Победа над "Черноморец-м"',
+          NewsClubNewsCardDateNews: '06.04.22',
+          NewsCardAnnounceNews: 'Товарищеский матч',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/sever_murmansk',
+          NewsClubNewsCardPreViewNews: 'ФК "Север" в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м".',
+          NewsClubNewsCardExtNews: 'ФК "Север" в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м". Голы на счету Ивана Игнатенко и дубль Даниила Майорова',
+          NewsClubNewsCardFullNews: 'ФК "Север" 6 апреля 2022 г в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м". Голы на счету Ивана Игнатенко и дубль Даниила Майорова',
+          ResultCardStatus: true,
+          ResultCardTitle: 'Победа',
+          ResultCardResult: 'ФК "Черноморец-м" Новороссийск - ФК "Север Мурманск" 0-3 (0-1)'
+        },
+        {
+          id: 6,
+          NewsClubNewsCardTitleNews: 'Победа над "Черноморец-м"',
+          NewsClubNewsCardDateNews: '12.04.22',
+          NewsCardAnnounceNews: '',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/sever_murmansk',
+          NewsClubNewsCardPreViewNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.',
+          NewsClubNewsCardExtNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.',
+          NewsClubNewsCardFullNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом. Онлайн трансляция пройдет в группе вк',
+          ResultCardStatus: true,
           ResultCardTitle: '',
           ResultCardResult: ''
         }
