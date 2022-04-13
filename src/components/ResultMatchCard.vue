@@ -3,10 +3,13 @@
     <q-card class="my-card" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
-          <div class="text-overline">{{ product_data.NewsCardAnnounceNews }}</div>
+          <div class="text-overline text-orange-9">{{ product_data.NewsCardAnnounceNews }}</div>
           <div class="text-h5 q-mt-sm q-mb-xs">{{ product_data.ResultCardTitle }}</div>
           <div class="text-caption text-grey">
             {{ product_data.ResultCardResult }}
+          </div>
+          <div class="text-overline text-red-14">
+            {{ product_data.NewsClubNewsCardDateNews }}
           </div>
         </q-card-section>
 
@@ -32,8 +35,6 @@ export default {
           NewsClubNewsCardPreViewNews: String,
           NewsClubNewsCardExtNews: String,
           NewsClubNewsCardTitleUrlImg: String,
-          NewsCardStatusMatch_F: String,
-          NewsCardStatusMatch_O: String,
           dateNews: String,
           NewsClubNewsCardDateNews: String,
           TitleNewsCard: String,
