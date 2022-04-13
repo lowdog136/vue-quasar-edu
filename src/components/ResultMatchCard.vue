@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div v-if="product_data.NewsClubNewsCardStatus" class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
@@ -27,6 +27,7 @@ export default {
       type: Object,
       default () {
         return {
+          NewsClubNewsCardStatus: String,
           NewsClubNewsCardCardNewsSrc: String,
           NewsClubNewsCardPreViewNews: String,
           NewsClubNewsCardExtNews: String,

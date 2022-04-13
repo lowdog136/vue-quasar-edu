@@ -18,7 +18,6 @@ export default store(function (/* { ssrContext } */) {
       // example
     },
     state: {
-      NewsCardStatusMatch_O: 'Официальный матч',
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '23.03.22',
       // Дата обновления новостей о команде
@@ -104,6 +103,8 @@ export default store(function (/* { ssrContext } */) {
       [
         {
           id: 1,
+          // Показывать в результататх матча true
+          NewsClubNewsCardStatus: true,
           NewsClubNewsCardTitleNews: 'Матч против Динамо',
           NewsClubNewsCardDateNews: '14.03.22',
           NewsCardAnnounceNews: 'Товарищеский матч',
@@ -117,6 +118,7 @@ export default store(function (/* { ssrContext } */) {
         },
         {
           id: 2,
+          NewsClubNewsCardStatus: true,
           NewsClubNewsCardTitleNews: 'Поражение от Звезды',
           NewsClubNewsCardDateNews: '21.03.22',
           NewsCardAnnounceNews: 'Товарищеский матч',
@@ -131,6 +133,7 @@ export default store(function (/* { ssrContext } */) {
         {
           id: 3,
           NewsClubNewsCardTitleNews: 'Победа над Фаворитом',
+          NewsClubNewsCardStatus: true,
           NewsClubNewsCardDateNews: '26.03.22',
           NewsCardAnnounceNews: 'Товарищеский матч',
           NewsClubNewsCardTitleUrlImg: 'title_0.png',
@@ -138,6 +141,7 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК "Фаворит" г.Выборг 5-1.',
           NewsClubNewsCardExtNews: 'Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК "Фаворит" г.Выборг 5-1. Голы : Д. Майоров, А. Некрасов-2, П. Сурков-2',
           NewsClubNewsCardFullNews: 'Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК "Фаворит" г.Выборг 5-1. Голы : Д. Майоров, А. Некрасов-2, П. Сурков-2. Состав "Севера":О. Аврамчик, М. Слащев, М. Осипов (Э.Кубланов\'46), И. Ваганов, Г. Кравчук, Д. Миронов, М. Зайцев(И.Шилов\'46), И. Игнатенко, П. Рябоконь, А. Некрасов(А.Соловьев\'46), Д. Майоров( П. Сурков\'46) ',
+          ResultCardStatus: true,
           ResultCardTitle: 'Победа',
           ResultCardResult: 'ФК "Север" Мурманск - ФК   "Фаворит" Выборг 5-1 (3-1)'
         },
@@ -151,12 +155,12 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
           NewsClubNewsCardExtNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
           NewsClubNewsCardFullNews: 'Сегодня 29 марта ФК "Север" отправится на сборы до 17 апреля в Дивноморское (Краснодарский край). Контрольные матчи будут при наличии подходящих соперников.',
-          ResultCardStatus: false,
           ResultCardTitle: '',
           ResultCardResult: ''
         },
         {
           id: 5,
+          NewsClubNewsCardStatus: true,
           NewsClubNewsCardTitleNews: 'Победа над "Черноморец-м"',
           NewsClubNewsCardDateNews: '06.04.22',
           NewsCardAnnounceNews: 'Товарищеский матч',
@@ -165,7 +169,6 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'ФК "Север" в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м".',
           NewsClubNewsCardExtNews: 'ФК "Север" в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м". Голы на счету Ивана Игнатенко и дубль Даниила Майорова',
           NewsClubNewsCardFullNews: 'ФК "Север" 6 апреля 2022 г в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК "Черноморец-м". Голы на счету Ивана Игнатенко и дубль Даниила Майорова',
-          ResultCardStatus: true,
           ResultCardTitle: 'Победа',
           ResultCardResult: 'ФК "Черноморец-м" Новороссийск - ФК "Север Мурманск" 0-3 (0-1)'
         },
@@ -179,12 +182,12 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.',
           NewsClubNewsCardExtNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.',
           NewsClubNewsCardFullNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом. Онлайн трансляция пройдет в группе вк',
-          ResultCardStatus: true,
           ResultCardTitle: '',
           ResultCardResult: ''
         },
         {
           id: 7,
+          NewsClubNewsCardStatus: true,
           NewsClubNewsCardTitleNews: 'Ничья с Анапой',
           NewsClubNewsCardDateNews: '13.04.22',
           NewsCardAnnounceNews: 'Результат матча',
@@ -193,12 +196,12 @@ export default store(function (/* { ssrContext } */) {
           NewsClubNewsCardPreViewNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника. После первого тайма мурманчане проигрывали 0-1.',
           NewsClubNewsCardExtNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника ФК "Витязево". После первого тайма мурманчане проигрывали 0-1. Следующая игра, заключительная на сборе, состоится в пятницу 15 апреля в 14:00, соперником станет футбольный клуб «Виста».',
           NewsClubNewsCardFullNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника ФК "Витязево". После первого тайма мурманчане проигрывали 0-1. За Север забил Александ Соловьев. Следующая игра, заключительная на сборе, состоится в пятницу 15 апреля в 14:00, соперником станет футбольный клуб «Виста»',
-          ResultCardStatus: true,
           ResultCardTitle: 'Ничья',
           ResultCardResult: 'ФК "Анапа" - ФК "Север Мурманск" 1-1 (1-0)'
         }
       ],
       colorCode: 'подробно',
+      InsertValue: [],
       count: 'red'
     },
     mutations: {

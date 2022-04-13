@@ -1,57 +1,48 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card class="my-card" flat>
-      <q-card-section horizontal>
-      </q-card-section>
-    </q-card>
-    <q-card class="my-card" flat>
-      <q-card-section horizontal>
-        <NewsCard v-for="product in products"
-                  :key="product.name"
-                  :product_data="product"
-        />
-      </q-card-section>
-    </q-card>
+  <div class="Input">
+    <AddNews />
+  </div>
+  <div class="checkBox">
+    <AddResult />
+  </div>
+  <div class="profile">
+    <h1>{{ firstName }} {{ lastName }}</h1>
+    <AddUserName
+      v-model:first-name="firstName"
+      v-model:last-name="lastName"
+    />
   </div>
 </template>
-
 <script>
-import { ref } from 'vue'
-import NewsCard from 'components/NewsCard'
+import AddNews from 'components/AddNews'
+import AddResult from 'components/AddResult'
+import AddUserName from 'components/AddUserName'
 
 export default {
-  components: { NewsCard },
+  components: { AddUserName, AddResult, AddNews },
   data () {
     return {
-      products: [
-        {
-          id: '1',
-          name: 'title_1.png',
-          article: 't1'
-        },
-        {
-          id: '2',
-          name: 'Name2',
-          article: 't2'
-        },
-        {
-          id: '3',
-          name: 'Name3',
-          article: 't3'
-        }
-      ]
+      firstName: 'John',
+      lastName: 'Doe'
     }
   },
-  setup () {
+  props () {
     return {
-      expanded: ref(false)
+      message: String,
+      NewsClubNewsCardCardNewsSrc: String,
+      NewsClubNewsCardPreViewNews: String,
+      NewsClubNewsCardExtNews: String,
+      NewsClubNewsCardTitleUrlImg: String,
+      NewsCardStatusMatch_F: String,
+      NewsCardStatusMatch_O: String,
+      dateNews: String,
+      NewsClubNewsCardDateNews: String,
+      TitleNewsCard: String,
+      NewsClubNewsCardFullNews: String,
+      NewsClubNewsCardFullNews2: String,
+      NewsClubNewsAnnounce: String,
+      NewsClubNewsCardTitleNews: String
     }
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.my-card
-  width: 100%
-  max-width: 350px
-</style>

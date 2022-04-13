@@ -18,6 +18,9 @@ import NewsCard from 'components/NewsCard'
 
 export default {
   components: { NewsCard },
+  props: {
+    NewsClubNewsCardStatus: String
+  },
   data () {
     return {}
   },
