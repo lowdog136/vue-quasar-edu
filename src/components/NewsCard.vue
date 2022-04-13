@@ -88,6 +88,7 @@ export default {
           TitleNewsCard: String,
           NewsClubNewsCardFullNews: String,
           NewsClubNewsCardFullNews2: String,
+          NewsClubNewsAnnounce: String,
           NewsClubNewsCardTitleNews: String
         }
       }

@@ -18,12 +18,11 @@ export default store(function (/* { ssrContext } */) {
       // example
     },
     state: {
-      NewsCardStatusMatch_F: 'Товарищеский матч',
       NewsCardStatusMatch_O: 'Официальный матч',
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '23.03.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '12.04.22',
+      NavigationReleaseNewsSite: '13.04.22',
       NavigationListMenu: [
         {
           id: 1,
@@ -146,7 +145,7 @@ export default store(function (/* { ssrContext } */) {
           id: 4,
           NewsClubNewsCardTitleNews: 'Дорога в Дивноморское',
           NewsClubNewsCardDateNews: '29.03.22',
-          NewsCardAnnounceNews: '',
+          NewsCardAnnounceNews: 'Новости клуба',
           NewsClubNewsCardTitleUrlImg: 'title_0.png',
           NewsClubNewsCardCardNewsSrc: 'Источник: severfans',
           NewsClubNewsCardPreViewNews: 'ФК "Север" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.',
@@ -172,9 +171,9 @@ export default store(function (/* { ssrContext } */) {
         },
         {
           id: 6,
-          NewsClubNewsCardTitleNews: 'Победа над "Черноморец-м"',
+          NewsClubNewsCardTitleNews: 'Анонс матча "Витязево"',
           NewsClubNewsCardDateNews: '12.04.22',
-          NewsCardAnnounceNews: '',
+          NewsCardAnnounceNews: 'Анонс матча',
           NewsClubNewsCardTitleUrlImg: 'title_0.png',
           NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/sever_murmansk',
           NewsClubNewsCardPreViewNews: 'ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.',
@@ -183,6 +182,20 @@ export default store(function (/* { ssrContext } */) {
           ResultCardStatus: true,
           ResultCardTitle: '',
           ResultCardResult: ''
+        },
+        {
+          id: 7,
+          NewsClubNewsCardTitleNews: 'Ничья с Анапой',
+          NewsClubNewsCardDateNews: '13.04.22',
+          NewsCardAnnounceNews: 'Результат матча',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/sever_murmansk',
+          NewsClubNewsCardPreViewNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника. После первого тайма мурманчане проигрывали 0-1.',
+          NewsClubNewsCardExtNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника ФК "Витязево". После первого тайма мурманчане проигрывали 0-1. Следующая игра, заключительная на сборе, состоится в пятницу 15 апреля в 14:00, соперником станет футбольный клуб «Виста».',
+          NewsClubNewsCardFullNews: 'ФК «Север» внезапно сыграл в ничью с ФК "Анапа" 1-1. До этого анонс был другого соперника ФК "Витязево". После первого тайма мурманчане проигрывали 0-1. За Север забил Александ Соловьев. Следующая игра, заключительная на сборе, состоится в пятницу 15 апреля в 14:00, соперником станет футбольный клуб «Виста»',
+          ResultCardStatus: true,
+          ResultCardTitle: 'Ничья',
+          ResultCardResult: 'ФК "Анапа" - ФК "Север Мурманск" 1-1 (1-0)'
         }
       ],
       colorCode: 'подробно',
