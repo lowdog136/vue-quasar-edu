@@ -19,7 +19,7 @@ export default store(function (/* { ssrContext } */) {
     },
     state: {
       // Дата обновления новостей о сайте
-      NavigationReleaseDateSite: '23.03.22',
+      NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '13.04.22',
       NavigationListMenu: [

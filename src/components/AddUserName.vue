@@ -15,8 +15,26 @@
 export default {
   name: 'AddUserName',
   props: {
-    firstName: String,
-    lastName: String
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          lastName: String,
+          firstName: String,
+          NewsClubNewsCardStatus: String,
+          NewsClubNewsCardCardNewsSrc: String,
+          NewsClubNewsCardPreViewNews: String,
+          NewsClubNewsCardExtNews: String,
+          NewsClubNewsCardTitleUrlImg: String,
+          dateNews: String,
+          NewsClubNewsCardDateNews: String,
+          TitleNewsCard: String,
+          NewsClubNewsCardFullNews: String,
+          NewsClubNewsCardFullNews2: String,
+          NewsClubNewsCardTitleNews: String
+        }
+      }
+    }
   },
   emits: ['update:firstName', 'update:lastName']
 }

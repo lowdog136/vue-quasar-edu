@@ -6,7 +6,8 @@
     <AddResult />
   </div>
   <div class="profile">
-    <h1>{{ firstName }} {{ lastName }}</h1>
+    <div class="text-h5 q-mt-sm q-mb-xs">{{ product_data.ResultCardTitle }}</div>
+    <h1>{{ product_data.NewsClubNewsCardTitleNews }} {{ lastName }}</h1>
     <AddUserName
       v-model:first-name="firstName"
       v-model:last-name="lastName"
@@ -26,22 +27,24 @@ export default {
       lastName: 'Doe'
     }
   },
-  props () {
-    return {
-      message: String,
-      NewsClubNewsCardCardNewsSrc: String,
-      NewsClubNewsCardPreViewNews: String,
-      NewsClubNewsCardExtNews: String,
-      NewsClubNewsCardTitleUrlImg: String,
-      NewsCardStatusMatch_F: String,
-      NewsCardStatusMatch_O: String,
-      dateNews: String,
-      NewsClubNewsCardDateNews: String,
-      TitleNewsCard: String,
-      NewsClubNewsCardFullNews: String,
-      NewsClubNewsCardFullNews2: String,
-      NewsClubNewsAnnounce: String,
-      NewsClubNewsCardTitleNews: String
+  props: {
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          NewsClubNewsCardStatus: String,
+          NewsClubNewsCardCardNewsSrc: String,
+          NewsClubNewsCardPreViewNews: String,
+          NewsClubNewsCardExtNews: String,
+          NewsClubNewsCardTitleUrlImg: String,
+          dateNews: String,
+          NewsClubNewsCardDateNews: String,
+          TitleNewsCard: String,
+          NewsClubNewsCardFullNews: String,
+          NewsClubNewsCardFullNews2: String,
+          NewsClubNewsCardTitleNews: String
+        }
+      }
     }
   }
 }
