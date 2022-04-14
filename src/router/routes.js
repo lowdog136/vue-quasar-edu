@@ -24,6 +24,7 @@ const routes = [
           { path: '/News/test2', name: 'test2', component: () => import('pages/News/test2.vue') }
         ]
       },
+      { path: '/CarrotPage', name: 'CarrotPage', component: () => import('pages/CarrotPage.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },

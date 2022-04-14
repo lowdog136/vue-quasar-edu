@@ -78,6 +78,7 @@ export default {
       default () {
         return {
           NewsClubNewsCardCardNewsSrc: String,
+          NewsCardAnnounceNews: String,
           NewsClubNewsCardStatus: String,
           NewsClubNewsCardPreViewNews: String,
           NewsClubNewsCardExtNews: String,
