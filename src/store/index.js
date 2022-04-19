@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+import { reactive } from 'vue'
 
 // import example from './module-example'
 
@@ -232,7 +233,7 @@ export default store(function (/* { ssrContext } */) {
       ],
       colorCode: 'подробно',
       InsertValue: [],
-      count: 'red'
+      count: '2'
     },
     mutations: {
       increment (state) {
@@ -251,4 +252,29 @@ export default store(function (/* { ssrContext } */) {
   })
 
   return Store
+})
+export const stope = reactive({
+  state: {
+    myName: 'zooloo',
+    myCount2: 0,
+    myTitleText: '',
+    myArray: [
+      {
+        id: '',
+        status: true,
+        title: ''
+      }
+    ]
+  },
+  mutations: {
+    SET_NAME: (state, myName) => {
+      state.myName = myName
+    }
+  },
+  actions: {},
+  getters: {
+    NAME: state => {
+      return state.myName
+    }
+  }
 })
