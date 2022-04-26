@@ -20,7 +20,7 @@ export default {
       'allPosts'
     ]),
   async mounted () {
-    this.fetchPosts()
+    this.stole.post.dispatch('fetchPosts')
   },
   setup () {
     return {
