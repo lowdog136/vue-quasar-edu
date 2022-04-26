@@ -1,6 +1,7 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import { reactive } from 'vue'
+import post from 'src/store/modules/post'
 
 // import example from './module-example'
 
@@ -277,4 +278,8 @@ export const stope = reactive({
       return state.myName
     }
   }
+})
+export const stole = reactive({
+  post,
+  modules: {}
 })

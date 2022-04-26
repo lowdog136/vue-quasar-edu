@@ -8,12 +8,12 @@
     >
       <q-input
         filled
-        v-model="NewsCardAnnounceNews"
+        v-model='$store.state.NewsClubNewsCard[1].NewsCardAnnounceNews'
         label="Заголовок"
         hint="Товарищеский матч, официальный матч"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-      />
+      /> {{ $store.state.NewsClubNewsCard[1].NewsCardAnnounceNews }}
       <q-input
         filled
         v-model="ResultCardTitle"
@@ -24,12 +24,12 @@
       />
       <q-input
         filled
-        v-model="ResultCardTeam1"
+        v-model='$store.state.NewsClubNewsCard[1].ResultCardTeam1'
         label="Команда 1"
         hint="ФК Имя Город"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-      />
+      /> {{ $store.state.NewsClubNewsCard[1].ResultCardTeam1 }}
       <q-input
         filled
         v-model="ResultCardTeam2"
@@ -111,6 +111,31 @@ export default {
 
       saveResultMatch () {
         console.log('saveResultMatch')
+      }
+    }
+  },
+  props: {
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          NewsClubNewsCardCardNewsSrc: String,
+          NewsCardAnnounceNews: String,
+          NewsClubNewsCardStatus: String,
+          NewsClubNewsCardPreViewNews: String,
+          NewsClubNewsCardExtNews: String,
+          NewsClubNewsCardTitleUrlImg: String,
+          NewsCardStatusMatch_F: String,
+          NewsCardStatusMatch_O: String,
+          dateNews: String,
+          ResultCardTeam1: String,
+          NewsClubNewsCardDateNews: String,
+          TitleNewsCard: String,
+          NewsClubNewsCardFullNews: String,
+          NewsClubNewsCardFullNews2: String,
+          NewsClubNewsAnnounce: String,
+          NewsClubNewsCardTitleNews: String
+        }
       }
     }
   }

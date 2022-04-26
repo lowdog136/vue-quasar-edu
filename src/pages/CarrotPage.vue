@@ -24,6 +24,7 @@
       </q-page-container>
     </q-layout>
   </div>
+
 </template>
 
 <script>
@@ -32,6 +33,27 @@ import ResultMatchAddData from 'components/ResultMatchAddData'
 
 export default defineComponent({
   name: 'CarrotPage',
-  components: { ResultMatchAddData }
+  components: { ResultMatchAddData },
+  data () {
+    return {
+      trueValue: true,
+      falseValue: false
+    }
+  },
+  props: {
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          NewsClubNewsCardStatus: String
+        }
+      }
+    }
+  }
 })
 </script>
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 400px
+</style>
