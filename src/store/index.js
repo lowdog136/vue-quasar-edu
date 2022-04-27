@@ -24,6 +24,7 @@ export default store(function (/* { ssrContext } */) {
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '19.04.22',
+      posts: [],
       NavigationListMenu: [
         {
           id: 1,
@@ -237,13 +238,28 @@ export default store(function (/* { ssrContext } */) {
       count: '2'
     },
     mutations: {
-      increment (state) {
-        state.count++
+      updatePosts (state, posts) {
+        state.posts = posts
+      },
+      createPost (state, newPost) {
+        state.posts.unshift(newPost)
+      }
+    },
+    getters: {
+      allPosts (state) {
+        return state.posts
+      },
+      postsCount (state) {
+        return state.posts.length
       }
     },
     actions: {
-      increment (context) {
-        context.commit('increment')
+      async fetchPosts (ctx, limit = 3) {
+        const res = await fetch(
+          'https://jsonplaceholder.typicode.com/posts?_limit=' + limit
+        )
+        const posts = await res.json()
+        ctx.commit('updatePosts', posts)
       }
     },
 
