@@ -1,7 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import { reactive } from 'vue'
-import post from 'src/store/modules/post'
 
 // import example from './module-example'
 
@@ -24,7 +23,7 @@ export default store(function (/* { ssrContext } */) {
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '19.04.22',
-      posts: [],
+      posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       NavigationListMenu: [
         {
           id: 1,
@@ -243,14 +242,20 @@ export default store(function (/* { ssrContext } */) {
       },
       createPost (state, newPost) {
         state.posts.unshift(newPost)
+        localStorage.setItem('posts', JSON.stringify(state.posts))
       }
     },
     getters: {
+      validPosts (state) {
+        return state.posts.filter(p => {
+          return p.title && p.body
+        })
+      },
       allPosts (state) {
         return state.posts
       },
-      postsCount (state) {
-        return state.posts.length
+      postsCount (state, getters) {
+        return getters.validPosts.length
       }
     },
     actions: {
@@ -260,6 +265,9 @@ export default store(function (/* { ssrContext } */) {
         )
         const posts = await res.json()
         ctx.commit('updatePosts', posts)
+      },
+      createPost ({ commit }, post) {
+        commit('createPost', post)
       }
     },
 
@@ -294,8 +302,4 @@ export const stope = reactive({
       return state.myName
     }
   }
-})
-export const stole = reactive({
-  post,
-  modules: {}
 })

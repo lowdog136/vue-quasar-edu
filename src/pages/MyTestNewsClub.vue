@@ -2,7 +2,7 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <PostForm />
     <h4> {{ postsCount }}</h4>
-    <div class="post" v-for="post in allPosts" :key="post.id">
+    <div class="post" v-for="post in validPosts" :key="post.id">
       <h3>{{ post.title }}</h3>
       <p>{{ post.body }}</p>
     </div>
@@ -16,7 +16,7 @@ export default {
   components: { PostForm },
   computed:
     mapGetters([
-      'allPosts',
+      'validPosts',
       'postsCount'
     ]),
   async mounted () {
