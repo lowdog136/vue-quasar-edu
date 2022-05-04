@@ -10,8 +10,6 @@
   <div class="container">
     <div id="app">
       <h1>Shopping List</h1>
-      <input v-model="itemName" @keyup.enter="addItem" type="text" /><br />
-      <button @click="addItem()">Add Item</button>
     </div>
     <ul>
       <li
@@ -21,7 +19,8 @@
         @click="boughtItem(item.id)"
         @dblclick="removeItem(item.id)"
       >
-        {{ item.name }}
+        itemName: {{ item.name }} --
+        itemBody: {{ item.body }}
       </li>
     </ul>
   </div>
