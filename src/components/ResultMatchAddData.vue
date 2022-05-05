@@ -8,15 +8,15 @@
     >
       <q-input
         filled
-        v-model='$store.state.NewsClubNewsCard[1].NewsCardAnnounceNews'
+        v-model='itemTitle'
         label="Заголовок"
         hint="Товарищеский матч, официальный матч"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-      /> {{ $store.state.NewsClubNewsCard[1].NewsCardAnnounceNews }}
+      /> {{ item.Title }}
       <q-input
         filled
-        v-model="ResultCardTitle"
+        v-model="itemResult"
         label="Результат игры"
         hint="Победа, поражение, ничья"
         lazy-rules
@@ -24,23 +24,23 @@
       />
       <q-input
         filled
-        v-model='$store.state.NewsClubNewsCard[1].ResultCardTeam1'
+        v-model='itemTeam1'
         label="Команда 1"
         hint="ФК Имя Город"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-      /> {{ $store.state.NewsClubNewsCard[1].ResultCardTeam1 }}
+      /> {{ item.team1 }}
       <q-input
         filled
-        v-model="ResultCardTeam2"
+        v-model="itemTeam2"
         label="Команда 2"
         hint="ФК Имя Город"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-      />
+      /> {{ item.team2 }}
       <q-input
         filled
-        v-model="ResultCardResult"
+        v-model="itemResult"
         label="Счет в матче"
         hint="1-1 (1-0)"
         lazy-rules
@@ -58,9 +58,27 @@
 
 <script>
 import { useQuasar } from 'quasar'
+import axios from 'axios'
 import { ref } from 'vue'
 export default {
   name: 'ResultMatchAddData',
+  data () {
+    return {
+      title: '',
+      status: '',
+      team1: '',
+      team2: '',
+      result: ''
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get('http://localhost:3000/items')
+      this.items = res.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
   setup () {
     const $q = useQuasar()
 
@@ -107,11 +125,24 @@ export default {
         ResultCardTeam2.value = null
         ResultCardResult.value = null
         accept.value = false
-      },
-
-      saveResultMatch () {
-        console.log('saveResultMatch')
       }
+    }
+  },
+  methods: {
+    async saveResultMatch () {
+      const res = await axios.post('http://localhost:3000/items', {
+        title: this.itemTitle,
+        status: this.itemStatus,
+        team1: this.itemTeam1,
+        team2: this.itemTeam2,
+        result: this.itemResult
+      })
+      this.items = [...this.items, res.data]
+      this.itemTitle = ''
+      this.itemStatus = ''
+      this.itemTeam1 = ''
+      this.itemTeam2 = ''
+      this.itemResult = ''
     }
   },
   props: {

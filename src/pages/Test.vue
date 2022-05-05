@@ -2,8 +2,9 @@
   <div class="container">
     <div id="app">
       <h1>Shopping List</h1>
-      <input v-model="itemName" v-model="itemBody" @keyup.enter="addItem" type="text" /><br />
-      <button @click="addItem()">Add Item</button> <br>
+      <input v-model="itemName" type="text" /><br />
+      <input v-model="itemBody" type="text" /><br />
+      <button @click="addPost()">Add Item</button> <br>
     </div>
     <ul>
       <li
@@ -54,20 +55,13 @@ export default {
       axios.delete(`http://localhost:3000/items/${id}`)
       this.items = this.items.filter((item) => item.id !== id)
     },
-    async addItem () {
+    async addPost () {
       const res = await axios.post('http://localhost:3000/items', {
         name: this.itemName,
         body: this.itemBody
       })
       this.items = [...this.items, res.data]
       this.itemName = ''
-      this.itemBody = ''
-    },
-    async addBody () {
-      const res = await axios.post('http://localhost:3000/items', {
-        body: this.itemBody
-      })
-      this.items = [...this.items, res.data]
       this.itemBody = ''
     }
   }

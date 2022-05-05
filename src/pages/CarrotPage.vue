@@ -24,30 +24,74 @@
       </q-page-container>
     </q-layout>
   </div>
-
+  <div class="container">
+    <div id="app">
+      <h1>Shopping List</h1>
+      <input v-model="itemName" type="text" /><br />
+      <input v-model="itemBody" type="text" /><br />
+      <button @click="addPost()">Add Item</button> <br>
+    </div>
+    <ul>
+      <li
+        v-for="item of items"
+        :class="{ bought: item.bought }"
+        :key="item.id"
+        @click="boughtItem(item.id)"
+        @dblclick="removeItem(item.id)"
+      >
+        {{ item.name }} {{item.body}}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import ResultMatchAddData from 'components/ResultMatchAddData'
+import axios from 'axios'
 
 export default defineComponent({
   name: 'CarrotPage',
   components: { ResultMatchAddData },
   data () {
     return {
-      trueValue: true,
-      falseValue: false
+      items: [],
+      itemName: '',
+      itemBody: ''
     }
   },
-  props: {
-    product_data: {
-      type: Object,
-      default () {
-        return {
-          NewsClubNewsCardStatus: String
+  async created () {
+    try {
+      const res = await axios.get('http://localhost:3000/items')
+      this.items = res.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  methods: {
+    async boughtItem (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        bought: true
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.bought = true
         }
-      }
+        return item
+      })
+    },
+    removeItem (id) {
+      axios.delete(`http://localhost:3000/items/${id}`)
+      this.items = this.items.filter((item) => item.id !== id)
+    },
+    async addPost () {
+      const res = await axios.post('http://localhost:3000/items', {
+        name: this.itemName,
+        body: this.itemBody
+      })
+      this.items = [...this.items, res.data]
+      this.itemName = ''
+      this.itemBody = ''
     }
   }
 })
