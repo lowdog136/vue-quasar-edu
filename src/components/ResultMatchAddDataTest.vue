@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div id="app">
-      <h1>Shopping List</h1>
+      <h1>add List</h1>
       <input v-model="itemTitle" type="text" placeholder="itemTitle"/><br />
       <input v-model="itemStatus" type="text" placeholder="itemStatus"/><br />
       <input v-model="itemTeam1" type="text" placeholder="itemTeam1"/><br />

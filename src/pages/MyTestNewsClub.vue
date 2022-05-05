@@ -19,7 +19,7 @@
         @click="boughtItem(item.id)"
         @dblclick="removeItem(item.id)"
       >
-        itemName: {{ item.name }} --
+        itemStatus: {{ item.status }} --
         itemBody: {{ item.body }}
       </li>
     </ul>
