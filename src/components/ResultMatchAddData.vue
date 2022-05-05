@@ -64,6 +64,7 @@ export default {
   name: 'ResultMatchAddData',
   data () {
     return {
+      items: [],
       title: '',
       status: '',
       team1: '',
