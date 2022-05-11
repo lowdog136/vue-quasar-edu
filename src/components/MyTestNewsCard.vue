@@ -6,13 +6,16 @@
       label-class="text-teal"
       label-style="font-size: 1.1em"
     />
-    <!--    1 news -->
     <q-card class="my-card" flat bordered>
       <q-img :src="require('../assets/image/imgTitle/' + product_data.NewsClubNewsCardTitleUrlImg )" />
 
       <q-card-section>
-        <div class="text-overline text-orange-9"> {{ product_data.NewsCardStatusMatch_F }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{ product_data.NewsClubNewsCardTitleNews }}</div>
+        <div class="text-overline text-orange-9">
+          {{ product_data.NewsCardAnnounceNews }}
+        </div>
+        <div class="text-h5 q-mt-sm q-mb-xs">
+          {{ product_data.NewsClubNewsCardTitleNews }}
+        </div>
         <div class="text-caption text-grey">
           {{ product_data.NewsClubNewsCardPreViewNews }}
         </div>
@@ -26,11 +29,11 @@
         <div class="labelDate">
           {{ product_data.NewsClubNewsCardDateNews }}
         </div>
-<!--        <NewsCardDetailPopUp
-          :NewsClubNewsCardPopUpFullNews="NewsClubNewsCardFullNews"
-          :NewsClubNewsCardPopUpTitleUrlImg="NewsClubNewsCardTitleUrlImg"
-          :NewsClubNewsCardCardPopUpNewsSrc="NewsClubNewsCardCardNewsSrc"
-          :NewsClubNewsCardPopUpTitleNews="TitleNewsCard"/>-->
+        <NewsCardDetailPopUp
+          :NewsClubNewsCardPopUpFullNews="product_data.NewsClubNewsCardFullNews"
+          :NewsClubNewsCardPopUpTitleUrlImg="product_data.NewsClubNewsCardTitleUrlImg"
+          :NewsClubNewsCardCardPopUpNewsSrc="product_data.NewsClubNewsCardCardNewsSrc"
+          :NewsClubNewsCardPopUpTitleNews="product_data.TitleNewsCard"/>
         <q-space />
 
         <q-btn
@@ -57,16 +60,28 @@
 
 <script>
 import { ref } from 'vue'
-
+import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+import axios from 'axios'
 export default {
-  name: 'MyTestNewsCard',
-  components: {},
+  name: 'NewsCard',
+  components: { NewsCardDetailPopUp },
   data () {
     return {
+      items: [],
+      itemName: '',
+      itemBody: '',
       dialog: ref(false),
       cancelEnabled: ref(false),
       expanded: ref(false),
       dateNews222: '14.03.22'
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get('http://localhost:3000/items')
+      this.items = res.data
+    } catch (error) {
+      console.log(error)
     }
   },
   props: {
@@ -75,6 +90,8 @@ export default {
       default () {
         return {
           NewsClubNewsCardCardNewsSrc: String,
+          NewsCardAnnounceNews: String,
+          NewsClubNewsCardStatus: String,
           NewsClubNewsCardPreViewNews: String,
           NewsClubNewsCardExtNews: String,
           NewsClubNewsCardTitleUrlImg: String,
@@ -85,6 +102,7 @@ export default {
           TitleNewsCard: String,
           NewsClubNewsCardFullNews: String,
           NewsClubNewsCardFullNews2: String,
+          NewsClubNewsAnnounce: String,
           NewsClubNewsCardTitleNews: String
         }
       }

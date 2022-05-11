@@ -11,7 +11,7 @@
 
       <q-card-section>
         <div class="text-overline text-orange-9">
-          {{ product_data.NewsCardAnnounceNews }}
+          {{ item.title }}
         </div>
         <div class="text-h5 q-mt-sm q-mb-xs">
           {{ product_data.NewsClubNewsCardTitleNews }}

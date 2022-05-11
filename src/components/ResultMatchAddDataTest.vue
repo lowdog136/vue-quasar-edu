@@ -16,8 +16,12 @@
         :key="item.id"
         @click="boughtItem(item.id)"
         @dblclick="removeItem(item.id)"
-      >
-        {{ item.name }} {{item.body}}
+      ><br>
+        itemTitle: {{ item.title }} --
+        itemStatus: {{ item.status }} --
+        itemTeam1: {{ item.team1 }} --
+        itemTeam2: {{ item.team2 }} --
+        itemResult: {{ item.result }} --
       </li>
     </ul>
   </div>

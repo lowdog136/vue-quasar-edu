@@ -1,34 +1,43 @@
 <template>
-  <div class="container">
-    <div id="app">
-      <h1>Shopping List</h1>
-      <input v-model="itemName" type="text" /><br />
-      <input v-model="itemBody" type="text" /><br />
-      <button @click="addPost()">Add Item</button> <br>
-    </div>
-    <ul>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <MyTestNewsCard
+      v-for="NewsClubNewsCardS in $store.state.NewsClubNewsCard.slice(id).reverse()"
+      :key="NewsClubNewsCardS.id"
+      :product_data="NewsClubNewsCardS"
+    />
+    <q-card class="my-card" flat>
+      <q-card-section flat>
+      </q-card-section>
+    </q-card>
+    <ul>eee
       <li
         v-for="item of items"
         :class="{ bought: item.bought }"
         :key="item.id"
-        @click="boughtItem(item.id)"
-        @dblclick="removeItem(item.id)"
-      >
-        {{ item.name }} {{item.body}}
+      ><br>
+        itemTitle: {{ item.title }} --
+        itemStatus: {{ item.status }} --
+        itemTeam1: {{ item.team1 }} --
+        itemTeam2: {{ item.team2 }} --
+        itemResult: {{ item.result }} --
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
+import MyTestNewsCard from 'components/MyTestNewsCard'
 import axios from 'axios'
+
 export default {
-  name: 'App',
+  components: { MyTestNewsCard },
+  props: {
+    NewsClubNewsCardStatus: String
+  },
   data () {
     return {
-      items: [],
-      itemName: '',
-      itemBody: ''
+      items: []
     }
   },
   async created () {
@@ -39,67 +48,16 @@ export default {
       console.log(error)
     }
   },
-  methods: {
-    async boughtItem (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
-        bought: true
-      })
-      this.items = this.items.map((item) => {
-        if (item.id === id) {
-          item.bought = true
-        }
-        return item
-      })
-    },
-    removeItem (id) {
-      axios.delete(`http://localhost:3000/items/${id}`)
-      this.items = this.items.filter((item) => item.id !== id)
-    },
-    async addPost () {
-      const res = await axios.post('http://localhost:3000/items', {
-        name: this.itemName,
-        body: this.itemBody
-      })
-      this.items = [...this.items, res.data]
-      this.itemName = ''
-      this.itemBody = ''
+  setup () {
+    return {
+      expanded: ref(false)
     }
   }
 }
 </script>
 
-<style>
-#app {
-  text-align: center;
-  color: #2c3e50;
-}
-.container {
-  background-color: #24e02dd2;
-  max-width: 400px;
-  margin: 0 auto;
-  border-radius: 8px;
-}
-li {
-  font-size: 1.5rem;
-  list-style: none;
-}
-button {
-  margin-top: 5px;
-  background-color: #3498db;
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-input {
-  margin-top: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 4px;
-}
-.bought {
-  text-decoration: line-through;
-}
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
 </style>
