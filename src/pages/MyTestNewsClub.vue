@@ -14,10 +14,7 @@
     <ul>
       <li
         v-for="item of items"
-        :class="{ bought: item.bought }"
         :key="item.id"
-        @click="boughtItem(item.id)"
-        @dblclick="removeItem(item.id)"
       >
         itemStatus: {{ item.status }} --
         itemBody: {{ item.body }}
