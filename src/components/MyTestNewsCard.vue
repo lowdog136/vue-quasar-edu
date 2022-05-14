@@ -1,15 +1,57 @@
 <template>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <q-card class="my-card" flat bordered
+            v-for="item of items"
+            :key="item.id">
+      <q-img
+        src="https://cdn.quasar.dev/img/parallax2.jpg"
+      />
+
+      <q-card-section>
+        <div class="text-overline text-orange-9">{{ item.title }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+        <div class="text-caption text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </q-card-section>
+
+      <q-card-actions>
+        <q-btn flat color="dark" label="Share" />
+        <q-btn flat color="primary" label="Book" />
+
+        <q-space />
+
+        <q-btn
+          color="grey"
+          round
+          flat
+          dense
+          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="expanded = !expanded"
+        />
+      </q-card-actions>
+
+      <q-slide-transition>
+        <div v-show="expanded">
+          <q-separator />
+          <q-card-section class="text-subitle2">
+            {{ lorem }}
+          </q-card-section>
+        </div>
+      </q-slide-transition>
+    </q-card>
+  </div>
   <div class="container">
     <ul>
       <li
         v-for="item of items"
         :key="item.id"
       ><br>
-        itemTitle: {{ item.title }} --
-        itemStatus: {{ item.status }} --
-        itemTeam1: {{ item.team1 }} --
-        itemTeam2: {{ item.team2 }} --
-        itemResult: {{ item.result }} --
+        itemTitle: {{ item.title }} <br>
+        itemStatus: {{ item.status }} <br>
+        itemTeam1: {{ item.team1 }} <br>
+        itemTeam2: {{ item.team2 }} <br>
+        itemResult: {{ item.result }} <br>
       </li>
     </ul>
   </div>
@@ -17,6 +59,8 @@
 
 <script>
 import axios from 'axios'
+import { ref } from 'vue'
+
 export default {
   name: 'ResultMatchAddDataTest',
   data () {
@@ -37,6 +81,12 @@ export default {
       this.items = res.data
     } catch (error) {
       console.log(error)
+    }
+  },
+  setup () {
+    return {
+      expanded: ref(false),
+      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   },
   methods: {
@@ -61,8 +111,8 @@ export default {
   color: #2c3e50;
 }
 .container {
-  background-color: #24e02dd2;
-  max-width: 400px;
+  background-color: rgba(80, 79, 70, 0.82);
+  max-width: 500px;
   margin: 0 auto;
   border-radius: 8px;
 }

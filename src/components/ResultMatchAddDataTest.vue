@@ -1,7 +1,19 @@
 <template>
   <div class="container">
     <div id="app">
-      <h1>add List</h1>
+      <h4>Добавить новость:</h4>
+      <p> Статус новости. Показывать или нет
+        <input v-model="itemNewsClubNewsCardStatus" type="text" placeholder="false or true"/><br/>
+      </p>
+      <p>предЗаголовок - победа,ничья, поражение, анонс
+        <input v-model="itemNewsCardAnnounceNews" type="text" placeholder="itemTitle"/><br />
+      </p>
+      <input v-model="itemTitle" type="text" placeholder="itemTitle"/><br />
+      <input v-model="itemStatus" type="text" placeholder="itemStatus"/><br />
+      <input v-model="itemTeam1" type="text" placeholder="itemTeam1"/><br />
+      <input v-model="itemTeam2" type="text" placeholder="itemTeam2"/><br />
+      <input v-model="itemResult" type="text" placeholder="itemResult"/><br />
+      <input v-model="itemTitle" type="text" placeholder="itemTitle"/><br />
       <input v-model="itemTitle" type="text" placeholder="itemTitle"/><br />
       <input v-model="itemStatus" type="text" placeholder="itemStatus"/><br />
       <input v-model="itemTeam1" type="text" placeholder="itemTeam1"/><br />
@@ -17,11 +29,12 @@
         @click="boughtItem(item.id)"
         @dblclick="removeItem(item.id)"
       ><br>
-        itemTitle: {{ item.title }} --
-        itemStatus: {{ item.status }} --
-        itemTeam1: {{ item.team1 }} --
-        itemTeam2: {{ item.team2 }} --
-        itemResult: {{ item.result }} --
+        <h4>Удалить новость: {{ item.id }}</h4>
+        itemTitle: {{ item.title }} <br>
+        itemStatus: {{ item.status }} <br>
+        itemTeam1: {{ item.team1 }} <br>
+        itemTeam2: {{ item.team2 }} <br>
+        itemResult: {{ item.result }} <br>
       </li>
     </ul>
   </div>
@@ -37,7 +50,8 @@ export default {
       itemName: '',
       itemBody: '',
       itemTitle: '',
-      itemStatus: '',
+      itemNewsCardAnnounceNews: '',
+      itemNewsClubNewsCardStatus: '',
       itemTeam1: '',
       itemTeam2: '',
       itemResult: ''
@@ -72,7 +86,8 @@ export default {
         name: this.itemName,
         body: this.itemBody,
         title: this.itemTitle,
-        status: this.itemStatus,
+        status: this.itemNewsClubNewsCardStatus,
+        preview: this.itemNewsCardAnnounceNews,
         team1: this.itemTeam1,
         team2: this.itemTeam2,
         result: this.itemResult
@@ -81,7 +96,8 @@ export default {
       this.itemName = ''
       this.itemBody = ''
       this.itemTitle = ''
-      this.itemStatus = ''
+      this.itemNewsClubNewsCardStatus = ''
+      this.itemNewsCardAnnounceNews = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
       this.itemResult = ''
@@ -92,12 +108,11 @@ export default {
 
 <style>
 #app {
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
 }
 .container {
   background-color: #24e02dd2;
-  max-width: 400px;
   margin: 0 auto;
   border-radius: 8px;
 }
