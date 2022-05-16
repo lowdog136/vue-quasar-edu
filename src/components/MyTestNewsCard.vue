@@ -11,7 +11,7 @@
         <div class="text-overline text-orange-9">{{ item.preview }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ item.title }}</div>
         <div class="text-caption text-grey">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {{ item.fullnews }}
         </div>
       </q-card-section>
 
@@ -35,25 +35,11 @@
         <div v-show="expanded">
           <q-separator />
           <q-card-section class="text-subitle2">
-            {{ lorem }}
+            {{ item.extnews }}
           </q-card-section>
         </div>
       </q-slide-transition>
     </q-card>
-  </div>
-  <div class="container">
-    <ul>
-      <li
-        v-for="item of items"
-        :key="item.id"
-      ><br>
-        itemTitle: {{ item.title }} <br>
-        itemStatus: {{ item.status }} <br>
-        itemTeam1: {{ item.team1 }} <br>
-        itemTeam2: {{ item.team2 }} <br>
-        itemResult: {{ item.result }} <br>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -66,14 +52,18 @@ export default {
   data () {
     return {
       items: [],
-      itemName: '',
-      itemBody: '',
-      itemTitle: '',
-      itemStatus: '',
-      itemNewsClubNewsCardTitleNews: '',
-      itemTeam1: '',
-      itemTeam2: '',
-      itemResult: ''
+      NewsClubNewsCardFullNews: '',
+      NewsClubNewsCardPreViewNews: '',
+      NewsClubNewsCardTitleNews: '',
+      NewsCardAnnounceNews: '',
+      NewsClubNewsCardExtNews: '',
+      NewsClubNewsCardStatus: '',
+      NewsClubNewsCardDateNews: '',
+      NewsClubNewsCardCardNewsSrc: '',
+      ResultCardTitle: '',
+      ResultCardTeam1: '',
+      ResultCardTeam2: '',
+      ResultCardResult: ''
     }
   },
   async created () {

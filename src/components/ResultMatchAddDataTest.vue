@@ -29,9 +29,10 @@
       </p>
       <q-separator/>
       <p> Данные для страницы с итогами матча<br />
-        <input v-model="itemTeam1" type="text" placeholder="itemTeam1"/><q-space/>
-        <input v-model="itemTeam2" type="text" placeholder="itemTeam2"/><q-space/>
-        <input v-model="itemResult" type="text" placeholder="itemResult"/><br />
+        <input v-model="ResultCardTitle" type="text" placeholder="ResultCardTitle"/><q-space/>
+        <input v-model="ResultCardTeam1" type="text" placeholder="ResultCardTeam1"/><q-space/>
+        <input v-model="ResultCardTeam2" type="text" placeholder="ResultCardTeam2"/><q-space/>
+        <input v-model="ResultCardResult" type="text" placeholder="ResultCardResult"/><br />
       </p>
       <button @click="addPost()">Add Item</button> <br>
     </div>
@@ -44,16 +45,17 @@
         @dblclick="removeItem(item.id)"
       ><br><q-separator/>
         <h4>Удалить новость: {{ item.id }}</h4>
-        itemTitle: {{ item.title }} <br>
-        itemStatus: {{ item.status }} <br>
+        item.title: {{ item.title }} <br>
+        item.status: {{ item.status }} <br>
         item.preview: {{ item.preview }} <br>
         item.fullnews: {{ item.fullnews }} <br>
         item.extnews: {{ item.extnews }} <br>
         item.datenews: {{ item.datenews }} <br>
         item.srcnews: {{ item.srcnews }} <br>
-        itemTeam1: {{ item.team1 }} <br>
-        itemTeam2: {{ item.team2 }} <br>
-        itemResult: {{ item.result }} <br>
+        itemTeam1: {{ item.resultCardTeam1 }} <br>
+        itemTeam2: {{ item.resultCardTeam2 }} <br>
+        itemItog: {{ item.resultCardTitle }} <br>
+        itemResult: {{ item.ResultCardResult }} <br>
       </li>
     </ul>
   </div>
@@ -66,8 +68,6 @@ export default {
   data () {
     return {
       items: [],
-      itemName: '',
-      itemBody: '',
       itemNewsClubNewsCardFullNews: '',
       itemNewsClubNewsCardPreViewNews: '',
       itemNewsClubNewsCardTitleNews: '',
@@ -76,9 +76,10 @@ export default {
       itemNewsClubNewsCardStatus: '',
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
-      itemTeam1: '',
-      itemTeam2: '',
-      itemResult: ''
+      ResultCardTitle: '',
+      ResultCardTeam1: '',
+      ResultCardTeam2: '',
+      ResultCardResult: ''
     }
   },
   async created () {
@@ -107,8 +108,6 @@ export default {
     },
     async addPost () {
       const res = await axios.post('http://localhost:3000/items', {
-        name: this.itemName,
-        body: this.itemBody,
         title: this.itemNewsClubNewsCardTitleNews,
         status: this.itemNewsClubNewsCardStatus,
         preview: this.itemNewsCardAnnounceNews,
@@ -116,13 +115,12 @@ export default {
         extnews: this.itemNewsClubNewsCardExtNews,
         datenews: this.itemNewsClubNewsCardDateNews,
         srcnews: this.itemNewsClubNewsCardCardNewsSrc,
-        team1: this.itemTeam1,
-        team2: this.itemTeam2,
-        result: this.itemResult
+        resultCardTitle: this.ResultCardTitle,
+        resultCardTeam1: this.ResultCardTeam1,
+        resultCardTeam2: this.ResultCardTeam2,
+        result: this.ResultCardResult
       })
       this.items = [...this.items, res.data]
-      this.itemName = ''
-      this.itemBody = ''
       this.itemNewsClubNewsCardFullNews = ''
       this.itemNewsClubNewsCardTitleNews = ''
       this.itemNewsClubNewsCardStatus = ''
@@ -132,7 +130,7 @@ export default {
       this.itemNewsClubNewsCardCardNewsSrc = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
-      this.itemResult = ''
+      this.ResultCardResult = ''
     }
   }
 }

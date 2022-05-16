@@ -1,19 +1,31 @@
 {
   "items": [
     {
-      "name": "",
-      "body": "",
-      "title": "Снова победа",
-      "status": "false",
-      "preview": "Победа",
-      "fullnews": "Это была сложная победа над трудным соперником",
-      "extnews": "Это была сложная победа над трудным",
-      "datenews": "2022-05-11",
-      "srcnews": "https://vk.com/fcsever",
-      "team1": "ФК Север",
-      "team2": "ФК Тапок",
-      "result": "1-0",
+      "title": "asdgsdag",
+      "status": "sdfsdg",
+      "preview": "sdgsadg",
+      "fullnews": "ashsahdf",
+      "extnews": "sahsadh",
+      "datenews": "2022-05-02",
+      "srcnews": "sahsafh",
+      "resultCardTitle": "asfhsafh",
+      "resultCardTeam1": "ashsah",
+      "resultCardTeam2": "ashsah",
       "id": 1
+    },
+    {
+      "title": "",
+      "status": "",
+      "preview": "",
+      "fullnews": "sdbsdb",
+      "extnews": "",
+      "datenews": "",
+      "srcnews": "sdfsd",
+      "resultCardTitle": "sdfsd",
+      "resultCardTeam1": "sdfsd",
+      "resultCardTeam2": "sdfsd",
+      "result": "sdfsd",
+      "id": 2
     }
   ]
 }
