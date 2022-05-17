@@ -5,15 +5,15 @@
         <q-dialog v-model="dialog" persistent>
           <q-card>
             <q-card-section>
-              <div class="text-overline text-orange-9"> {{ $store.state.NewsCardStatusMatch_F }}</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">{{ NewsClubNewsCardPopUpTitleNews }}</div>
+              <div class="text-overline text-orange-9"> 11</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">22</div>
               <div class="text-caption text-grey">
-                <q-img :src="require('../assets/image/imgTitle/' + NewsClubNewsCardPopUpTitleUrlImg )" />
+                <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
                 <br>
-                {{ NewsClubNewsCardPopUpFullNews }}
+                {{ item.fullnews }}
               </div>
               <div class="text-caption text-grey">
-                {{ NewsClubNewsCardCardPopUpNewsSrc }}
+                {{ item.srcnews }}
               </div>
             </q-card-section>
 
@@ -21,7 +21,7 @@
               <div v-show="expanded">
                 <q-separator />
                 <q-card-section class="text-subitle2">
-                  {{ $store.state.NewsClubNewsCard[0].NewsClubNewsCardExtNews }}
+                  {{ item.srcnews }}
                 </q-card-section>
               </div>
             </q-slide-transition>

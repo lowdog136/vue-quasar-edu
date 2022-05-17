@@ -1,10 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <NewsCard
-      v-for="NewsClubNewsCardS in $store.state.NewsClubNewsCard.slice(id).reverse()"
-      :key="NewsClubNewsCardS.id"
-      :product_data="NewsClubNewsCardS"
-    />
+    <NewsCard />
     <q-card class="my-card" flat>
       <q-card-section flat>
       </q-card-section>

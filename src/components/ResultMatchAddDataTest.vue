@@ -7,7 +7,7 @@
         <input v-model="itemNewsClubNewsCardStatus" type="text" placeholder="false or true"/><br/>
       </p>
       <p>предЗаголовок - победа,ничья, поражение, анонс<br/>
-        <input v-model="itemNewsCardAnnounceNews" type="text" placeholder="itemTitle"/><br />
+        <input v-model="itemNewsCardSubTitleNews" type="text" placeholder="subtitle"/><br />
       </p>
       <p>Заголовок новости<br/>
         <input v-model="itemNewsClubNewsCardTitleNews" type="text" placeholder="itemTitle"/>
@@ -47,6 +47,7 @@
         <h4>Удалить новость: {{ item.id }}</h4>
         item.title: {{ item.title }} <br>
         item.status: {{ item.status }} <br>
+        item.subtitle: {{ item.subtitle }} <br>
         item.preview: {{ item.preview }} <br>
         item.fullnews: {{ item.fullnews }} <br>
         item.extnews: {{ item.extnews }} <br>
@@ -71,7 +72,7 @@ export default {
       itemNewsClubNewsCardFullNews: '',
       itemNewsClubNewsCardPreViewNews: '',
       itemNewsClubNewsCardTitleNews: '',
-      itemNewsCardAnnounceNews: '',
+      itemNewsCardSubTitleNews: '',
       itemNewsClubNewsCardExtNews: '',
       itemNewsClubNewsCardStatus: '',
       itemNewsClubNewsCardDateNews: '',
@@ -110,7 +111,8 @@ export default {
       const res = await axios.post('http://localhost:3000/items', {
         title: this.itemNewsClubNewsCardTitleNews,
         status: this.itemNewsClubNewsCardStatus,
-        preview: this.itemNewsCardAnnounceNews,
+        subtitle: this.itemNewsCardSubTitleNews,
+        preview: this.itemNewsClubNewsCardPreViewNews,
         fullnews: this.itemNewsClubNewsCardFullNews,
         extnews: this.itemNewsClubNewsCardExtNews,
         datenews: this.itemNewsClubNewsCardDateNews,
@@ -123,8 +125,9 @@ export default {
       this.items = [...this.items, res.data]
       this.itemNewsClubNewsCardFullNews = ''
       this.itemNewsClubNewsCardTitleNews = ''
+      this.itemNewsClubNewsCardPreViewNews = ''
       this.itemNewsClubNewsCardStatus = ''
-      this.itemNewsCardAnnounceNews = ''
+      this.itemNewsCardSubTitleNews = ''
       this.itemNewsClubNewsCardDateNews = ''
       this.itemNewsClubNewsCardExtNews = ''
       this.itemNewsClubNewsCardCardNewsSrc = ''

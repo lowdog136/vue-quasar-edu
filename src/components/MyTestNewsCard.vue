@@ -48,7 +48,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 
 export default {
-  name: 'ResultMatchAddDataTest',
+  name: 'MyTestNewsCard',
   data () {
     return {
       items: [],
