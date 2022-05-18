@@ -30,7 +30,7 @@
         <div class="labelDate">
           {{ item.datenews }}
         </div>
-        <NewsCardDetailPopUp :itemNewsClubNewsCardFullNews="NewsClubNewsCardFullNews"/>
+        <NewsCardDetailPopUp :kfull="product_data.kkfull" />
         <q-space />
 
         <q-btn
@@ -105,6 +105,15 @@ export default {
         return item
       })
     }
+  },
+  props: {
+    product_data: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    kkfull: String
   }
 }
 </script>
