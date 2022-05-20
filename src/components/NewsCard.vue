@@ -30,7 +30,7 @@
         <div class="labelDate">
           {{ item.datenews }}
         </div>
-        <NewsCardDetailPopUp :kfull="product_data.kkfull" />
+        <NewsCardDetailPopUp :kfull="item.fullnews"/>
         <q-space />
 
         <q-btn
@@ -64,6 +64,8 @@ export default {
   components: { NewsCardDetailPopUp },
   data () {
     return {
+      text: '',
+      mysText: 'gopa',
       items: [],
       NewsClubNewsCardFullNews: '',
       NewsClubNewsCardPreViewNews: '',

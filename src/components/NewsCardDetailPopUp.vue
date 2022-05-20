@@ -8,7 +8,6 @@
           <div class="text-h6"> {{ kfull }}</div>
         </q-card-section>
         <q-card-section class="row items-center q-gutter-sm">
-          <q-btn label="Open dialog" color="primary" @click="dialog2 = true" />
           <q-btn v-close-popup label="Close" color="primary" />
         </q-card-section>
       </q-card>
@@ -56,7 +55,9 @@ export default {
     product_data: {
       type: Object,
       default () {
-        return {}
+        return {
+          text: String
+        }
       }
     },
     kfull: String

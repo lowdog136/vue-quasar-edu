@@ -145,7 +145,7 @@ export default {
   color: #2c3e50;
 }
 .container {
-  background-color: #24e02dd2;
+  background-color: rgba(42, 44, 43, 0.82);
   margin: 0 auto;
   border-radius: 8px;
 }
