@@ -16,16 +16,13 @@
         <input v-model="itemNewsClubNewsCardPreViewNews" type="text" placeholder="itemStatus"/>
       </p>
       <p>Текст - основной текст. полный. работает по кнопке подробно<br/>
-        <input v-model="itemNewsClubNewsCardFullNews" type="text" placeholder="itemTitle"/>
-      </p>
-      <p>раскрТекст - текст показывающий при раскрытии.чуть больше чем в предТекстНовости<br/>
-        <input v-model="itemNewsClubNewsCardExtNews" type="text" placeholder="itemTitle"/>
+        <input v-model="itemNewsClubNewsCardFullNews" type="text" placeholder="полный текст"/>
       </p>
       <p>датаНовости<br />
         <input v-model="itemNewsClubNewsCardDateNews" type="date" placeholder="датаНовости"/>
       </p>
       <p>источник новости<br />
-        <input v-model="itemNewsClubNewsCardCardNewsSrc" type="url" placeholder="датаНовости"/>
+        <input v-model="itemNewsClubNewsCardCardNewsSrc" type="url" placeholder="Источник новости"/>
       </p>
       <q-separator/>
       <p> Данные для страницы с итогами матча<br />
@@ -50,7 +47,6 @@
         item.subtitle: {{ item.subtitle }} <br>
         item.preview: {{ item.preview }} <br>
         item.fullnews: {{ item.fullnews }} <br>
-        item.extnews: {{ item.extnews }} <br>
         item.datenews: {{ item.datenews }} <br>
         item.srcnews: {{ item.srcnews }} <br>
         itemTeam1: {{ item.resultCardTeam1 }} <br>
@@ -73,7 +69,6 @@ export default {
       itemNewsClubNewsCardPreViewNews: '',
       itemNewsClubNewsCardTitleNews: '',
       itemNewsCardSubTitleNews: '',
-      itemNewsClubNewsCardExtNews: '',
       itemNewsClubNewsCardStatus: '',
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
@@ -114,7 +109,6 @@ export default {
         subtitle: this.itemNewsCardSubTitleNews,
         preview: this.itemNewsClubNewsCardPreViewNews,
         fullnews: this.itemNewsClubNewsCardFullNews,
-        extnews: this.itemNewsClubNewsCardExtNews,
         datenews: this.itemNewsClubNewsCardDateNews,
         srcnews: this.itemNewsClubNewsCardCardNewsSrc,
         resultCardTitle: this.ResultCardTitle,
@@ -129,7 +123,6 @@ export default {
       this.itemNewsClubNewsCardStatus = ''
       this.itemNewsCardSubTitleNews = ''
       this.itemNewsClubNewsCardDateNews = ''
-      this.itemNewsClubNewsCardExtNews = ''
       this.itemNewsClubNewsCardCardNewsSrc = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
@@ -145,7 +138,7 @@ export default {
   color: #2c3e50;
 }
 .container {
-  background-color: rgba(42, 44, 43, 0.82);
+  background-color: rgba(172, 187, 180, 0.82);
   margin: 0 auto;
   border-radius: 8px;
 }

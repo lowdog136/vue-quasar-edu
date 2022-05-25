@@ -11,15 +11,15 @@
             :key="item.id">
       <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
       <q-card-section>
-        <div class="text-overline text-orange-9">
+        <div class="text-overline text-deep-orange-14">
           {{ item.subtitle }}
         </div>
         <div class="text-h5 q-mt-sm q-mb-xs">
           {{ item.title }}
         </div>
-        <div class="text-caption text-grey">
+        <div class="text-caption text-blue-grey-10">
           {{ item.preview }}
-        </div>
+        </div> <br>
         <div class="text-caption text-grey">
           {{ item.srcnews }}
         </div>

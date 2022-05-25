@@ -4,13 +4,12 @@
 
     <q-dialog v-model="dialog">
       <q-card class="my-card">
+        <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
         <q-card-section>
           <div class="text-overline text-orange-9"> {{ PopyUpSubTitleNews }}</div>
           <div class="text-h5 q-mt-sm q-mb-xs">{{ PopyUpTitleNews }}</div>
-          <div class="text-caption text-grey">
-            <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
-            <br>
-            {{ PopyUpFullNews }}
+          <div class="text-caption text-blue-grey-10">
+            <h6>{{ PopyUpFullNews }} </h6>
           </div>
           <div class="text-caption text-grey">
             {{ PopyUpSrcNews }}
@@ -74,5 +73,11 @@ export default {
 <style lang="sass" scoped>
 .my-card
   width: 100%
-  max-width: 350px
+  min-width: 350px
+  max-width: 750px
+
+.h6
+  font-size: 10vw
+  font-size: max(100px, min(10vw, 150px))
+  font-size: clamp(100px, 10vw, 150px)
 </style>
