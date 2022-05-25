@@ -2,7 +2,6 @@
   <div v-if="product_data.NewsClubNewsCardStatus" class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered>
       <q-img :src="require('../assets/image/imgTitle/' + product_data.NewsClubNewsCardTitleUrlImg )" />
-
       <q-card-section>
         <div class="text-overline text-orange-9">{{ product_data.NewsCardAnnounceNews }}</div>
         <div class="text-caption text-grey">{{ product_data.NewsClubNewsCardDateNews }}</div>

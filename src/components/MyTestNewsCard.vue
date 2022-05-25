@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered
-            v-for="item of items"
+            v-for="item in items"
             :key="item.id">
       <q-img
         src="https://cdn.quasar.dev/img/parallax2.jpg"

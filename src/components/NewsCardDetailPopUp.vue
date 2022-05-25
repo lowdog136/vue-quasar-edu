@@ -3,7 +3,7 @@
     <q-btn label="Подробно" color="primary" @click="dialog = true" />
 
     <q-dialog v-model="dialog">
-      <q-card>
+      <q-card class="my-card">
         <q-card-section>
           <div class="text-overline text-orange-9"> {{ PopyUpSubTitleNews }}</div>
           <div class="text-h5 q-mt-sm q-mb-xs">{{ PopyUpTitleNews }}</div>
@@ -71,3 +71,8 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
+</style>

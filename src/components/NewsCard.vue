@@ -7,9 +7,9 @@
       label-style="font-size: 1.1em"
     />
     <q-card class="my-card" flat bordered
-            v-for="item of items"
+            v-for="item in items.slice(id).reverse()"
             :key="item.id">
-      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+      <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
       <q-card-section>
         <div class="text-overline text-orange-9">
           {{ item.subtitle }}
@@ -97,38 +97,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  text-align: center;
-  color: #2c3e50;
-}
-.container {
-  background-color: rgba(80, 79, 70, 0.82);
-  max-width: 400px;
-  margin: 0 auto;
-  border-radius: 8px;
-}
-li {
-  font-size: 1.5rem;
-  list-style: none;
-}
-button {
-  margin-top: 5px;
-  background-color: #3498db;
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-input {
-  margin-top: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 4px;
-}
-.bought {
-  text-decoration: line-through;
-}
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
 </style>
