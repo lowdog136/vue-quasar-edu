@@ -30,27 +30,9 @@
         <div class="labelDate">
           {{ item.datenews }}
         </div>
-        <NewsCardDetailPopUp :kfull="item.fullnews"/>
+        <NewsCardDetailPopUp :PopyUpSubTitleNews="item.subtitle" :PopyUpSrcNews="item.srcnews" :PopyUpFullNews="item.fullnews" :PopyUpTitleNews="item.title"/>
         <q-space />
-
-        <q-btn
-          color="grey"
-          round
-          flat
-          dense
-          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-          @click="expanded = !expanded"
-        />
       </q-card-actions>
-
-      <q-slide-transition>
-        <div v-show="expanded">
-          <q-separator />
-          <q-card-section class="text-subitle2">
-            {{ item.extnews }}
-          </q-card-section>
-        </div>
-      </q-slide-transition>
     </q-card>
   </div>
 </template>
@@ -67,14 +49,6 @@ export default {
       text: '',
       mysText: 'gopa',
       items: [],
-      NewsClubNewsCardFullNews: '',
-      NewsClubNewsCardPreViewNews: '',
-      NewsClubNewsCardTitleNews: '',
-      NewsCardAnnounceNews: '',
-      NewsClubNewsCardExtNews: '',
-      NewsClubNewsCardStatus: '',
-      NewsClubNewsCardDateNews: '',
-      NewsClubNewsCardCardNewsSrc: '',
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
@@ -109,13 +83,16 @@ export default {
     }
   },
   props: {
+    PopyUpSubTitleNews: String,
+    PopyUpTitleNews: String,
+    PopyUpSrcNews: String,
+    PopyUpFullNews: String,
     product_data: {
       type: Object,
       default () {
         return {}
       }
-    },
-    kkfull: String
+    }
   }
 }
 </script>
@@ -127,7 +104,7 @@ export default {
 }
 .container {
   background-color: rgba(80, 79, 70, 0.82);
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 auto;
   border-radius: 8px;
 }

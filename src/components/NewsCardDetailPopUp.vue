@@ -3,13 +3,24 @@
     <q-btn label="Подробно" color="primary" @click="dialog = true" />
 
     <q-dialog v-model="dialog">
-      <q-card >
+      <q-card>
         <q-card-section>
-          <div class="text-h6"> {{ kfull }}</div>
+          <div class="text-overline text-orange-9"> {{ PopyUpSubTitleNews }}</div>
+          <div class="text-h5 q-mt-sm q-mb-xs">{{ PopyUpTitleNews }}</div>
+          <div class="text-caption text-grey">
+            <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
+            <br>
+            {{ PopyUpFullNews }}
+          </div>
+          <div class="text-caption text-grey">
+            {{ PopyUpSrcNews }}
+          </div>
         </q-card-section>
+      <q-card >
         <q-card-section class="row items-center q-gutter-sm">
-          <q-btn v-close-popup label="Close" color="primary" />
+          <q-btn v-close-popup label="Закрыть" color="primary" />
         </q-card-section>
+      </q-card>
       </q-card>
     </q-dialog>
   </div>
@@ -23,14 +34,6 @@ export default {
   data () {
     return {
       items: [],
-      NewsClubNewsCardFullNews: '',
-      NewsClubNewsCardPreViewNews: '',
-      NewsClubNewsCardTitleNews: '',
-      NewsCardAnnounceNews: '',
-      NewsClubNewsCardExtNews: '',
-      NewsClubNewsCardStatus: '',
-      NewsClubNewsCardDateNews: '',
-      NewsClubNewsCardCardNewsSrc: '',
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
@@ -60,8 +63,11 @@ export default {
         }
       }
     },
-    kfull: String
-
+    PopyUpSubTitleNews: String,
+    PopyUpSubImgNews: String,
+    PopyUpTitleNews: String,
+    PopyUpFullNews: String,
+    PopyUpSrcNews: String
   }
 }
 </script>
