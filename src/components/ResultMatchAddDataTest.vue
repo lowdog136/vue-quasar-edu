@@ -1,37 +1,131 @@
 <template>
   <div class="container">
     <div id="app">
-      <h4>Добавить новость:</h4>
+      <h5>Добавить новость:</h5>
       <q-separator/>
-      <p> Статус новости. Показывать или нет<br/>
-        <input v-model="itemNewsClubNewsCardStatus" type="text" placeholder="false or true"/><br/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardStatus'
+          label=""
+          hint="Статус новости. Показывать или нет/false or true"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>предЗаголовок - победа,ничья, поражение, анонс<br/>
-        <input v-model="itemNewsCardSubTitleNews" type="text" placeholder="subtitle"/><br />
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsCardSubTitleNews'
+          label=""
+          hint="subtitle.предЗаголовок - победа,ничья, поражение, анонс"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>Заголовок новости<br/>
-        <input v-model="itemNewsClubNewsCardTitleNews" type="text" placeholder="itemTitle"/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardTitleNews'
+          label=""
+          hint="Заголовок новости: Товарищеский матч, официальный матч"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>предТекстНовости - превью. 2-3 предложения<br/>
-        <input v-model="itemNewsClubNewsCardPreViewNews" type="text" placeholder="itemStatus"/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardPreViewNews'
+          label=""
+          hint="itemStatus.предТекстНовости - превью. 2-3 предложения"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>Текст - основной текст. полный. работает по кнопке подробно<br/>
-        <input v-model="itemNewsClubNewsCardFullNews" type="text" placeholder="полный текст"/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardFullNews'
+          label=""
+          hint="Текст - основной текст. полный. работает по кнопке подробно"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>датаНовости<br />
-        <input v-model="itemNewsClubNewsCardDateNews" type="date" placeholder="датаНовости"/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardDateNews'
+          label=""
+          hint="датаНовости"
+          type="date"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
-      <p>источник новости<br />
-        <input v-model="itemNewsClubNewsCardCardNewsSrc" type="url" placeholder="Источник новости"/>
+      <p>
+        <q-input
+          filled
+          v-model='itemNewsClubNewsCardCardNewsSrc'
+          label=""
+          hint="источник новости"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
       </p>
       <q-separator/>
       <p> Данные для страницы с итогами матча<br />
-        <input v-model="ResultCardTitle" type="text" placeholder="ResultCardTitle"/><q-space/>
-        <input v-model="ResultCardTeam1" type="text" placeholder="ResultCardTeam1"/><q-space/>
-        <input v-model="ResultCardTeam2" type="text" placeholder="ResultCardTeam2"/><q-space/>
-        <input v-model="ResultCardResult" type="text" placeholder="ResultCardResult"/><br />
+        <q-input
+          filled
+          v-model='ResultCardStatus'
+          label=""
+          hint="Показывать карточку с результатом матча или нет"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
+        <q-space/><br>
+        <q-input
+          filled
+          v-model='ResultCardTitle'
+          label=""
+          hint="ResultCardTitle"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
+        <q-space/><br>
+        <q-input
+          filled
+          v-model='ResultCardTeam1'
+          label=""
+          hint="ResultCardTeam1"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
+        <q-space/><br>
+        <q-input
+          filled
+          v-model='ResultCardTeam2'
+          label=""
+          hint="ResultCardTeam2"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
+        <q-space/><br>
+        <q-input
+          filled
+          v-model='ResultCardResult'
+          label=""
+          hint="ResultCardResult"
+          lazy-rules
+          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        />
+        <br />
       </p>
-      <button @click="addPost()">Add Item</button> <br>
+      <div class="bottom">
+        <button @click="addPost()" color="primary">Добавить</button>
+        <button @click="onReset" color="primary">Очистить форму</button>
+      </div>
     </div>
     <ul>
       <li
@@ -49,6 +143,7 @@
         item.fullnews: {{ item.fullnews }} <br>
         item.datenews: {{ item.datenews }} <br>
         item.srcnews: {{ item.srcnews }} <br>
+        itemResultCardStatus: {{ item.resultCardStatus }} <br>
         itemTeam1: {{ item.resultCardTeam1 }} <br>
         itemTeam2: {{ item.resultCardTeam2 }} <br>
         itemItog: {{ item.resultCardTitle }} <br>
@@ -60,6 +155,8 @@
 
 <script>
 import axios from 'axios'
+import { useQuasar } from 'quasar'
+import { ref } from 'vue'
 export default {
   name: 'ResultMatchAddDataTest',
   data () {
@@ -72,6 +169,7 @@ export default {
       itemNewsClubNewsCardStatus: '',
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
+      ResultCardStatus: '',
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
@@ -84,6 +182,39 @@ export default {
       this.items = res.data
     } catch (error) {
       console.log(error)
+    }
+  },
+  setup () {
+    const $q = useQuasar()
+
+    const name = ref(null)
+    const accept = ref(false)
+
+    return {
+      name,
+      accept,
+      onSubmit () {
+        if (accept.value !== true) {
+          $q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'You need to accept the license and terms first'
+          })
+        } else {
+          $q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Submitted'
+          })
+        }
+      },
+
+      onReset () {
+        name.value = null
+        accept.value = false
+      }
     }
   },
   methods: {
@@ -111,6 +242,7 @@ export default {
         fullnews: this.itemNewsClubNewsCardFullNews,
         datenews: this.itemNewsClubNewsCardDateNews,
         srcnews: this.itemNewsClubNewsCardCardNewsSrc,
+        resultCardStatus: this.ResultCardStatus,
         resultCardTitle: this.ResultCardTitle,
         resultCardTeam1: this.ResultCardTeam1,
         resultCardTeam2: this.ResultCardTeam2,
@@ -124,6 +256,7 @@ export default {
       this.itemNewsCardSubTitleNews = ''
       this.itemNewsClubNewsCardDateNews = ''
       this.itemNewsClubNewsCardCardNewsSrc = ''
+      this.ResultCardStatus = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
       this.ResultCardResult = ''

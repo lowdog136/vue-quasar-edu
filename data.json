@@ -83,6 +83,34 @@
       "resultCardTeam2": "",
       "result": "",
       "id": 6
+    },
+    {
+      "title": "",
+      "status": "",
+      "subtitle": "",
+      "preview": "",
+      "fullnews": "",
+      "datenews": "",
+      "srcnews": "",
+      "resultCardTitle": "",
+      "resultCardTeam1": "",
+      "resultCardTeam2": "",
+      "result": "",
+      "id": 7
+    },
+    {
+      "title": "",
+      "status": "",
+      "subtitle": "",
+      "preview": "",
+      "fullnews": "",
+      "datenews": "",
+      "srcnews": "",
+      "resultCardTitle": "",
+      "resultCardTeam1": "fgfdg",
+      "resultCardTeam2": "",
+      "result": "",
+      "id": 8
     }
   ]
 }
