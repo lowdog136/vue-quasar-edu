@@ -8,14 +8,6 @@
       <q-separator/>
         <q-input
           filled
-          v-model='itemNewsClubNewsCardStatus'
-          label=""
-          hint="Статус новости. Показывать или нет/false or true"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
           v-model='itemNewsCardSubTitleNews'
           label=""
           hint="subtitle.предЗаголовок - победа,ничья, поражение, анонс"
@@ -69,16 +61,8 @@
       <p> Данные для страницы с итогами матча<br />
         <q-input
           filled
-          v-model='ResultCardStatus'
-          label=""
-          hint="Показывать карточку с результатом матча или нет"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-space/><br>
-        <q-input
-          filled
           v-model='ResultCardTitle'
+          disable
           label=""
           hint="ResultCardTitle"
           lazy-rules
@@ -88,6 +72,7 @@
         <q-input
           filled
           v-model='ResultCardTeam1'
+          disable
           label=""
           hint="ResultCardTeam1"
           lazy-rules
@@ -97,6 +82,7 @@
         <q-input
           filled
           v-model='ResultCardTeam2'
+          disable
           label=""
           hint="ResultCardTeam2"
           lazy-rules
@@ -106,6 +92,7 @@
         <q-input
           filled
           v-model='ResultCardResult'
+          disable
           label=""
           hint="ResultCardResult"
           lazy-rules
@@ -125,16 +112,42 @@
         :key="item.id"
       ><br><q-separator/>
         <h5>Новость: {{ item.id }}
+          <q-btn @click="statusItemOn(item.id)" @dblclick="statusItemOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
           <q-btn @click="boughtItem(item.id)" @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
           <q-btn @dblclick="removeItem(item.id)" label="Удалить" color="primary" flat class="q-ml-sm" />
         </h5>
-        item.title: {{ item.title }} <br>
+        <q-card v-if="item.status" class="my-card" flat bordered>
+          <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
+          <q-card-section>
+            <div class="text-overline text-deep-orange-14">
+              {{ item.subtitle }}
+            </div>
+            <div class="text-h5 q-mt-sm q-mb-xs">
+              {{ item.title }}
+            </div>
+            <div class="text-caption text-blue-grey-10">
+              {{ item.preview }}
+            </div> <br>
+            <div class="text-caption text-grey">
+              {{ item.srcnews }}
+            </div>
+          </q-card-section>
+
+          <q-card-actions>
+            <q-btn flat color="dark" label="" />
+            <div class="labelDate">
+              {{ item.datenews }}
+            </div>
+            <NewsCardDetailPopUp
+              :PopyUpSubTitleNews="item.subtitle"
+              :PopyUpSrcNews="item.srcnews"
+              :PopyUpFullNews="item.fullnews"
+              :PopyUpTitleNews="item.title"
+            />
+            <q-space />
+          </q-card-actions>
+        </q-card>
         item.status: {{ item.status }} <br>
-        item.subtitle: {{ item.subtitle }} <br>
-        item.preview: {{ item.preview }} <br>
-        item.fullnews: {{ item.fullnews }} <br>
-        item.datenews: {{ item.datenews }} <br>
-        item.srcnews: {{ item.srcnews }} <br>
         itemResultCardStatus: {{ item.resultCardStatus }} <br>
         itemTeam1: {{ item.resultCardTeam1 }} <br>
         itemTeam2: {{ item.resultCardTeam2 }} <br>
@@ -149,7 +162,10 @@
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
+import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+
 export default {
+  components: { NewsCardDetailPopUp },
   name: 'ResultMatchAddDataTest',
   data () {
     return {
@@ -158,10 +174,10 @@ export default {
       itemNewsClubNewsCardPreViewNews: '',
       itemNewsClubNewsCardTitleNews: '',
       itemNewsCardSubTitleNews: '',
-      itemNewsClubNewsCardStatus: '',
+      itemNewsClubNewsCardStatus: true,
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
-      ResultCardStatus: '',
+      ResultCardStatus: true,
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
@@ -232,6 +248,28 @@ export default {
         return item
       })
     },
+    async statusItemOn (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        status: true
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.status = true
+        }
+        return item
+      })
+    },
+    async statusItemOff (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        status: false
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.status = false
+        }
+        return item
+      })
+    },
     removeItem (id) {
       axios.delete(`http://localhost:3000/items/${id}`)
       this.items = this.items.filter((item) => item.id !== id)
@@ -291,6 +329,10 @@ button {
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
+}
+.my-card {
+  width: 100%;
+  max-width: 450px;
 }
 input {
   margin-top: 5px;
