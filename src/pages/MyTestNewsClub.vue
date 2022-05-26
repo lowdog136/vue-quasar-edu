@@ -37,7 +37,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3000/items')
+      const res = await axios.get('http://localhost:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -54,7 +54,7 @@ export default {
   methods:
     mapActions(['fetchPosts']),
   async boughtItem (id) {
-    await axios.patch(`http://localhost:3000/items/${id}`, {
+    await axios.patch(`http://localhost:3001/items/${id}`, {
       bought: true
     })
     this.items = this.items.map((item) => {
@@ -65,11 +65,11 @@ export default {
     })
   },
   removeItem (id) {
-    axios.delete(`http://localhost:3000/items/${id}`)
+    axios.delete(`http://localhost:3001/items/${id}`)
     this.items = this.items.filter((item) => item.id !== id)
   },
   async addItem () {
-    const res = await axios.post('http://localhost:3000/items', {
+    const res = await axios.post('http://localhost:3001/items', {
       name: this.itemName
     })
     this.items = [...this.items, res.data]

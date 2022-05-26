@@ -188,7 +188,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3000/items')
+      const res = await axios.get('http://localhost:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -229,7 +229,7 @@ export default {
   },
   methods: {
     async boughtItem (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         bought: true
       })
       this.items = this.items.map((item) => {
@@ -240,7 +240,7 @@ export default {
       })
     },
     async removeBought (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         bought: false
       })
       this.items = this.items.map((item) => {
@@ -251,7 +251,7 @@ export default {
       })
     },
     async statusItemOn (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         status: true
       })
       this.items = this.items.map((item) => {
@@ -262,7 +262,7 @@ export default {
       })
     },
     async statusItemOff (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         status: false
       })
       this.items = this.items.map((item) => {
@@ -273,7 +273,7 @@ export default {
       })
     },
     async statusResultCardOn (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         resultCardStatus: true
       })
       this.items = this.items.map((item) => {
@@ -284,7 +284,7 @@ export default {
       })
     },
     async statusResultCardOff (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         resultCardStatus: false
       })
       this.items = this.items.map((item) => {
@@ -295,11 +295,11 @@ export default {
       })
     },
     removeItem (id) {
-      axios.delete(`http://localhost:3000/items/${id}`)
+      axios.delete(`http://localhost:3001/items/${id}`)
       this.items = this.items.filter((item) => item.id !== id)
     },
     async addPost () {
-      const res = await axios.post('http://localhost:3000/items', {
+      const res = await axios.post('http://localhost:3001/items', {
         title: this.itemNewsClubNewsCardTitleNews,
         status: this.itemNewsClubNewsCardStatus,
         subtitle: this.itemNewsCardSubTitleNews,

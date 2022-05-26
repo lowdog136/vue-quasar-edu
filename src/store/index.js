@@ -22,7 +22,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '19.04.22',
+      NavigationReleaseNewsSite: '26.05.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       NavigationListMenu: [
         {

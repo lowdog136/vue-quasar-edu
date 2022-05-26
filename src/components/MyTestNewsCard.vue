@@ -68,7 +68,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3000/items')
+      const res = await axios.get('http://localhost:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     async boughtItem (id) {
-      await axios.patch(`http://localhost:3000/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         bought: true
       })
       this.items = this.items.map((item) => {
