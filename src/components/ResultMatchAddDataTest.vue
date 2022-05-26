@@ -18,7 +18,7 @@
           filled
           v-model='itemNewsClubNewsCardTitleNews'
           label=""
-          hint="Заголовок новости: Товарищеский матч, официальный матч"
+          hint="Заголовок новости: 2-3 слова"
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
@@ -113,7 +113,7 @@
       ><br><q-separator/>
         <h5>Новость: {{ item.id }}
           <q-btn @click="statusItemOn(item.id)" @dblclick="statusItemOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-          <q-btn @click="boughtItem(item.id)" @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
+          <q-btn @click="boughtItem(item.id)" disable @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
           <q-btn @dblclick="removeItem(item.id)" label="Удалить" color="primary" flat class="q-ml-sm" />
         </h5>
         <q-card v-if="item.status" class="my-card" flat bordered>
@@ -147,7 +147,9 @@
             <q-space />
           </q-card-actions>
         </q-card>
-        item.status: {{ item.status }} <br>
+        <q-space />item.status: {{ item.status }} <br>
+        <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
+
         itemResultCardStatus: {{ item.resultCardStatus }} <br>
         itemTeam1: {{ item.resultCardTeam1 }} <br>
         itemTeam2: {{ item.resultCardTeam2 }} <br>
@@ -266,6 +268,28 @@ export default {
       this.items = this.items.map((item) => {
         if (item.id === id) {
           item.status = false
+        }
+        return item
+      })
+    },
+    async statusResultCardOn (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        resultCardStatus: true
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.resultCardStatus = true
+        }
+        return item
+      })
+    },
+    async statusResultCardOff (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        resultCardStatus: false
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.resultCardStatus = false
         }
         return item
       })
