@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <div id="app">
-      <h5>Добавить новость:</h5>
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
       <q-separator/>
-      <p>
         <q-input
           filled
           v-model='itemNewsClubNewsCardStatus'
@@ -12,8 +14,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
-      <p>
         <q-input
           filled
           v-model='itemNewsCardSubTitleNews'
@@ -22,8 +22,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
-      <p>
         <q-input
           filled
           v-model='itemNewsClubNewsCardTitleNews'
@@ -32,8 +30,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
-      <p>
         <q-input
           filled
           v-model='itemNewsClubNewsCardPreViewNews'
@@ -42,8 +38,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
-      <p>
         <q-input
           filled
           v-model='itemNewsClubNewsCardFullNews'
@@ -52,8 +46,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
-      <p>
         <q-input
           filled
           v-model='itemNewsClubNewsCardDateNews'
@@ -63,7 +55,6 @@
           lazy-rules
           :rules="[ val => val && val.length > 0 || 'Заполните поле']"
         />
-      </p>
       <p>
         <q-input
           filled
@@ -123,19 +114,20 @@
         <br />
       </p>
       <div class="bottom">
-        <button @click="addPost()" color="primary">Добавить</button>
-        <button @click="onReset" color="primary">Очистить форму</button>
+        <q-btn @click="addPost()" label="Добавить" color="primary" flat class="q-ml-sm" />
+        <q-btn label="Очистить" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
-    </div>
+    </q-form>
     <ul>
       <li
-        v-for="item of items"
+        v-for="item in items.slice(id).reverse()"
         :class="{ bought: item.bought }"
         :key="item.id"
-        @click="boughtItem(item.id)"
-        @dblclick="removeItem(item.id)"
       ><br><q-separator/>
-        <h4>Удалить новость: {{ item.id }}</h4>
+        <h5>Новость: {{ item.id }}
+          <q-btn @click="boughtItem(item.id)" @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
+          <q-btn @dblclick="removeItem(item.id)" label="Удалить" color="primary" flat class="q-ml-sm" />
+        </h5>
         item.title: {{ item.title }} <br>
         item.status: {{ item.status }} <br>
         item.subtitle: {{ item.subtitle }} <br>
@@ -225,6 +217,17 @@ export default {
       this.items = this.items.map((item) => {
         if (item.id === id) {
           item.bought = true
+        }
+        return item
+      })
+    },
+    async removeBought (id) {
+      await axios.patch(`http://localhost:3000/items/${id}`, {
+        bought: false
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.bought = false
         }
         return item
       })

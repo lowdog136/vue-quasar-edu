@@ -1,48 +1,6 @@
 {
   "items": [
     {
-      "title": "Матч против Динамо",
-      "status": "true",
-      "subtitle": "Товарищеский матч",
-      "preview": "В минувшее воскресенье ФК \"Север\" провел товарищеский матч против ФК \"Динамо\" Санкт-Петербург.",
-      "fullnews": "В минувшее воскресенье ФК \"Север\" провел гостевой товарищеский матч против ФК \"Динамо\" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2. За \"Север\" голы забили: 33\\'-Миронов, 76\\'-Гагиев (пен).'",
-      "datenews": "2022-03-14",
-      "srcnews": "vk.com/dynamo_spb",
-      "resultCardTitle": "Поражение",
-      "resultCardTeam1": "ФК \"Динамо\" Санкт-Петербург",
-      "resultCardTeam2": "ФК \"Север Мурманск",
-      "result": "4-2",
-      "id": 1
-    },
-    {
-      "title": "Поражение от Звезды",
-      "status": "true",
-      "subtitle": "Товарищеский матч",
-      "preview": "19 марта очередной товарищеский матч против ФК \"Звезда\" из Санкт-Петербурга закончился разгромом \"Севера\".",
-      "fullnews": "Товарищеский матч против ФК \"Звезда\" из Санкт-Петербурга закончился разгромом \"Севера\". Команда из Мурманска проиграла 6-1. Единственный гол \"Север\" гол забил на 26й минуте игрок под номером восемь.",
-      "datenews": "2022-03-21",
-      "srcnews": "vk.com/fczvezdaspb",
-      "resultCardTitle": "Поражение",
-      "resultCardTeam1": "ФК \"Звезда\" Санкт-Петербург",
-      "resultCardTeam2": "ФК \"Север Мурманск",
-      "result": "6-1",
-      "id": 2
-    },
-    {
-      "title": "Победа над Фаворитом",
-      "status": "true",
-      "subtitle": "Товарищеский матч",
-      "preview": "Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК \"Фаворит\" г.Выборг 5-1.",
-      "fullnews": "Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК \"Фаворит\" г.Выборг 5-1. Голы : Д. Майоров, А. Некрасов-2, П. Сурков-2. Состав \"Севера\":О. Аврамчик, М. Слащев, М. Осипов (Э.Кубланов\\'46), И. Ваганов, Г. Кравчук, Д. Миронов, М. Зайцев(И.Шилов\\'46), И. Игнатенко, П. Рябоконь, А. Некрасов(А.Соловьев\\'46), Д. Майоров( П. Сурков\\'46) '",
-      "datenews": "2022-03-26",
-      "srcnews": "vk.com/id121092017",
-      "resultCardTitle": "Победа",
-      "resultCardTeam1": "ФК \"Север Мурманск",
-      "resultCardTeam2": "ФК \"Фаворит\" Выборг",
-      "result": "5-1 (3-1)",
-      "id": 3
-    },
-    {
       "title": "Дорога в Дивноморское",
       "status": "true",
       "subtitle": "Новости клуба",
@@ -54,7 +12,8 @@
       "resultCardTeam1": "",
       "resultCardTeam2": "",
       "result": "",
-      "id": 4
+      "id": 4,
+      "bought": true
     },
     {
       "title": "Победа над \"Черноморец-м\"",
@@ -68,7 +27,8 @@
       "resultCardTeam1": "ФК \"Черноморец-м\" Новороссийск",
       "resultCardTeam2": "ФК \"Север Мурманск",
       "result": "0-3 (0-1)",
-      "id": 5
+      "id": 5,
+      "bought": true
     },
     {
       "title": "Анонс матча \"Витязево\"",
@@ -82,35 +42,40 @@
       "resultCardTeam1": "",
       "resultCardTeam2": "",
       "result": "",
-      "id": 6
+      "id": 6,
+      "bought": false
     },
     {
-      "title": "",
-      "status": "",
-      "subtitle": "",
-      "preview": "",
-      "fullnews": "",
-      "datenews": "",
-      "srcnews": "",
+      "title": "Friendly match",
+      "status": "true",
+      "subtitle": "Win",
+      "preview": "Very easy game for sports club. Victory is lucky fans all city",
+      "fullnews": "Very easy game for sports club. Victory is lucky fans all city. 5-1 win to home",
+      "datenews": "2022-05-25",
+      "srcnews": "severfans.ru",
+      "resultCardStatus": "false",
+      "resultCardTitle": "Win",
+      "resultCardTeam1": "Team1",
+      "resultCardTeam2": "Team2",
+      "result": "5-1",
+      "id": 9,
+      "bought": false
+    },
+    {
+      "title": "Товарищеская игра",
+      "status": "true",
+      "subtitle": "Анонс игры",
+      "preview": "Планируется матч с фк Команда 2. Игра будет в субботу 30 мая",
+      "fullnews": "Планируется матч с фк Команда 2. Игра будет в субботу 30 мая. Матч пройдет на стадионе \"Стадион 1\"",
+      "datenews": "2022-05-26",
+      "srcnews": "stest",
+      "resultCardStatus": "false",
       "resultCardTitle": "",
       "resultCardTeam1": "",
       "resultCardTeam2": "",
       "result": "",
-      "id": 7
-    },
-    {
-      "title": "",
-      "status": "",
-      "subtitle": "",
-      "preview": "",
-      "fullnews": "",
-      "datenews": "",
-      "srcnews": "",
-      "resultCardTitle": "",
-      "resultCardTeam1": "fgfdg",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 8
+      "id": 10,
+      "bought": false
     }
   ]
 }
