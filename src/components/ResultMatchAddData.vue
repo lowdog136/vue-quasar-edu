@@ -74,7 +74,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3001/items')
+      const res = await axios.get('http://localhost/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -131,7 +131,7 @@ export default {
   },
   methods: {
     async saveResultMatch () {
-      const res = await axios.post('http://localhost:3001/items', {
+      const res = await axios.post('http://localhost/items', {
         title: this.itemTitle,
         status: this.itemStatus,
         team1: this.itemTeam1,
