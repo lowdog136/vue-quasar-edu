@@ -25,6 +25,7 @@ const routes = [
         ]
       },
       { path: '/CarrotPage', name: 'CarrotPage', component: () => import('pages/CarrotPage.vue') },
+      { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },

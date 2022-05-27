@@ -19,7 +19,7 @@
           SeverFans
         </q-toolbar-title>
 
-        <div>Сайт болельщиков ФК "Север" Мурманск</div>
+        <div>1Сайт болельщиков ФК "Север" Мурманск</div>
       </q-toolbar>
     </q-header>
 

@@ -19,7 +19,16 @@
           SeverFans
         </q-toolbar-title>
 
-        <div>Сайт болельщиков ФК "Север" Мурманск</div>
+        <div>
+          <q-btn
+            flat
+            dense
+            round
+            icon="login"
+            aria-label="in.."
+            @click=""
+          />
+        </div>
       </q-toolbar>
     </q-header>
 
