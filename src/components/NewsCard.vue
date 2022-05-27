@@ -18,20 +18,22 @@
             {{ item.srcnews }}
           </div>
         </q-card-section>
-
-        <q-card-actions>
-          <q-btn flat color="dark" label="" />
-          <div class="labelDate">
-            {{ item.datenews }}
-          </div>
+      <q-tabs
+        v-model="tab"
+        class="white text-primary shadow-2"
+      >
+        <q-tab name="event" icon="event">{{ item.datenews }}
+        </q-tab>
+        <q-tab name="raiting" icon="star" label="Оценить">
+          <q-badge color="dark" text-color="white" floating>10+</q-badge>
+        </q-tab>
           <NewsCardDetailPopUp
             :PopyUpSubTitleNews="item.subtitle"
             :PopyUpSrcNews="item.srcnews"
             :PopyUpFullNews="item.fullnews"
             :PopyUpTitleNews="item.title"
           />
-          <q-space />
-        </q-card-actions>
+      </q-tabs>
     </q-card>
   </div>
 </template>
