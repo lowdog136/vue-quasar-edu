@@ -24,7 +24,7 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="raiting" icon="star" label="Оценить">
+        <q-tab name="raiting" disable icon="star" label="Оценить">
           <q-badge color="dark" text-color="white" floating>10+</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
