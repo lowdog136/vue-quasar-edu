@@ -18,16 +18,18 @@
         <q-toolbar-title>
           SeverFans
         </q-toolbar-title>
-
         <div>
-          <q-btn
-            flat
-            dense
-            round
-            icon="login"
-            aria-label="in.."
-            @click="kek"
-          />
+            <q-btn flat dense round icon="login" @click="dialog = true" />
+            <q-dialog v-model="dialog">
+              <q-card>
+                <q-card-section>
+                  <div class="text-h6"><LogoPast /></div>
+                </q-card-section>
+                <q-card-section class="row items-center q-gutter-sm">
+                  <q-btn v-close-popup label="Закрыть" color="primary" />
+                </q-card-section>
+              </q-card>
+            </q-dialog>
         </div>
       </q-toolbar>
     </q-header>
@@ -57,15 +59,17 @@
 
 import { defineComponent, ref } from 'vue'
 import NewsDrawer from 'components/NewsDrawer'
+import LogoPast from 'components/LogoPast'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { NewsDrawer },
+  components: { LogoPast, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
 
     return {
       leftDrawerOpen,
+      dialog: ref(false),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
