@@ -296,7 +296,7 @@ export default store(function (/* { ssrContext } */) {
     mutations: {
       ratingNewsUp (state) {
         state.ratingNews++
-        console.log(state.ratingNews)
+        console.log(store.state.ratingNews)
       },
       updatePosts (state, posts) {
         state.posts = posts

@@ -24,7 +24,7 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="raiting" icon="star" label="Оценить">
+        <q-tab name="raiting" disable icon="star" label="Оценить">
           <q-badge color="dark" @click="ratingNewsUp" text-color="white" floating>{{ $store.state.ratingNews }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
@@ -42,7 +42,6 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-import store from 'src/store'
 export default {
   name: 'NewsCard',
   components: { NewsCardDetailPopUp },
@@ -72,10 +71,6 @@ export default {
     }
   },
   methods: {
-    ratingNewsUp () {
-      this.$store.commit('ratingNewsUp')
-      console.log(store.state.ratingNews)
-    },
     async boughtItem (id) {
       await axios.patch(`https://severfans.ru/items/${id}`, {
         bought: true

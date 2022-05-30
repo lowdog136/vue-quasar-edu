@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <MyTestNewsCard />
+    <q-btn @click="ratingNewsUp">{{$store.state.ratingNews}}</q-btn>
+
     <q-card class="my-card" flat>
       <q-card-section flat>
       </q-card-section>
@@ -10,11 +11,10 @@
 
 <script>
 import { ref } from 'vue'
-import MyTestNewsCard from 'components/MyTestNewsCard'
 import axios from 'axios'
 
 export default {
-  components: { MyTestNewsCard },
+  components: {},
   props: {
     NewsClubNewsCardStatus: String
   },
@@ -30,6 +30,18 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  computed: {
+    const () {
+      return this.$store.state.ratingNews
+    }
+  },
+  methods: {
+    ratingNewsUp () {
+      this.$store.commit('ratingNewsUp')
+      console.log(this.$store.state.ratingNews)
+    }
+
   },
   setup () {
     return {
