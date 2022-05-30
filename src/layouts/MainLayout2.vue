@@ -10,11 +10,19 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-<!--        <q-footer reveal elevated>
-          <q-toolbar class="glossy">
-            <q-toolbar-title>Footer</q-toolbar-title>
-          </q-toolbar>
-        </q-footer>-->
+        <!--         <q-btn
+                  flat
+                  dense
+                  round
+                  icon="scoreboard"
+                  aria-label="Menu"
+             @click="toggleLeftDrawer"
+                />
+        <q-footer reveal elevated>
+                  <q-toolbar class="glossy">
+                    <q-toolbar-title>Footer</q-toolbar-title>
+                  </q-toolbar>
+                </q-footer>-->
         <q-toolbar-title>
           SeverFans
         </q-toolbar-title>
@@ -46,9 +54,9 @@
           Навигация
         </q-item-label>
           <NewsDrawer />
+          <NewsDrawerResultGame />
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -60,18 +68,24 @@
 import { defineComponent, ref } from 'vue'
 import NewsDrawer from 'components/NewsDrawer'
 import LogoPast from 'components/LogoPast'
+import NewsDrawerResultGame from 'components/NewsDrawerResultGame'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { LogoPast, NewsDrawer },
+  components: { NewsDrawerResultGame, LogoPast, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
+    const leftDrawerOpenResultGame = ref(false)
 
     return {
       leftDrawerOpen,
+      leftDrawerOpenResultGame,
       dialog: ref(false),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      toggleLeftDrawerResultGame () {
+        leftDrawerOpenResultGame.value = !leftDrawerOpenResultGame.value
       }
     }
   }

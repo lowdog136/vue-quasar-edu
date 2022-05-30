@@ -7,20 +7,6 @@
       <p>{{ post.body }}</p>
     </div>
   </div>
-  <div class="container">
-    <div id="app">
-      <h1>Shopping List</h1>
-    </div>
-    <ul>
-      <li
-        v-for="item of items"
-        :key="item.id"
-      >
-        itemStatus: {{ item.status }} --
-        itemBody: {{ item.body }}
-      </li>
-    </ul>
-  </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'

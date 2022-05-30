@@ -22,7 +22,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '26.05.22',
+      NavigationReleaseNewsSite: '30.05.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       NavigationListMenu: [
         {
@@ -230,13 +230,74 @@ export default store(function (/* { ssrContext } */) {
           ResultCardTeam1: 'ФК Виста',
           ResultCardTeam2: 'ФК "Север Мурманск',
           ResultCardResult: '1-2 (1-1)'
+        },
+        {
+          id: 9,
+          NewsClubNewsCardStatus: true,
+          NewsClubNewsCardTitleNews: '',
+          NewsClubNewsCardDateNews: '23.04.22',
+          NewsCardAnnounceNews: 'Результат матча',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: '',
+          NewsClubNewsCardPreViewNews: '',
+          NewsClubNewsCardExtNews: '',
+          NewsClubNewsCardFullNews: '',
+          ResultCardTitle: 'Победа',
+          ResultCardTeam1: 'ФК "Константиновское"',
+          ResultCardTeam2: 'ФК "Север Мурманск',
+          ResultCardResult: '0-2'
+        },
+        {
+          id: 10,
+          NewsClubNewsCardStatus: true,
+          NewsClubNewsCardTitleNews: 'Победа над ФК "Виста"',
+          NewsClubNewsCardDateNews: '10.05.22',
+          NewsCardAnnounceNews: 'Результат матча',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: '',
+          NewsClubNewsCardPreViewNews: '',
+          NewsClubNewsCardExtNews: '',
+          NewsClubNewsCardFullNews: '',
+          ResultCardTitle: 'Победа',
+          ResultCardTeam1: 'ФК "Константиновское"',
+          ResultCardTeam2: 'ФК "Север Мурманск',
+          ResultCardResult: '1-2 (1-1)'
+        },
+        {
+          id: 11,
+          NewsClubNewsCardStatus: true,
+          NewsClubNewsCardTitleNews: 'Победа над ФК "Виста"',
+          NewsClubNewsCardDateNews: '30.05.22',
+          NewsCardAnnounceNews: 'Результат матча',
+          NewsClubNewsCardTitleUrlImg: 'title_0.png',
+          NewsClubNewsCardCardNewsSrc: 'Источник: vk.com/fdcvista',
+          NewsClubNewsCardPreViewNews: '15 апреля "Свевер" обыграл ФК "Виста". Северяне первые вышли вперед за счет пенальти на 13 минуте. Итоговый счет 1-2 (1-1)',
+          NewsClubNewsCardExtNews: '15 апреля FDC «Vista» на домашнем поле провела товарищеский матч с мурманским «Севером».\n' +
+            '\n' +
+            'Уже на 13 минуте матча мы пропускаем гол с пенальти, который реализует футболист «Севера» Максим Осипов. Под занавес первого тайма Алексей Алуханян зарабатывает одиннадцатиметровый удар. На исполнение отправляют Самуэля Акере, который уверенно вколачивает мяч в сетку ворот.\n',
+          NewsClubNewsCardFullNews: 'Пенальти северян в начале матча сломал игру красно-белым\n' +
+            '\n' +
+            '15 апреля FDC «Vista» на домашнем поле провела товарищеский матч с мурманским «Севером».\n' +
+            '\n' +
+            'Уже на 13 минуте матча мы пропускаем гол с пенальти, который реализует футболист «Севера» Максим Осипов. Под занавес первого тайма Алексей Алуханян зарабатывает одиннадцатиметровый удар. На исполнение отправляют Самуэля Акере, который уверенно вколачивает мяч в сетку ворот.\n' +
+            '\n' +
+            'Во втором тайме игра шла на обоюдных курсах. В самом начале один из шансов реализовали северяне: 1-2. Этот результат сохранился до конца матча и стал итоговым счётом.',
+          ResultCardTitle: 'Победа',
+          ResultCardTeam1: 'ФК "Электрон"',
+          ResultCardTeam2: 'ФК "Север Мурманск',
+          ResultCardResult: '0-3 (0-1)'
         }
       ],
       colorCode: 'подробно',
       InsertValue: [],
+      ratingNews: 0,
       count: '2'
     },
     mutations: {
+      ratingNewsUp (state) {
+        state.ratingNews++
+        console.log(state.ratingNews)
+      },
       updatePosts (state, posts) {
         state.posts = posts
       },
