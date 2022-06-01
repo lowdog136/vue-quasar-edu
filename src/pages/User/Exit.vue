@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <h4> page UserName</h4>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <h4>Exit page</h4>
+    <q-card class="my-card" flat>
+      <q-card-section flat>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 

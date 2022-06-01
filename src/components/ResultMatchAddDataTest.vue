@@ -9,6 +9,7 @@
         <q-input
           filled
           v-model='itemNewsCardSubTitleNews'
+          autogrow
           label=""
           hint="subtitle.предЗаголовок - победа,ничья, поражение, анонс"
           lazy-rules
@@ -16,6 +17,7 @@
         />
         <q-input
           filled
+          autogrow
           v-model='itemNewsClubNewsCardTitleNews'
           label=""
           hint="Заголовок новости: 2-3 слова"
@@ -107,12 +109,14 @@
         <q-btn label="Очистить" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
-    <ul>
+  </div>
+  <div class="q-pa-md row items-start q-gutter-md">
       <li
         v-for="item in items.slice(id).reverse()"
         :class="{ bought: item.bought }"
         :key="item.id"
-      ><br><q-separator/>
+      >
+        <q-separator/>
         <h5>Новость: {{ item.id }}
           <q-btn @click="statusItemOn(item.id)" @dblclick="statusItemOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
           <q-btn @click="boughtItem(item.id)" disable @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
@@ -158,7 +162,6 @@
         itemItog: {{ item.resultCardTitle }} <br>
         itemResult: {{ item.ResultCardResult }} <br>
       </li>
-    </ul>
   </div>
 </template>
 
@@ -345,6 +348,7 @@ export default {
 li {
   font-size: 1.5rem;
   list-style: none;
+  max-width: 350px;
 }
 button {
   margin-top: 5px;
