@@ -8,7 +8,7 @@
           </q-avatar>
 
           <q-toolbar-title>
-            CarrotPage-Админка
+            CarrotPage
           </q-toolbar-title>
 
           <q-btn @click="panelViewOn" @dblclick="panelViewOff" color="primary" flat round dense icon="help" />

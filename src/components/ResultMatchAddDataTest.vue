@@ -24,6 +24,7 @@
         />
         <q-input
           filled
+          autogrow
           v-model='itemNewsClubNewsCardPreViewNews'
           label=""
           hint="itemStatus.предТекстНовости - превью. 2-3 предложения"
@@ -32,6 +33,7 @@
         />
         <q-input
           filled
+          autogrow
           v-model='itemNewsClubNewsCardFullNews'
           label=""
           hint="Текст - основной текст. полный. работает по кнопке подробно"
