@@ -24,7 +24,14 @@ const routes = [
           { path: '/News/test2', name: 'test2', component: () => import('pages/News/test2.vue') }
         ]
       },
-      { path: '/CarrotPage', name: 'CarrotPage', component: () => import('pages/CarrotPage.vue') },
+      {
+        path: '/User',
+        component: () => import('layouts/LayoutUserPage.vue'),
+        children: [
+          { path: '/User/CarrotPage', name: 'CarrotPage', component: () => import('pages/User/CarrotPage.vue') },
+          { path: '/User/Exit', name: 'Exit', component: () => import('pages/User/Exit.vue') }
+        ]
+      },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]

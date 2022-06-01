@@ -114,7 +114,7 @@
         <h5>Новость: {{ item.id }}
           <q-btn @click="statusItemOn(item.id)" @dblclick="statusItemOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
           <q-btn @click="boughtItem(item.id)" disable @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
-          <q-btn @dblclick="removeItem(item.id)" label="Удалить" color="primary" flat class="q-ml-sm" />
+          <q-btn @dblclick="removeItem(item.id)" icon="delete" label="Удалить" color="primary" flat class="q-ml-sm" />
         </h5>
         <q-card v-if="item.status" class="my-card" flat bordered>
           <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
