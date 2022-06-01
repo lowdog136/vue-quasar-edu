@@ -41,6 +41,7 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
+
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 export default {
   name: 'NewsCard',

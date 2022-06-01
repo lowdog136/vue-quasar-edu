@@ -40,12 +40,33 @@
       </q-item>
       <q-expansion-item
         v-model="expanded"
-        icon="perm_identity"
+        icon="stadium"
         label="Стадион"
         caption="Стадион"
         to="/Stadium"
         disable
       />
+    </q-expansion-item>
+    <q-expansion-item
+      v-model="expanded"
+      icon="emoji_events"
+      label="Текущие соревнования"
+      caption="Чемпионат СЗФО 2022"
+    >
+      <q-item clickable v-ripple :active="active" to="/GamesNow/GamesNowEvent">
+        <q-item-section avatar>
+          <q-icon name="calendar_month" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Календарь игр</q-item-label>
+          <q-item-label caption>Расписание матчей</q-item-label>
+        </q-item-section>
+        <q-item-section side top>
+          <q-item-label caption>
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">01.06.22</span>
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-expansion-item>
     <q-expansion-item
       v-model="expanded"

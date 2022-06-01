@@ -32,6 +32,14 @@ const routes = [
           { path: '/User/Exit', name: 'Exit', component: () => import('pages/User/Exit.vue') }
         ]
       },
+      {
+        path: '/GamesNow',
+        component: () => import('layouts/LayoutGamesNow.vue'),
+        children: [
+          { path: '/GamesNow/GamesNowEvent', name: 'GamesNowEvent', component: () => import('pages/GamesNow/GamesNowEvent.vue') },
+          { path: '/User/Exit', name: 'Exit', component: () => import('pages/User/Exit.vue') }
+        ]
+      },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]

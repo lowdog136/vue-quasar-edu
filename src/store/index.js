@@ -288,12 +288,15 @@ export default store(function (/* { ssrContext } */) {
           ResultCardResult: '0-3 (0-1)'
         }
       ],
-      colorCode: 'подробно',
+      colorCode: false,
       InsertValue: [],
       ratingNews: 0,
       count: '2'
     },
     mutations: {
+      changedropDown (state) {
+        state.colorCode = true
+      },
       ratingNewsUp (state) {
         state.ratingNews++
         console.log(store.state.ratingNews)
@@ -307,6 +310,9 @@ export default store(function (/* { ssrContext } */) {
       }
     },
     getters: {
+      dropDown (state) {
+        return state.colorCode
+      },
       validPosts (state) {
         return state.posts.filter(p => {
           return p.title && p.body
@@ -320,6 +326,9 @@ export default store(function (/* { ssrContext } */) {
       }
     },
     actions: {
+      togledropDown ({ commit }) {
+        commit('changedropDown')
+      },
       createPost ({ commit }, post) {
         commit('createPost', post)
       }
@@ -335,6 +344,7 @@ export default store(function (/* { ssrContext } */) {
 export const stope = reactive({
   state: {
     myName: 'zooloo',
+    ratingNewsNew: 0,
     myCount2: 0,
     myTitleText: '',
     myArray: [
@@ -346,6 +356,9 @@ export const stope = reactive({
     ]
   },
   mutations: {
+    changemyCount2 (state) {
+      this.state.myCount2++
+    },
     SET_NAME: (state, myName) => {
       state.myName = myName
     }

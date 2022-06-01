@@ -1,6 +1,9 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-btn @click="ratingNewsUp">{{$store.state.ratingNews}}</q-btn>
+    <div class="my-card" v-if="$store.state.colorCode">
+      <h4> Text here </h4>
+    </div>
+    <q-btn @click="btnClick">Buttom click</q-btn>
 
     <q-card class="my-card" flat>
       <q-card-section flat>
@@ -12,6 +15,7 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {},
@@ -32,13 +36,19 @@ export default {
     }
   },
   computed: {
-    const () {
-      return this.$store.state.ratingNews
-    }
+    ...mapGetters([
+      'dropDown'
+    ])
   },
   methods: {
+    ...mapActions([
+      'togledropDown'
+    ]),
+    btnClick () {
+      this.togledropDown()
+    },
     ratingNewsUp () {
-      this.$store.commit('ratingNewsUp')
+      this.$store.dispatch('ratingNewsUp')
       console.log(this.$store.state.ratingNews)
     }
 
