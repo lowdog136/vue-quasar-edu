@@ -11,11 +11,11 @@
             CarrotPage-Админка
           </q-toolbar-title>
 
-          <q-btn flat round dense icon="whatshot" />
+          <q-btn @click="panelViewOn" @dblclick="panelViewOff" color="primary" flat round dense icon="help" />
         </q-toolbar>
       </q-header>
 
-      <q-page-container>
+      <q-page-container v-if="panelViewItem">
         <q-page padding>
           <p v-for="n in 1" :key="n">
             <ResultMatchAddDataTest />
@@ -36,8 +36,16 @@ export default defineComponent({
   components: { ResultMatchAddDataTest },
   data () {
     return {
-      trueValue: true,
+      panelViewItem: false,
       falseValue: false
+    }
+  },
+  methods: {
+    panelViewOn () {
+      this.panelViewItem = true
+    },
+    panelViewOff () {
+      this.panelViewItem = false
     }
   },
   props: {
