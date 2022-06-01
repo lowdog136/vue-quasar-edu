@@ -117,11 +117,12 @@
         :key="item.id"
       >
         <q-separator/>
-        <h5>Новость: {{ item.id }}
-          <q-btn @click="statusItemOn(item.id)" @dblclick="statusItemOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-          <q-btn @click="boughtItem(item.id)" disable @dblclick="removeBought(item.id)" label="Скрыть" color="primary" flat class="q-ml-sm" />
-          <q-btn @dblclick="removeItem(item.id)" icon="delete" label="Удалить" color="primary" flat class="q-ml-sm" />
-        </h5>
+        <div class="blockNewsCard">
+          Новость: {{ item.id }}
+            <q-btn @click="statusItemOn(item.id)" icon="toggle_off" @dblclick="statusItemOff(item.id)" label="" color="primary" flat class="q-ml-sm" />
+            <q-btn @click="boughtItem(item.id)" disable icon="visibility_off" @dblclick="removeBought(item.id)" label="" color="primary" flat class="q-ml-sm" />
+            <q-btn @dblclick="removeItem(item.id)" icon="delete" label="" color="primary" flat class="q-ml-sm" />
+        </div>
         <q-card v-if="item.status" class="my-card" flat bordered>
           <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
           <q-card-section>
@@ -155,12 +156,13 @@
         </q-card>
         <q-space />item.status: {{ item.status }} <br>
         <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-
-        itemResultCardStatus: {{ item.resultCardStatus }} <br>
-        itemTeam1: {{ item.resultCardTeam1 }} <br>
-        itemTeam2: {{ item.resultCardTeam2 }} <br>
-        itemItog: {{ item.resultCardTitle }} <br>
-        itemResult: {{ item.ResultCardResult }} <br>
+        <div class="blockResultCard">
+          itemResultCardStatus: {{ item.resultCardStatus }} <br>
+          itemTeam1: {{ item.resultCardTeam1 }} <br>
+          itemTeam2: {{ item.resultCardTeam2 }} <br>
+          itemItog: {{ item.resultCardTitle }} <br>
+          itemResult: {{ item.ResultCardResult }} <br>
+        </div>
       </li>
   </div>
 </template>
@@ -359,6 +361,15 @@ button {
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
+}
+.blockResultCard {
+   font-size: 14px;
+ }
+.labelDate {
+  font-size: 14px;
+}
+.blockNewsCard {
+  font-size: 14px;
 }
 .my-card {
   width: 100%;
