@@ -69,7 +69,7 @@
       </q-item>
       <q-item clickable v-ripple :active="active" to="/GamesNow/GamesNowTable">
         <q-item-section avatar>
-          <q-icon name="calendar_month" />
+          <q-icon name="table_chart" />
         </q-item-section>
         <q-item-section>
           <q-item-label>Турнирная таблица</q-item-label>

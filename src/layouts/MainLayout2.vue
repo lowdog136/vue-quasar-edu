@@ -43,6 +43,7 @@
     </q-header>
 
     <q-drawer
+      width="320"
       v-model="leftDrawerOpen"
       show-if-above
       bordered
@@ -91,3 +92,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="sass" scoped>
+.glossy1
+  width: 100%
+  max-width: 150px
+</style>

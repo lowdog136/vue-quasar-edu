@@ -4,11 +4,30 @@
       <h4> Text here </h4>
     </div>
     <q-btn @click="btnClick">Buttom click</q-btn>
-
-    <q-card class="my-card" flat>
-      <q-card-section flat>
-      </q-card-section>
-    </q-card>
+  </div>
+  <div>
+    <q-timeline-entry
+      :title='titleEvent'
+      subtitle="Июль 2, 2022"
+      side="left"
+      icon="emoji_emotions">
+      ff
+    </q-timeline-entry>
+    <q-timeline-entry
+      :title='titleEvent'
+      subtitle="Июль 2, 2022"
+      side="left"
+      icon="emoji_emotions"
+    >
+      ff
+    </q-timeline-entry>
+  </div>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <GamesNowEventCard
+    v-for="GamesNowEventList in $store.state.GamesNowEventLists"
+    :key="GamesNowEventList.id"
+    :eventListValue="GamesNowEventList"
+    />
   </div>
 </template>
 
@@ -16,15 +35,18 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { mapActions, mapGetters } from 'vuex'
+import GamesNowEventCard from 'components/GamesNowEventCard'
 
 export default {
-  components: {},
-  props: {
-    NewsClubNewsCardStatus: String
-  },
+  components: { GamesNowEventCard },
   data () {
     return {
       items: []
+    }
+  },
+  setup () {
+    return {
+      expanded: ref(false)
     }
   },
   async created () {
@@ -51,11 +73,20 @@ export default {
       this.$store.dispatch('ratingNewsUp')
       console.log(this.$store.state.ratingNews)
     }
-
   },
-  setup () {
-    return {
-      expanded: ref(false)
+  props: {
+    eventListValue: {
+      type: Object,
+      default () {
+        return {
+          eventCardTitleMounthDate: String,
+          eventCardTitleMounthDateView: String,
+          eventCardTitleDate: String,
+          eventCardNameContest: String,
+          eventCardGameTur: String,
+          eventCardGameBody: String
+        }
+      }
     }
   }
 }

@@ -119,9 +119,13 @@
         <q-separator/>
         <div class="blockNewsCard">
           Новость: {{ item.id }}
-            <q-btn @click="statusItemOn(item.id)" icon="toggle_off" @dblclick="statusItemOff(item.id)" label="" color="primary" flat class="q-ml-sm" />
+            <q-btn @click="statusItemOn(item.id)" icon="toggle_off" @dblclick="statusItemOff(item.id)" label="" color="primary" flat class="q-ml-sm">
+              <q-tooltip class="bg-accent">Включить/выключить показ на странице с новостями</q-tooltip>
+            </q-btn>
             <q-btn @click="boughtItem(item.id)" disable icon="visibility_off" @dblclick="removeBought(item.id)" label="" color="primary" flat class="q-ml-sm" />
-            <q-btn @dblclick="removeItem(item.id)" icon="delete" label="" color="primary" flat class="q-ml-sm" />
+            <q-btn @dblclick="removeItem(item.id)" icon="delete" label="" color="primary" flat class="q-ml-sm">
+              <q-tooltip class="bg-black">Удалить запись</q-tooltip>
+            </q-btn>
         </div>
         <q-card v-if="item.status" class="my-card" flat bordered>
           <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />

@@ -1,6 +1,5 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
-import { reactive } from 'vue'
 
 // import example from './module-example'
 
@@ -288,10 +287,49 @@ export default store(function (/* { ssrContext } */) {
           ResultCardResult: '0-3 (0-1)'
         }
       ],
+      GamesNowEventLists:
+      [
+        {
+          id: 1,
+          eventCardTitleMounthDate: 'Июль, 2022',
+          eventCardTitleDate: 'Июль 2, 2022',
+          eventCardNameContest: 'Чемпионат СЗФО',
+          eventCardGameTur: 2,
+          eventCardGameBody: 'ФК "Север" - СШ №7 Карелия',
+          eventCardTitleMounthDateView: true
+        },
+        {
+          id: 2,
+          eventCardTitleMounthDate: 'Июль, 2022',
+          eventCardTitleDate: 'Июнь 29, 2022',
+          eventCardNameContest: 'Чемпионат СЗФО',
+          eventCardGameTur: 1,
+          eventCardGameBody: 'ФК "Север" - ФК "Химик"',
+          eventCardTitleMounthDateView: true
+        },
+        {
+          id: 3,
+          eventCardTitleMounthDate: 'Июль, 2022',
+          eventCardTitleDate: 'Июнь 29, 2022',
+          eventCardNameContest: 'Чемпионат СЗФО',
+          eventCardGameTur: 1,
+          eventCardGameBody: 'ФК "Север" - ФК "Химик"',
+          eventCardTitleMounthDateView: true
+        },
+        {
+          id: 4,
+          eventCardTitleMounthDate: 'Июль, 2022',
+          eventCardTitleDate: 'Июнь 29, 2022',
+          eventCardNameContest: 'Чемпионат СЗФО',
+          eventCardGameTur: 1,
+          eventCardGameBody: 'ФК "Север" - ФК "Химик"',
+          eventCardTitleMounthDateView: true
+        }
+      ],
       colorCode: false,
       InsertValue: [],
       ratingNews: 0,
-      count: '2'
+      count: 'Июнь 29, 2022'
     },
     mutations: {
       changedropDown (state) {
@@ -340,33 +378,4 @@ export default store(function (/* { ssrContext } */) {
   })
 
   return Store
-})
-export const stope = reactive({
-  state: {
-    myName: 'zooloo',
-    ratingNewsNew: 0,
-    myCount2: 0,
-    myTitleText: '',
-    myArray: [
-      {
-        id: '',
-        status: true,
-        title: ''
-      }
-    ]
-  },
-  mutations: {
-    changemyCount2 (state) {
-      this.state.myCount2++
-    },
-    SET_NAME: (state, myName) => {
-      state.myName = myName
-    }
-  },
-  actions: {},
-  getters: {
-    NAME: state => {
-      return state.myName
-    }
-  }
 })

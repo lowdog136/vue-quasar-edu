@@ -110,11 +110,7 @@ import { useQuasar } from 'quasar'
 import { computed } from 'vue'
 
 export default {
-  data () {
-    return {
-      titleEvent1: 'Чемпионат СЗФО'
-    }
-  },
+  data () {},
   setup () {
     const $q = useQuasar()
 
