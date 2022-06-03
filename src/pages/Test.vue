@@ -9,18 +9,34 @@
           :eventListValue="GamesNowEventList"
         />
       </div>
+      <div>
+        <vueLidate />
+      </div>
     </div>
     <q-btn @click="btnClick">Buttom click</q-btn>
   </div>
   <div>
-    <vueLidate />
+    <section class="forms">
+      <form class="register" @submit.prevent="register">
+        <h4>register</h4>
+        <input type="email" placeholder="email" v-model="register_form.email"/>
+        <input type="password" placeholder="password" v-model="register_form.password"/>
+        <input type="submit" value="register"/>
+      </form>
+      <form class="login" @submit.prevent="login">
+        <h4>login</h4>
+        <input type="email" placeholder="email" v-model="login_form.email"/>
+        <input type="password" placeholder="password" v-model="login_form.password"/>
+        <input type="submit" value="login"/>
+      </form>
+    </section>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
-import { mapActions, mapGetters } from 'vuex'
+import { useStore, mapActions, mapGetters } from 'vuex'
 import GamesNowEventCard from 'components/GamesNowEventCard'
 import vueLidate from 'components/vueLidate'
 
@@ -32,7 +48,24 @@ export default {
     }
   },
   setup () {
+    // eslint-disable-next-line camelcase
+    const login_form = ref({})
+    // eslint-disable-next-line camelcase
+    const register_form = ref({})
+    const store = useStore()
+    const login = () => {
+      store.dispatch('login', login_form.value)
+    }
+    const register = () => {
+      store.dispatch('login', register_form.value)
+    }
+
     return {
+      login_form,
+      register_form,
+      login,
+      register,
+      store,
       expanded: ref(false)
     }
   },

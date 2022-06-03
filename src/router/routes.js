@@ -1,8 +1,10 @@
+import { auth } from 'src/firebase'
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout2.vue'),
+    meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/AboutSite', name: 'AboutSite', component: () => import('pages/AboutSite.vue') },
@@ -41,7 +43,7 @@ const routes = [
         ]
       },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
-      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
+      { path: '/Test', meta: { requiresAuth: true }, name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },
 
@@ -52,5 +54,15 @@ const routes = [
     component: () => import('pages/Error404.vue')
   }
 ]
-
+routes.beforeEach((to, from, next) => {
+  if (to.path === '/Test' && auth.currentUser) {
+    next('/')
+    return
+  }
+  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+    next('/Test')
+    return
+  }
+  next()
+})
 export default routes

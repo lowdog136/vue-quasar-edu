@@ -15,6 +15,7 @@
     "@vuelidate/validators": "^2.0.0-alpha.29",
     "axios": "^0.26.1",
     "core-js": "^3.6.5",
+    "firebase": "^9.8.2",
     "quasar": "^2.0.0",
     "serve": "^13.0.2",
     "vue": "^3.0.0",

@@ -1,5 +1,8 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+import { auth } from '../firebase'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import router from 'src/router'
 
 // import example from './module-example'
 
@@ -329,9 +332,16 @@ export default store(function (/* { ssrContext } */) {
       colorCode: false,
       InsertValue: [],
       ratingNews: 0,
-      count: 'Июнь 29, 2022'
+      count: 'Июнь 29, 2022',
+      user: null
     },
     mutations: {
+      SET_USER (state, user) {
+        state.user = user
+      },
+      CLEAR_USER (state) {
+        state.user = null
+      },
       changedropDown (state) {
         state.colorCode = true
       },
@@ -364,6 +374,72 @@ export default store(function (/* { ssrContext } */) {
       }
     },
     actions: {
+      async login ({ commit }, details) {
+        const { email, password } = details
+
+        try {
+          await signInWithEmailAndPassword(auth, email, password)
+        } catch (error) {
+          switch (error.code) {
+            case 'auth/user-not-found':
+              alert('user not found')
+              break
+            case 'aith/wrong-password':
+              alert('wrong password')
+              break
+            default:
+              alert('something went wrong')
+          }
+          return
+        }
+        commit('SET_USER', auth.currentUser)
+        router.push('/')
+      },
+      async register ({ commit }, details) {
+        const { email, password } = details
+
+        try {
+          await createUserWithEmailAndPassword(auth, email, password)
+        } catch (error) {
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              alert('email already in use')
+              break
+            case 'auth/invalid-email':
+              alert('invalid email')
+              break
+            case 'auth/operation-not-allowed':
+              alert('operation not allows')
+              break
+            case 'auth/weak-password':
+              alert('weak password')
+              break
+            default:
+              alert('something went wrong')
+          }
+          return
+        }
+        commit('SET_USER', auth.currentUser)
+        router.push('/')
+      },
+      async logout ({ commit }) {
+        await signOut(auth)
+        commit('CLEAR_USER')
+        router.push('/Test')
+      },
+      fetchUser ({ commit }) {
+        auth.onAuthStateChanged(async user => {
+          if (user === null) {
+            commit('CLEAR_USER')
+          } else {
+            commit('SET_USER', user)
+
+            if (router.isReady() && router.currentRoute.value.path === '/Test') {
+              router.push('/')
+            }
+          }
+        })
+      },
       togledropDown ({ commit }) {
         commit('changedropDown')
       },

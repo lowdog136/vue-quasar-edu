@@ -12,7 +12,7 @@
         </q-input>
         <q-badge v-if="v$.email.$error" color="teal">{{ v$.email.$errors[0].$message }}</q-badge>
 
-        <q-input outlined v-model="state.password.password" label="Пароль" >
+        <q-input outlined v-model="state.password.password" type="password" label="Пароль" >
           <template v-slot:prepend>
             <q-icon name="fingerprint" />
           </template>
@@ -22,7 +22,7 @@
         </q-input>
         <q-badge v-if="v$.password.password.$error" color="teal">{{ v$.password.password.$errors[0].$message }}</q-badge>
 
-        <q-input outlined v-model="state.password.confirm" type="text" label="Подтверждение пароля" >
+        <q-input outlined v-model="state.password.confirm" type="password" label="Подтверждение пароля" >
           <template v-slot:prepend>
             <q-icon name="fingerprint" />
           </template>
