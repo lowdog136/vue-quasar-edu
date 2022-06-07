@@ -16,6 +16,12 @@
           </div> <br>
           <div class="text-caption text-grey">
             {{ item.srcnews }}
+            <q-icon
+              v-for="size in ['xs']"
+              :key="size"
+              :size="size"
+              name="visibility"
+            /> {{ $store.state.NewsCardHowWatch }}
           </div>
         </q-card-section>
       <q-tabs
@@ -32,6 +38,7 @@
             :PopyUpSrcNews="item.srcnews"
             :PopyUpFullNews="item.fullnews"
             :PopyUpTitleNews="item.title"
+            :PopyUpHowWatch="$store.state.NewsCardHowWatch"
           />
       </q-tabs>
     </q-card>
@@ -89,6 +96,7 @@ export default {
     PopyUpTitleNews: String,
     PopyUpSrcNews: String,
     PopyUpFullNews: String,
+    PopyUpHowWatch: String,
 
     product_data: {
       type: Object,

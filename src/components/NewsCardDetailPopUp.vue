@@ -17,7 +17,7 @@
         </q-card-section>
       <q-card >
         <q-card-section class="row items-center q-gutter-sm">
-          <q-btn v-close-popup label="Закрыть" color="primary" />
+          <q-btn v-close-popup label="Закрыть" @click="howWatch" color="primary" />
         </q-card-section>
       </q-card>
       </q-card>
@@ -28,6 +28,8 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
+// eslint-disable-next-line no-unused-vars
+import store from 'src/store'
 
 export default {
   data () {
@@ -66,7 +68,13 @@ export default {
     PopyUpSubImgNews: String,
     PopyUpTitleNews: String,
     PopyUpFullNews: String,
-    PopyUpSrcNews: String
+    PopyUpSrcNews: String,
+    PopyUpHowWatch: String
+  },
+  methods: {
+    howWatch () {
+      this.$store.state.NewsCardHowWatch++
+    }
   }
 }
 </script>

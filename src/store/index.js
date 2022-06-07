@@ -334,6 +334,7 @@ export default store(function (/* { ssrContext } */) {
       ratingNews: 0,
       count: 'Июнь 29, 2022',
       uid: 'wTZJonX7ZaWDPXOikF8gfzfvwfm1',
+      NewsCardHowWatch: 0,
       user: null
     },
     mutations: {
