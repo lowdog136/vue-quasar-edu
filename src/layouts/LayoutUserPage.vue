@@ -23,7 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <div class="text-h6 q-mb-md">Настройки</div>
+                  <div class="text-h6 q-mb-md" v-if="$store.state.user.uid='7fCGgUGXSFceI6kybPLJOhpE4Qp2'">Настройки</div>
                   <q-btn flat dense to="/User/Exit" label="Use Mobile Data" />
                   <q-btn flat dense to="/User/CarrotPage" icon="help" label="CarrotPage" />
                   <q-toggle disable v-model="panelView" label="Use Carrot Data" />
@@ -37,10 +37,11 @@
                     <img src="https://cdn.quasar.dev/img/avatar4.jpg">
                   </q-avatar>
 
-                  <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+                  <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.email }} </div>
 
                   <q-btn
                     color="primary"
+                    @click="$store.dispatch('logout')"
                     label="Выйти"
                     to="/"
                     push
@@ -55,10 +56,10 @@
           <q-dialog v-model="dialog">
             <q-card>
               <q-card-section>
-                <div class="text-h6">До свидания, UserName </div>
+                <div class="text-h6">До свидания, {{ $store.state.user.email }} </div>
               </q-card-section>
               <q-card-section class="row items-center q-gutter-sm">
-                <q-btn v-close-popup label="Выйти ?" to="/" color="primary" />
+                <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -73,7 +74,8 @@
 
 <script>
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'LayoutUserPage',
@@ -81,6 +83,10 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
+    const store = useStore()
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
 
     return {
       panelView: ref(true),

@@ -333,6 +333,7 @@ export default store(function (/* { ssrContext } */) {
       InsertValue: [],
       ratingNews: 0,
       count: 'Июнь 29, 2022',
+      uid: '7fCGgUGXSFceI6kybPLJOhpE4Qp2',
       user: null
     },
     mutations: {
