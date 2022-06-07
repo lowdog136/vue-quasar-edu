@@ -1,10 +1,11 @@
-import { auth } from 'src/firebase'
+// eslint-disable-next-line no-unused-vars
+import Login from '../pages/Login.vue'
 
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout2.vue'),
     meta: { requiresAuth: true },
+    component: () => import('layouts/MainLayout2.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/AboutSite', name: 'AboutSite', component: () => import('pages/AboutSite.vue') },
@@ -28,6 +29,7 @@ const routes = [
       },
       {
         path: '/User',
+        meta: { requiresAuth: true },
         component: () => import('layouts/LayoutUserPage.vue'),
         children: [
           { path: '/User/CarrotPage', name: 'CarrotPage', component: () => import('pages/User/CarrotPage.vue') },
@@ -43,7 +45,8 @@ const routes = [
         ]
       },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
-      { path: '/Test', meta: { requiresAuth: true }, name: 'Test', component: () => import('pages/Test.vue') }
+      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
+      { path: '/Login', name: 'Login', component: () => import('pages/Login.vue') }
     ]
   },
 
@@ -54,15 +57,4 @@ const routes = [
     component: () => import('pages/Error404.vue')
   }
 ]
-routes.beforeEach((to, from, next) => {
-  if (to.path === '/Test' && auth.currentUser) {
-    next('/')
-    return
-  }
-  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-    next('/Test')
-    return
-  }
-  next()
-})
 export default routes

@@ -33,6 +33,7 @@
         <q-badge v-if="v$.password.confirm.$error" color="teal">{{ v$.password.confirm.$errors[0].$message }}</q-badge>
 
         <q-btn class="q-mt-sm" label="Войти" @click="submitForm" color="primary"/>
+        <button @click="$store.dispatch('logout')">Logout</button>
       </div>
     </q-form>
   </div>
@@ -40,8 +41,9 @@
 
 <script>
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onBeforeMount } from 'vue'
 import useValidate from '@vuelidate/core'
+import { useStore } from 'vuex'
 
 export default {
   name: 'LogoPast',
@@ -52,6 +54,10 @@ export default {
         password: '',
         confirm: ''
       }
+    })
+    const store = useStore()
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
     })
 
     const rules = computed(() => {

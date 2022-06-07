@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyDrf5-3zYXtRO2e5cb1LNoBzou_WNdFdYU',
   authDomain: 'sf-quasar-aut.firebaseapp.com',

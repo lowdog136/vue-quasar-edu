@@ -66,7 +66,8 @@
 
 <script>
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer'
 import LogoPast from 'components/LogoPast'
 import NewsDrawerResultGame from 'components/NewsDrawerResultGame'
@@ -77,6 +78,10 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
+    const store = useStore()
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
 
     return {
       leftDrawerOpen,

@@ -12,24 +12,25 @@
       <div>
         <vueLidate />
       </div>
+      <section class="forms">
+        <form class="register" @submit.prevent="register">
+          <h4>register</h4>
+          <input type="email" placeholder="email" v-model="register_form.email"/>
+          <input type="password" placeholder="password" v-model="register_form.password"/>
+          <input type="submit" value="register"/>
+        </form>
+        <form class="login" @submit.prevent="login">
+          <h4>login</h4>
+          <input type="email" placeholder="email" v-model="login_form.email"/>
+          <input type="password" placeholder="password" v-model="login_form.password"/>
+          <input type="submit" value="login"/>
+        </form>
+      </section>
     </div>
     <q-btn @click="btnClick">Buttom click</q-btn>
   </div>
   <div>
-    <section class="forms">
-      <form class="register" @submit.prevent="register">
-        <h4>register</h4>
-        <input type="email" placeholder="email" v-model="register_form.email"/>
-        <input type="password" placeholder="password" v-model="register_form.password"/>
-        <input type="submit" value="register"/>
-      </form>
-      <form class="login" @submit.prevent="login">
-        <h4>login</h4>
-        <input type="email" placeholder="email" v-model="login_form.email"/>
-        <input type="password" placeholder="password" v-model="login_form.password"/>
-        <input type="submit" value="login"/>
-      </form>
-    </section>
+   <q-btn @click="btnClickPush">Buttom push</q-btn>
   </div>
 </template>
 
@@ -59,7 +60,6 @@ export default {
     const register = () => {
       store.dispatch('login', register_form.value)
     }
-
     return {
       login_form,
       register_form,
@@ -84,8 +84,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      'togledropDown'
+      'togledropDown',
+      'changePush'
     ]),
+    btnClickPush () {
+      this.$router.push({ path: '/Login' })
+    },
     btnClick () {
       this.togledropDown()
     },
@@ -116,7 +120,6 @@ export default {
 .my-card
   width: 100%
   max-width: 450px
-
   .root
     width: 400px
     margin: 0 auto
@@ -124,7 +127,6 @@ export default {
     padding: 30px
     margin-top: 100px
     border-radius: 20px
-
   input
     border: none
     outline: none
@@ -139,5 +141,4 @@ export default {
     margin-top: 10px
     border: none
     color: white
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" >
     <q-header elevated>
       <q-toolbar class="glossy">
         <q-btn
@@ -65,7 +65,6 @@
         </div>
       </q-toolbar>
     </q-header>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -77,7 +76,7 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'MainLayout2',
+  name: 'LayoutUserPage',
   components: {},
   setup () {
     const leftDrawerOpen = ref(false)

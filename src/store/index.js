@@ -342,6 +342,9 @@ export default store(function (/* { ssrContext } */) {
       CLEAR_USER (state) {
         state.user = null
       },
+      changePush () {
+        this.router.push('/User')
+      },
       changedropDown (state) {
         state.colorCode = true
       },
@@ -393,7 +396,7 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
-        router.push('/')
+        this.$router.push({ path: '/User' })
       },
       async register ({ commit }, details) {
         const { email, password } = details
@@ -420,12 +423,12 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
-        router.push('/')
+        this.$router.push({ path: '/' })
       },
       async logout ({ commit }) {
         await signOut(auth)
         commit('CLEAR_USER')
-        router.push('/Test')
+        this.router.push('/')
       },
       fetchUser ({ commit }) {
         auth.onAuthStateChanged(async user => {
@@ -434,11 +437,14 @@ export default store(function (/* { ssrContext } */) {
           } else {
             commit('SET_USER', user)
 
-            if (router.isReady() && router.currentRoute.value.path === '/Test') {
-              router.push('/')
+            if (router.isReady() && router.currentRoute.value.path === '/User') {
+              this.router.push('/User')
             }
           }
         })
+      },
+      changePush ({ commit }) {
+        commit('changePush')
       },
       togledropDown ({ commit }) {
         commit('changedropDown')
