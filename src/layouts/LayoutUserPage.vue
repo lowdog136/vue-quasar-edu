@@ -23,7 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <div class="text-h6 q-mb-md" v-if="$store.state.user.uid='7fCGgUGXSFceI6kybPLJOhpE4Qp2'">Настройки</div>
+                  <div class="text-h6 q-mb-md">Настройки</div>
                   <q-btn flat dense to="/User/Exit" label="Use Mobile Data" />
                   <q-btn flat dense to="/User/CarrotPage" icon="help" label="CarrotPage" />
                   <q-toggle disable v-model="panelView" label="Use Carrot Data" />
