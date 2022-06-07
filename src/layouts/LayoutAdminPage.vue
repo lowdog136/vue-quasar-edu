@@ -23,7 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <div class="text-h6 q-mb-md" v-if="$store.state.user.uid ='wTZJonX7ZaWDPXOikF8gfzfvwfm1'">Настройки</div>
+                  <div class="text-h6 q-mb-md">Настройки</div>
                   <q-btn flat dense to="/User/Exit" label="Use Mobile Data" />
                   <q-btn flat dense to="/User/CarrotPage" icon="help" label="CarrotPage" />
                   <q-toggle disable v-model="panelView" label="Use Carrot Data" />
@@ -56,7 +56,7 @@
           <q-dialog v-model="dialog">
             <q-card>
               <q-card-section>
-                <div class="text-h6">До свидания, {{ $store.state.user.email }} {{ $store.state.user.uid }}</div>
+                <div class="text-h6">До свидания, {{ $store.state.user.email }} </div>
               </q-card-section>
               <q-card-section class="row items-center q-gutter-sm">
                 <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />

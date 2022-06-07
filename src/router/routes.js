@@ -1,6 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-import Login from '../pages/Login.vue'
-
 const routes = [
   {
     path: '/',
@@ -45,8 +42,7 @@ const routes = [
         ]
       },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
-      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
-      { path: '/Login', name: 'Login', component: () => import('pages/Login.vue') }
+      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]
   },
 
