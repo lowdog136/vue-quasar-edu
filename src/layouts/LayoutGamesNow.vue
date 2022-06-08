@@ -35,7 +35,7 @@
         <NewsDrawer />
       </q-list>
     </q-drawer>
-    <q-page-container>
+    <q-page-container style="padding-left: 0px">
       <router-view />
     </q-page-container>
   </q-layout>

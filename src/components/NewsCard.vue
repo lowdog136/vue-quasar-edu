@@ -19,8 +19,8 @@
               v-for="size in ['xs']"
               :key="size"
               :size="size"
-              name="visibility"
-            /> {{ $store.state.NewsCardHowWatch }} {{ item.srcnews }}
+              name="link"
+            /> {{ item.srcnews }}
           </div>
         </q-card-section>
       <q-tabs
@@ -29,7 +29,7 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="raiting" icon="star" label="Оценить">
+        <q-tab name="raiting" disable icon="star" label="Оценить">
           <q-badge color="dark" @click="ratingNewsCardUp" text-color="white" floating>{{ $store.state.ratingNewsCard }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp

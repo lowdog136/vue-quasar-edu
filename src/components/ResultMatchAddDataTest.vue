@@ -190,6 +190,7 @@ export default {
       itemNewsClubNewsCardStatus: true,
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
+      itemNewsClubNewsCardHowWatch: '',
       ResultCardStatus: true,
       ResultCardTitle: '',
       ResultCardTeam1: '',
@@ -318,6 +319,7 @@ export default {
         fullnews: this.itemNewsClubNewsCardFullNews,
         datenews: this.itemNewsClubNewsCardDateNews,
         srcnews: this.itemNewsClubNewsCardCardNewsSrc,
+        howWatch: this.itemNewsClubNewsCardHowWatch,
         resultCardStatus: this.ResultCardStatus,
         resultCardTitle: this.ResultCardTitle,
         resultCardTeam1: this.ResultCardTeam1,
@@ -332,6 +334,7 @@ export default {
       this.itemNewsCardSubTitleNews = ''
       this.itemNewsClubNewsCardDateNews = ''
       this.itemNewsClubNewsCardCardNewsSrc = ''
+      this.itemNewsClubNewsCardHowWatch = ''
       this.ResultCardStatus = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
