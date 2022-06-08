@@ -77,7 +77,7 @@
         </q-item-section>
         <q-item-section side top>
           <q-item-label caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">02.06.22</span>
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">07.06.22</span>
           </q-item-label>
         </q-item-section>
       </q-item>

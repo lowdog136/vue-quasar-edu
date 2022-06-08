@@ -34,6 +34,15 @@ const routes = [
         ]
       },
       {
+        path: '/Admin',
+        meta: { requiresAuth: true },
+        component: () => import('layouts/LayoutAdminPage.vue'),
+        children: [
+          { path: '/Admin/CarrotPage', name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
+          { path: '/Admin/Exit', name: 'ExitAdmin', component: () => import('pages/Admin/ExitAdmin.vue') }
+        ]
+      },
+      {
         path: '/GamesNow',
         component: () => import('layouts/LayoutGamesNow.vue'),
         children: [

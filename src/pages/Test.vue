@@ -31,7 +31,19 @@
   </div>
   <div>
    <q-btn @click="btnClickPush">Buttom push</q-btn>
+  </div> <br/>
+  <div>
+    <q-btn @click="howWatch">Buttom watch</q-btn>
+    {{ store.state.NewsCardHowWatch }}
   </div>
+  <br/>
+  <div>
+    <q-btn @click="myCountUp">Buttom myCount</q-btn>
+    {{ store.state.myCount }}
+  </div>
+  <div>
+    <q-btn @click="myCountZero">Buttom myCountZero</q-btn>
+  </div><br/>
 </template>
 
 <script>
@@ -54,6 +66,12 @@ export default {
     // eslint-disable-next-line camelcase
     const register_form = ref({})
     const store = useStore()
+    const count = ref(0)
+    // eslint-disable-next-line no-undef
+    const increaseCount = () => {
+      count.value++
+    }
+
     const login = () => {
       store.dispatch('login', login_form.value)
     }
@@ -64,6 +82,7 @@ export default {
       login_form,
       register_form,
       login,
+      increaseCount,
       register,
       store,
       expanded: ref(false)
@@ -85,17 +104,16 @@ export default {
   methods: {
     ...mapActions([
       'togledropDown',
-      'changePush'
+      'changePush',
+      'myCountZero',
+      'myCountUp',
+      'howWatch'
     ]),
     btnClickPush () {
       this.$router.push({ path: '/Login' })
     },
     btnClick () {
       this.togledropDown()
-    },
-    ratingNewsUp () {
-      this.$store.dispatch('ratingNewsUp')
-      console.log(this.$store.state.ratingNews)
     }
   },
   props: {

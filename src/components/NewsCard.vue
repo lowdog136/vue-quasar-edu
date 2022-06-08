@@ -15,13 +15,12 @@
             {{ item.preview }}
           </div> <br>
           <div class="text-caption text-grey">
-            {{ item.srcnews }}
             <q-icon
               v-for="size in ['xs']"
               :key="size"
               :size="size"
               name="visibility"
-            /> {{ $store.state.NewsCardHowWatch }}
+            /> {{ $store.state.NewsCardHowWatch }} {{ item.srcnews }}
           </div>
         </q-card-section>
       <q-tabs
@@ -30,15 +29,14 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="raiting" disable icon="star" label="Оценить">
-          <q-badge color="dark" @click="ratingNewsUp" text-color="white" floating>{{ $store.state.ratingNews }}</q-badge>
+        <q-tab name="raiting" icon="star" label="Оценить">
+          <q-badge color="dark" @click="ratingNewsCardUp" text-color="white" floating>{{ $store.state.ratingNewsCard }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
             :PopyUpSubTitleNews="item.subtitle"
             :PopyUpSrcNews="item.srcnews"
             :PopyUpFullNews="item.fullnews"
             :PopyUpTitleNews="item.title"
-            :PopyUpHowWatch="$store.state.NewsCardHowWatch"
           />
       </q-tabs>
     </q-card>
@@ -48,8 +46,9 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
-
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'NewsCard',
   components: { NewsCardDetailPopUp },
@@ -78,7 +77,16 @@ export default {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   },
+  computed: {
+    ...mapGetters([
+      'ratingNewsCardUp'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'ratingNewsCardUp',
+      'howWatch'
+    ]),
     async boughtItem (id) {
       await axios.patch(`https://severfans.ru/items/${id}`, {
         bought: true
@@ -96,7 +104,6 @@ export default {
     PopyUpTitleNews: String,
     PopyUpSrcNews: String,
     PopyUpFullNews: String,
-    PopyUpHowWatch: String,
 
     product_data: {
       type: Object,

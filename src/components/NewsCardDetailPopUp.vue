@@ -27,6 +27,7 @@
 
 <script>
 import { ref } from 'vue'
+import { mapActions } from 'vuex'
 import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import store from 'src/store'
@@ -72,9 +73,9 @@ export default {
     PopyUpHowWatch: String
   },
   methods: {
-    howWatch () {
-      this.$store.state.NewsCardHowWatch++
-    }
+    ...mapActions([
+      'howWatch'
+    ])
   }
 }
 </script>

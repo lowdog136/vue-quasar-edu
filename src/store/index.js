@@ -24,7 +24,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '01.06.22',
+      NavigationReleaseNewsSite: '07.06.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       NavigationListMenu: [
         {
@@ -331,7 +331,8 @@ export default store(function (/* { ssrContext } */) {
       ],
       colorCode: false,
       InsertValue: [],
-      ratingNews: 0,
+      myCount: 2,
+      ratingNewsCard: 0,
       count: 'Июнь 29, 2022',
       uid: 'wTZJonX7ZaWDPXOikF8gfzfvwfm1',
       NewsCardHowWatch: 0,
@@ -341,18 +342,26 @@ export default store(function (/* { ssrContext } */) {
       SET_USER (state, user) {
         state.user = user
       },
+      incrementCounter (state) {
+        state.myCount++
+      },
+      clearCount (state) {
+        state.myCount = null
+      },
       CLEAR_USER (state) {
         state.user = null
       },
       changePush () {
         this.router.push('/User')
       },
+      ratingNewsCardUp (state) {
+        state.ratingNewsCard++
+      },
+      howWatch: function (state) {
+        state.NewsCardHowWatch++
+      },
       changedropDown (state) {
         state.colorCode = true
-      },
-      ratingNewsUp (state) {
-        state.ratingNews++
-        console.log(store.state.ratingNews)
       },
       updatePosts (state, posts) {
         state.posts = posts
@@ -363,6 +372,12 @@ export default store(function (/* { ssrContext } */) {
       }
     },
     getters: {
+      howWatch (state) {
+        return state.NewsCardHowWatch
+      },
+      ratingNewsCardUp (state) {
+        return state.ratingNewsCard
+      },
       dropDown (state) {
         return state.colorCode
       },
@@ -447,6 +462,18 @@ export default store(function (/* { ssrContext } */) {
       },
       changePush ({ commit }) {
         commit('changePush')
+      },
+      myCountZero ({ commit }) {
+        commit('clearCount')
+      },
+      myCountUp ({ commit }) {
+        commit('incrementCounter')
+      },
+      ratingNewsCardUp ({ commit }) {
+        commit('ratingNewsCardUp')
+      },
+      howWatch ({ commit }) {
+        commit('howWatch')
       },
       togledropDown ({ commit }) {
         commit('changedropDown')
