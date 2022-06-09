@@ -311,11 +311,12 @@ export default {
     },
     async howWatchUp (id) {
       await axios.put(`${baseURL}/items/${id}`, {
-        howWatch: 1
+        howWatch: this.itemNewsClubNewsCardHowWatch
       })
       this.items = this.items.map((item) => {
         if (item.id === id) {
           item.howWatch = false
+          console.log(item.howWatch)
         }
         return item
       })
