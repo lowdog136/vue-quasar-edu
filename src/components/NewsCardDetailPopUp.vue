@@ -44,7 +44,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('https://severfans.ru/items')
+      const res = await axios.get('http://localhost:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)

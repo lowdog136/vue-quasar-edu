@@ -134,6 +134,38 @@
       "resultCardTeam2": "",
       "result": "",
       "id": 9
+    },
+    {
+      "title": "Тестирование счетчика",
+      "status": true,
+      "subtitle": "новости сайта",
+      "preview": "Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod temporLorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor",
+      "fullnews": "Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "datenews": "2022-06-09",
+      "srcnews": "severfans.ru",
+      "howWatch": "",
+      "resultCardStatus": true,
+      "resultCardTitle": "",
+      "resultCardTeam1": "",
+      "resultCardTeam2": "",
+      "result": "",
+      "id": 10
+    },
+    {
+      "title": "тестирование счетчика 2",
+      "status": true,
+      "subtitle": "новости сайта",
+      "preview": "Ut molestiae tenetur qui vero galisum eum earum distinctio qui cumque sunt ea enim voluptas",
+      "fullnews": "Ut porro facilis non dignissimos nihil nam assumenda perspiciatis eos doloremque dolor et consequatur cumque! Id eveniet distinctio ad facilis quibusdam est sunt nostrum a consequatur vitae aut nesciunt labore est sequi sint. ",
+      "datenews": "2022-06-09",
+      "srcnews": "severfans",
+      "howWatch": "",
+      "resultCardStatus": true,
+      "resultCardTitle": "",
+      "resultCardTeam1": "",
+      "resultCardTeam2": "",
+      "result": "",
+      "id": 11
     }
   ]
 }

@@ -158,6 +158,8 @@
             <q-space />
           </q-card-actions>
         </q-card>
+        <q-space />item.howWatch: {{ item.howWatch }} <br>
+        <q-btn @click="howWatchUp"/>
         <q-space />item.status: {{ item.status }} <br>
         <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
         <div class="blockResultCard">
@@ -176,6 +178,7 @@ import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+const baseURL = 'http://localhost:3001'
 
 export default {
   components: { NewsCardDetailPopUp },
@@ -200,7 +203,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('https://severfans.ru/items')
+      const res = await axios.get(`${baseURL}/items`)
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -241,7 +244,7 @@ export default {
   },
   methods: {
     async boughtItem (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         bought: true
       })
       this.items = this.items.map((item) => {
@@ -252,7 +255,7 @@ export default {
       })
     },
     async removeBought (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         bought: false
       })
       this.items = this.items.map((item) => {
@@ -263,7 +266,7 @@ export default {
       })
     },
     async statusItemOn (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         status: true
       })
       this.items = this.items.map((item) => {
@@ -274,7 +277,7 @@ export default {
       })
     },
     async statusItemOff (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         status: false
       })
       this.items = this.items.map((item) => {
@@ -285,7 +288,7 @@ export default {
       })
     },
     async statusResultCardOn (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         resultCardStatus: true
       })
       this.items = this.items.map((item) => {
@@ -296,7 +299,7 @@ export default {
       })
     },
     async statusResultCardOff (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         resultCardStatus: false
       })
       this.items = this.items.map((item) => {
@@ -306,12 +309,23 @@ export default {
         return item
       })
     },
+    async howWatchUp (id) {
+      await axios.put(`${baseURL}/items/${id}`, {
+        howWatch: 1
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.howWatch = false
+        }
+        return item
+      })
+    },
     removeItem (id) {
-      axios.delete(`https://severfans.ru/items/${id}`)
+      axios.delete(`${baseURL}/items/${id}`)
       this.items = this.items.filter((item) => item.id !== id)
     },
     async addPost () {
-      const res = await axios.post('https://severfans.ru/items', {
+      const res = await axios.post(`${baseURL}/items`, {
         title: this.itemNewsClubNewsCardTitleNews,
         status: this.itemNewsClubNewsCardStatus,
         subtitle: this.itemNewsCardSubTitleNews,

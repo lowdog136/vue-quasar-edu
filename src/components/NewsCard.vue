@@ -30,7 +30,7 @@
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
         <q-tab name="raiting" disable icon="star" label="Оценить">
-          <q-badge color="dark" @click="ratingNewsCardUp" text-color="white" floating>{{ $store.state.ratingNewsCard }}</q-badge>
+          <q-badge color="dark" @click="ratingNewsCardUp" text-color="white" floating>{{ item.id }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
             :PopyUpSubTitleNews="item.subtitle"
@@ -65,7 +65,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('https://severfans.ru/items')
+      const res = await axios.get('http://localhost:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -88,7 +88,7 @@ export default {
       'howWatch'
     ]),
     async boughtItem (id) {
-      await axios.patch(`https://severfans.ru/items/${id}`, {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
         bought: true
       })
       this.items = this.items.map((item) => {
