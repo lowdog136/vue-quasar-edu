@@ -159,7 +159,7 @@
           </q-card-actions>
         </q-card>
         <q-space />item.howWatch: {{ item.howWatch }} <br>
-        <q-btn @click="howWatchUp"/>
+        <q-btn @click="howWatchUp(item.id)"/>
         <q-space />item.status: {{ item.status }} <br>
         <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
         <div class="blockResultCard">
@@ -311,11 +311,11 @@ export default {
     },
     async howWatchUp (id) {
       await axios.put(`${baseURL}/items/${id}`, {
-        howWatch: this.itemNewsClubNewsCardHowWatch
+        howWatch: this.itemNewsClubNewsCardHowWatch++
       })
       this.items = this.items.map((item) => {
         if (item.id === id) {
-          item.howWatch = false
+          this.item.howWatch = item.howWatch++
           console.log(item.howWatch)
         }
         return item
