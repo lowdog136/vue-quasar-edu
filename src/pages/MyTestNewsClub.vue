@@ -12,6 +12,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import PostForm from 'components/PostForm'
+
 export default {
   name: 'MyTestNewsClub',
   components: { PostForm },

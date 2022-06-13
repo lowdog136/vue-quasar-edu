@@ -17,7 +17,7 @@
         </q-card-section>
       <q-card >
         <q-card-section class="row items-center q-gutter-sm">
-          <q-btn v-close-popup label="Закрыть" @click="howWatch" color="primary" />
+          <q-btn v-close-popup label="Закрыть" color="primary" />
         </q-card-section>
       </q-card>
       </q-card>
@@ -29,8 +29,7 @@
 import { ref } from 'vue'
 import { mapActions } from 'vuex'
 import axios from 'axios'
-// eslint-disable-next-line no-unused-vars
-import store from 'src/store'
+const baseURL = 'http://localhost:3001'
 
 export default {
   data () {
@@ -44,7 +43,7 @@ export default {
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3001/items')
+      const res = await axios.get(`${baseURL}/items`)
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -69,13 +68,24 @@ export default {
     PopyUpSubImgNews: String,
     PopyUpTitleNews: String,
     PopyUpFullNews: String,
-    PopyUpSrcNews: String,
-    PopyUpHowWatch: String
+    PopyUpSrcNews: String
   },
   methods: {
     ...mapActions([
       'howWatch'
-    ])
+    ]),
+    async PopyUphowWatchUp (id) {
+      await axios.patch(`${baseURL}/items/${id}`, {
+        howWatch: this.itemNewsClubNewsCardHowWatch++
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          this.item.howWatch = item.howWatch++
+          console.log(item.howWatch)
+        }
+        return item.howWatch
+      })
+    }
   }
 }
 </script>

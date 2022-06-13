@@ -19,6 +19,12 @@
               v-for="size in ['xs']"
               :key="size"
               :size="size"
+              name="visibility"
+            /> {{ item.howWatch }}
+            <q-icon
+              v-for="size in ['xs']"
+              :key="size"
+              :size="size"
               name="link"
             /> {{ item.srcnews }}
           </div>
@@ -29,8 +35,8 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="raiting" disable icon="star" label="Оценить">
-          <q-badge color="dark" @click="ratingNewsCardUp" text-color="white" floating>{{ item.id }}</q-badge>
+        <q-tab name="star" @click="raitingNewsCardUp(item.raiting)" icon="star" label="Оценить">
+          <q-badge color="dark"  text-color="white" floating>{{ item.raiting }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
             :PopyUpSubTitleNews="item.subtitle"
@@ -48,6 +54,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 import { mapActions, mapGetters } from 'vuex'
+const baseURL = 'http://localhost:3001'
 
 export default {
   name: 'NewsCard',
@@ -60,12 +67,15 @@ export default {
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
-      ResultCardResult: ''
+      ResultCardResult: '',
+      itemNewsClubNewsCardRaiting: '',
+      raiting: '',
+      howWatch: ''
     }
   },
   async created () {
     try {
-      const res = await axios.get('http://localhost:3001/items')
+      const res = await axios.get(`${baseURL}/items`)
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -87,6 +97,18 @@ export default {
       'ratingNewsCardUp',
       'howWatch'
     ]),
+    async raitingNewsCardUp (id) {
+      await axios.patch(`http://localhost:3001/items/${id}`, {
+        raiting: this.itemNewsClubNewsCardRaiting
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          item.raiting = item.raiting++
+          console.log(this.item.raiting)
+        }
+        return item.rating
+      })
+    },
     async boughtItem (id) {
       await axios.patch(`http://localhost:3001/items/${id}`, {
         bought: true
@@ -104,6 +126,7 @@ export default {
     PopyUpTitleNews: String,
     PopyUpSrcNews: String,
     PopyUpFullNews: String,
+    PopyUpHowWatch: String,
 
     product_data: {
       type: Object,

@@ -25,24 +25,43 @@
           <input type="password" placeholder="password" v-model="login_form.password"/>
           <input type="submit" value="login"/>
         </form>
+        <div>
+        <q-btn @click="btnClickPush">Buttom push</q-btn>
+      </div> <br/>
+        <div>
+          <q-btn @click="howWatch">Buttom watch</q-btn>
+          {{ store.state.NewsCardHowWatch }}
+        </div>
+        <br/>
+        <div>
+          <q-btn @click="myCountUp">Buttom myCount</q-btn>
+          {{ store.state.myCount }}
+        </div>
+        <div>
+          <q-btn @click="myCountZero">Buttom myCountZero</q-btn>
+        </div><br/>
       </section>
     </div>
     <q-btn @click="btnClick">Buttom click</q-btn>
   </div>
+
   <div>
-   <q-btn @click="btnClickPush">Buttom push</q-btn>
-  </div> <br/>
+    <q-input style="max-width: 150px" label="id" v-model="id"></q-input>
+    <q-input style="max-width: 150px" label="title" v-model="title"></q-input>
+    <q-input style="max-width: 150px" label="body" v-model="body"></q-input>
+    <q-btn style="max-width: 150px" @click="getPostT()">JSON get post</q-btn>
+    <q-btn style="max-width: 150px" @click="addPostT()">JSON add post</q-btn>
+    <q-btn style="max-width: 150px" @click="delPostT(id)">JSON del post</q-btn>
+    <q-btn style="max-width: 150px" @click="renPostT(id)">JSON reN post</q-btn>
+    <div v-for="post in posts" :key="post.id">
+      <p>id:{{ post.id }}
+      {{ post.title }}
+      {{ post.body }}
+        <q-btn style="max-width: 150px" @click="countUpT(id)">JSON count up</q-btn>
+        count: {{ post.count }}</p>
+    </div>
+  </div><br/>
   <div>
-    <q-btn @click="howWatch">Buttom watch</q-btn>
-    {{ store.state.NewsCardHowWatch }}
-  </div>
-  <br/>
-  <div>
-    <q-btn @click="myCountUp">Buttom myCount</q-btn>
-    {{ store.state.myCount }}
-  </div>
-  <div>
-    <q-btn @click="myCountZero">Buttom myCountZero</q-btn>
   </div><br/>
 </template>
 
@@ -57,8 +76,29 @@ export default {
   components: { GamesNowEventCard, vueLidate },
   data () {
     return {
+      posts: [],
+      id: '',
+      title: '',
+      body: '',
+      author: 'author1',
+      count: '',
       items: []
     }
+  },
+  mounted () {
+    // axios
+    //   .post('http://localhost:3001/posts/', {
+    //     id: '4',
+    //     userId: '3',
+    //     title: 'Article title4-1',
+    //     body: 'Article body content44'
+    //   })
+    //   .then((response) => console.log(response))
+    // axios
+    //   .get('http://localhost:3001/posts')
+    //   .then((response) => {
+    //     this.posts = response.data
+    //   })
   },
   setup () {
     // eslint-disable-next-line camelcase
@@ -88,9 +128,17 @@ export default {
       expanded: ref(false)
     }
   },
+  async addPost2 () {
+    try {
+      const res = await axios.post('http://localhost:3001/posts')
+      this.items = res.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
   async created () {
     try {
-      const res = await axios.get('https://severfasns.ru:3001/items')
+      const res = await axios.get('https://severfans.ru:3001/items')
       this.items = res.data
     } catch (error) {
       console.log(error)
@@ -114,19 +162,60 @@ export default {
     },
     btnClick () {
       this.togledropDown()
-    }
-  },
-  props: {
-    eventListValue: {
-      type: Object,
-      default () {
-        return {
-          eventCardTitleMounthDate: String,
-          eventCardTitleMounthDateView: String,
-          eventCardTitleDate: String,
-          eventCardNameContest: String,
-          eventCardGameTur: String,
-          eventCardGameBody: String
+    },
+    async addPostT () {
+      await axios.post('http://localhost:3001/posts/', {
+        title: this.title,
+        body: this.body,
+        count: this.count
+      })
+    },
+    async getPostT () {
+      await axios.get('http://localhost:3001/posts/', {
+        id: this.id
+      })
+        .then((response) => {
+          this.posts = response.data
+        })
+    },
+    async renPostT (id) {
+      await axios.patch(`http://localhost:3001/posts/${id}`, {
+        title: this.title
+      })
+    },
+    async countUpT (id) {
+      await axios.patch(`http://localhost:3001/posts/${id}`, {
+        count: this.count++
+      })
+    },
+    async delPostT (id) {
+      await axios.delete(`http://localhost:3001/posts/${id}`, {
+      })
+    },
+    async addPostM (id) {
+      await axios.post(`http://localhost:3001/posts/${id}`, {
+        title: '',
+        body: ''
+      })
+      this.posts = this.posts.map((post) => {
+        if (post.id === id) {
+          post.status = false
+        }
+        return post
+      })
+    },
+    props: {
+      eventListValue: {
+        type: Object,
+        default () {
+          return {
+            eventCardTitleMounthDate: String,
+            eventCardTitleMounthDateView: String,
+            eventCardTitleDate: String,
+            eventCardNameContest: String,
+            eventCardGameTur: String,
+            eventCardGameBody: String
+          }
         }
       }
     }

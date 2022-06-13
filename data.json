@@ -1,13 +1,15 @@
 {
   "items": [
     {
-      "title": "Матч против Динамо",
+      "title": " repudiated and annoyances accepted",
       "status": true,
-      "subtitle": "Товарищеский матч",
-      "preview": "В минувшее воскресенье ФК \"Север\" провел товарищеский матч против ФК \"Динамо\" Санкт-Петербург.",
-      "fullnews": "В минувшее воскресенье ФК \"Север\" провел гостевой товарищеский матч против ФК \"Динамо\" Санкт-Петербург. Матч закончился победой хозяев со счетом 4-2. За \"Север\" голы забили: 33'-Миронов, 76'-Гагиев (пен).",
-      "datenews": "2022-03-14",
-      "srcnews": "vk.com/dynamo_spb",
+      "subtitle": "ipsum lorem",
+      "preview": "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue",
+      "fullnews": "\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"",
+      "datenews": "2022-06-01",
+      "srcnews": "ipsum lorem",
+      "howWatch": "",
+      "raiting": "",
       "resultCardStatus": true,
       "resultCardTitle": "",
       "resultCardTeam1": "",
@@ -16,114 +18,21 @@
       "id": 1
     },
     {
-      "title": "Поражение от Звезды",
+      "title": " reiciendis voluptatibus",
       "status": true,
-      "subtitle": "Товарищеский матч",
-      "preview": "19 марта очередной товарищеский матч против ФК \"Звезда\" из Санкт-Петербурга закончился разгромом \"Севера\".",
-      "fullnews": "Товарищеский матч против ФК \"Звезда\" из Санкт-Петербурга закончился разгромом \"Севера\". Команда из Мурманска проиграла 6-1. Единственный гол \"Север\" гол забил на 26й минуте игрок под номером восемь.",
-      "datenews": "2022-03-21",
-      "srcnews": "vk.com/fczvezdaspb",
+      "subtitle": "ipsum lorem",
+      "preview": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia anim",
+      "fullnews": "\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"",
+      "datenews": "2022-06-05",
+      "srcnews": "ipsum lorem",
+      "howWatch": "",
+      "raiting": "",
       "resultCardStatus": true,
       "resultCardTitle": "",
       "resultCardTeam1": "",
       "resultCardTeam2": "",
       "result": "",
       "id": 2
-    },
-    {
-      "title": "Победа над Фаворитом",
-      "status": true,
-      "subtitle": "Товарищеский матч",
-      "preview": "Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК \"Фаворит\" г.Выборг 5-1.",
-      "fullnews": "Мурманчане крупно победили после последних поражений. Победа в контольном матче над ФК \"Фаворит\" г.Выборг 5-1. Голы : Д. Майоров, А. Некрасов-2, П. Сурков-2. Состав \"Севера\":О. Аврамчик, М. Слащев, М. Осипов (Э.Кубланов'46), И. Ваганов, Г. Кравчук, Д. Миронов, М. Зайцев(И.Шилов'46), И. Игнатенко, П. Рябоконь, А. Некрасов(А.Соловьев'46), Д. Майоров( П. Сурков'46)",
-      "datenews": "2022-03-26",
-      "srcnews": "vk.com/id121092017",
-      "resultCardStatus": true,
-      "resultCardTitle": "",
-      "resultCardTeam1": "",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 3
-    },
-    {
-      "title": "Дорога в Дивноморское",
-      "status": true,
-      "subtitle": "Новости клуба",
-      "preview": "ФК \"Север\" отправился на сборы до 17 апреля в Дивноморское. Контрольные матчи будут при наличии подходящих соперников.",
-      "fullnews": "Сегодня 29 марта ФК \"Север\" отправится на сборы до 17 апреля в Дивноморское (Краснодарский край). Контрольные матчи будут при наличии подходящих соперников.",
-      "datenews": "2022-03-29",
-      "srcnews": "severfans",
-      "resultCardStatus": true,
-      "resultCardTitle": "",
-      "resultCardTeam1": "",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 4
-    },
-    {
-      "title": "Победа над \"Черноморец-м\"",
-      "status": true,
-      "subtitle": "Товарищеский матч",
-      "preview": "ФК \"Север\" в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК \"Черноморец-м\".",
-      "fullnews": "ФК \"Север\" 6 апреля 2022 г в рамках первого товарищеского матча на сборах одержал победу 0-3 (0-1) над ФК \"Черноморец-м\". Голы на счету Ивана Игнатенко и дубль Даниила Майорова",
-      "datenews": "2022-04-06",
-      "srcnews": "vk.com/sever_murmansk",
-      "resultCardStatus": true,
-      "resultCardTitle": "",
-      "resultCardTeam1": "",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 5
-    },
-    {
-      "title": "Анонс матча \"Витязево\"",
-      "status": true,
-      "subtitle": "Анонс матча",
-      "preview": "ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом.",
-      "fullnews": "ФК «Север» в рамках продолжающейся подготовки к сезону на сборах сыграет в Витязево с местным одноимённым футбольным клубом. Онлайн трансляция пройдет в группе вк",
-      "datenews": "2022-04-12",
-      "srcnews": "vk.com/sever_murmansk'",
-      "resultCardStatus": true,
-      "resultCardTitle": "",
-      "resultCardTeam1": "",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 6
-    },
-    {
-      "title": "Ничья с Анапой",
-      "status": true,
-      "subtitle": "Результат матча",
-      "preview": "ФК «Север» внезапно сыграл в ничью с ФК \"Анапа\" 1-1. До этого анонс был другого соперника. После первого тайма мурманчане проигрывали 0-1.",
-      "fullnews": "ФК «Север» внезапно сыграл в ничью с ФК \"Анапа\" 1-1. До этого анонс был другого соперника ФК \"Витязево\". После первого тайма мурманчане проигрывали 0-1. За Север забил Александ Соловьев. Следующая игра, заключительная на сборе, состоится в пятницу 15 апреля в 14:00, соперником станет футбольный клуб «Виста»",
-      "datenews": "2022-04-13",
-      "srcnews": "vk.com/sever_murmansk",
-      "resultCardStatus": true,
-      "resultCardTitle": "",
-      "resultCardTeam1": "",
-      "resultCardTeam2": "",
-      "result": "",
-      "id": 7
-    },
-    {
-      "howWatch": 8,
-      "id": 8,
-      "status": true
-    },
-    {
-      "howWatch": 0,
-      "id": 9,
-      "status": true
-    },
-    {
-      "howWatch": 8,
-      "id": 10,
-      "status": true
-    },
-    {
-      "howWatch": 7,
-      "id": 11,
-      "status": true
     }
   ]
 }

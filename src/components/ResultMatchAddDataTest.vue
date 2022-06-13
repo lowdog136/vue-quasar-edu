@@ -154,12 +154,15 @@
               :PopyUpSrcNews="item.srcnews"
               :PopyUpFullNews="item.fullnews"
               :PopyUpTitleNews="item.title"
+              :PopyUpItem="item.item"
             />
             <q-space />
           </q-card-actions>
         </q-card>
+        <q-space />item.raiting: {{ item.raiting }} <br>
         <q-space />item.howWatch: {{ item.howWatch }} <br>
-        <q-btn @click="howWatchUp(item.id)"/>
+        <q-btn @click="howWatchUp(item.id)" label="UP"/>
+        <q-btn @click="howWatchUpZero(item.id)" label="Null"/>
         <q-space />item.status: {{ item.status }} <br>
         <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
         <div class="blockResultCard">
@@ -194,6 +197,7 @@ export default {
       itemNewsClubNewsCardDateNews: '',
       itemNewsClubNewsCardCardNewsSrc: '',
       itemNewsClubNewsCardHowWatch: '',
+      itemNewsClubNewsCardRaiting: '',
       ResultCardStatus: true,
       ResultCardTitle: '',
       ResultCardTeam1: '',
@@ -310,7 +314,7 @@ export default {
       })
     },
     async howWatchUp (id) {
-      await axios.put(`${baseURL}/items/${id}`, {
+      await axios.patch(`${baseURL}/items/${id}`, {
         howWatch: this.itemNewsClubNewsCardHowWatch++
       })
       this.items = this.items.map((item) => {
@@ -318,7 +322,19 @@ export default {
           this.item.howWatch = item.howWatch++
           console.log(item.howWatch)
         }
-        return item
+        return item.howWatch
+      })
+    },
+    async howWatchUpZero (id) {
+      await axios.patch(`${baseURL}/items/${id}`, {
+        howWatch: this.itemNewsClubNewsCardHowWatch
+      })
+      this.items = this.items.map((item) => {
+        if (item.id === id) {
+          this.item.howWatch = item.howWatch = null
+          console.log(item.howWatch)
+        }
+        return item.howWatch
       })
     },
     removeItem (id) {
@@ -335,6 +351,7 @@ export default {
         datenews: this.itemNewsClubNewsCardDateNews,
         srcnews: this.itemNewsClubNewsCardCardNewsSrc,
         howWatch: this.itemNewsClubNewsCardHowWatch,
+        raiting: this.itemNewsClubNewsCardRaiting,
         resultCardStatus: this.ResultCardStatus,
         resultCardTitle: this.ResultCardTitle,
         resultCardTeam1: this.ResultCardTeam1,
@@ -350,6 +367,7 @@ export default {
       this.itemNewsClubNewsCardDateNews = ''
       this.itemNewsClubNewsCardCardNewsSrc = ''
       this.itemNewsClubNewsCardHowWatch = ''
+      this.itemNewsClubNewsCardRaiting = ''
       this.ResultCardStatus = ''
       this.itemTeam1 = ''
       this.itemTeam2 = ''
