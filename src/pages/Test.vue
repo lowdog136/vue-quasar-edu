@@ -49,10 +49,23 @@
     <q-input style="max-width: 150px" label="id" v-model="id"></q-input>
     <q-input style="max-width: 150px" label="title" v-model="title"></q-input>
     <q-input style="max-width: 150px" label="body" v-model="body"></q-input>
+    <br><q-separator/>
+    <q-input style="max-width: 150px" label="name" v-model="name"></q-input>
+    <q-input style="max-width: 150px" label="surname" v-model="surname"></q-input>
+    <q-input style="max-width: 150px" label="other" v-model="other"></q-input>
     <q-btn style="max-width: 150px" @click="getPostT()">JSON get post</q-btn>
+    <q-btn style="max-width: 150px" @click="getProfileT()">JSON get profile</q-btn>
     <q-btn style="max-width: 150px" @click="addPostT()">JSON add post</q-btn>
+    <q-btn style="max-width: 150px" @click="addProfilesT()">JSON add prof</q-btn>
     <q-btn style="max-width: 150px" @click="delPostT(id)">JSON del post</q-btn>
+    <q-btn style="max-width: 150px" @click="renProfT(id)">JSON reN prof</q-btn>
     <q-btn style="max-width: 150px" @click="renPostT(id)">JSON reN post</q-btn>
+    <div v-for="profiles in profile" :key="profiles.id">
+      <p>id:{{ profiles.id }}
+        name:{{ profiles.name }}
+      surname:{{ profiles.surname }}
+      other: {{ profiles.other }}</p>
+    </div>
     <div v-for="post in posts" :key="post.id">
       <p>id:{{ post.id }}
       {{ post.title }}
@@ -77,6 +90,10 @@ export default {
   data () {
     return {
       posts: [],
+      profile: [],
+      name: '',
+      surname: '',
+      other: '',
       id: '',
       title: '',
       body: '',
@@ -163,12 +180,27 @@ export default {
     btnClick () {
       this.togledropDown()
     },
+    async addProfilesT () {
+      await axios.post('http://localhost:3001/profile/', {
+        name: this.name,
+        surname: this.surname,
+        other: this.other
+      })
+    },
     async addPostT () {
       await axios.post('http://localhost:3001/posts/', {
         title: this.title,
         body: this.body,
         count: this.count
       })
+    },
+    async getProfileT () {
+      await axios.get('http://localhost:3001/profile/', {
+        name: this.name
+      })
+        .then((response) => {
+          this.profile = response.data
+        })
     },
     async getPostT () {
       await axios.get('http://localhost:3001/posts/', {
@@ -177,6 +209,11 @@ export default {
         .then((response) => {
           this.posts = response.data
         })
+    },
+    async renProfT (id) {
+      await axios.patch(`http://localhost:3001/profile/${id}`, {
+        other: this.other
+      })
     },
     async renPostT (id) {
       await axios.patch(`http://localhost:3001/posts/${id}`, {
