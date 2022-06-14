@@ -6,46 +6,46 @@
       class="q-gutter-md"
     >
       <q-separator/>
-        <q-input
-          filled
-          v-model='resultGameStatus'
-          autogrow
-          label=""
-          hint="показывать или нет true/false"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
+      <q-input
+        filled
+        v-model='resultGameStatus'
+        autogrow
+        label=""
+        hint="показывать или нет true/false"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
       <q-input
         filled
         autogrow
-        v-model='resultGameTitle'
+        :resultGameTitle="resultGameTitle"
         label=""
         hint="товарищ или чемп/кубок"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
       />
-        <q-input
-          filled
-          autogrow
-          v-model='resultGameResult'
-          label=""
-          hint="победа/ничья/поражение"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
-          v-model='resultGameDate'
-          label=""
-          hint="датаНовости"
-          type="date"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
+      <q-input
+        filled
+        autogrow
+        :resultGameResult="resultGameResult"
+        label=""
+        hint="победа/ничья/поражение"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
+      <q-input
+        filled
+        :resultGameDate="resultGameDate"
+        label=""
+        hint="датаНовости"
+        type="date"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
       <p>
         <q-input
           filled
-          v-model='resultGameTeam1'
+          :resultGameTeam1="resultGameTeam1"
           label=""
           hint="команда 1"
           lazy-rules
@@ -55,7 +55,7 @@
       <p>
         <q-input
           filled
-          v-model='resultGameTeam1City'
+          :resultGameTeam1City="resultGameTeam1City"
           label=""
           hint="город команда 1"
           lazy-rules
@@ -65,7 +65,7 @@
       <p>
         <q-input
           filled
-          v-model='resultGameTeam2'
+          :resultGameTeam2="resultGameTeam2"
           label=""
           hint="команда 2"
           lazy-rules
@@ -75,7 +75,7 @@
       <p>
         <q-input
           filled
-          v-model='resultGameTeam2City'
+          :resultGameTeam2City="resultGameTeam2City"
           label=""
           hint="город команда 2"
           lazy-rules
@@ -85,7 +85,7 @@
       <p>
         <q-input
           filled
-          v-model='resultGameTotal'
+          :resultGameTotal="resultGameTotal"
           label=""
           hint="Итоговый счет"
           lazy-rules
@@ -99,48 +99,50 @@
     </q-form>
   </div>
   <div class="q-pa-md row items-start q-gutter-md">
-      <li
-        v-for="resultGame in resultGames.slice(id).reverse()"
-        :class="{ bought: item.bought }"
-        :key="resultGame.id"
-      >
-        <q-separator/>
-        <div class="blockNewsCard">
-          Новость: {{ resultGame.id }}
-            <q-btn @click="statusItemOn(resultGame.id)" icon="toggle_off" @dblclick="statusItemOff(resultGame.id)" label="" color="primary" flat class="q-ml-sm">
-              <q-tooltip class="bg-accent">Включить/выключить показ на странице с новостями</q-tooltip>
-            </q-btn>
-            <q-btn @click="boughtItem(resultGame.id)" disable icon="visibility_off" @dblclick="removeBought(resultGame.id)" label="" color="primary" flat class="q-ml-sm" />
-            <q-btn @dblclick="removeItem(resultGame.id)" icon="delete" label="" color="primary" flat class="q-ml-sm">
-              <q-tooltip class="bg-black">Удалить запись</q-tooltip>
-            </q-btn>
-        </div>
-        <q-card v-if="resultGame.status" class="my-card" flat bordered>
-          <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
-          <q-card-section>
-            <div class="text-overline text-deep-orange-14">
-              {{ resultGame.status }}
-            </div>
-            <div class="text-h5 q-mt-sm q-mb-xs">
-              {{ resultGame.status }}
-            </div>
-            <div class="text-caption text-blue-grey-10">
-              {{ resultGame.status }}
-            </div> <br>
-            <div class="text-caption text-grey">
-              {{ resultGame.status }}
-            </div>
-          </q-card-section>
-        </q-card>
-        <q-btn @click="statusResultCardOn(resultGame.id)" @dblclick="statusResultCardOff(resultGame.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-        <div class="blockResultCard">
-          resultGameStatus: {{ resultGame.resultGameStatus }} <br>
-          itemTeam1: {{ resultGame.resultGameResult }} <br>
-          itemTeam2: {{ resultGame.resultGameTitle }} <br>
-          itemItog: {{ resultGame.resultGameDate }} <br>
-          itemResult: {{ resultGame.ResultCardResult }} <br>
-        </div>
-      </li>
+    <li
+      v-for="resultGame in resultGames.slice(id).reverse()"
+      :key="resultGame.id"
+    >
+      <q-separator/>
+      <div class="blockNewsCard">
+        Новость: {{ resultGame.id }}
+      </div>
+      <q-card class="my-card" flat bordered>
+        <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
+        <q-card-section>
+          <div class="text-overline text-deep-orange-14">
+            {{ resultGame.team1 }}
+          </div>
+          <div class="text-h5 q-mt-sm q-mb-xs">
+            {{ resultGame.team1 }}
+          </div>
+          <div class="text-caption text-blue-grey-10">
+            {{ resultGame.team1 }}
+          </div> <br>
+          <div class="text-caption text-grey">
+            {{ resultGame.team1 }}
+          </div>
+        </q-card-section>
+
+        <q-card-actions>
+          <q-btn flat color="dark" label="" />
+          <div class="labelDate">
+            {{ resultGame.team1 }}
+          </div>
+          <q-space />
+        </q-card-actions>
+      </q-card>
+      <q-space />resultGame.raiting: {{ resultGame.id }} <br>
+      <q-space />resultGame.howWatch: {{ resultGame.team1 }} <br>
+      <q-space />item.status: {{ resultGame.team1 }} <br>
+      <div class="blockResultCard">
+        itemResultCardStatus: {{ resultGame.team1 }}<br>
+        itemTeam1: {{ resultGame.team1 }}<br>
+        itemTeam2: {{ resultGame.team1 }} <br>
+        itemItog: {{ resultGame.team1 }} <br>
+        itemResult: {{ resultGame.team1 }} <br>
+      </div>
+    </li>
   </div>
 </template>
 
@@ -156,21 +158,21 @@ export default {
   data () {
     return {
       resultGames: [],
-      resultGameStatus: '',
-      resultGameResult: '',
-      resultGameTitle: '',
-      resultGameDate: '',
-      resultGameTeam1: '',
-      resultGameTeam1City: '',
-      resultGameTeam2: '',
-      resultGameTeam2City: '',
-      resultGameTotal: ''
+      resultGameStatus: ref(''),
+      resultGameResult: ref(''),
+      resultGameTitle: ref(''),
+      resultGameDate: ref(''),
+      resultGameTeam1: ref(''),
+      resultGameTeam1City: ref(''),
+      resultGameTeam2: ref(''),
+      resultGameTeam2City: ref(''),
+      resultGameTotal: ref('')
     }
   },
   async created () {
     try {
       const res = await axios.get(`${baseURL}/resultGames`)
-      this.items = res.data
+      this.resultGames = res.data
     } catch (error) {
       console.log(error)
     }
@@ -209,72 +211,6 @@ export default {
     }
   },
   methods: {
-    async boughtItem (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        bought: true
-      })
-      this.items = this.items.map((item) => {
-        if (item.id === id) {
-          item.bought = true
-        }
-        return item
-      })
-    },
-    async removeBought (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        bought: false
-      })
-      this.items = this.items.map((item) => {
-        if (item.id === id) {
-          item.bought = false
-        }
-        return item
-      })
-    },
-    async statusItemOn (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        status: true
-      })
-      this.resultGames = this.resultGames.map((resultGame) => {
-        if (resultGame.id === id) {
-          resultGame.status = true
-        }
-        return resultGame
-      })
-    },
-    async statusItemOff (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        status: false
-      })
-      this.resultGames = this.resultGames.map((resultGame) => {
-        if (resultGame.id === id) {
-          resultGame.status = false
-        }
-        return resultGame
-      })
-    },
-    async statusResultCardOn (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        resultCardStatus: true
-      })
-      this.resultGames = this.resultGames.map((resultGame) => {
-        if (resultGame.id === id) {
-          resultGame.resultCardStatus = true
-        }
-        return resultGame
-      })
-    },
-    async statusResultCardOff (id) {
-      await axios.patch(`${baseURL}/resultGames/${id}`, {
-        resultCardStatus: false
-      })
-      this.items = this.items.map((item) => {
-        if (item.id === id) {
-          item.resultCardStatus = false
-        }
-        return item
-      })
-    },
     removeItem (id) {
       axios.delete(`${baseURL}/resultGames/${id}`)
       this.resultGames = this.resultGames.filter((resultGame) => resultGame.id !== id)
@@ -332,8 +268,8 @@ button {
   border-radius: 4px;
 }
 .blockResultCard {
-   font-size: 14px;
- }
+  font-size: 14px;
+}
 .labelDate {
   font-size: 14px;
 }

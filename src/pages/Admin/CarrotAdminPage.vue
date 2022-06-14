@@ -8,11 +8,11 @@
           </q-avatar>
 
           <q-toolbar-title>
-            CarrotPage
+            CarrotAdminPage
           </q-toolbar-title>
 
-          <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="primary" flat round dense icon="help" />
-          <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="primary" flat round dense icon="help" />
+          <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="white" flat round dense icon="smart_toy" />
+          <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="white" flat round dense icon="help" />
         </q-toolbar>
       </q-header>
 
