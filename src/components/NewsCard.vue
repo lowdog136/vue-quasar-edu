@@ -35,7 +35,7 @@
       >
         <q-tab name="event" icon="event">{{ item.datenews }}
         </q-tab>
-        <q-tab name="star" @click="raitingNewsCardUp(item.raiting)" icon="star" label="Оценить">
+        <q-tab name="star" disable @click="raitingNewsCardUp(item.raiting)" icon="star" label="Оценить">
           <q-badge color="dark"  text-color="white" floating>{{ item.raiting }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
@@ -54,7 +54,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 import { mapActions, mapGetters } from 'vuex'
-const baseURL = 'http://localhost:3001'
+const baseURL = 'https://severfans.ru'
 
 export default {
   name: 'NewsCard',

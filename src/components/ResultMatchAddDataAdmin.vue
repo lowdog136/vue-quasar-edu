@@ -181,7 +181,7 @@ import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-const baseURL = 'http://localhost:3001'
+const baseURL = 'https://severfans.ru'
 
 export default {
   components: { NewsCardDetailPopUp },
