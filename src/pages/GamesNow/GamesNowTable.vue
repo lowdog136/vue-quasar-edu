@@ -34,13 +34,13 @@ const rows = [
   {
     name: 'Север',
     colorCode: 'primary',
-    games: 2,
+    games: 3,
     win: 2,
-    draw: '0',
+    draw: 1,
     lose: 0,
-    ball_io: '5-1',
-    score: 6,
-    last_game: 'ВВ'
+    ball_io: '6-2',
+    score: 7,
+    last_game: 'ВВН'
   },
   {
     name: 'Псков',
@@ -74,13 +74,13 @@ const rows = [
   },
   {
     name: 'Новград',
-    games: 0,
+    games: 1,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 0,
-    ball_io: 0,
-    score: '0',
-    last_game: ''
+    ball_io: '1-1',
+    score: 1,
+    last_game: 'Н'
   },
   {
     name: 'СШ Ленинградец',

@@ -61,12 +61,14 @@
         :title='titleEvent'
         subtitle="Июнь 11, 2022"
         side="left"
+        color="orange-14"
+        icon="done_all"
       >
         <div>
           3 тур
         </div>
         <div>
-          ФК "Новград" - ФК "Север"
+          ФК "Новград" 1-1 ФК "Север"
         </div>
       </q-timeline-entry>
 
