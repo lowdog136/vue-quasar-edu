@@ -145,14 +145,6 @@ export default {
       expanded: ref(false)
     }
   },
-  async addPost2 () {
-    try {
-      const res = await axios.post('http://localhost:3001/posts')
-      this.items = res.data
-    } catch (error) {
-      console.log(error)
-    }
-  },
   async created () {
     try {
       const res = await axios.get('https://severfans.ru:3001/items')

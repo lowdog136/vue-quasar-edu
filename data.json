@@ -34,5 +34,12 @@
       "result": "",
       "id": 2
     }
+  ],
+  "resultGames": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
   ]
 }
