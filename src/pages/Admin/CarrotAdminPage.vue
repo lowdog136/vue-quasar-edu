@@ -18,7 +18,7 @@
       <q-page-container v-if="panelViewItem">
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            <ResultMatchAddDataTest />
+            <ResultMatchAddDataAdmin />
           </p>
         </q-page>
       </q-page-container>
@@ -29,11 +29,11 @@
 
 <script>
 import { defineComponent } from 'vue'
-import ResultMatchAddDataTest from 'components/ResultMatchAddDataTest'
+import ResultMatchAddDataAdmin from 'components/ResultMatchAddDataAdmin'
 
 export default defineComponent({
-  name: 'CarrotPage',
-  components: { ResultMatchAddDataTest },
+  name: 'CarrotAdminPage',
+  components: { ResultMatchAddDataAdmin },
   data () {
     return {
       panelViewItem: false,

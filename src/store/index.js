@@ -413,7 +413,7 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
-        this.$router.push({ path: '/User' })
+        this.$router.push({ path: '/Admin' })
       },
       async register ({ commit }, details) {
         const { email, password } = details
@@ -454,8 +454,8 @@ export default store(function (/* { ssrContext } */) {
           } else {
             commit('SET_USER', user)
 
-            if (router.isReady() && router.currentRoute.value.path === '/User') {
-              this.router.push('/User')
+            if (router.isReady() && router.currentRoute.value.path === '/Admin') {
+              this.router.push('/Admin')
             }
           }
         })

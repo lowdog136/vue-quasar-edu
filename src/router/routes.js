@@ -29,7 +29,7 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import('layouts/LayoutUserPage.vue'),
         children: [
-          { path: '/User/CarrotPage', name: 'CarrotPage', component: () => import('pages/User/CarrotPage.vue') },
+          { path: '/User/ProfilePage', name: 'ProfilePage', component: () => import('pages/User/ProfilePage.vue') },
           { path: '/User/Exit', name: 'Exit', component: () => import('pages/User/Exit.vue') }
         ]
       },
@@ -38,7 +38,7 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import('layouts/LayoutAdminPage.vue'),
         children: [
-          { path: '/Admin/CarrotPage', name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
+          { path: '/Admin/CarrotAdminPage', name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
           { path: '/Admin/Exit', name: 'ExitAdmin', component: () => import('pages/Admin/ExitAdmin.vue') }
         ]
       },
