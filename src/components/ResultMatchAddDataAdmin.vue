@@ -6,51 +6,51 @@
       class="q-gutter-md"
     >
       <q-separator/>
-        <q-input
-          filled
-          v-model='itemNewsCardSubTitleNews'
-          autogrow
-          label=""
-          hint="subtitle.предЗаголовок - победа,ничья, поражение, анонс"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
-          autogrow
-          v-model='itemNewsClubNewsCardTitleNews'
-          label=""
-          hint="Заголовок новости: 2-3 слова"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
-          autogrow
-          v-model='itemNewsClubNewsCardPreViewNews'
-          label=""
-          hint="itemStatus.предТекстНовости - превью. 2-3 предложения"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
-          autogrow
-          v-model='itemNewsClubNewsCardFullNews'
-          label=""
-          hint="Текст - основной текст. полный. работает по кнопке подробно"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
-        <q-input
-          filled
-          v-model='itemNewsClubNewsCardDateNews'
-          label=""
-          hint="датаНовости"
-          type="date"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Заполните поле']"
-        />
+      <q-input
+        filled
+        v-model='itemNewsCardSubTitleNews'
+        autogrow
+        label=""
+        hint="subtitle.предЗаголовок - победа,ничья, поражение, анонс"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
+      <q-input
+        filled
+        autogrow
+        v-model='itemNewsClubNewsCardTitleNews'
+        label=""
+        hint="Заголовок новости: 2-3 слова"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
+      <q-input
+        filled
+        autogrow
+        v-model='itemNewsClubNewsCardPreViewNews'
+        label=""
+        hint="itemStatus.предТекстНовости - превью. 2-3 предложения"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
+      <q-input
+        filled
+        autogrow
+        v-model='itemNewsClubNewsCardFullNews'
+        label=""
+        hint="Текст - основной текст. полный. работает по кнопке подробно"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
+      <q-input
+        filled
+        v-model='itemNewsClubNewsCardDateNews'
+        label=""
+        hint="датаНовости"
+        type="date"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+      />
       <p>
         <q-input
           filled
@@ -111,68 +111,68 @@
     </q-form>
   </div>
   <div class="q-pa-md row items-start q-gutter-md">
-      <li
-        v-for="item in items.slice(id).reverse()"
-        :class="{ bought: item.bought }"
-        :key="item.id"
-      >
-        <q-separator/>
-        <div class="blockNewsCard">
-          Новость: {{ item.id }}
-            <q-btn @click="statusItemOn(item.id)" icon="toggle_off" @dblclick="statusItemOff(item.id)" label="" color="primary" flat class="q-ml-sm">
-              <q-tooltip class="bg-accent">Включить/выключить показ на странице с новостями</q-tooltip>
-            </q-btn>
-            <q-btn @click="boughtItem(item.id)" disable icon="visibility_off" @dblclick="removeBought(item.id)" label="" color="primary" flat class="q-ml-sm" />
-            <q-btn @dblclick="removeItem(item.id)" icon="delete" label="" color="primary" flat class="q-ml-sm">
-              <q-tooltip class="bg-black">Удалить запись</q-tooltip>
-            </q-btn>
-        </div>
-        <q-card v-if="item.status" class="my-card" flat bordered>
-          <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
-          <q-card-section>
-            <div class="text-overline text-deep-orange-14">
-              {{ item.subtitle }}
-            </div>
-            <div class="text-h5 q-mt-sm q-mb-xs">
-              {{ item.title }}
-            </div>
-            <div class="text-caption text-blue-grey-10">
-              {{ item.preview }}
-            </div> <br>
-            <div class="text-caption text-grey">
-              {{ item.srcnews }}
-            </div>
-          </q-card-section>
+    <li
+      v-for="item in items.slice(id).reverse()"
+      :class="{ bought: item.bought }"
+      :key="item.id"
+    >
+      <q-separator/>
+      <div class="blockNewsCard">
+        Новость: {{ item.id }}
+        <q-btn @click="statusItemOn(item.id)" icon="toggle_off" @dblclick="statusItemOff(item.id)" label="" color="primary" flat class="q-ml-sm">
+          <q-tooltip class="bg-accent">Включить/выключить показ на странице с новостями</q-tooltip>
+        </q-btn>
+        <q-btn @click="boughtItem(item.id)" disable icon="visibility_off" @dblclick="removeBought(item.id)" label="" color="primary" flat class="q-ml-sm" />
+        <q-btn @dblclick="removeItem(item.id)" icon="delete" label="" color="primary" flat class="q-ml-sm">
+          <q-tooltip class="bg-black">Удалить запись</q-tooltip>
+        </q-btn>
+      </div>
+      <q-card v-if="item.status" class="my-card" flat bordered>
+        <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
+        <q-card-section>
+          <div class="text-overline text-deep-orange-14">
+            {{ item.subtitle }}
+          </div>
+          <div class="text-h5 q-mt-sm q-mb-xs">
+            {{ item.title }}
+          </div>
+          <div class="text-caption text-blue-grey-10">
+            {{ item.preview }}
+          </div> <br>
+          <div class="text-caption text-grey">
+            {{ item.srcnews }}
+          </div>
+        </q-card-section>
 
-          <q-card-actions>
-            <q-btn flat color="dark" label="" />
-            <div class="labelDate">
-              {{ item.datenews }}
-            </div>
-            <NewsCardDetailPopUp
-              :PopyUpSubTitleNews="item.subtitle"
-              :PopyUpSrcNews="item.srcnews"
-              :PopyUpFullNews="item.fullnews"
-              :PopyUpTitleNews="item.title"
-              :PopyUpItem="item.item"
-            />
-            <q-space />
-          </q-card-actions>
-        </q-card>
-        <q-space />item.raiting: {{ item.raiting }} <br>
-        <q-space />item.howWatch: {{ item.howWatch }} <br>
-        <q-btn @click="howWatchUp(item.id)" label="UP"/>
-        <q-btn @click="howWatchUpZero(item.id)" label="Null"/>
-        <q-space />item.status: {{ item.status }} <br>
-        <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-        <div class="blockResultCard">
-          itemResultCardStatus: {{ item.resultCardStatus }} <br>
-          itemTeam1: {{ item.resultCardTeam1 }} <br>
-          itemTeam2: {{ item.resultCardTeam2 }} <br>
-          itemItog: {{ item.resultCardTitle }} <br>
-          itemResult: {{ item.ResultCardResult }} <br>
-        </div>
-      </li>
+        <q-card-actions>
+          <q-btn flat color="dark" label="" />
+          <div class="labelDate">
+            {{ item.datenews }}
+          </div>
+          <NewsCardDetailPopUp
+            :PopyUpSubTitleNews="item.subtitle"
+            :PopyUpSrcNews="item.srcnews"
+            :PopyUpFullNews="item.fullnews"
+            :PopyUpTitleNews="item.title"
+            :PopyUpItem="item.item"
+          />
+          <q-space />
+        </q-card-actions>
+      </q-card>
+      <q-space />item.raiting: {{ item.raiting }} <br>
+      <q-space />item.howWatch: {{ item.howWatch }} <br>
+      <q-btn @click="howWatchUp(item.id)" label="UP"/>
+      <q-btn @click="howWatchUpZero(item.id)" label="Null"/>
+      <q-space />item.status: {{ item.status }} <br>
+      <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
+      <div class="blockResultCard">
+        itemResultCardStatus: {{ item.resultCardStatus }} <br>
+        itemTeam1: {{ item.resultCardTeam1 }} <br>
+        itemTeam2: {{ item.resultCardTeam2 }} <br>
+        itemItog: {{ item.resultCardTitle }} <br>
+        itemResult: {{ item.ResultCardResult }} <br>
+      </div>
+    </li>
   </div>
 </template>
 
@@ -181,11 +181,11 @@ import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-const baseURL = 'https://severfans.ru'
+const baseURL = 'http://localhost:3001'
 
 export default {
   components: { NewsCardDetailPopUp },
-  name: 'ResultMatchAddDataAdmin',
+  name: 'ResultMatchAddDataTest',
   data () {
     return {
       items: [],
@@ -403,8 +403,8 @@ button {
   border-radius: 4px;
 }
 .blockResultCard {
-   font-size: 14px;
- }
+  font-size: 14px;
+}
 .labelDate {
   font-size: 14px;
 }

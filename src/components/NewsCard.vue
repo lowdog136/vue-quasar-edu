@@ -54,7 +54,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 import { mapActions, mapGetters } from 'vuex'
-const baseURL = 'https://severfans.ru'
+const baseURL = 'http://localhost:3001'
 
 export default {
   name: 'NewsCard',

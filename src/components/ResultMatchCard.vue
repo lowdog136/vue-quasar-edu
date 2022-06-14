@@ -1,45 +1,59 @@
 <template>
-  <div v-if="product_data.NewsClubNewsCardStatus" class="q-pa-md row items-start q-gutter-md">
+  <div class="q-pa-md row items-start q-gutter-md"
+  v-for="resultGame in resultGames.slice(id).reverse()"
+  :key="resultGame.id">
     <q-card class="my-card" flat bordered>
-      <q-img :src="require('../assets/image/imgTitle/' + product_data.NewsClubNewsCardTitleUrlImg )" />
+      <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
       <q-card-section>
-        <div class="text-overline text-orange-9">{{ product_data.NewsCardAnnounceNews }}</div>
-        <div class="text-caption text-grey">{{ product_data.NewsClubNewsCardDateNews }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{ product_data.ResultCardTitle }}</div>
+        <div class="text-overline text-orange-9">{{ resultGame.title }}</div>
+        <div class="text-caption text-grey">{{ resultGame.date }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs-md">{{ resultGame.result }}</div>
         <div class="text-caption text-grey">
-          {{ product_data.ResultCardTeam1 }}<br>
-          {{ product_data.ResultCardTeam2 }}<br>
-          Счет: {{ product_data.ResultCardResult }}
+          {{ resultGame.team1 }}<br>
+          {{ resultGame.team1city }} <br>
+          {{ resultGame.team2 }}<br>
+          {{ resultGame.team2city }}<br>
         </div>
-        <div class="text-caption text-white">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div class="text-caption text-pink-7" style="width: auto">
+          Счет: {{ resultGame.total }}
         </div>
       </q-card-section>
     </q-card>
   </div>
 </template>
 <script>
+import axios from 'axios'
+const baseURL = 'http://localhost:3001'
+
 export default {
   name: 'ResultMatchCard',
+  data () {
+    return {
+      resultGames: [],
+      resultGameStatus: '',
+      resultGameResult: '',
+      resultGameTitle: '',
+      resultGameDate: '',
+      resultGameTeam1: '',
+      resultGameTeam1City: '',
+      resultGameTeam2: '',
+      resultGameTeam2City: '',
+      resultGameTotal: ''
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get(`${baseURL}/resultGames`)
+      this.resultGames = res.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
   props: {
     product_data: {
       type: Object,
       default () {
-        return {
-          NewsClubNewsCardStatus: String,
-          NewsClubNewsCardCardNewsSrc: String,
-          NewsClubNewsCardPreViewNews: String,
-          NewsClubNewsCardExtNews: String,
-          NewsClubNewsCardTitleUrlImg: String,
-          dateNews: String,
-          NewsClubNewsCardDateNews: String,
-          TitleNewsCard: String,
-          ResultCardTeam1: String,
-          ResultCardTeam2: String,
-          NewsClubNewsCardFullNews: String,
-          NewsClubNewsCardFullNews2: String,
-          NewsClubNewsCardTitleNews: String
-        }
+        return {}
       }
     }
   }
@@ -52,6 +66,5 @@ export default {
   height: 60px
 .my-card
   display: flex
-  width: 100%
-  max-width: 400px
+  width: 300px
 </style>

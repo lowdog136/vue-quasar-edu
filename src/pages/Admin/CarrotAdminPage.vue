@@ -11,7 +11,8 @@
             CarrotPage
           </q-toolbar-title>
 
-          <q-btn @click="panelViewOn" @dblclick="panelViewOff" color="primary" flat round dense icon="help" />
+          <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="primary" flat round dense icon="help" />
+          <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="primary" flat round dense icon="help" />
         </q-toolbar>
       </q-header>
 
@@ -19,6 +20,13 @@
         <q-page padding>
           <p v-for="n in 1" :key="n">
             <ResultMatchAddDataAdmin />
+          </p>
+        </q-page>
+      </q-page-container>
+      <q-page-container v-if="panelViewItemResultCard">
+        <q-page padding>
+          <p v-for="n in 1" :key="n">
+            <ResultMatchResultCardAddDataAdmin />
           </p>
         </q-page>
       </q-page-container>
@@ -30,21 +38,29 @@
 <script>
 import { defineComponent } from 'vue'
 import ResultMatchAddDataAdmin from 'components/ResultMatchAddDataAdmin'
+import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
 
 export default defineComponent({
   name: 'CarrotAdminPage',
-  components: { ResultMatchAddDataAdmin },
+  components: { ResultMatchAddDataAdmin, ResultMatchResultCardAddDataAdmin },
   data () {
     return {
       panelViewItem: false,
+      panelViewItemResultCard: false,
       falseValue: false
     }
   },
   methods: {
-    panelViewOn () {
+    panelViewOnResultCard () {
+      this.panelViewItemResultCard = true
+    },
+    panelViewOffResultCard () {
+      this.panelViewItemResultCard = false
+    },
+    panelViewOnNewsCard () {
       this.panelViewItem = true
     },
-    panelViewOff () {
+    panelViewOffNewsCard () {
       this.panelViewItem = false
     }
   },

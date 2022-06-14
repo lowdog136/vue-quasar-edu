@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import { mapActions } from 'vuex'
 import axios from 'axios'
-const baseURL = 'https://severfans.ru'
+const baseURL = 'http://localhost:3001'
 
 export default {
   data () {

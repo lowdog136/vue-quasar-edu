@@ -1,20 +1,28 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <ResultMatchCard
-      v-for="NewsClubNewsCardS in $store.state.NewsClubNewsCard.slice(id).reverse()"
-      :key="NewsClubNewsCardS.id"
-      :product_data="NewsClubNewsCardS"/>
+    <ResultMatchCard />
   </div>
 </template>
 
 <script>
 import ResultMatchCard from 'components/ResultMatchCard'
+import axios from 'axios'
+const baseURL = 'http://localhost:3001'
+
 export default {
   components: { ResultMatchCard },
   data () {
     return {
       trueValue: true,
       falseValue: false
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get(`${baseURL}/resultGames`)
+      this.resultGames = res.data
+    } catch (error) {
+      console.log(error)
     }
   },
   props: {
