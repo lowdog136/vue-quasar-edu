@@ -1,69 +1,99 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md"
-       v-for="resultGame in resultGames.slice(id).reverse()"
-       :key="resultGame.id">
-    <q-card class="my-card" flat bordered>
-      <q-img width="70%" height="80%" :src="require('../assets/image/imgTitle/title_0.png' )" />
-      <q-card-section>
-        <div class="text-overline text-orange-9">{{ resultGame.title }}</div>
-        <div class="text-caption text-grey">{{ resultGame.date }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs-md">{{ resultGame.result }}</div>
-        <div class="text-caption text-grey">
-          {{ resultGame.team1 }}<br>
-          {{ resultGame.team1city }} <br>
-          {{ resultGame.team2 }}<br>
-          {{ resultGame.team2city }}<br>
+  <div>
+    <q-splitter
+      v-model="splitterModel"
+      style="height: 400px"
+    >
+
+      <template v-slot:before>
+        <div class="q-pa-md">
+          <q-tree
+            :nodes="simple"
+            node-key="label"
+            selected-color="primary"
+            v-model:selected="selected"
+            default-expand-all
+          />
         </div>
-        <div class="text-caption text-pink-7" style="width: auto">
-          Счет: {{ resultGame.total }}
-        </div>
-      </q-card-section>
-    </q-card>
+      </template>
+
+      <template v-slot:after>
+        <q-tab-panels
+          v-model="selected"
+          animated
+          transition-prev="jump-up"
+          transition-next="jump-up"
+        >
+          <q-tab-panel name="2022">
+            <div class="text-h4 q-mb-md">Welcome</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Чемпионат СЗФО 3 тур">
+            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Чемпионат СЗФО 2 тур">
+            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Чемпионат СЗФО 1 тур">
+            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Room view1">
+            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+        </q-tab-panels>
+      </template>
+    </q-splitter>
   </div>
 </template>
+
 <script>
-import axios from 'axios'
-const baseURL = 'http://localhost:3001'
+import { ref } from 'vue'
 
 export default {
-  name: 'ResultMatchCard',
-  data () {
+  setup () {
     return {
-      resultGames: [],
-      resultGameStatus: '',
-      resultGameResult: '',
-      resultGameTitle: '',
-      resultGameDate: '',
-      resultGameTeam1: '',
-      resultGameTeam1City: '',
-      resultGameTeam2: '',
-      resultGameTeam2City: '',
-      resultGameTotal: ''
-    }
-  },
-  async created () {
-    try {
-      const res = await axios.get(`${baseURL}/resultGames`)
-      this.resultGames = res.data
-    } catch (error) {
-      console.log(error)
-    }
-  },
-  props: {
-    product_data: {
-      type: Object,
-      default () {
-        return {}
-      }
+      splitterModel: ref(50),
+      selected: ref('Food'),
+
+      simple: [
+        {
+          label: '2022',
+          children: [
+            {
+              label: 'Чемпионат СЗФО 3 тур',
+              icon: 'restaurant_menu'
+            },
+            {
+              label: 'Чемпионат СЗФО 2 тур',
+              icon: 'room_service'
+            },
+            {
+              label: 'Чемпионат СЗФО 1 тур',
+              icon: 'room_service'
+            },
+            {
+              label: 'Room view1',
+              icon: 'photo'
+            }
+          ]
+        }
+      ]
     }
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.result
-  display: flex
-  height: 60px
-.my-card
-  display: flex
-</style>
