@@ -62,39 +62,15 @@
     },
     {
       "status": "true",
-      "result": "",
-      "title": "",
-      "date": "2022-06-13",
-      "team1": "команда 1",
-      "team1city": "город команды 1",
-      "team2": "команда номер 2",
-      "team2city": "город команды номер 2",
-      "total": "3-1",
+      "result": "Ничья33",
+      "title": "СЗФО 21",
+      "date": "2022-06-11",
+      "team1": "ФК \"Новг333рад\"",
+      "team1city": "Нижни33й Новгород",
+      "team2": "ФК \"Север\"",
+      "team2city": "Мур333манск",
+      "total": "1-1",
       "id": 3
-    },
-    {
-      "status": "",
-      "result": "",
-      "title": "",
-      "date": "",
-      "team1": "",
-      "team1city": "",
-      "team2": "",
-      "team2city": "",
-      "total": "",
-      "id": 4
-    },
-    {
-      "status": "sdfsdf",
-      "result": "",
-      "title": "",
-      "date": "2022-06-16",
-      "team1": "sdfsdf",
-      "team1city": "sdgsdh",
-      "team2": "sdhsdh",
-      "team2city": "sdhsdh",
-      "total": "sdhsdhsdh",
-      "id": 5
     }
   ]
 }

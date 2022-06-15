@@ -158,15 +158,15 @@ export default {
   data () {
     return {
       resultGames: [],
-      resultGameStatus: ref(''),
-      resultGameResult: ref(''),
-      resultGameTitle: ref(''),
-      resultGameDate: ref(''),
-      resultGameTeam1: ref(''),
-      resultGameTeam1City: ref(''),
-      resultGameTeam2: ref(''),
-      resultGameTeam2City: ref(''),
-      resultGameTotal: ref('')
+      resultGameStatus: '',
+      resultGameResult: '',
+      resultGameTitle: '',
+      resultGameDate: '',
+      resultGameTeam1: '',
+      resultGameTeam1City: '',
+      resultGameTeam2: '',
+      resultGameTeam2City: '',
+      resultGameTotal: ''
     }
   },
   async created () {

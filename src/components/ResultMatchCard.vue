@@ -26,32 +26,10 @@
         >
           <q-tab-panel name="2022">
             <div class="text-h4 q-mb-md">Welcome</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
+            </q-tab-panel>
 
-          <q-tab-panel name="Чемпионат СЗФО 3 тур">
-            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="Чемпионат СЗФО 2 тур">
-            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="Чемпионат СЗФО 1 тур">
-            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-
-          <q-tab-panel name="Room view1">
-            <div class="text-h4 q-mb-md">Чемпионат СЗФО</div>
+          <q-tab-panel name="Food">
+            <div class="text-h4 q-mb-md">Food</div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
           </q-tab-panel>
@@ -63,8 +41,33 @@
 
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
+const baseURL = 'http://localhost:3001'
 
 export default {
+  name: 'ResultMatchCard',
+  data () {
+    return {
+      resultGames: [],
+      resultGameStatus: '',
+      resultGameResult: '',
+      resultGameTitle: '',
+      resultGameDate: '',
+      resultGameTeam1: '',
+      resultGameTeam1City: '',
+      resultGameTeam2: '',
+      resultGameTeam2City: '',
+      resultGameTotal: ''
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get(`${baseURL}/resultGames`)
+      this.resultGames = res.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
   setup () {
     return {
       splitterModel: ref(50),
@@ -75,20 +78,8 @@ export default {
           label: '2022',
           children: [
             {
-              label: 'Чемпионат СЗФО 3 тур',
+              label: 'Food',
               icon: 'restaurant_menu'
-            },
-            {
-              label: 'Чемпионат СЗФО 2 тур',
-              icon: 'room_service'
-            },
-            {
-              label: 'Чемпионат СЗФО 1 тур',
-              icon: 'room_service'
-            },
-            {
-              label: 'Room view1',
-              icon: 'photo'
             }
           ]
         }
