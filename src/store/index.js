@@ -26,6 +26,48 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '12.06.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
+      teams: [
+        {
+          id: 1,
+          name: 'ФК "Север"',
+          city: 'г. Мурманск'
+        },
+        {
+          id: 2,
+          name: 'СШ "Ленинградец"',
+          city: 'Ленинградская область'
+        },
+        {
+          id: 3,
+          name: 'ФК "Псков"',
+          city: 'г.Псков'
+        },
+        {
+          id: 4,
+          name: 'СШ №2 ВО "Звезда"',
+          city: 'г. Санкт-Петербург'
+        },
+        {
+          id: 5,
+          name: 'СШ №7 "Карелия"',
+          city: 'г. Петразаводск'
+        },
+        {
+          id: 6,
+          name: 'ФК "Химик"',
+          city: 'г. Коряжма'
+        },
+        {
+          id: 7,
+          name: 'ФК "Новград"',
+          city: 'г. Великий Новгород'
+        },
+        {
+          id: 8,
+          name: 'СШ "Электрон"',
+          city: 'г. Великий Новгород'
+        }
+      ],
       NavigationListMenu: [
         {
           id: 1,
