@@ -48,13 +48,13 @@
         subtitle="Июнь 15, 2022"
         side="left"
         icon="local_fire_department"
-        color="primary"
+        color="orange-14"
       >
         <div>
           4 тур
         </div>
         <div>
-          ФК "Псков" - ФК "Север"
+          ФК "Псков" 0-2 ФК "Север"
         </div>
       </q-timeline-entry>
       <q-timeline-entry

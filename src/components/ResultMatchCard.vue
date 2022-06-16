@@ -56,7 +56,7 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
-const baseURL = 'http://localhost:3001'
+const baseURL = 'https://severfans.ru'
 
 export default {
   name: 'ResultMatchCard',
