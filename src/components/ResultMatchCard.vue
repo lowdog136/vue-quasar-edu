@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ResultMatchCardArchiveGameF />
     <ResultMatchCardChemp />
   </div>
 </template>
@@ -7,12 +8,12 @@
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
-import ResultMatchCardChemp from 'components/ResultMatchCardChemp'
+import ResultMatchCardArchiveGameF from 'components/ResultMatchCardArchiveGameF'
 const baseURL = 'http://localhost:3001'
 
 export default {
   name: 'ResultMatchCard',
-  components: { ResultMatchCardChemp },
+  components: { ResultMatchCardArchiveGameF },
   data () {
     return {}
   },

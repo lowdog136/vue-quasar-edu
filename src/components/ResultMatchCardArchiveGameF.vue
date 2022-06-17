@@ -59,7 +59,7 @@ import axios from 'axios'
 const baseURL = 'https://severfans.ru'
 
 export default {
-  name: 'ResultMatchCardChemp',
+  name: 'ResultMatchCardArchiveGameF',
   data () {
     return {
       tour: 'лол',
