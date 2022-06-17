@@ -24,9 +24,9 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel name="Чемпионат СЗФО 2022">
-            <div class="text-h5 q-mb-md">О турнире:</div>
-            <p>Чемпионат СЗФО по футболу среди мужских команд 2022 г. Представлен 8 командами: ФК "Север", ФК ""Псков", СШ "Ленинградец", СШ №2 ВО "Звезда", СШ №7 "Карелия", ФК "Химик", ФК "Новград", СШ "Электрон".</p>
+          <q-tab-panel :name=titleMainName >
+            <div class="text-h5 q-mb-md">Кратко:</div>
+            <p>{{ titleMainBody }}</p>
             </q-tab-panel>
           <q-tab-panel :name=tours[3]>
             <div class="text-h4 q-mb-md">4 тур</div>
@@ -43,9 +43,10 @@
             <p>{{$store.state.teams[1].name}} {{$store.state.teams[1].city}} 1 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[0]>
-            <div class="text-h4 q-mb-md">1 тур</div>
-            <p>29 мая</p>
-            <p>{{$store.state.teams[7].name}} {{$store.state.teams[7].city}} 0 - 3 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
+            <div class="text-h4 q-mb-md">{{ tours[0] }}</div>
+            <p>14.03.22</p>
+            <p>Поражение</p>
+            <p>ФК "Динамо" Санкт-Петербург 4 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
         </q-tab-panels>
       </template>
@@ -55,59 +56,56 @@
 
 <script>
 import { ref } from 'vue'
-import axios from 'axios'
-const baseURL = 'https://severfans.ru'
 
 export default {
   name: 'ResultMatchCardArchiveGameF',
   data () {
     return {
-      tour: 'лол',
-      tours: ['1 тур', '2 тур', '3 тур', '4 тур'],
-      teams: ['ФК "Север"', 'ФК ""Псков"', 'СШ "Ленинградец"', 'СШ №2 ВО "Звезда"', 'СШ №7 "Карелия"', 'ФК "Химик"', 'ФК "Новград"', 'СШ "Электрон"'],
-      resultGames: [],
-      resultGameStatus: '',
-      resultGameResult: '',
-      resultGameTitle: '',
-      resultGameDate: '',
-      resultGameTeam1: '',
-      resultGameTeam1City: '',
-      resultGameTeam2: '',
-      resultGameTeam2City: '',
-      resultGameTotal: ''
-    }
-  },
-  async created () {
-    try {
-      const res = await axios.get(`${baseURL}/resultGames`)
-      this.resultGames = res.data
-    } catch (error) {
-      console.log(error)
+      titleMainName: 'Товарищеские игры 2022',
+      titleMainBody: 'В 2022 году ФК "Север" провел 8 товарищеских матчей.',
+      tours: ['против Динамо', 'против Звезды', 'против Фаворита', 'против Черноморец-М', 'против Анапы', 'против Висты', 'против Константиновское', 'против Константиновское.2'],
+      teams: ['ФК "Север"', 'ФК ""Псков"', 'СШ "Ленинградец"', 'СШ №2 ВО "Звезда"', 'СШ №7 "Карелия"', 'ФК "Химик"', 'ФК "Новград"', 'СШ "Электрон"']
     }
   },
   setup () {
     return {
       splitterModel: ref(50),
-      selected: ref('1 тур'),
+      selected: ref('против Константиновское.2'),
 
       simple: [
         {
-          label: 'Чемпионат СЗФО 2022',
+          label: 'Товарищеские игры 2022',
           children: [
             {
-              label: '4 тур',
+              label: 'против Константиновское.2',
               icon: 'done'
             },
             {
-              label: '3 тур',
+              label: 'против Константиновское',
               icon: 'done'
             },
             {
-              label: '2 тур',
+              label: 'против Висты',
               icon: 'done'
             },
             {
-              label: '1 тур',
+              label: 'против Анапы',
+              icon: 'done'
+            },
+            {
+              label: 'против Черноморец-М',
+              icon: 'done'
+            },
+            {
+              label: 'против Фаворита',
+              icon: 'done'
+            },
+            {
+              label: 'против Звезды',
+              icon: 'done'
+            },
+            {
+              label: 'против Динамо',
               icon: 'done'
             }
           ]

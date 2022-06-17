@@ -1,19 +1,19 @@
 <template>
   <div>
+    <ResultMatchCardArchiveGameO />
     <ResultMatchCardArchiveGameF />
-    <ResultMatchCardChemp />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
 import axios from 'axios'
 import ResultMatchCardArchiveGameF from 'components/ResultMatchCardArchiveGameF'
+import ResultMatchCardArchiveGameO from 'components/ResultMatchCardArchiveGameO'
 const baseURL = 'http://localhost:3001'
 
 export default {
   name: 'ResultMatchCard',
-  components: { ResultMatchCardArchiveGameF },
+  components: { ResultMatchCardArchiveGameF, ResultMatchCardArchiveGameO },
   data () {
     return {}
   },
@@ -26,12 +26,7 @@ export default {
     }
   },
   setup () {
-    return {
-      splitterModel: ref(50),
-      selected: ref('1 тур'),
-
-      simple: []
-    }
+    return {}
   }
 }
 </script>
