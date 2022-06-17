@@ -33,17 +33,17 @@
             <p>{{$store.state.teams[2].name}} {{$store.state.teams[2].city}} 0 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[2]>
-            <div class="text-h4 q-mb-md">3 тур</div>
+            <div class="text-h5 q-mb-md">3 тур</div>
             <p>1 июня</p>
             <p>{{$store.state.teams[6].name}} {{$store.state.teams[6].city}} 1 - 1 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[1]>
-            <div class="text-h4 q-mb-md">2 тур</div>
+            <div class="text-h5 q-mb-md">2 тур</div>
             <p>1 июня</p>
             <p>{{$store.state.teams[1].name}} {{$store.state.teams[1].city}} 1 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[0]>
-            <div class="text-h4 q-mb-md">1 тур</div>
+            <div class="text-h5 q-mb-md">1 тур</div>
             <p>29 мая</p>
             <p>{{$store.state.teams[7].name}} {{$store.state.teams[7].city}} 0 - 3 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>

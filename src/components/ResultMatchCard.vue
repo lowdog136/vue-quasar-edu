@@ -9,7 +9,7 @@
 import axios from 'axios'
 import ResultMatchCardArchiveGameF from 'components/ResultMatchCardArchiveGameF'
 import ResultMatchCardArchiveGameO from 'components/ResultMatchCardArchiveGameO'
-const baseURL = 'http://localhost:3001'
+const baseURL = 'https://severfans.ru'
 
 export default {
   name: 'ResultMatchCard',
