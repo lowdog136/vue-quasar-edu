@@ -145,8 +145,7 @@ export default store(function (/* { ssrContext } */) {
           Caption: 'История ресурса'
         }
       ],
-      NewsClubNewsCard:
-      [
+      NewsClubNewsCard: [
         {
           id: 1,
           // Показывать в результататх матча true
@@ -332,8 +331,7 @@ export default store(function (/* { ssrContext } */) {
           ResultCardResult: '0-3 (0-1)'
         }
       ],
-      GamesNowEventLists:
-      [
+      GamesNowEventLists: [
         {
           id: 1,
           eventCardTitleMounthDate: 'Июль, 2022',
