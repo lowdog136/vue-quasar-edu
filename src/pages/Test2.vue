@@ -17,18 +17,7 @@ export default {
       tests: [
         {
           id: 1,
-          name: 'Food',
-          other: ''
-        },
-        {
-          id: 2,
-          name: 'Room service',
-          other: ''
-        },
-        {
-          id: 3,
-          name: 'Room view',
-          other: ''
+          name: ['Food', 'Room view', 'Room service']
         }
       ],
       posts: [],
