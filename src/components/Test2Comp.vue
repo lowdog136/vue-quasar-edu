@@ -1,46 +1,20 @@
 <template>
-  <div>
-    <q-splitter
-      v-model="splitterModel"
-      unit="px"
-      style="height: 400px"
-    >
-
-      <template v-slot:before>
-        <div class="q-pa-md">
-            <q-tree
-              :nodes="simple"
-              node-key="label"
-              selected-color="primary"
-              v-model:selected="selected"
-              default-expand-all
-            />
-        </div>
-      </template>
-
-      <template v-slot:after >
-        <q-tab-panels
-          v-model="selected"
-          animated
-          transition-prev="jump-up"
-          transition-next="jump-up"
+  <div class="q-px-lg q-pb-md">
+    <q-timeline :layout="layout" color="secondary">
+      <q-timeline-entry heading>Июнь, 2022</q-timeline-entry>
+        <q-timeline-entry
+          v-for=" test in tests" :key="test.id"
+          :title='titleEvent'
+          subtitle="Июнь 1, 2022"
+          side="left"
+          color="orange-14"
+          icon="done_all"
         >
-            <q-tab-panel name="Relax Hotel">
-              <div class="text-h4 q-mb-md">Welcome</div>
-              <p>Ololo</p>
-              <p>{{ TitleNews }}</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            </q-tab-panel>
-
-          <q-tab-panel :name=TitleGame>
-            <div class="text-h4 q-mb-md">{{ TitleGame }}</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-        </q-tab-panels>
-      </template>
-    </q-splitter>
+          <div>
+            {{ test.tour }} {{ test.other }}
+          </div>
+        </q-timeline-entry>
+    </q-timeline>
   </div>
 </template>
 
@@ -55,18 +29,50 @@ export default {
       tests: [
         {
           id: 1,
-          name: 'Food',
-          other: ''
+          tour: '1 tour',
+          other: 'СШ "Ленинградец" 1 - 2 ФК "Север"'
         },
         {
           id: 2,
-          name: 'Room service',
-          other: ''
+          tour: '2 tour',
+          other: 'СШ "Ленинградец" 2 - 2 ФК "Север"'
         },
         {
           id: 3,
-          name: 'Room view',
+          tour: '3 tour',
           other: ''
+        },
+        {
+          id: 4,
+          tour: '4 tour',
+          other: ''
+        },
+        {
+          id: 5,
+          tour: '5 tour',
+          other: ''
+        }
+      ],
+      matches: [
+        {
+          id: 1,
+          match: 'СШ "Ленинградец" 1 - 2 ФК "Север"'
+        },
+        {
+          id: 2,
+          match: 'СШ "Ленинградец" 2 - 2 ФК "Север"'
+        },
+        {
+          id: 3,
+          match: 'СШ "Ленинградец" 3 - 2 ФК "Север"'
+        },
+        {
+          id: 4,
+          match: 'СШ "Ленинградец" 4 - 2 ФК "Север"'
+        },
+        {
+          id: 5,
+          match: 'СШ "Ленинградец" 5 - 2 ФК "Север"'
         }
       ]
     }

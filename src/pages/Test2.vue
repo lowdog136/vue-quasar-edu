@@ -16,16 +16,21 @@
         </q-card>
       </div>
     </div>
-  </div><br/>
+  </div>
+  <br/>
+  <div>
+    <Test2Comp />
+  </div>
 </template>
 
 <script>
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
+import Test2Comp from 'components/Test2Comp'
 
 export default {
-  components: { },
+  components: { Test2Comp },
   data () {
     return {
       tests: [
