@@ -35,12 +35,14 @@
         :title='titleEvent'
         subtitle="Июнь 18, 2022"
         side="left"
+        color="orange-14"
+        icon="done_all"
       >
         <div>
           5 тур
         </div>
         <div>
-          СШ №2 ВО "Звезда" - ФК "Север"
+          {{$store.state.teams[3].name}} 1 - 2 {{$store.state.teams[0].name}}
         </div>
       </q-timeline-entry>
       <q-timeline-entry
@@ -54,7 +56,7 @@
           4 тур
         </div>
         <div>
-          ФК "Псков" 0-2 ФК "Север"
+          {{$store.state.teams[2].name}} 0 - 2 {{$store.state.teams[0].name}}
         </div>
       </q-timeline-entry>
       <q-timeline-entry
@@ -68,7 +70,7 @@
           3 тур
         </div>
         <div>
-          ФК "Новград" 1-1 ФК "Север"
+          {{$store.state.teams[6].name}} 1 - 1 {{$store.state.teams[0].name}}
         </div>
       </q-timeline-entry>
 
@@ -83,7 +85,7 @@
           2 тур
         </div>
         <div>
-          ФК "Ленинградец" 1-2 ФК "Север"
+          {{$store.state.teams[1].name}} 1 - 2 {{$store.state.teams[0].name}}
         </div>
       </q-timeline-entry>
 
@@ -100,7 +102,7 @@
           1 тур
         </div>
         <div>
-          СШ "Электрон" 0-3 ФК "Север"
+          {{ $store.state.teams[7].name }} 0 - 3 {{ $store.state.teams[0].name }}
         </div>
       </q-timeline-entry>
     </q-timeline>

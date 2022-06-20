@@ -34,13 +34,13 @@ const rows = [
   {
     name: 'Север',
     colorCode: 'primary',
-    games: 4,
-    win: 3,
+    games: 5,
+    win: 4,
     draw: 1,
     lose: 0,
-    ball_io: '8-2',
-    score: 10,
-    last_game: 'ВВНВ'
+    ball_io: '10-3',
+    score: 13,
+    last_game: 'ВВНВВ'
   },
   {
     name: 'Псков',
@@ -54,22 +54,22 @@ const rows = [
   },
   {
     name: 'СШ №2 ВО Звезда',
-    games: 3,
+    games: 4,
     win: 1,
     draw: 1,
-    lose: 1,
-    ball_io: '5-7',
+    lose: 2,
+    ball_io: '6-9',
     score: '4',
-    last_game: 'HВП'
+    last_game: 'HВПП'
   },
   {
     name: 'Химик',
-    games: 3,
+    games: 4,
     win: 0,
-    draw: 2,
+    draw: 3,
     lose: 1,
-    ball_io: '5-7',
-    score: '2',
+    ball_io: '6-8',
+    score: '3',
     last_game: 'ПНН'
   },
   {
@@ -94,13 +94,13 @@ const rows = [
   },
   {
     name: 'СШ №7 Карелия',
-    games: 3,
+    games: 4,
     win: 1,
-    draw: 0,
+    draw: 1,
     lose: 2,
-    ball_io: '3-4',
-    score: '3',
-    last_game: 'ППВ'
+    ball_io: '4-5',
+    score: '4',
+    last_game: 'ППВН'
   },
   {
     name: 'СШ Электрон',

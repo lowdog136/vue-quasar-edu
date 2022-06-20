@@ -28,17 +28,23 @@
             <div class="text-h5 q-mb-md">О турнире:</div>
             <p>Чемпионат СЗФО по футболу среди мужских команд 2022 г. Представлен 8 командами: ФК "Север", ФК ""Псков", СШ "Ленинградец", СШ №2 ВО "Звезда", СШ №7 "Карелия", ФК "Химик", ФК "Новград", СШ "Электрон".</p>
             </q-tab-panel>
+          <q-tab-panel :name=tours[4]>
+            <div class="text-h4 q-mb-md">{{ tours[4] }}</div>
+            <p>18 июня</p>
+            <p>{{$store.state.teams[3].name}} {{$store.state.teams[3].city}} 1 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
+          </q-tab-panel>
           <q-tab-panel :name=tours[3]>
-            <div class="text-h4 q-mb-md">4 тур</div>
+            <div class="text-h4 q-mb-md">{{ tours[3] }}</div>
+            <p>15 июня</p>
             <p>{{$store.state.teams[2].name}} {{$store.state.teams[2].city}} 0 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[2]>
-            <div class="text-h5 q-mb-md">3 тур</div>
+            <div class="text-h4 q-mb-md">{{ tours[2] }}</div>
             <p>1 июня</p>
             <p>{{$store.state.teams[6].name}} {{$store.state.teams[6].city}} 1 - 1 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[1]>
-            <div class="text-h5 q-mb-md">2 тур</div>
+            <div class="text-h4 q-mb-md">{{ tours[1] }}</div>
             <p>1 июня</p>
             <p>{{$store.state.teams[1].name}} {{$store.state.teams[1].city}} 1 - 2 {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
@@ -63,8 +69,9 @@ export default {
   data () {
     return {
       tour: 'лол',
-      tours: ['1 тур', '2 тур', '3 тур', '4 тур'],
+      tours: ['1 тур', '2 тур', '3 тур', '4 тур', '5 тур'],
       teams: ['ФК "Север"', 'ФК ""Псков"', 'СШ "Ленинградец"', 'СШ №2 ВО "Звезда"', 'СШ №7 "Карелия"', 'ФК "Химик"', 'ФК "Новград"', 'СШ "Электрон"'],
+      scores: ['0-3', '1-2', '1-1', '0-2', '1-2'],
       resultGames: [],
       resultGameStatus: '',
       resultGameResult: '',
@@ -94,6 +101,10 @@ export default {
         {
           label: 'Чемпионат СЗФО 2022',
           children: [
+            {
+              label: '5 тур',
+              icon: 'done'
+            },
             {
               label: '4 тур',
               icon: 'done'

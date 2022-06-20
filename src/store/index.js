@@ -24,8 +24,45 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о сайте
       NavigationReleaseDateSite: '13.04.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '17.06.22',
+      NavigationReleaseNewsSite: '20.06.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
+      tours: [
+        {
+          id: 1,
+          name: '1 тур',
+          other: ''
+        },
+        {
+          id: 2,
+          name: '2 тур',
+          other: ''
+        },
+        {
+          id: 3,
+          name: '3 тур',
+          other: ''
+        },
+        {
+          id: 4,
+          name: '4 тур',
+          other: ''
+        },
+        {
+          id: 5,
+          name: '5 тур',
+          other: ''
+        },
+        {
+          id: 6,
+          name: '5 тур',
+          other: ''
+        },
+        {
+          id: 7,
+          name: '7 тур',
+          other: ''
+        }
+      ],
       teams: [
         {
           id: 1,
