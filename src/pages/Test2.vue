@@ -1,6 +1,21 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <Test2Comp v-for="test in tests" :key="test.id" :TitleNews="$store.state.count" :TitleGame="test.name"/>
+    <div>
+      {{ $store.state.tours[tourCount].name}}
+    </div>
+    <div>
+      <q-btn @click="tourCount++" label="+"/>
+      <q-btn @click="tourCount--" label="-"/>
+    </div>
+    <div v-for="test in $store.state.tours" :key="test.id">
+      <div v-if="tourCount == test.id - 1">
+        <q-card class="my-card" >
+          <q-card-section>
+            {{ test.id }} - {{ test.name }}
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
   </div><br/>
 </template>
 
@@ -8,16 +23,27 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import Test2Comp from 'components/Test2Comp'
 
 export default {
-  components: { Test2Comp },
+  components: { },
   data () {
     return {
       tests: [
         {
           id: 1,
-          name: ['Food', 'Room view', 'Room service']
+          name: 'name1'
+        },
+        {
+          id: 2,
+          name: 'name2'
+        },
+        {
+          id: 3,
+          name: 'name3'
+        },
+        {
+          id: 4,
+          name: 'name4'
         }
       ],
       posts: [],
@@ -30,6 +56,7 @@ export default {
       body: '',
       author1: ['Room view', 'Room service', 'Food'],
       author2: 'Room service',
+      tourCount: 0,
       count: '',
       items: []
     }
@@ -68,6 +95,7 @@ export default {
       store.dispatch('login', register_form.value)
     }
     return {
+      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       login_form,
       register_form,
       login,
@@ -92,6 +120,9 @@ export default {
     ]),
     btnClickPush () {
       this.$router.push({ path: '/Login' })
+    },
+    tourCountUp () {
+      this.tourCount()
     },
     btnClick () {
       this.togledropDown()
