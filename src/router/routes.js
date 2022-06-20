@@ -29,8 +29,7 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import('layouts/LayoutUserPage.vue'),
         children: [
-          { path: '/User/ProfilePage', name: 'ProfilePage', component: () => import('pages/User/ProfilePage.vue') },
-          { path: '/User/Exit', name: 'Exit', component: () => import('pages/User/Exit.vue') }
+          { path: '/User/ProfilePage', name: 'ProfilePage', component: () => import('pages/User/ProfilePage.vue') }
         ]
       },
       {

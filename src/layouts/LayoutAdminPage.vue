@@ -27,7 +27,7 @@
                   <q-btn flat dense to="/Admin/ExitAdmin" label="Use Mobile Data" />
                   <q-btn flat dense to="/Admin/CarrotAdminPage" icon="help" label="CarrotAdminPage" />
                   <q-toggle disable v-model="panelView" label="Use Carrot Data" />
-                  <q-toggle disable v-model="bluetooth" label="Bluetooth" />
+                  <q-toggle disable v-model="dark_mode" label="Ночной режим" />
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />

@@ -24,7 +24,7 @@
               <div class="row no-wrap q-pa-md">
                 <div class="column">
                   <div class="text-h6 q-mb-md" >Настройки</div>
-                  <q-toggle disable v-model="bluetooth" label="Bluetooth" />
+                  <q-toggle disable v-model="dark_mode" label="Ночной режим" />
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />
@@ -53,7 +53,7 @@
           <q-dialog v-model="dialog">
             <q-card>
               <q-card-section>
-                <div class="text-h6">До свидания, {{ $store.state.user.email }} {{ $store.state.user.uid }}</div>
+                <div class="text-h6">До свидания, {{ $store.state.user.email }} </div>
               </q-card-section>
               <q-card-section class="row items-center q-gutter-sm">
                 <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />

@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-layout view="lHh lpr lFf" container style="height: 800px" class="shadow-2 rounded-borders">
+      <UserProfile />
     </q-layout>
   </div>
 
@@ -8,10 +9,11 @@
 
 <script>
 import { defineComponent } from 'vue'
+import UserProfile from 'components/UserProfile'
 
 export default defineComponent({
   name: 'ProfilePage',
-  components: {},
+  components: { UserProfile },
   data () {
     return {
       panelViewItem: false,
