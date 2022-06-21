@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
+import { useQuasar } from 'quasar'
 import { useStore, mapActions, mapGetters } from 'vuex'
 import Test2Comp from 'components/Test2Comp'
 
@@ -82,6 +83,7 @@ export default {
     //   })
   },
   setup () {
+    const $q = useQuasar()
     // eslint-disable-next-line camelcase
     const login_form = ref({})
     // eslint-disable-next-line camelcase
@@ -100,6 +102,9 @@ export default {
       store.dispatch('login', register_form.value)
     }
     return {
+      layout: computed(() => {
+        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
+      }),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       login_form,
       register_form,
