@@ -12,6 +12,8 @@
         <q-card class="my-card" >
           <q-card-section>
             {{ test.id }} - {{ test.name }}
+            <NewsCardDetailPopUp :PopyUpSubTitleNews="test.name"
+                                 :PopyUpBtnSize="BtnSize"/>
           </q-card-section>
         </q-card>
       </div>
@@ -29,9 +31,10 @@ import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { useStore, mapActions, mapGetters } from 'vuex'
 import Test2Comp from 'components/Test2Comp'
+import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  components: { Test2Comp },
+  components: { Test2Comp, NewsCardDetailPopUp },
   data () {
     return {
       tests: [
@@ -52,16 +55,9 @@ export default {
           name: 'name4'
         }
       ],
-      posts: [],
-      profile: [],
-      name: '',
-      surname: '',
-      other: '',
-      id: '',
-      title: '',
-      body: '',
       author1: ['Room view', 'Room service', 'Food'],
       author2: 'Room service',
+      BtnSize: 'xs',
       tourCount: 0,
       count: '',
       items: []

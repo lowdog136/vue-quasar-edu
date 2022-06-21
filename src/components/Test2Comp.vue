@@ -3,24 +3,6 @@
     <div class="title">
       {{titleMainEvent }}
     </div>
-    <q-timeline :layout="layout" color="secondary" v-for="game in games" :key="game.id">
-      <q-timeline-entry heading>{{ game.mounth }}</q-timeline-entry>
-      <q-timeline-entry
-        v-for="matchEvent in game.matchEvents" :key="matchEvent.id"
-        :title='titleEvent'
-        :subtitle=matchEvent.data
-        side="left"
-        :color=matchEvent.color
-        :icon=matchEvent.icon
-      >
-        <div>
-          {{ matchEvent.tour}}
-        </div>
-        <div>
-          {{ matchEvent.nameEvent}}
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
   </div>
 </template>
 
@@ -106,7 +88,7 @@ export default {
 
     return {
       titleEvent: 'Чемпионат СЗФО',
-      titleMainEvent: 'Календарь игр ФК "Север"',
+      titleMainEvent: 'samething title',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })
