@@ -27,9 +27,11 @@
 <script>
 import { useQuasar } from 'quasar'
 import { computed } from 'vue'
+// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
   name: 'eventSZFO',
+  components: {},
   data () {
     return {
       games: [
@@ -40,7 +42,7 @@ export default {
             {
               id: 1,
               tour: '1 тур',
-              nameEvent: 'СШ "Электрон" г. Великий Новгород 0 - 3 ФК "Север" г. Мурманск',
+              nameEvent: 'СШ "Электрон" 0-3 ФК "Север"',
               color: 'orange-14',
               data: 'май 29, 2022',
               mounth: 'май',
@@ -122,6 +124,7 @@ export default {
 
     return {
       titleEvent: 'Чемпионат СЗФО',
+      btnSize: 'xs',
       titleMainEvent: 'Календарь игр ФК "Север"',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')

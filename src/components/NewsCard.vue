@@ -43,6 +43,8 @@
             :PopyUpSrcNews="item.srcnews"
             :PopyUpFullNews="item.fullnews"
             :PopyUpTitleNews="item.title"
+            :PopyUpBtnName = "btnName"
+            :PopyUpDivMain = "btnDivMain"
           />
       </q-tabs>
     </q-card>
@@ -63,10 +65,12 @@ export default {
     return {
       rating: 0,
       text: '',
+      btnName: 'Подробно',
       items: [],
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
+      btnDivMain: 'q-pa-md',
       ResultCardResult: '',
       itemNewsClubNewsCardRaiting: '',
       raiting: '',

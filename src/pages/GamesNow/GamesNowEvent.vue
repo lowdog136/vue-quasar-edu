@@ -8,11 +8,7 @@
 import eventSZFO from 'components/Events/eventSZFO'
 
 export default {
-  components: { eventSZFO },
-  data () {},
-  setup () {
-    return {}
-  }
+  components: { eventSZFO }
 }
 </script>
 

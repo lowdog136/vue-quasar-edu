@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-md">
-    <q-btn label="Подробно" color="primary" @click="dialog = true" />
+  <div :class=PopyUpDivMain>
+    <q-btn :label=PopyUpBtnName color="primary" :size=PopyUpBtnSize @click="dialog = true" />
 
     <q-dialog v-model="dialog">
       <q-card class="my-card">
@@ -65,6 +65,9 @@ export default {
       }
     },
     PopyUpSubTitleNews: String,
+    PopyUpDivMain: String,
+    PopyUpBtnSize: String,
+    PopyUpBtnName: String,
     PopyUpSubImgNews: String,
     PopyUpTitleNews: String,
     PopyUpFullNews: String,
