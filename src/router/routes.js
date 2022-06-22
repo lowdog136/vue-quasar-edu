@@ -37,7 +37,7 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import('layouts/LayoutAdminPage.vue'),
         children: [
-          { path: '/Admin/CarrotAdminPage', name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
+          { path: '/Admin/CarrotAdminPage', meta: { requiresAuth: true }, name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
           { path: '/Admin/Exit', name: 'ExitAdmin', component: () => import('pages/Admin/ExitAdmin.vue') }
         ]
       },

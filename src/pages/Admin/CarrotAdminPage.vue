@@ -10,7 +10,7 @@
           <q-toolbar-title>
             CarrotAdminPage
           </q-toolbar-title>
-
+          <q-btn to="/" color="black" flat round dense icon="first_page" />
           <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="white" flat round dense icon="smart_toy" />
           <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="white" flat round dense icon="help" />
         </q-toolbar>

@@ -147,31 +147,24 @@
         <q-card-actions>
           <q-btn flat color="dark" label="" />
           <div class="labelDate">
-            {{ item.datenews }}
+            {{ item.datenews }} <q-space/>
           </div>
-          <NewsCardDetailPopUp
-            :PopyUpSubTitleNews="item.subtitle"
-            :PopyUpSrcNews="item.srcnews"
-            :PopyUpFullNews="item.fullnews"
-            :PopyUpTitleNews="item.title"
-            :PopyUpItem="item.item"
-          />
+          <div>
+            <NewsCardDetailPopUp
+              :PopyUpSubTitleNews="item.subtitle"
+              :PopyUpSrcNews="item.srcnews"
+              :PopyUpFullNews="item.fullnews"
+              :PopyUpTitleNews="item.title"
+              :PopyUpItem="item.item"
+              :PopyUpBtnName="PopyUpBtnName"
+            />
+          </div>
           <q-space />
         </q-card-actions>
       </q-card>
-      <q-space />item.raiting: {{ item.raiting }} <br>
-      <q-space />item.howWatch: {{ item.howWatch }} <br>
-      <q-btn @click="howWatchUp(item.id)" label="UP"/>
-      <q-btn @click="howWatchUpZero(item.id)" label="Null"/>
-      <q-space />item.status: {{ item.status }} <br>
+      <q-space />item.status: {{ item.status }}
       <q-btn @click="statusResultCardOn(item.id)" @dblclick="statusResultCardOff(item.id)" label="on/off" color="primary" flat class="q-ml-sm" />
-      <div class="blockResultCard">
-        itemResultCardStatus: {{ item.resultCardStatus }} <br>
-        itemTeam1: {{ item.resultCardTeam1 }} <br>
-        itemTeam2: {{ item.resultCardTeam2 }} <br>
-        itemItog: {{ item.resultCardTitle }} <br>
-        itemResult: {{ item.ResultCardResult }} <br>
-      </div>
+      <br>
     </li>
   </div>
 </template>
@@ -221,6 +214,7 @@ export default {
 
     return {
       name,
+      PopyUpBtnName: 'popup',
       accept,
       onSubmit () {
         if (accept.value !== true) {
