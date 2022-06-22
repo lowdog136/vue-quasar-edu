@@ -30,37 +30,44 @@ export default store(function (/* { ssrContext } */) {
         {
           id: 1,
           name: '1 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 2,
           name: '2 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 3,
           name: '3 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 4,
           name: '4 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 5,
           name: '5 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 6,
           name: '5 тур',
-          other: ''
+          other: '',
+          count: ''
         },
         {
           id: 7,
           name: '7 тур',
-          other: ''
+          other: '',
+          count: ''
         }
       ],
       teams: [
@@ -103,6 +110,60 @@ export default store(function (/* { ssrContext } */) {
           id: 8,
           name: 'СШ "Электрон"',
           city: 'г. Великий Новгород'
+        }
+      ],
+      games: [
+        {
+          id: 1,
+          mounth: 'Май, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '1 тур',
+              nameEvent: 'СШ "Ленинградец" 6 - 2 ФК "Север"',
+              color: 'primary',
+              data: 'май 29, 2022',
+              mounth: 'май',
+              icon: 'bookmark_border',
+              count: 0
+            }
+          ]
+        },
+        {
+          id: 2,
+          mounth: 'Июнь, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '2 тур',
+              nameEvent: 'СШ "Ленинградец" 6 - 2 ФК "Север"',
+              color: 'primary',
+              data: 'June 1, 2022',
+              mounth: 'June',
+              icon: 'bookmark_border',
+              count: 0
+            },
+            {
+              id: 2,
+              tour: '3 тур',
+              nameEvent: 'СШ "Ленинградец" 2 - 2 ФК "Север"',
+              color: 'primary',
+              data: 'June 11, 2022',
+              mounth: 'June',
+              icon: 'bookmark_border',
+              count: 0
+            },
+            {
+              id: 3,
+              tour: '5 тур',
+              nameEvent: 'СШ "Ленинградец" 1 - 2 ФК "Север"',
+              color: 'primary',
+              data: 'June 31, 2022',
+              mounth: 'June',
+              icon: 'bookmark_border',
+              count: 0
+            }
+          ]
         }
       ],
       NavigationListMenu: [

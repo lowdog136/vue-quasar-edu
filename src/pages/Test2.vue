@@ -1,27 +1,5 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <div>
-      {{ $store.state.tours[tourCount].name}}
-    </div>
-    <div>
-      <q-btn @click="tourCount++" label="+"/>
-      <q-btn @click="tourCount--" label="-"/>
-    </div>
-    <div v-for="test in $store.state.tours" :key="test.id">
-      <div v-if="tourCount == test.id - 1">
-        <q-card class="my-card" >
-          <q-card-section>
-            {{ test.id }} - {{ test.name }}
-            <NewsCardDetailPopUp :PopyUpSubTitleNews="test.name"
-                                 :PopyUpBtnSize="BtnSize"/>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-  </div>
-  <br/>
-  <div>
-    <Test2Comp />
   </div>
 </template>
 
@@ -30,11 +8,9 @@ import { ref, computed } from 'vue'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import Test2Comp from 'components/Test2Comp'
-import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  components: { Test2Comp, NewsCardDetailPopUp },
+  components: {},
   data () {
     return {
       tests: [
@@ -57,6 +33,7 @@ export default {
       ],
       author1: ['Room view', 'Room service', 'Food'],
       author2: 'Room service',
+      BtnName: 'pump',
       BtnSize: 'xs',
       tourCount: 0,
       count: '',
@@ -103,6 +80,7 @@ export default {
       }),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       login_form,
+      titleMainEvent: 'samething title2',
       register_form,
       login,
       increaseCount,

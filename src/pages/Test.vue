@@ -3,11 +3,6 @@
     <div class="my-card" v-if="$store.state.colorCode">
       <h4> Text here </h4>
       <div class="q-pa-md row items-start q-gutter-md">
-        <GamesNowEventCard
-          v-for="GamesNowEventList in $store.state.GamesNowEventLists"
-          :key="GamesNowEventList.id"
-          :eventListValue="GamesNowEventList"
-        />
       </div>
       <div>
         <vueLidate />
@@ -44,7 +39,6 @@
     </div>
     <q-btn @click="btnClick">Buttom click</q-btn>
   </div>
-
   <div>
     <q-input style="max-width: 150px" label="id" v-model="id"></q-input>
     <q-input style="max-width: 150px" label="title" v-model="title"></q-input>
@@ -82,11 +76,10 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import GamesNowEventCard from 'components/GamesNowEventCard'
 import vueLidate from 'components/vueLidate'
 
 export default {
-  components: { GamesNowEventCard, vueLidate },
+  components: { vueLidate },
   data () {
     return {
       posts: [],
