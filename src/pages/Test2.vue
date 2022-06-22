@@ -1,15 +1,32 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
+    <q-form       @submit.prevent="addTodo"
+                  class="q-gutter-md">
+      <q-input
+        filled
+        v-model="addTodo"
+        label="Your name *"
+        hint="Name and surname"
+        lazy-rules
+      />
+    <q-btn />
+    </q-form>
+    <div v-for="todo in todos" :key="todo.content">
+      {{ todo.content }}
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
-import { useQuasar } from 'quasar'
 import { useStore, mapActions, mapGetters } from 'vuex'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../firebase'
 
 export default {
+  name: 'test2',
   components: {},
   data () {
     return {
@@ -56,7 +73,32 @@ export default {
     //   })
   },
   setup () {
-    const $q = useQuasar()
+    const todos = ref([])
+    onMounted(async () => {
+      const querySnapshot = await getDocs(collection(db, 'todos'))
+      const fbTodos = []
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data().id)
+        const todo = {
+          id: doc.id,
+          content: doc.data().content,
+          done: doc.data().done
+        }
+        fbTodos.push(todo)
+      })
+      todos.value = fbTodos
+      console.log('mounted')
+    })
+    const newTodoContent = ref('')
+    // eslint-disable-next-line no-unused-vars
+    const addTodo = () => {
+      const newToDo = {
+        id: uuidv4(),
+        content: newTodoContent.value,
+        done: false
+      }
+      todos.value.unshift(newToDo)
+    }
     // eslint-disable-next-line camelcase
     const login_form = ref({})
     // eslint-disable-next-line camelcase
@@ -75,9 +117,6 @@ export default {
       store.dispatch('login', register_form.value)
     }
     return {
-      layout: computed(() => {
-        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
-      }),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       login_form,
       titleMainEvent: 'samething title2',
@@ -171,37 +210,10 @@ export default {
         }
         return post
       })
-    },
-    props: {
-      eventListValue: {
-        type: Object,
-        default () {
-          return {
-            eventCardTitleMounthDate: String,
-            eventCardTitleMounthDateView: String,
-            eventCardTitleDate: String,
-            eventCardNameContest: String,
-            eventCardGameTur: String,
-            eventCardGameBody: String
-          }
-        }
-      }
     }
   },
-  props: {
-    TitleNews: String,
-    PopyUpTitleNews: String,
-    PopyUpSrcNews: String,
-    PopyUpFullNews: String,
-    PopyUpHowWatch: String,
 
-    product_data: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
-  }
+  props: {}
 }
 </script>
 
