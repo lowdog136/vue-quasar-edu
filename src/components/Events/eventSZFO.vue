@@ -115,6 +115,75 @@ export default {
               icon: 'sentiment_very_satisfied'
             }
           ]
+        },
+        {
+          id: 4,
+          mounth: 'Август, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '8 тур',
+              nameEvent: 'ФК "Север" - СШ "Электрон"',
+              color: 'teal',
+              data: 'август 6, 2022',
+              icon: 'event'
+            },
+            {
+              id: 2,
+              tour: '9 тур',
+              nameEvent: 'ФК "Север" - ФК "Новград"',
+              color: 'teal',
+              data: 'август 9, 2022',
+              icon: 'event'
+            },
+            {
+              id: 3,
+              tour: '10 тур',
+              nameEvent: 'ФК "Север" - СШ №2 ВО "Звезда"',
+              color: 'teal',
+              data: 'август 13, 2022',
+              icon: 'event'
+            },
+            {
+              id: 4,
+              tour: '11 тур',
+              nameEvent: 'СШ №7 Карелия - ФК "Север"',
+              color: 'teal',
+              data: 'август 20, 2022',
+              mounth: 'июль',
+              icon: 'sentiment_very_satisfied'
+            },
+            {
+              id: 5,
+              tour: '12 тур',
+              nameEvent: 'ФК "Химик" - ФК "Север"',
+              color: 'teal',
+              data: 'август 25, 2022',
+              icon: 'event'
+            }
+          ]
+        },
+        {
+          id: 5,
+          mounth: 'Сентябрь, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '13 тур',
+              nameEvent: 'ФК "Север" - ФК "Псков"',
+              color: 'red',
+              data: 'сентябрь 14, 2022',
+              icon: 'local_fire_department'
+            },
+            {
+              id: 1,
+              tour: '14 тур',
+              nameEvent: 'ФК "Север" - СШ Ленинградец',
+              color: 'teal',
+              data: 'сентябрь 17, 2022',
+              icon: 'event'
+            }
+          ]
         }
       ]
     }
@@ -125,7 +194,7 @@ export default {
     return {
       titleEvent: 'Чемпионат СЗФО',
       btnSize: 'xs',
-      titleMainEvent: 'Календарь игр ФК "Север"',
+      titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })

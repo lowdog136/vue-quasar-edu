@@ -84,13 +84,13 @@ const rows = [
   },
   {
     name: 'СШ Ленинградец',
-    games: 3,
-    win: 1,
+    games: 4,
+    win: 2,
     draw: 1,
     lose: 1,
-    ball_io: '8-6',
-    score: '4',
-    last_game: 'ПВН'
+    ball_io: '12-6',
+    score: '7',
+    last_game: 'ПВНВ'
   },
   {
     name: 'СШ №7 Карелия',
@@ -104,13 +104,13 @@ const rows = [
   },
   {
     name: 'СШ Электрон',
-    games: 3,
+    games: 4,
     win: 0,
     draw: 0,
-    lose: 3,
-    ball_io: '0-10',
+    lose: 4,
+    ball_io: '0-14',
     score: '0',
-    last_game: 'ППП'
+    last_game: 'ПППП'
   }
 ]
 
