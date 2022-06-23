@@ -15,7 +15,8 @@
     <div class="q-pa-md" v-for="todo in todos" :key="todo.id" style="max-width: 550px">
       <q-list bordered separator>
         <q-item clickable v-ripple>
-          <q-item-section>{{ todo.content }}</q-item-section>
+          <q-item-section v-if="todo.done">{{ todo.content }}</q-item-section>
+          <q-item-section><q-btn @click="toggleDone(todo.id)" icon="done"/></q-item-section>
           <q-item-section><q-btn @click="deleteTodo(todo.id)" icon="delete"/></q-item-section>
         </q-item>
       </q-list>
@@ -27,11 +28,10 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
-
 const newTodoContent = ref('')
 
 const addTodo = () => {
@@ -106,7 +106,12 @@ export default {
         todos.value = fbTodos
       })
     })
-
+    const toggleDone = id => {
+      const index = todos.value.findIndex(todo => todo.id === id)
+      updateDoc(doc(todosCollectionRef, id), {
+        done: !todos.value[index].done
+      })
+    }
     // eslint-disable-next-line camelcase
     const login_form = ref({})
     // eslint-disable-next-line camelcase
@@ -135,6 +140,7 @@ export default {
       register,
       deleteTodo,
       deleteDoc,
+      toggleDone,
       addTodo,
       todos,
       store,
