@@ -15,7 +15,7 @@
           lazy-rules
         />
       </div>
-      <q-btn @click="addTodo"/>
+      <q-btn @click="addTodo" label="add data"/>
     </q-form>
     <div class="q-pa-md" v-for="todo in todos" :key="todo.id" style="max-width: 550px">
       <q-list bordered separator>
@@ -26,7 +26,49 @@
           <q-item-section><q-btn @click="deleteTodo(todo.id)" icon="delete"/></q-item-section>
         </q-item>
       </q-list>
+    </div> <br>
+    <div>
+      <q-form
+        class="q-gutter-md"
+      >
+        <div>
+          <q-input
+            v-model='newEventSubTitle'
+            hint="add SubTitle"
+            lazy-rules
+          />
+          <q-input
+            v-model='newEventTitle'
+            hint="add Title"
+            lazy-rules
+          />
+          <q-input
+            v-model='newEventTeam1'
+            hint="add Team1"
+            lazy-rules
+          />
+          <q-input
+            v-model='newEventTeam2'
+            hint="add Team2"
+            lazy-rules
+          />
+
+        </div>
+        <q-btn @click="addEvent" label="add event"/>
+      </q-form>
     </div>
+    <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 550px">
+      <q-list bordered separator>
+        <q-item v-ripple>
+          <q-item-section v-if="event.done">{{ event.subtitle }}</q-item-section>
+          <q-item-section v-if="event.done">{{ event.title }}</q-item-section>
+          <q-item-section v-if="event.done">{{ event.team1 }}</q-item-section>
+          <q-item-section v-if="event.done">{{ event.team2 }}</q-item-section>
+          <q-item-section><q-btn @click="toggleDone(event.id)" icon="done"/></q-item-section>
+          <q-item-section><q-btn @click="deleteTodo(event.id)" icon="delete"/></q-item-section>
+        </q-item>
+      </q-list>
+    </div> <br>
   </div>
 </template>
 
@@ -38,8 +80,28 @@ import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from 'fireb
 import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
+const eventCollectionRef = collection(db, 'events')
 const newTodoContent = ref('')
 const newTodoTitle = ref('')
+const newEventSubTitle = ref('')
+const newEventTitle = ref('')
+const newEventTeam1 = ref('')
+const newEventTeam2 = ref('')
+
+const addEvent = () => {
+  addDoc(eventCollectionRef, {
+    subtitle: newEventSubTitle.value,
+    title: newEventTitle.value,
+    team1: newEventTeam1.value,
+    team2: newEventTeam2.value,
+    done: false
+  })
+  newEventSubTitle.value = ''
+  newEventTitle.value = ''
+  newEventTeam1.value = ''
+  newEventTeam2.value = ''
+  console.log('add todo', newTodoTitle.value)
+}
 
 const addTodo = () => {
   addDoc(todosCollectionRef, {
@@ -88,6 +150,7 @@ export default {
   },
   setup () {
     const todos = ref([])
+    const events = ref([])
     onMounted(async () => {
       // const querySnapshot = await getDocs(collection(db, 'todos'))
       // const fbTodos = []
@@ -114,6 +177,21 @@ export default {
           fbTodos.push(todo)
         })
         todos.value = fbTodos
+      })
+      onSnapshot(collection(db, 'events'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const event = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            team1: doc.data().team1,
+            team2: doc.data().team2,
+            done: doc.data().done
+          }
+          fbEvents.push(event)
+        })
+        events.value = fbEvents
       })
     })
     const toggleDone = id => {
@@ -153,6 +231,8 @@ export default {
       deleteDoc,
       toggleDone,
       addTodo,
+      addEvent,
+      events,
       todos,
       store,
       expanded: ref(false)
