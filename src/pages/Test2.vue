@@ -1,8 +1,23 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <div >
-      <q-list v-for="todo in todos" :key="todo.id">
-        {{ todo.id }} - {{ todo.content }}
+    <q-form
+      @submit.prevent="addTodo"
+      class="q-gutter-md"
+    >
+      <div>
+        <q-input
+          v-model='newTodoContent'
+          hint="add todo"
+          lazy-rules
+        />
+      </div>
+    </q-form>
+    <div class="q-pa-md" v-for="todo in todos" :key="todo.id" style="max-width: 550px">
+      <q-list bordered separator>
+        <q-item clickable v-ripple>
+          <q-item-section>{{ todo.content }}</q-item-section>
+          <q-item-section><q-btn @click="deleteTodo(todo.id)" icon="delete"/></q-item-section>
+        </q-item>
       </q-list>
     </div>
   </div>
@@ -10,35 +25,34 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+
+const todosCollectionRef = collection(db, 'todos')
+
+const newTodoContent = ref('')
+
+const addTodo = () => {
+  addDoc(todosCollectionRef, {
+    content: newTodoContent.value,
+    done: false
+  })
+  newTodoContent.value = ''
+  console.log('add todo', newTodoContent.value)
+}
+
+const deleteTodo = id => {
+  deleteDoc(doc(todosCollectionRef, id))
+}
 
 export default {
   name: 'test2',
   components: {},
   data () {
     return {
-      tests: [
-        {
-          id: 1,
-          name: 'name1'
-        },
-        {
-          id: 2,
-          name: 'name2'
-        },
-        {
-          id: 3,
-          name: 'name3'
-        },
-        {
-          id: 4,
-          name: 'name4'
-        }
-      ],
+      tests: [],
       author1: ['Room view', 'Room service', 'Food'],
       author2: 'Room service',
       BtnName: 'pump',
@@ -92,16 +106,7 @@ export default {
         todos.value = fbTodos
       })
     })
-    const newTodoContent = ref('')
-    // eslint-disable-next-line no-unused-vars
-    const addTodo = () => {
-      const newToDo = {
-        id: uuidv4(),
-        content: newTodoContent.value,
-        done: false
-      }
-      todos.value.unshift(newToDo)
-    }
+
     // eslint-disable-next-line camelcase
     const login_form = ref({})
     // eslint-disable-next-line camelcase
@@ -126,7 +131,11 @@ export default {
       register_form,
       login,
       increaseCount,
+      newTodoContent,
       register,
+      deleteTodo,
+      deleteDoc,
+      addTodo,
       todos,
       store,
       expanded: ref(false)
