@@ -1,18 +1,9 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-form       @submit.prevent="addTodo"
-                  class="q-gutter-md">
-      <q-input
-        filled
-        v-model="addTodo"
-        label="Your name *"
-        hint="Name and surname"
-        lazy-rules
-      />
-    <q-btn />
-    </q-form>
-    <div v-for="todo in todos" :key="todo.content">
-      {{ todo.content }}
+    <div >
+      <q-list v-for="todo in todos" :key="todo.id">
+        {{ todo.id }} - {{ todo.content }}
+      </q-list>
     </div>
   </div>
 </template>
@@ -22,7 +13,7 @@ import { ref, onMounted } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 
 export default {
@@ -75,19 +66,31 @@ export default {
   setup () {
     const todos = ref([])
     onMounted(async () => {
-      const querySnapshot = await getDocs(collection(db, 'todos'))
-      const fbTodos = []
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data().id)
-        const todo = {
-          id: doc.id,
-          content: doc.data().content,
-          done: doc.data().done
-        }
-        fbTodos.push(todo)
+      // const querySnapshot = await getDocs(collection(db, 'todos'))
+      // const fbTodos = []
+      // querySnapshot.forEach((doc) => {
+      //   console.log(doc.id, ' => ', doc.data())
+      //   const todo = {
+      //     id: doc.id,
+      //     content: doc.data().content,
+      //     done: doc.data().done
+      //   }
+      //   fbTodos.push(todo)
+      // })
+      // todos.value = fbTodos
+      // console.log('mounted')
+      onSnapshot(collection(db, 'todos'), (querySnapshot) => {
+        const fbTodos = []
+        querySnapshot.forEach((doc) => {
+          const todo = {
+            id: doc.id,
+            content: doc.data().content,
+            done: doc.data().done
+          }
+          fbTodos.push(todo)
+        })
+        todos.value = fbTodos
       })
-      todos.value = fbTodos
-      console.log('mounted')
     })
     const newTodoContent = ref('')
     // eslint-disable-next-line no-unused-vars
@@ -124,6 +127,7 @@ export default {
       login,
       increaseCount,
       register,
+      todos,
       store,
       expanded: ref(false)
     }
