@@ -1,21 +1,27 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <q-form
-      @submit.prevent="addTodo"
       class="q-gutter-md"
     >
       <div>
         <q-input
+          v-model='newTodoTitle'
+          hint="add content"
+          lazy-rules
+        />
+        <q-input
           v-model='newTodoContent'
-          hint="add todo"
+          hint="add content"
           lazy-rules
         />
       </div>
+      <q-btn @click="addTodo"/>
     </q-form>
     <div class="q-pa-md" v-for="todo in todos" :key="todo.id" style="max-width: 550px">
       <q-list bordered separator>
-        <q-item clickable v-ripple>
-          <q-item-section v-if="todo.done">{{ todo.content }}</q-item-section>
+        <q-item v-ripple>
+          <q-item-section v-if="!todo.done">{{ todo.content }}</q-item-section>
+          <q-item-section v-if="!todo.done">{{ todo.title }}</q-item-section>
           <q-item-section><q-btn @click="toggleDone(todo.id)" icon="done"/></q-item-section>
           <q-item-section><q-btn @click="deleteTodo(todo.id)" icon="delete"/></q-item-section>
         </q-item>
@@ -33,14 +39,17 @@ import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
 const newTodoContent = ref('')
+const newTodoTitle = ref('')
 
 const addTodo = () => {
   addDoc(todosCollectionRef, {
     content: newTodoContent.value,
+    title: newTodoTitle.value,
     done: false
   })
   newTodoContent.value = ''
-  console.log('add todo', newTodoContent.value)
+  newTodoTitle.value = ''
+  console.log('add todo', newTodoTitle.value)
 }
 
 const deleteTodo = id => {
@@ -99,6 +108,7 @@ export default {
           const todo = {
             id: doc.id,
             content: doc.data().content,
+            title: doc.data().title,
             done: doc.data().done
           }
           fbTodos.push(todo)
@@ -137,6 +147,7 @@ export default {
       login,
       increaseCount,
       newTodoContent,
+      newTodoTitle,
       register,
       deleteTodo,
       deleteDoc,
@@ -160,15 +171,6 @@ export default {
       'myCountUp',
       'howWatch'
     ]),
-    btnClickPush () {
-      this.$router.push({ path: '/Login' })
-    },
-    tourCountUp () {
-      this.tourCount()
-    },
-    btnClick () {
-      this.togledropDown()
-    },
     async addProfilesT () {
       await axios.post('http://localhost:3001/profile/', {
         name: this.name,
@@ -181,53 +183,6 @@ export default {
         title: this.title,
         body: this.body,
         count: this.count
-      })
-    },
-    async getProfileT () {
-      await axios.get('http://localhost:3001/profile/', {
-        name: this.name
-      })
-        .then((response) => {
-          this.profile = response.data
-        })
-    },
-    async getPostT () {
-      await axios.get('http://localhost:3001/posts/', {
-        id: this.id
-      })
-        .then((response) => {
-          this.posts = response.data
-        })
-    },
-    async renProfT (id) {
-      await axios.patch(`http://localhost:3001/profile/${id}`, {
-        other: this.other
-      })
-    },
-    async renPostT (id) {
-      await axios.patch(`http://localhost:3001/posts/${id}`, {
-        title: this.title
-      })
-    },
-    async countUpT (id) {
-      await axios.patch(`http://localhost:3001/posts/${id}`, {
-        count: this.count++
-      })
-    },
-    async delPostT (id) {
-      await axios.delete(`http://localhost:3001/posts/${id}`, {
-      })
-    },
-    async addPostM (id) {
-      await axios.post(`http://localhost:3001/posts/${id}`, {
-        title: '',
-        body: ''
-      })
-      this.posts = this.posts.map((post) => {
-        if (post.id === id) {
-          post.status = false
-        }
-        return post
       })
     }
   },
