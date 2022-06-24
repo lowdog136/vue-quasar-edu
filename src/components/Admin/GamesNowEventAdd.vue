@@ -30,32 +30,57 @@
         <q-btn @click="addEvent" label="add event"/>
       </q-form>
     </div>
-    <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 550px">
-      <q-list bordered separator>
-        <q-item v-ripple>
-          <q-item-section v-if="event.done">{{ event.subtitle }}</q-item-section>
-          <q-item-section v-if="event.done">{{ event.title }}</q-item-section>
-          <q-item-section v-if="event.done">{{ event.team1 }}</q-item-section>
-          <q-item-section v-if="event.done">{{ event.team2 }}</q-item-section>
-          <q-item-section><q-btn @click="toggleEvent(event.id)" icon="done"/></q-item-section>
-          <q-item-section><q-btn @click="deleteEvent(event.id)" icon="delete"/></q-item-section>
-        </q-item>
-      </q-list>
-    </div> <br>
+    <q-toggle
+      :false-value="false"
+      :label="`Показываем ${redModel}`"
+      :true-value="true"
+      color="red"
+      v-model="redModel"
+    />
+    <div v-if="redModel">
+      <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
+        <q-card>
+          <q-toolbar class="bg-primary text-white shadow-2">
+            <q-toolbar-title>{{ event.subtitle }}</q-toolbar-title>
+          </q-toolbar>
+          <q-list v-if="event.done">
+            <q-item-section>
+              {{ event.count }}
+            </q-item-section>
+            <q-item>
+              {{ event.title }}
+            </q-item>
+            <q-item>
+              {{ event.team1 }}-{{ event.team2 }}
+            </q-item>
+          </q-list>
+          <q-tabs
+            v-model="tab"
+            class="bg-teal text-yellow shadow-2"
+          >
+            <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
+            <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
+            <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
+          </q-tabs>
+        </q-card>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../../firebase'
 
 const eventCollectionRef = collection(db, 'events')
+const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
 const newEventSubTitle = ref('')
 const newEventTitle = ref('')
 const newEventTeam1 = ref('')
 const newEventTeam2 = ref('')
+const newEventCount = ref('')
 
 const addEvent = () => {
   addDoc(eventCollectionRef, {
@@ -63,12 +88,15 @@ const addEvent = () => {
     title: newEventTitle.value,
     team1: newEventTeam1.value,
     team2: newEventTeam2.value,
-    done: false
+    date: Date.now(),
+    count: 0,
+    done: true
   })
   newEventSubTitle.value = ''
   newEventTitle.value = ''
   newEventTeam1.value = ''
   newEventTeam2.value = ''
+  newEventCount.value = ''
   console.log('add todo', newEventSubTitle.value)
 }
 
@@ -77,7 +105,7 @@ const deleteEvent = id => {
 }
 
 export default {
-  name: 'test2',
+  name: 'GamesNowEventAdd',
   components: {},
   data () {
     return {
@@ -110,12 +138,13 @@ export default {
     const todos = ref([])
     const events = ref([])
     onMounted(async () => {
-      onSnapshot(collection(db, 'todos'), (querySnapshot) => {
+      onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbTodos = []
         querySnapshot.forEach((doc) => {
           const todo = {
             id: doc.id,
             content: doc.data().content,
+            date: doc.date().date,
             title: doc.data().title,
             done: doc.data().done
           }
@@ -132,6 +161,7 @@ export default {
             title: doc.data().title,
             team1: doc.data().team1,
             team2: doc.data().team2,
+            count: doc.data().count,
             done: doc.data().done
           }
           fbEvents.push(event)
@@ -145,6 +175,13 @@ export default {
         done: !events.value[index].done
       })
     }
+    const countUpEvent = id => {
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(eventCollectionRef, id), {
+        count: events.value[index].count++
+      })
+      console.log('countUP', events.value[index].count)
+    }
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       titleMainEvent: 'samething title2',
@@ -152,12 +189,17 @@ export default {
       newEventTitle,
       newEventTeam1,
       newEventTeam2,
+      newEventCount,
+      done: ref(true),
+      redModel: ref(true),
       deleteEvent,
       deleteDoc,
       toggleEvent,
+      countUpEvent,
       addEvent,
       events,
       todos,
+      tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
   },

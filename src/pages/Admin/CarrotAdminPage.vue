@@ -16,6 +16,7 @@
           <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="white" flat round dense icon="help" />
         </q-toolbar>
       </q-header>
+      <!--      Показать админку добавление событий-->
       <q-page-container v-if="panelViewEvent">
         <q-page padding>
           <p v-for="n in 1" :key="n">
@@ -23,7 +24,7 @@
           </p>
         </q-page>
       </q-page-container>
-
+      <!--      Показать админку добавление новостей-->
       <q-page-container v-if="panelViewItem">
         <q-page padding>
           <p v-for="n in 1" :key="n">
@@ -31,6 +32,7 @@
           </p>
         </q-page>
       </q-page-container>
+      <!--      Показать админку добавление результатов матчей-->
       <q-page-container v-if="panelViewItemResultCard">
         <q-page padding>
           <p v-for="n in 1" :key="n">
@@ -44,7 +46,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import ResultMatchAddDataAdmin from 'components/ResultMatchAddDataAdmin'
 import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
 import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
@@ -58,6 +60,11 @@ export default defineComponent({
       panelViewItem: false,
       panelViewItemResultCard: false,
       falseValue: false
+    }
+  },
+  setup () {
+    return {
+      redModel: ref('panelViewEvent')
     }
   },
   methods: {
