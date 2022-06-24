@@ -1,15 +1,15 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <GamesNowEventAdd />
+    <Test2Comp />
   </div>
 </template>
 
 <script>
 
-import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
+import Test2Comp from 'components/Test2Comp'
 export default {
   name: 'test3',
-  components: { GamesNowEventAdd },
+  components: { Test2Comp },
   data () {
     return {
       tests: [],
