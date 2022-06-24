@@ -44,13 +44,13 @@ const rows = [
   },
   {
     name: 'Псков',
-    games: 4,
-    win: 3,
+    games: 5,
+    win: 4,
     draw: 0,
     lose: 1,
-    ball_io: '10-3',
-    score: 9,
-    last_game: 'ВВВП'
+    ball_io: '11-3',
+    score: 12,
+    last_game: 'ВВВПВ'
   },
   {
     name: 'СШ №2 ВО Звезда',
@@ -74,33 +74,33 @@ const rows = [
   },
   {
     name: 'Новград',
-    games: 1,
+    games: 2,
     win: 0,
     draw: 1,
-    lose: 0,
-    ball_io: '1-1',
+    lose: 1,
+    ball_io: '1-2',
     score: 1,
-    last_game: 'Н'
+    last_game: 'НП'
   },
   {
     name: 'СШ Ленинградец',
-    games: 4,
+    games: 5,
     win: 2,
     draw: 1,
-    lose: 1,
-    ball_io: '12-6',
+    lose: 2,
+    ball_io: '14-9',
     score: '7',
-    last_game: 'ПВНВ'
+    last_game: 'ПВ'
   },
   {
     name: 'СШ №7 Карелия',
-    games: 4,
-    win: 1,
+    games: 5,
+    win: 2,
     draw: 1,
     lose: 2,
-    ball_io: '4-5',
-    score: '4',
-    last_game: 'ППВН'
+    ball_io: '7-7',
+    score: '7',
+    last_game: 'ППВНП'
   },
   {
     name: 'СШ Электрон',
