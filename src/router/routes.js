@@ -50,6 +50,7 @@ const routes = [
         ]
       },
       { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
+      { path: '/Test3', name: 'Test3', component: () => import('pages/Test3.vue') },
       { path: '/Test2', name: 'Test2', component: () => import('pages/Test2.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
     ]

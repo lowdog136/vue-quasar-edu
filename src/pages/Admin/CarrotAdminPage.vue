@@ -11,10 +11,18 @@
             CarrotAdminPage
           </q-toolbar-title>
           <q-btn to="/" color="black" flat round dense icon="first_page" />
+          <q-btn @click="panelViewOnEventCard" @dblclick="panelViewOffEventCard" color="white" flat round dense icon="event" />
           <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="white" flat round dense icon="smart_toy" />
           <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="white" flat round dense icon="help" />
         </q-toolbar>
       </q-header>
+      <q-page-container v-if="panelViewEvent">
+        <q-page padding>
+          <p v-for="n in 1" :key="n">
+            <GamesNowEventAdd />
+          </p>
+        </q-page>
+      </q-page-container>
 
       <q-page-container v-if="panelViewItem">
         <q-page padding>
@@ -39,18 +47,26 @@
 import { defineComponent } from 'vue'
 import ResultMatchAddDataAdmin from 'components/ResultMatchAddDataAdmin'
 import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
+import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
 
 export default defineComponent({
   name: 'CarrotAdminPage',
-  components: { ResultMatchAddDataAdmin, ResultMatchResultCardAddDataAdmin },
+  components: { ResultMatchAddDataAdmin, ResultMatchResultCardAddDataAdmin, GamesNowEventAdd },
   data () {
     return {
+      panelViewEvent: false,
       panelViewItem: false,
       panelViewItemResultCard: false,
       falseValue: false
     }
   },
   methods: {
+    panelViewOnEventCard () {
+      this.panelViewEvent = true
+    },
+    panelViewOffEventCard () {
+      this.panelViewEvent = false
+    },
     panelViewOnResultCard () {
       this.panelViewItemResultCard = true
     },
