@@ -65,7 +65,7 @@
           <q-item-section v-if="event.done">{{ event.team1 }}</q-item-section>
           <q-item-section v-if="event.done">{{ event.team2 }}</q-item-section>
           <q-item-section><q-btn @click="toggleDone(event.id)" icon="done"/></q-item-section>
-          <q-item-section><q-btn @click="deleteTodo(event.id)" icon="delete"/></q-item-section>
+          <q-item-section><q-btn @click="deleteEvent(event.id)" icon="delete"/></q-item-section>
         </q-item>
       </q-list>
     </div> <br>
@@ -114,6 +114,9 @@ const addTodo = () => {
   console.log('add todo', newTodoTitle.value)
 }
 
+const deleteEvent = id => {
+  deleteDoc(doc(eventCollectionRef, id))
+}
 const deleteTodo = id => {
   deleteDoc(doc(todosCollectionRef, id))
 }
@@ -232,6 +235,7 @@ export default {
       newEventTeam2,
       register,
       deleteTodo,
+      deleteEvent,
       deleteDoc,
       toggleDone,
       addTodo,
