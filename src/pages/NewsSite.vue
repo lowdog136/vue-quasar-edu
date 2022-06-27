@@ -1,113 +1,51 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout view="lHh lpr lFf" container style="height: 800px" class="shadow-2 rounded-borders">
-      <q-header elevated>
-        <q-toolbar>
-          <q-avatar>
-            <img alt="logo" src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-
-          <q-toolbar-title>
-            Новости сайта
-          </q-toolbar-title>
-
-          <q-btn flat round dense icon="whatshot" />
-        </q-toolbar>
-      </q-header>
-
-      <q-page-container>
-        <q-page padding>
-          <p v-for="n in 1" :key="n">
-            Текущая версия сайта 2.2.0 <br><br>
-            ver. 2.2.0<br>
-            Добавлено:<br>
-            - На странице с новостями новости отображаются по умолчанию от новой к старой.<br>
-            - На странице с результатами матчей отображаются только результаты игр.<br><br>
-            ver. 2.1.0<br>
-            Добавлено:<br>
-            - Разблокирована страница "Результаты матчей". Сделано оформление.<br>
-            - Подсветка даты в "Новости клуба" и "Новости сайта".<br>
-            Реализовано динамически добавление и отображение информации на стратнице "Новости клуба". Исправлен баг с выводом карточек новостей.<br>
-            Добавляемая информация вынесена в хранилище (store.state)<br><br>
-            ver. 2.0.4<br>
-            Добавлено:<br>
-            - При нажатии на "Подробно" (раздел новости команды) появляется высплывающее окно с полной версией новости.<br><br>
-
-            ver. 2.0.3<br>
-            Добавлено:<br>
-            - Статичные страницы для раздела "Новости клуба". При нажатии на "Подробно" происходит переход на полную новость.<br>
-            Испралены мелкие ошибки.<br><br>
-
-            ver. 2.0.2<br>
-            Испралена ошибка функциона меню "навигация" работы статичных разделов.<br>
-            Подправлен внешний вид главной страницы.<br>
-            Добавлено:<br>
-            - Страницы "Новости клуба", "Новости сайта".<br>
-            - Навигация слева пункт "О сайте" стал раскрывающимся. Внутри 2 раздела:<br>
-            -- "Новости" - информация с release.txt<br>
-            -- "История" - история самого сайта.<br>
-            - Навигация слева пункт "ФК Север" плюс еще один раздел. Новый раздел "Новости клуба".<br><br>
-
-            ver. 2.0.1<br>
-            Полностью переработан функционал сайта.<br>
-            Поддержка мобильных платформ.<br><br>
-
-            ver. 0.1.6-1<br>
-            Добавлено:<br>
-            - Обновлен вид: "ФК Север"<br><br>
-
-            ver. 0.1.6<br>
-            Добавлено:<br>
-            - Внешний вид главной страницы.<br>
-            - Обновлен вид: 404, "О сайте", "Контакты"<br><br>
-
-            ver. 0.1.5-2<br>
-            Добавлено:<br>
-            - 404 ошибка<br><br>
-
-            ver. 0.1.5<br>
-            Добавлено:<br>
-            - Внешний вид главной страницы.<br>
-            - Переработан внешний вид "Контакты"<br>
-            - Переработан внешний вид "О сайте"<br>
-            - Добавлен navbar<br>
-            - Переделан footer (компонент footernew)<br><br>
-
-            bagtracker:<br>
-            - стили с materialezise-css слетают. Нужно сделать стили в компоненте.<br><br>
-
-            ver 0.1.4<br>
-            Добавлено:<br>
-            - правка стилей страниц (О сайте)<br><br>
-
-            ver 0.1.3<br>
-            Добавлено:<br>
-            - в App.vue добавлены классы content и footer<br>
-            - компонент Footer вырезан со всех страниц и вставлен в App.vue, так как предполагается, что на всех страницах footer одинаковый.<br>
-            - компонент Footer прибит к низу страницы или к низу контекта, если он не влезает в экран<br><br>
-
-            ver 0.1.2<br>
-            Добавлено:<br>
-            - Статичная картинка в верхней части страниц<br>
-            - Правка кода<br><br>
-
-            ver 0.1.1<br>
-            Добавлено:<br>
-            - логотип на страницу AboutFans. Изменен размер шрифта основного текста<br>
-            - Измненен размер лого на AboutClub. Изменен размер шрифта основного текста<br>
-            - Изменен цвет шрифта активной вкладке на главной странице<br><br>
-
-          </p>
-        </q-page>
-      </q-page-container>
-    </q-layout>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <siteUpdate />
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+import siteUpdate from 'components/SiteUpdate/siteUpdate'
+export default {
+  name: 'test3',
+  components: { siteUpdate },
+  data () {
+    return {}
+  },
+  mounted () {},
+  setup () {
+    return {
+      titleMainEvent: 'Новости сайта. Релизы.',
+      prDate: '25 may 2022'
+    }
+  }
+}
 </script>
+
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 450px
+  .root
+    width: 400px
+    margin: 0 auto
+    background-color: #fff
+    padding: 30px
+    margin-top: 100px
+    border-radius: 20px
+  input
+    border: none
+    outline: none
+    border-bottom: 1px solid #ddd
+    font-size: 1em
+    padding: 5px 0
+    margin: 10px 0 5px 0
+    width: 100%
+  button
+    background-color: #3498db
+    padding: 10px 20px
+    margin-top: 10px
+    border: none
+    color: white
+</style>

@@ -1,23 +1,19 @@
 <template>
-  <div class="q-px-lg q-pb-md">
-    <div class="title">
-      {{titleMainEvent }}
-    </div>
-    <q-timeline :layout="layout" color="secondary" v-for="game in games.slice(id).reverse()" :key="game.id">
-      <q-timeline-entry heading>{{ game.mounth }}</q-timeline-entry>
-      <q-timeline-entry
-        v-for="matchEvent in game.matchEvents.slice(id).reverse()" :key="matchEvent.id"
-        :title='titleEvent'
-        :subtitle=matchEvent.data
-        side="left"
-        :color=matchEvent.color
-        :icon=matchEvent.icon
+  <div class="q-pa-md row items-start q-gutter-md">
+    <q-timeline color="secondary" >
+      <q-timeline-entry heading >
+        Хронология обновлений
+      </q-timeline-entry>
+      <q-timeline-entry v-for="event in events" :key="event.id"
+                        :title=event.title
+                        :subtitle=event.dateupd
+                        icon="done"
       >
         <div>
-          {{ matchEvent.tour}}
+          ver: {{ event.ver }}
         </div>
-        <div>
-          {{ matchEvent.nameEvent}}
+        <div style="max-width: 650px">
+          {{ event.body }}
         </div>
       </q-timeline-entry>
     </q-timeline>
@@ -25,190 +21,184 @@
 </template>
 
 <script>
-import { useQuasar } from 'quasar'
-import { computed } from 'vue'
-// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+import { ref, onMounted } from 'vue'
+import { mapActions, mapGetters } from 'vuex'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
+import { db } from '../../firebase'
+
+const eventCollectionRef = collection(db, 'siteUpdates')
+const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
+const newEventVer = ref('')
+const newEventTitle = ref('')
+const newEventBody = ref('')
+const newEventTeam2 = ref('')
+const newEventDateUpd = ref('')
+const newEventDate = ref('')
+const newEventCount = ref('')
+
+const addEvent = () => {
+  addDoc(eventCollectionRef, {
+    ver: newEventVer.value,
+    title: newEventTitle.value,
+    body: newEventBody.value,
+    dateupd: newEventDateUpd.value,
+    date: Date.now(),
+    done: true
+  })
+  newEventVer.value = ''
+  newEventTitle.value = ''
+  newEventBody.value = ''
+  newEventDateUpd.value = ''
+  newEventDate.value = ''
+  newEventCount.value = ''
+  console.log('add todo', newEventDate.value)
+}
+
+const deleteEvent = id => {
+  deleteDoc(doc(eventCollectionRef, id))
+}
 
 export default {
   name: 'siteUpdate',
   components: {},
   data () {
     return {
-      games: [
-        {
-          id: 1,
-          mounth: 'Май, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '1 тур',
-              nameEvent: 'СШ "Электрон" 0-3 ФК "Север"',
-              color: 'orange-14',
-              data: 'май 29, 2022',
-              mounth: 'май',
-              icon: 'done_all'
-            }
-          ]
-        },
-        {
-          id: 2,
-          mounth: 'Июнь, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '2 тур',
-              nameEvent: 'СШ "Ленинградец" 1-2 ФК "Север"',
-              color: 'orange-14',
-              data: 'Июнь 1, 2022',
-              mounth: 'June',
-              icon: 'done_all'
-            },
-            {
-              id: 2,
-              tour: '3 тур',
-              nameEvent: 'ФК "Новград" 1-1 ФК "Север"',
-              color: 'orange-14',
-              data: 'Июнь 11, 2022',
-              mounth: 'June',
-              icon: 'done_all'
-            },
-            {
-              id: 3,
-              tour: '4 тур',
-              nameEvent: 'ФК "Псков" 0-2 ФК "Север"',
-              color: 'red',
-              data: 'Июнь 15, 2022',
-              mounth: 'June',
-              icon: 'local_fire_department'
-            },
-            {
-              id: 3,
-              tour: '5 тур',
-              nameEvent: 'СШ №2 ВО "Звезда" 1-2 ФК "Север"',
-              color: 'orange-14',
-              data: 'Июнь 18, 2022',
-              mounth: 'June',
-              icon: 'done_all'
-            },
-            {
-              id: 3,
-              tour: '6 тур',
-              nameEvent: 'ФК "Север" - ФК "Химик',
-              color: 'teal',
-              data: 'Июнь 29, 2022',
-              mounth: 'June',
-              icon: 'bookmark_border'
-            }
-          ]
-        },
-        {
-          id: 3,
-          mounth: 'Июль, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '7 тур',
-              nameEvent: 'ФК "Север" - СШ №7 Карелия',
-              color: 'teal',
-              data: 'июль 2, 2022',
-              mounth: 'июль',
-              icon: 'sentiment_very_satisfied'
-            }
-          ]
-        },
-        {
-          id: 4,
-          mounth: 'Август, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '8 тур',
-              nameEvent: 'ФК "Север" - СШ "Электрон"',
-              color: 'teal',
-              data: 'август 6, 2022',
-              icon: 'event'
-            },
-            {
-              id: 2,
-              tour: '9 тур',
-              nameEvent: 'ФК "Север" - ФК "Новград"',
-              color: 'teal',
-              data: 'август 9, 2022',
-              icon: 'event'
-            },
-            {
-              id: 3,
-              tour: '10 тур',
-              nameEvent: 'ФК "Север" - СШ №2 ВО "Звезда"',
-              color: 'teal',
-              data: 'август 13, 2022',
-              icon: 'event'
-            },
-            {
-              id: 4,
-              tour: '11 тур',
-              nameEvent: 'СШ №7 Карелия - ФК "Север"',
-              color: 'teal',
-              data: 'август 20, 2022',
-              mounth: 'июль',
-              icon: 'sentiment_very_satisfied'
-            },
-            {
-              id: 5,
-              tour: '12 тур',
-              nameEvent: 'ФК "Химик" - ФК "Север"',
-              color: 'teal',
-              data: 'август 25, 2022',
-              icon: 'event'
-            }
-          ]
-        },
-        {
-          id: 5,
-          mounth: 'Сентябрь, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '13 тур',
-              nameEvent: 'ФК "Север" - ФК "Псков"',
-              color: 'red',
-              data: 'сентябрь 14, 2022',
-              icon: 'local_fire_department'
-            },
-            {
-              id: 1,
-              tour: '14 тур',
-              nameEvent: 'ФК "Север" - СШ Ленинградец',
-              color: 'teal',
-              data: 'сентябрь 17, 2022',
-              icon: 'event'
-            }
-          ]
-        }
-      ]
+      tests: [],
+      author1: ['Room view', 'Room service', 'Food'],
+      author2: 'Room service',
+      BtnName: 'pump',
+      BtnSize: 'xs',
+      tourCount: 0,
+      count: '',
+      items: []
     }
   },
+  mounted () {
+    // axios
+    //   .post('http://localhost:3001/posts/', {
+    //     id: '4',
+    //     userId: '3',
+    //     title: 'Article title4-1',
+    //     body: 'Article body content44'
+    //   })
+    //   .then((response) => console.log(response))
+    // axios
+    //   .get('http://localhost:3001/posts')
+    //   .then((response) => {
+    //     this.posts = response.data
+    //   })
+  },
   setup () {
-    const $q = useQuasar()
-
-    return {
-      titleEvent: 'Чемпионат СЗФО',
-      btnSize: 'xs',
-      titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
-      layout: computed(() => {
-        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
+    const todos = ref([])
+    const events = ref([])
+    onMounted(async () => {
+      onSnapshot(eventCollectionQuery, (querySnapshot) => {
+        const fbTodos = []
+        querySnapshot.forEach((doc) => {
+          const todo = {
+            id: doc.id,
+            content: doc.data().content,
+            title: doc.data().title,
+            done: doc.data().done
+          }
+          fbTodos.push(todo)
+        })
+        todos.value = fbTodos
+      })
+      onSnapshot(eventCollectionQuery, (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const event = {
+            id: doc.id,
+            ver: doc.data().ver,
+            title: doc.data().title,
+            body: doc.data().body,
+            dateupd: doc.data().dateupd,
+            date: doc.data().date,
+            done: doc.data().done
+          }
+          fbEvents.push(event)
+        })
+        events.value = fbEvents
+      })
+    })
+    const toggleEvent = id => {
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(eventCollectionRef, id), {
+        done: !events.value[index].done
       })
     }
-  }
+    const countUpEvent = id => {
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(eventCollectionRef, id), {
+        count: events.value[index].count++
+      })
+      console.log('countUP', events.value[index].count)
+    }
+    return {
+      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      titleMainEvent: 'samething title2',
+      newEventVer,
+      newEventTitle,
+      newEventBody,
+      newEventDateUpd,
+      newEventTeam2,
+      newEventCount,
+      done: ref(true),
+      redModel: ref(false),
+      deleteEvent,
+      deleteDoc,
+      toggleEvent,
+      countUpEvent,
+      addEvent,
+      events,
+      todos,
+      tab: ref(['alarms', 'mails']),
+      expanded: ref(false)
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'dropDown'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'togledropDown',
+      'changePush',
+      'myCountZero',
+      'myCountUp',
+      'howWatch'
+    ])
+  },
+
+  props: {}
 }
 </script>
 
 <style lang="sass" scoped>
-.title
-  font-size: 28px
-  text-align: center
-  color: #2c3e50
 .my-card
   width: 100%
-  max-width: 350px
+  max-width: 450px
+  .root
+    width: 400px
+    margin: 0 auto
+    background-color: #fff
+    padding: 30px
+    margin-top: 100px
+    border-radius: 20px
+  input
+    border: none
+    outline: none
+    border-bottom: 1px solid #ddd
+    font-size: 1em
+    padding: 5px 0
+    margin: 10px 0 5px 0
+    width: 100%
+  button
+    background-color: #3498db
+    padding: 10px 20px
+    margin-top: 10px
+    border: none
+    color: white
 </style>
