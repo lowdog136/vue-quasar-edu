@@ -11,34 +11,14 @@ export default {
   name: 'test3',
   components: { Test2Comp },
   data () {
-    return {
-      tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
-      BtnName: 'pump',
-      BtnSize: 'xs',
-      tourCount: 0,
-      count: '',
-      items: []
-    }
-  },
-  mounted () {
-    // axios
-    //   .post('http://localhost:3001/posts/', {
-    //     id: '4',
-    //     userId: '3',
-    //     title: 'Article title4-1',
-    //     body: 'Article body content44'
-    //   })
-    //   .then((response) => console.log(response))
-    // axios
-    //   .get('http://localhost:3001/posts')
-    //   .then((response) => {
-    //     this.posts = response.data
-    //   })
-  },
-  setup () {
     return {}
+  },
+  mounted () {},
+  setup () {
+    return {
+      titleMainEvent: 'Новости сайта. Релизы.',
+      prDate: '25 may 2022'
+    }
   }
 }
 </script>
