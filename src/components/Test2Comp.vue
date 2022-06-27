@@ -1,12 +1,12 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <div class="q-pa-md">
+    <div class="q-pa-md" style="max-width: 650px">
       <q-form
         class="q-gutter-md"
       >
         <div>
           <q-input
-            v-model='newEventSubTitle'
+            v-model='newEventVer'
             hint="add Ver"
             lazy-rules
           />
@@ -16,8 +16,15 @@
             lazy-rules
           />
           <q-input
-            v-model='newEventTeam1'
+            v-model='newEventBody'
+            autogrow
             hint="add Body"
+            lazy-rules
+          />
+          <q-input
+            v-model='newEventDateUpd'
+            type="text"
+            hint="add date"
             lazy-rules
           />
         </div>
@@ -32,20 +39,20 @@
       v-model="redModel"
     />
     <div v-if="redModel">
-      <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
+      <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>{{ event.subtitle }}</q-toolbar-title>
+            <q-toolbar-title>{{ event.ver }}</q-toolbar-title>
           </q-toolbar>
           <q-list v-if="event.done">
             <q-item-section>
-              {{ event.count }}
+              {{ event.data }}
             </q-item-section>
             <q-item>
               {{ event.title }}
             </q-item>
             <q-item>
-              {{ event.team1 }}-{{ event.team2 }}
+              {{ event.body }}
             </q-item>
           </q-list>
           <q-tabs
@@ -60,38 +67,59 @@
       </div>
     </div>
   </div>
+   <div class="q-px-lg q-pb-md">
+      <q-timeline color="secondary" >
+        <q-timeline-entry heading >
+          Хронология обновлений
+        </q-timeline-entry>
+        <q-timeline-entry v-for="event in events" :key="event.id"
+          :title=event.title
+          :subtitle=event.dateupd
+          icon="done"
+        >
+          <div>
+            ver: {{ event.ver }}
+          </div>
+          <div style="max-width: 650px">
+            {{ event.body }}
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const eventCollectionRef = collection(db, 'siteUpdates')
-const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
+const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
 const newEventVer = ref('')
 const newEventTitle = ref('')
 const newEventBody = ref('')
 const newEventTeam2 = ref('')
+const newEventDateUpd = ref('')
+const newEventDate = ref('')
 const newEventCount = ref('')
 
 const addEvent = () => {
   addDoc(eventCollectionRef, {
-    subtitle: newEventVer.value,
+    ver: newEventVer.value,
     title: newEventTitle.value,
-    team1: newEventBody.value,
-    team2: newEventTeam2.value,
+    body: newEventBody.value,
+    dateupd: newEventDateUpd.value,
     date: Date.now(),
-    count: 0,
     done: true
   })
   newEventVer.value = ''
   newEventTitle.value = ''
   newEventBody.value = ''
-  newEventTeam2.value = ''
+  newEventDateUpd.value = ''
+  newEventDate.value = ''
   newEventCount.value = ''
-  console.log('add todo', newEventBody.value)
+  console.log('add todo', newEventDate.value)
 }
 
 const deleteEvent = id => {
@@ -138,7 +166,6 @@ export default {
           const todo = {
             id: doc.id,
             content: doc.data().content,
-            date: doc.date().date,
             title: doc.data().title,
             done: doc.data().done
           }
@@ -146,7 +173,7 @@ export default {
         })
         todos.value = fbTodos
       })
-      onSnapshot(collection(db, 'siteUpdates'), (querySnapshot) => {
+      onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const event = {
@@ -154,6 +181,8 @@ export default {
             ver: doc.data().ver,
             title: doc.data().title,
             body: doc.data().body,
+            dateupd: doc.data().dateupd,
+            date: doc.data().date,
             done: doc.data().done
           }
           fbEvents.push(event)
@@ -180,10 +209,11 @@ export default {
       newEventVer,
       newEventTitle,
       newEventBody,
+      newEventDateUpd,
       newEventTeam2,
       newEventCount,
       done: ref(true),
-      redModel: ref(true),
+      redModel: ref(false),
       deleteEvent,
       deleteDoc,
       toggleEvent,

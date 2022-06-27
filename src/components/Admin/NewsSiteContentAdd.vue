@@ -6,7 +6,7 @@
       >
         <div>
           <q-input
-            v-model='newEventSubTitle'
+            v-model='newEventVer'
             hint="add Ver"
             lazy-rules
           />
@@ -16,8 +16,14 @@
             lazy-rules
           />
           <q-input
-            v-model='newEventTeam1'
+            v-model='newEventBody'
             hint="add Body"
+            lazy-rules
+          />
+          <q-input
+            v-model='newEventDate'
+            type="text"
+            hint="add date"
             lazy-rules
           />
         </div>
@@ -32,20 +38,20 @@
       v-model="redModel"
     />
     <div v-if="redModel">
-      <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
+      <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>{{ event.subtitle }}</q-toolbar-title>
+            <q-toolbar-title>{{ event.ver }}</q-toolbar-title>
           </q-toolbar>
           <q-list v-if="event.done">
             <q-item-section>
-              {{ event.count }}
+              {{ event.data }}
             </q-item-section>
             <q-item>
               {{ event.title }}
             </q-item>
             <q-item>
-              {{ event.team1 }}-{{ event.team2 }}
+              {{ event.body }}
             </q-item>
           </q-list>
           <q-tabs
@@ -59,6 +65,25 @@
         </q-card>
       </div>
     </div>
+  </div>
+  <div class="q-px-lg q-pb-md">
+    <q-timeline color="secondary" >
+      <q-timeline-entry heading >
+        Timeline heading
+      </q-timeline-entry>
+      <q-timeline-entry v-for="event in events" :key="event.id"
+                        :title=event.title
+                        :subtitle=event.date
+                        icon="done"
+      >
+        <div>
+          ver: {{ event.ver }}
+        </div>
+        <div>
+          {{ event.body }}
+        </div>
+      </q-timeline-entry>
+    </q-timeline>
   </div>
 </template>
 
@@ -74,24 +99,23 @@ const newEventVer = ref('')
 const newEventTitle = ref('')
 const newEventBody = ref('')
 const newEventTeam2 = ref('')
+const newEventDate = ref('')
 const newEventCount = ref('')
 
 const addEvent = () => {
   addDoc(eventCollectionRef, {
-    subtitle: newEventVer.value,
+    ver: newEventVer.value,
     title: newEventTitle.value,
-    team1: newEventBody.value,
-    team2: newEventTeam2.value,
-    date: Date.now(),
-    count: 0,
+    body: newEventBody.value,
+    date: newEventDate.value,
     done: true
   })
   newEventVer.value = ''
   newEventTitle.value = ''
   newEventBody.value = ''
-  newEventTeam2.value = ''
+  newEventDate.value = ''
   newEventCount.value = ''
-  console.log('add todo', newEventBody.value)
+  console.log('add todo', newEventDate.value)
 }
 
 const deleteEvent = id => {
@@ -99,7 +123,7 @@ const deleteEvent = id => {
 }
 
 export default {
-  name: 'NewsCiteContentAdd',
+  name: 'GamesNowEventAdd',
   components: {},
   data () {
     return {
@@ -138,7 +162,6 @@ export default {
           const todo = {
             id: doc.id,
             content: doc.data().content,
-            date: doc.date().date,
             title: doc.data().title,
             done: doc.data().done
           }
@@ -154,6 +177,7 @@ export default {
             ver: doc.data().ver,
             title: doc.data().title,
             body: doc.data().body,
+            date: doc.data().date,
             done: doc.data().done
           }
           fbEvents.push(event)
@@ -180,10 +204,11 @@ export default {
       newEventVer,
       newEventTitle,
       newEventBody,
+      newEventDate,
       newEventTeam2,
       newEventCount,
       done: ref(true),
-      redModel: ref(true),
+      redModel: ref(false),
       deleteEvent,
       deleteDoc,
       toggleEvent,
