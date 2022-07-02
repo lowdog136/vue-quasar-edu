@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <div class="q-pa-md" style="max-width: 650px">
+<!--    addEvent-->
       <q-form
         class="q-gutter-md"
       >
@@ -30,13 +31,62 @@
         </div>
         <q-btn @click="addEvent" label="add event"/>
       </q-form>
+      <!--    addNewsCard-->
+      <q-form
+        class="q-gutter-md"
+      >
+        <div>
+          <q-input
+            v-model=newNewsCardSubTitle
+            hint="add subtitle"
+            lazy-rules
+          />
+          <q-input
+            v-model='newNewsCardTitle'
+            hint="add Title"
+            lazy-rules
+          />
+          <q-input
+            v-model='newNewsCardPreView'
+            autogrow
+            hint="add preview"
+            lazy-rules
+          />
+          <q-input
+            v-model='newNewsCardFullNews'
+            type="text"
+            hint="add fullnews"
+            lazy-rules
+          />
+          <q-input
+            v-model='newNewsCardDateNews'
+            type="text"
+            hint="add datenews"
+            lazy-rules
+          />
+          <q-input
+            v-model='newNewsCardSrcNews'
+            type="text"
+            hint="add srcnews"
+            lazy-rules
+          />
+        </div>
+        <q-btn @click="addNewsCard" label="add news"/>
+      </q-form>
     </div>
     <q-toggle
       :false-value="false"
-      :label="`Показываем ${redModel}`"
+      :label="`Показываем EventAddModule ${redModel}`"
       :true-value="true"
       color="red"
       v-model="redModel"
+    />
+    <q-toggle
+      :false-value="false"
+      :label="`Показываем NewsAddModule ${greenModel}`"
+      :true-value="true"
+      color="red"
+      v-model="greenModel"
     />
     <div v-if="redModel">
       <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 650px">
@@ -66,8 +116,36 @@
         </q-card>
       </div>
     </div>
+    <div v-if="greenModel">
+      <div class="q-pa-md" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
+        <q-card>
+          <q-toolbar class="bg-primary text-white shadow-2">
+            <q-toolbar-title>{{ NewsCard.title }}</q-toolbar-title>
+          </q-toolbar>
+          <q-list v-if="NewsCard.done">
+            <q-item-section>
+              {{ NewsCard.data }}
+            </q-item-section>
+            <q-item>
+              {{ NewsCard.title }}
+            </q-item>
+            <q-item>
+              {{ NewsCard.fullnews }}
+            </q-item>
+          </q-list>
+          <q-tabs
+            v-model="tab"
+            class="bg-teal text-yellow shadow-2"
+          >
+            <q-tab  @click="countUpEvent(NewsCard.id)" name="mails" icon="arrow_upward" />
+            <q-tab @click="toggleEvent(NewsCard.id)" name="alarms" icon="done" />
+            <q-tab @click="deleteEvent(NewsCard.id)" name="movies" icon="delete" />
+          </q-tabs>
+        </q-card>
+      </div>
+    </div>
   </div>
-   <div class="q-px-lg q-pb-md">
+   <div v-if="redModel" class="q-px-lg q-pb-md">
       <q-timeline color="secondary" >
         <q-timeline-entry heading >
           Хронология обновлений
@@ -86,6 +164,11 @@
         </q-timeline-entry>
       </q-timeline>
     </div>
+  <div v-if="greenModel" class="q-px-lg q-pb-md">
+    <div v-for="NewsCard in NewsCards" :key="NewsCard.id">
+      {{ NewsCard.title }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -93,9 +176,13 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from '../firebase'
-
+// Event block
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
+// NewsCard block
+const newsCardCollectionRef = collection(db, 'siteNews')
+const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
+
 const newEventVer = ref('')
 const newEventTitle = ref('')
 const newEventBody = ref('')
@@ -103,6 +190,13 @@ const newEventTeam2 = ref('')
 const newEventDateUpd = ref('')
 const newEventDate = ref('')
 const newEventCount = ref('')
+//  NewsCard Block
+const newNewsCardSubTitle = ref('')
+const newNewsCardTitle = ref('')
+const newNewsCardPreView = ref('')
+const newNewsCardFullNews = ref('')
+const newNewsCardDateNews = ref('')
+const newNewsCardSrcNews = ref('')
 
 const addEvent = () => {
   addDoc(eventCollectionRef, {
@@ -124,6 +218,26 @@ const addEvent = () => {
 
 const deleteEvent = id => {
   deleteDoc(doc(eventCollectionRef, id))
+}
+// NewsCard Block
+const addNewsCard = () => {
+  addDoc(newsCardCollectionRef, {
+    subtitle: newNewsCardSubTitle.value,
+    title: newNewsCardTitle.value,
+    preview: newNewsCardPreView.value,
+    fullnews: newNewsCardFullNews.value,
+    datenews: newNewsCardDateNews.value,
+    srcnews: newNewsCardSrcNews.value,
+    date: Date.now(),
+    done: true
+  })
+  newNewsCardSubTitle.value = ''
+  newNewsCardTitle.value = ''
+  newNewsCardPreView.value = ''
+  newNewsCardFullNews.value = ''
+  newNewsCardDateNews.value = ''
+  newNewsCardSrcNews.value = ''
+  console.log('add news', newNewsCardSubTitle.value)
 }
 
 export default {
@@ -159,6 +273,7 @@ export default {
   setup () {
     const todos = ref([])
     const events = ref([])
+    const NewsCards = ref([])
     onMounted(async () => {
       onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbTodos = []
@@ -189,6 +304,25 @@ export default {
         })
         events.value = fbEvents
       })
+      // NewsCard Module
+      onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
+        const fbNewsCards = []
+        querySnapshot.forEach((doc) => {
+          const NewsCard = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            preview: doc.data().preview,
+            fullnews: doc.data().fullnews,
+            datenews: doc.data().datenews,
+            srcnews: doc.data().srcnews,
+            date: doc.data().date,
+            done: doc.data().done
+          }
+          fbNewsCards.push(NewsCard)
+        })
+        fbNewsCards.value = fbNewsCards
+      })
     })
     const toggleEvent = id => {
       const index = events.value.findIndex(event => event.id === id)
@@ -212,15 +346,24 @@ export default {
       newEventDateUpd,
       newEventTeam2,
       newEventCount,
+      newNewsCardDateNews,
+      newNewsCardFullNews,
+      newNewsCardTitle,
+      newNewsCardSubTitle,
+      newNewsCardPreView,
+      newNewsCardSrcNews,
       done: ref(true),
       redModel: ref(false),
+      greenModel: ref(false),
       deleteEvent,
+      addNewsCard,
       deleteDoc,
       toggleEvent,
       countUpEvent,
       addEvent,
       events,
       todos,
+      NewsCards,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
