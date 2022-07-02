@@ -11,9 +11,10 @@
 </template>
 
 <script>
+
 const columns = [
   {
-    name: 'name',
+    name: 'desc',
     required: true,
     label: '',
     align: 'left',
