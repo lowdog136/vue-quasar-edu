@@ -120,7 +120,7 @@
       <div class="q-pa-md" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>{{ NewsCard.title }}</q-toolbar-title>
+            <q-toolbar-title>{{ NewsCard.subtitle }}</q-toolbar-title>
           </q-toolbar>
           <q-list v-if="NewsCard.done">
             <q-item-section>
@@ -137,9 +137,9 @@
             v-model="tab"
             class="bg-teal text-yellow shadow-2"
           >
-            <q-tab  @click="countUpEvent(NewsCard.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(NewsCard.id)" name="alarms" icon="done" />
-            <q-tab @click="deleteEvent(NewsCard.id)" name="movies" icon="delete" />
+            <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
+            <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
+            <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
           </q-tabs>
         </q-card>
       </div>
@@ -165,6 +165,7 @@
       </q-timeline>
     </div>
   <div v-if="greenModel" class="q-px-lg q-pb-md">
+    AddNewsBlock Mode
     <div v-for="NewsCard in NewsCards" :key="NewsCard.id">
       {{ NewsCard.title }}
     </div>
@@ -198,6 +199,7 @@ const newNewsCardFullNews = ref('')
 const newNewsCardDateNews = ref('')
 const newNewsCardSrcNews = ref('')
 
+// Event Block
 const addEvent = () => {
   addDoc(eventCollectionRef, {
     ver: newEventVer.value,
@@ -321,7 +323,7 @@ export default {
           }
           fbNewsCards.push(NewsCard)
         })
-        fbNewsCards.value = fbNewsCards
+        NewsCards.value = fbNewsCards
       })
     })
     const toggleEvent = id => {
