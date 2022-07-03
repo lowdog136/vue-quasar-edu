@@ -1,15 +1,15 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <Test2Comp />
+    <NewsCardContentAdd />
   </div>
 </template>
 
 <script>
 
-import Test2Comp from 'components/Test2Comp'
+import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
 export default {
   name: 'test3',
-  components: { Test2Comp },
+  components: { NewsCardContentAdd },
   data () {
     return {}
   },
