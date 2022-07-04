@@ -26,9 +26,9 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '20.06.22',
       // Дата обновления календаря чемпионата
-      GamesNowEventUpdateDate: '22.06.22',
+      GamesNowEventUpdateDate: '04.07.22',
       // Дата обновления таблицы чемпионата
-      GamesNowTableUpdateDate: '24.06.22',
+      GamesNowTableUpdateDate: '04.07.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       tours: [
         {
