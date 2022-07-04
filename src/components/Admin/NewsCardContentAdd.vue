@@ -24,13 +24,14 @@
           />
           <q-input
             v-model='newNewsCardFullNews'
+            autogrow
             type="text"
             hint="add fullnews"
             lazy-rules
           />
           <q-input
             v-model='newNewsCardDateNews'
-            type="text"
+            type="date"
             hint="add datenews"
             lazy-rules
           />
@@ -65,7 +66,17 @@
               {{ NewsCard.title }}
             </q-item>
             <q-item>
-              {{ NewsCard.fullnews }}
+              {{ NewsCard.preview }}<br/>{{ NewsCard.datenews }}
+            </q-item>
+            <q-item>
+              <NewsCardDetailPopUp
+                :PopyUpSubTitleNews="NewsCard.subtitle"
+                :PopyUpSrcNews="NewsCard.srcnews"
+                :PopyUpFullNews="NewsCard.fullnews"
+                :PopyUpTitleNews="NewsCard.title"
+                :PopyUpItem="NewsCard.item"
+                :PopyUpBtnName="PopyUpBtnName"
+              />
             </q-item>
           </q-list>
           <q-tabs
@@ -93,6 +104,7 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from '../../firebase'
+import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 // NewsCard block
 const newsCardCollectionRef = collection(db, 'siteNews')
@@ -132,18 +144,9 @@ const deleteNewsCard = id => {
 
 export default {
   name: 'NewsCardContentAdminAdd',
-  components: {},
+  components: { NewsCardDetailPopUp },
   data () {
-    return {
-      tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
-      BtnName: 'pump',
-      BtnSize: 'xs',
-      tourCount: 0,
-      count: '',
-      items: []
-    }
+    return {}
   },
   mounted () {
     // axios
@@ -161,8 +164,6 @@ export default {
     //   })
   },
   setup () {
-    const todos = ref([])
-    const events = ref([])
     const NewsCards = ref([])
     onMounted(async () => {
       // NewsCard Module
@@ -186,21 +187,20 @@ export default {
       })
     })
     const toggleEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionQuery, id), {
-        done: !events.value[index].done
+        done: !NewsCards.value[index].done
       })
     }
     const countUpEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionQuery, id), {
-        count: events.value[index].count++
+        count: NewsCards.value[index].count++
       })
-      console.log('countUP', events.value[index].count)
+      console.log('countUP', NewsCards.value[index].count)
     }
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      titleMainEvent: 'samething title2',
       newNewsCardDateNews,
       newNewsCardFullNews,
       newNewsCardTitle,
@@ -210,13 +210,12 @@ export default {
       done: ref(true),
       redModel: ref(false),
       greenModel: ref(false),
+      PopyUpBtnName: 'popup',
       addNewsCard,
       deleteNewsCard,
       deleteDoc,
       toggleEvent,
       countUpEvent,
-      events,
-      todos,
       NewsCards,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
