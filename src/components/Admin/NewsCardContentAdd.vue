@@ -217,23 +217,14 @@ export default {
       toggleEvent,
       countUpEvent,
       NewsCards,
-      tab: ref(['alarms', 'mails']),
-      expanded: ref(false)
+      tab: ref(['alarms', 'mails'])
     }
   },
   computed: {
-    ...mapGetters([
-      'dropDown'
-    ])
+    ...mapGetters([])
   },
   methods: {
-    ...mapActions([
-      'togledropDown',
-      'changePush',
-      'myCountZero',
-      'myCountUp',
-      'howWatch'
-    ])
+    ...mapActions([])
   },
 
   props: {}
