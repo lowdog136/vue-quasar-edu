@@ -22,9 +22,9 @@ export default store(function (/* { ssrContext } */) {
     },
     state: {
       // Дата обновления новостей о сайте
-      NavigationReleaseDateSite: '13.04.22',
+      NavigationReleaseDateSite: '04.07.22',
       // Дата обновления новостей о команде
-      NavigationReleaseNewsSite: '20.06.22',
+      NavigationReleaseNewsSite: '04.07.22',
       // Дата обновления календаря чемпионата
       GamesNowEventUpdateDate: '04.07.22',
       // Дата обновления таблицы чемпионата

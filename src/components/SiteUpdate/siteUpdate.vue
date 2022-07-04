@@ -62,16 +62,7 @@ export default {
   name: 'siteUpdate',
   components: {},
   data () {
-    return {
-      tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
-      BtnName: 'pump',
-      BtnSize: 'xs',
-      tourCount: 0,
-      count: '',
-      items: []
-    }
+    return {}
   },
   mounted () {
     // axios

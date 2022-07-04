@@ -28,6 +28,16 @@
             <div class="text-h5 q-mb-md">О турнире:</div>
             <p>Чемпионат СЗФО по футболу среди мужских команд 2022 г. Представлен 8 командами: ФК "Север", ФК ""Псков", СШ "Ленинградец", СШ №2 ВО "Звезда", СШ №7 "Карелия", ФК "Химик", ФК "Новград", СШ "Электрон".</p>
             </q-tab-panel>
+          <q-tab-panel :name=tours[6]>
+            <div class="text-h4 q-mb-md">{{ tours[4] }}</div>
+            <p>2 июля</p>
+            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} 2 - 0 {{$store.state.teams[4].name}} {{$store.state.teams[4].city}}</p>
+          </q-tab-panel>
+          <q-tab-panel :name=tours[5]>
+            <div class="text-h4 q-mb-md">{{ tours[4] }}</div>
+            <p>29 июня</p>
+            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} 3 - 0 {{$store.state.teams[5].name}} {{$store.state.teams[5].city}}</p>
+          </q-tab-panel>
           <q-tab-panel :name=tours[4]>
             <div class="text-h4 q-mb-md">{{ tours[4] }}</div>
             <p>18 июня</p>
@@ -69,19 +79,9 @@ export default {
   data () {
     return {
       tour: 'лол',
-      tours: ['1 тур', '2 тур', '3 тур', '4 тур', '5 тур'],
+      tours: ['1 тур', '2 тур', '3 тур', '4 тур', '5 тур', '6 тур', '7 тур'],
       teams: ['ФК "Север"', 'ФК ""Псков"', 'СШ "Ленинградец"', 'СШ №2 ВО "Звезда"', 'СШ №7 "Карелия"', 'ФК "Химик"', 'ФК "Новград"', 'СШ "Электрон"'],
-      scores: ['0-3', '1-2', '1-1', '0-2', '1-2'],
-      resultGames: [],
-      resultGameStatus: '',
-      resultGameResult: '',
-      resultGameTitle: '',
-      resultGameDate: '',
-      resultGameTeam1: '',
-      resultGameTeam1City: '',
-      resultGameTeam2: '',
-      resultGameTeam2City: '',
-      resultGameTotal: ''
+      scores: ['0-3', '1-2', '1-1', '0-2', '1-2']
     }
   },
   async created () {
@@ -101,6 +101,14 @@ export default {
         {
           label: 'Чемпионат СЗФО 2022',
           children: [
+            {
+              label: '7 тур',
+              icon: 'done'
+            },
+            {
+              label: '6 тур',
+              icon: 'done'
+            },
             {
               label: '5 тур',
               icon: 'done'

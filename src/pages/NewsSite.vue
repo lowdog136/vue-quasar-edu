@@ -8,7 +8,7 @@
 
 import siteUpdate from 'components/SiteUpdate/siteUpdate'
 export default {
-  name: 'test3',
+  name: 'NewsSite',
   components: { siteUpdate },
   data () {
     return {}

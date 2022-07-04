@@ -45,6 +45,7 @@
             :PopyUpTitleNews="NewsCard.title"
             :PopyUpItem="NewsCard.item"
             :PopyUpBtnName="btnName"
+            :PopyUpDivMain = "btnDivMain"
           />
       </q-tabs>
     </q-card>
@@ -70,11 +71,13 @@ export default {
   data () {
     return {
       rating: 0,
+      btnName: 'Подробно',
       text: '',
       items: [],
       ResultCardTitle: '',
       ResultCardTeam1: '',
       ResultCardTeam2: '',
+      // кнопка что бы не прилипала к краю
       btnDivMain: 'q-pa-md',
       ResultCardResult: '',
       itemNewsClubNewsCardRaiting: '',
@@ -115,7 +118,6 @@ export default {
     })
     return {
       NewsCards,
-      btnName: 'Подробно',
       expanded: ref(false),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
