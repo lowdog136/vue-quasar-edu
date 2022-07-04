@@ -110,7 +110,7 @@ import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 const newsCardCollectionRef = collection(db, 'siteNews')
 const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
 
-//  NewsCard Block
+//  NewsCard Add value Block
 const newNewsCardSubTitle = ref('')
 const newNewsCardTitle = ref('')
 const newNewsCardPreView = ref('')
@@ -118,7 +118,7 @@ const newNewsCardFullNews = ref('')
 const newNewsCardDateNews = ref('')
 const newNewsCardSrcNews = ref('')
 
-// NewsCard Block
+// NewsCard Add Block
 const addNewsCard = () => {
   addDoc(newsCardCollectionRef, {
     subtitle: newNewsCardSubTitle.value,
@@ -143,7 +143,7 @@ const deleteNewsCard = id => {
 }
 
 export default {
-  name: 'NewsCardContentAdminAdd',
+  name: 'NewsCardContentAdd',
   components: { NewsCardDetailPopUp },
   data () {
     return {}

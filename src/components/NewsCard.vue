@@ -1,18 +1,18 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md"
-       v-for="item in items.slice(id).reverse()"
-       :key="item.id">
-    <q-card v-if="item.status" class="my-card" flat bordered>
+       v-for="NewsCard in NewsCards"
+       :key="NewsCard.id">
+    <q-card v-if="NewsCard.done" class="my-card" flat bordered>
         <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
         <q-card-section>
           <div class="text-overline text-deep-orange-14">
-            {{ item.subtitle }}
+            {{ NewsCard.subtitle }}
           </div>
           <div class="text-h5 q-mt-sm q-mb-xs">
-            {{ item.title }}
+            {{ NewsCard.title }}
           </div>
           <div class="text-caption text-blue-grey-10">
-            {{ item.preview }}
+            {{ NewsCard.preview }}
           </div> <br>
           <div class="text-caption text-grey">
             <q-icon
@@ -20,31 +20,31 @@
               :key="size"
               :size="size"
               name="visibility"
-            /> {{ item.howWatch }}
+            /> {{ NewsCard.howWatch }}
             <q-icon
               v-for="size in ['xs']"
               :key="size"
               :size="size"
               name="link"
-            /> {{ item.srcnews }}
+            /> {{ NewsCard.srcnews }}
           </div>
         </q-card-section>
       <q-tabs
         v-model="tab"
         class="white text-primary shadow-2"
       >
-        <q-tab name="event" icon="event">{{ item.datenews }}
+        <q-tab name="event" icon="event">{{ NewsCard.datenews }}
         </q-tab>
-        <q-tab name="star" disable @click="raitingNewsCardUp(item.raiting)" icon="star" label="Оценить">
-          <q-badge color="dark"  text-color="white" floating>{{ item.raiting }}</q-badge>
+        <q-tab name="star" disable @click="raitingNewsCardUp(NewsCard.raiting)" icon="star" label="Оценить">
+          <q-badge color="dark"  text-color="white" floating>{{ NewsCard.raiting }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
-            :PopyUpSubTitleNews="item.subtitle"
-            :PopyUpSrcNews="item.srcnews"
-            :PopyUpFullNews="item.fullnews"
-            :PopyUpTitleNews="item.title"
-            :PopyUpBtnName = "btnName"
-            :PopyUpDivMain = "btnDivMain"
+            :PopyUpSubTitleNews="NewsCard.subtitle"
+            :PopyUpSrcNews="NewsCard.srcnews"
+            :PopyUpFullNews="NewsCard.fullnews"
+            :PopyUpTitleNews="NewsCard.title"
+            :PopyUpItem="NewsCard.item"
+            :PopyUpBtnName="btnName"
           />
       </q-tabs>
     </q-card>
@@ -52,11 +52,17 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 import { mapActions, mapGetters } from 'vuex'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from 'src/firebase'
+
 const baseURL = 'https://severfans.ru'
+// NewsCard block
+const newsCardCollectionRef = collection(db, 'siteNews')
+const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
 
 export default {
   name: 'NewsCard',
@@ -65,7 +71,6 @@ export default {
     return {
       rating: 0,
       text: '',
-      btnName: 'Подробно',
       items: [],
       ResultCardTitle: '',
       ResultCardTeam1: '',
@@ -86,7 +91,31 @@ export default {
     }
   },
   setup () {
+    const NewsCards = ref([])
+    onMounted(async () => {
+      // NewsCard Module
+      onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
+        const fbNewsCards = []
+        querySnapshot.forEach((doc) => {
+          const NewsCard = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            preview: doc.data().preview,
+            fullnews: doc.data().fullnews,
+            datenews: doc.data().datenews,
+            srcnews: doc.data().srcnews,
+            date: doc.data().date,
+            done: doc.data().done
+          }
+          fbNewsCards.push(NewsCard)
+        })
+        NewsCards.value = fbNewsCards
+      })
+    })
     return {
+      NewsCards,
+      btnName: 'Подробно',
       expanded: ref(false),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }

@@ -28,7 +28,8 @@
       <q-page-container v-if="panelViewItem">
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            <ResultMatchAddDataAdmin />
+            <NewsCardContentAdd />
+<!--            <ResultMatchAddDataAdmin />-->
           </p>
         </q-page>
       </q-page-container>
@@ -47,13 +48,13 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import ResultMatchAddDataAdmin from 'components/ResultMatchAddDataAdmin'
+import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
 import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
 import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
 
 export default defineComponent({
   name: 'CarrotAdminPage',
-  components: { ResultMatchAddDataAdmin, ResultMatchResultCardAddDataAdmin, GamesNowEventAdd },
+  components: { NewsCardContentAdd, ResultMatchResultCardAddDataAdmin, GamesNowEventAdd },
   data () {
     return {
       panelViewEvent: false,
