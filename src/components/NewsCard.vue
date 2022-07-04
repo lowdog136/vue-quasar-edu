@@ -35,8 +35,8 @@
       >
         <q-tab name="event" icon="event">{{ NewsCard.datenews }}
         </q-tab>
-        <q-tab name="star" disable @click="raitingNewsCardUp(NewsCard.raiting)" icon="star" label="Оценить">
-          <q-badge color="dark"  text-color="white" floating>{{ NewsCard.raiting }}</q-badge>
+        <q-tab name="star" @click="countUpEvent(NewsCard.id)" icon="star" label="Оценить">
+          <q-badge color="dark"  text-color="white" floating>{{ NewsCard.count }}</q-badge>
         </q-tab>
           <NewsCardDetailPopUp
             :PopyUpSubTitleNews="NewsCard.subtitle"
@@ -57,7 +57,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
 
 const baseURL = 'https://severfans.ru'
@@ -109,15 +109,24 @@ export default {
             datenews: doc.data().datenews,
             srcnews: doc.data().srcnews,
             date: doc.data().date,
-            done: doc.data().done
+            done: doc.data().done,
+            count: doc.data().count
           }
           fbNewsCards.push(NewsCard)
         })
         NewsCards.value = fbNewsCards
       })
     })
+    const countUpEvent = id => {
+      const index = NewsCards.value.findIndex(event => event.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        count: NewsCards.value[index].count++
+      })
+      console.log('countUP', NewsCards.value[index].count)
+    }
     return {
       NewsCards,
+      countUpEvent,
       expanded: ref(false),
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
