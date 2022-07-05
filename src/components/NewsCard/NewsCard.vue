@@ -36,7 +36,8 @@
         <NewsCardFootTab
           :count="NewsCard.count"
           :datenews="NewsCard.datenews"
-          :divclass="divclass"
+          :divclassFootTab="divclassFootTab"
+          :likeUp="countUpEvent"
         />
         <NewsCardDetailPopUp
           :PopyUpSubTitleNews="NewsCard.subtitle"
@@ -72,7 +73,7 @@ export default {
       btnName: 'Подробно',
       // кнопка что бы не прилипала к краю
       btnDivMain: 'q-pa-md',
-      divclass: 'q-pa-m'
+      divclassFootTab: 'q-pa-m'
     }
   },
   setup () {
@@ -108,7 +109,6 @@ export default {
       console.log('countUP', NewsCards.value[index].id)
     }
     return {
-      tab: ref('mails'),
       NewsCards,
       countUpEvent
     }

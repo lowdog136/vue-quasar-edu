@@ -1,7 +1,10 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <NewsCardContentAdd />
-    <NewsCardFootTab />
+    <NewsCardFootTab
+      :count="count"
+      :datenews="prDate"
+    />
   </div>
 </template>
 
@@ -19,6 +22,7 @@ export default {
   setup () {
     return {
       titleMainEvent: 'Новости сайта. Релизы.',
+      count: 0,
       prDate: '25 may 2022'
     }
   }

@@ -1,12 +1,12 @@
 <template>
-  <div :class=divclass>
+  <div :class=divclassFootTab>
     <q-tabs
       v-model="tab"
-      class="white text-primary shadow-2"
+      class="white text-primary"
     >
       <q-tab name="event" icon="event">{{ datenews }}
       </q-tab>
-      <q-tab name="star" @click={countUpEvent} icon="star" label="Оценить">
+      <q-tab name="star" @click=likeUp icon="star" label="Оценить">
         <q-badge color="dark"  text-color="white" floating>{{ count }}</q-badge>
       </q-tab>
     </q-tabs>
@@ -27,8 +27,8 @@ export default {
   props: {
     datenews: String,
     count: String,
-    divclass: String,
-    countUpEvent: String
+    likeUp: String,
+    divclassFootTab: String
   }
 }
 </script>

@@ -51,8 +51,7 @@ export default {
   },
   setup () {
     return {
-      dialog: ref(false),
-      dialog2: ref(false)
+      dialog: ref(false)
     }
   },
   props: {
