@@ -173,7 +173,7 @@
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
-import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 const baseURL = 'https://severfans.ru'
 
 export default {

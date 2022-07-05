@@ -9,8 +9,14 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import NewsCard from 'components/NewsCard'
+import { ref, onMounted } from 'vue'
+import NewsCard from 'components/NewsCard/NewsCard'
+import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
+import { db } from 'src/firebase'
+
+// NewsCard block
+const newsCardCollectionRef = collection(db, 'siteNews')
+const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
 
 export default {
   components: { NewsCard },
@@ -21,8 +27,40 @@ export default {
     return {}
   },
   setup () {
+    const NewsCards = ref([])
+    onMounted(async () => {
+      // NewsCard Module
+      onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
+        const fbNewsCards = []
+        querySnapshot.forEach((doc) => {
+          const NewsCard = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            preview: doc.data().preview,
+            fullnews: doc.data().fullnews,
+            datenews: doc.data().datenews,
+            srcnews: doc.data().srcnews,
+            date: doc.data().date,
+            done: doc.data().done,
+            count: doc.data().count
+          }
+          fbNewsCards.push(NewsCard)
+        })
+        NewsCards.value = fbNewsCards
+      })
+    })
+    const countUpEvent = id => {
+      const index = NewsCards.value.findIndex(event => event.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        count: NewsCards.value[index].count++
+      })
+      // console.log('countUP', NewsCards.value[index].count)
+      console.log('countUP', NewsCards.value[index].id)
+    }
     return {
-      expanded: ref(false)
+      NewsCards,
+      countUpEvent
     }
   }
 }

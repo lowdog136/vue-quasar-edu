@@ -4,7 +4,7 @@
 
     <q-dialog v-model="dialog">
       <q-card class="my-card">
-        <q-img :src="require('../assets/image/imgTitle/title_0.png' )" />
+        <q-img :src="require('assets/image/imgTitle/title_0.png' )" />
         <q-card-section>
           <div class="text-overline text-orange-9"> {{ PopyUpSubTitleNews }}</div>
           <div class="text-h5 q-mt-sm q-mb-xs">{{ PopyUpTitleNews }}</div>
