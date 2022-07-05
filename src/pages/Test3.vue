@@ -1,15 +1,17 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <NewsCardContentAdd />
+    <NewsCardFootTab />
   </div>
 </template>
 
 <script>
 
 import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
+import NewsCardFootTab from 'components/NewsCard/NewsCardFootTab'
 export default {
   name: 'test3',
-  components: { NewsCardContentAdd },
+  components: { NewsCardFootTab, NewsCardContentAdd },
   data () {
     return {}
   },

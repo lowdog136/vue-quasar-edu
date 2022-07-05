@@ -6,7 +6,7 @@
 
 <script>
 import { ref } from 'vue'
-import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 import TestComp from 'components/TestComp'
 
 export default {
