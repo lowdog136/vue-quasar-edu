@@ -6,7 +6,7 @@
     >
       <q-tab name="event" icon="event">{{ datenews }}
       </q-tab>
-      <q-tab name="star" @click=likeUp icon="star" label="Оценить">
+      <q-tab name="star" @click=countUpEvent icon="star" label="Оценить">
         <q-badge color="dark"  text-color="white" floating>{{ count }}</q-badge>
       </q-tab>
     </q-tabs>
@@ -27,7 +27,7 @@ export default {
   props: {
     datenews: String,
     count: String,
-    likeUp: String,
+    countUpEvent: Function,
     divclassFootTab: String
   }
 }

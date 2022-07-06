@@ -64,6 +64,8 @@
           <q-item-section v-if="event.done">{{ event.title }}</q-item-section>
           <q-item-section v-if="event.done">{{ event.team1 }}</q-item-section>
           <q-item-section v-if="event.done">{{ event.team2 }}</q-item-section>
+          <q-item-section v-if="event.count">{{ event.count }}</q-item-section>
+          <q-item-section><q-btn @click="countUp(event.id)" icon="bookmark"/></q-item-section>
           <q-item-section><q-btn @click="toggleDone(event.id)" icon="done"/></q-item-section>
           <q-item-section><q-btn @click="deleteEvent(event.id)" icon="delete"/></q-item-section>
         </q-item>
@@ -87,6 +89,7 @@ const newEventSubTitle = ref('')
 const newEventTitle = ref('')
 const newEventTeam1 = ref('')
 const newEventTeam2 = ref('')
+const newEventCount = ref('')
 
 const addEvent = () => {
   addDoc(eventCollectionRef, {
@@ -94,12 +97,14 @@ const addEvent = () => {
     title: newEventTitle.value,
     team1: newEventTeam1.value,
     team2: newEventTeam2.value,
-    done: false
+    count: newEventCount.value,
+    done: true
   })
   newEventSubTitle.value = ''
   newEventTitle.value = ''
   newEventTeam1.value = ''
   newEventTeam2.value = ''
+  newEventCount.value = ''
   console.log('add todo', newTodoTitle.value)
 }
 
@@ -190,7 +195,8 @@ export default {
             title: doc.data().title,
             team1: doc.data().team1,
             team2: doc.data().team2,
-            done: doc.data().done
+            done: doc.data().done,
+            count: doc.data().count
           }
           fbEvents.push(event)
         })
@@ -198,9 +204,15 @@ export default {
       })
     })
     const toggleDone = id => {
-      const index = todos.value.findIndex(todo => todo.id === id)
-      updateDoc(doc(todosCollectionRef, id), {
-        done: !todos.value[index].done
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(eventCollectionRef, id), {
+        done: !events.value[index].done
+      })
+    }
+    const countUp = id => {
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(eventCollectionRef, id), {
+        count: events.value[index].count++
       })
     }
     // eslint-disable-next-line camelcase
@@ -208,11 +220,10 @@ export default {
     // eslint-disable-next-line camelcase
     const register_form = ref({})
     const store = useStore()
-    const count = ref(0)
     // eslint-disable-next-line no-undef
-    const increaseCount = () => {
-      count.value++
-    }
+    // const increaseCount = () => {
+    //   count.value++
+    // }
 
     const login = () => {
       store.dispatch('login', login_form.value)
@@ -226,7 +237,6 @@ export default {
       titleMainEvent: 'samething title2',
       register_form,
       login,
-      increaseCount,
       newTodoContent,
       newTodoTitle,
       newEventSubTitle,
@@ -238,6 +248,7 @@ export default {
       deleteEvent,
       deleteDoc,
       toggleDone,
+      countUp,
       addTodo,
       addEvent,
       events,

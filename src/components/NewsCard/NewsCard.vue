@@ -37,7 +37,7 @@
           :count="NewsCard.count"
           :datenews="NewsCard.datenews"
           :divclassFootTab="divclassFootTab"
-          :likeUp="countUpEvent"
+          :countUpEvent="countUpEvent"
         />
         <NewsCardDetailPopUp
           :PopyUpSubTitleNews="NewsCard.subtitle"
@@ -101,12 +101,11 @@ export default {
       })
     })
     const countUpEvent = id => {
-      const index = NewsCards.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionRef, id), {
         count: NewsCards.value[index].count++
       })
-      // console.log('countUP', NewsCards.value[index].count)
-      console.log('countUP', NewsCards.value[index].id)
+      console.log('countUP', NewsCards.value[index].count)
     }
     return {
       NewsCards,
