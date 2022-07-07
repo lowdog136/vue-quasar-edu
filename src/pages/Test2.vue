@@ -83,6 +83,8 @@ import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
 const eventCollectionRef = collection(db, 'events')
+const eventCollectionCount = collection(db, 'events')
+
 const newTodoContent = ref('')
 const newTodoTitle = ref('')
 const newEventSubTitle = ref('')
@@ -209,11 +211,19 @@ export default {
         done: !events.value[index].done
       })
     }
+    // const countUp = id => {
+    //   const index = events.value.findIndex(event => event.id === id)
+    //   updateDoc(doc(eventCollectionRef, id), {
+    //     count: events.value[index].title.length
+    //   })
+    //   console.log('length', events.value[index].count)
+    // }
     const countUp = id => {
       const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        count: events.value[index].count++
+      updateDoc(doc(eventCollectionCount, id), {
+        count: 666
       })
+      console.log('length', events.value[index].count)
     }
     // eslint-disable-next-line camelcase
     const login_form = ref({})

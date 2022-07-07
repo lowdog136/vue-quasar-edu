@@ -1,20 +1,17 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <NewsCardContentAdd />
-    <NewsCardFootTab
-      :count="count"
-      :datenews="prDate"
-    />
+    <NewsCardSubTitleSelect />
   </div>
 </template>
 
 <script>
 
 import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
-import NewsCardFootTab from 'components/NewsCard/NewsCardFootTab'
+import NewsCardSubTitleSelect from 'components/Selects/NewsCardSubTitleSelect'
 export default {
   name: 'test3',
-  components: { NewsCardFootTab, NewsCardContentAdd },
+  components: { NewsCardSubTitleSelect, NewsCardContentAdd },
   data () {
     return {}
   },
