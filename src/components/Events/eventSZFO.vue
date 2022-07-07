@@ -18,6 +18,7 @@
         </div>
         <div>
           {{ matchEvent.nameEvent}}
+          <q-item-label caption>планируют посетить: {{ matchEvent.planeVisitCount }}</q-item-label>
         </div>
       </q-timeline-entry>
     </q-timeline>
@@ -126,7 +127,8 @@ export default {
               nameEvent: 'ФК "Север" - СШ "Электрон"',
               color: 'teal',
               data: 'август 6, 2022',
-              icon: 'event'
+              icon: 'event',
+              planeVisitCount: 0
             },
             {
               id: 2,
@@ -134,7 +136,8 @@ export default {
               nameEvent: 'ФК "Север" - ФК "Новград"',
               color: 'teal',
               data: 'август 9, 2022',
-              icon: 'event'
+              icon: 'event',
+              planeVisitCount: 0
             },
             {
               id: 3,
@@ -142,7 +145,8 @@ export default {
               nameEvent: 'ФК "Север" - СШ №2 ВО "Звезда"',
               color: 'teal',
               data: 'август 13, 2022',
-              icon: 'event'
+              icon: 'event',
+              planeVisitCount: 0
             },
             {
               id: 4,
@@ -150,8 +154,8 @@ export default {
               nameEvent: 'СШ №7 Карелия - ФК "Север"',
               color: 'teal',
               data: 'август 20, 2022',
-              mounth: 'июль',
-              icon: 'sentiment_very_satisfied'
+              icon: 'sentiment_very_satisfied',
+              planeVisitCount: 0
             },
             {
               id: 5,
@@ -159,7 +163,8 @@ export default {
               nameEvent: 'ФК "Химик" - ФК "Север"',
               color: 'teal',
               data: 'август 25, 2022',
-              icon: 'event'
+              icon: 'event',
+              planeVisitCount: 0
             }
           ]
         },
@@ -173,7 +178,8 @@ export default {
               nameEvent: 'ФК "Север" - ФК "Псков"',
               color: 'red',
               data: 'сентябрь 14, 2022',
-              icon: 'local_fire_department'
+              icon: 'local_fire_department',
+              planeVisitCount: 0
             },
             {
               id: 1,
@@ -181,7 +187,8 @@ export default {
               nameEvent: 'ФК "Север" - СШ Ленинградец',
               color: 'teal',
               data: 'сентябрь 17, 2022',
-              icon: 'event'
+              icon: 'event',
+              planeVisitCount: 0
             }
           ]
         }
