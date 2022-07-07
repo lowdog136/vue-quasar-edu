@@ -1,6 +1,8 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <h4> Привет, {{ $store.state.user.email }}</h4>
+<!--    <h4> Привет, {{ $store.state.user.email }}</h4>-->
+    <h4> Привет, username</h4>
+    <h4> Матчи, которые ты хочешь посетить:</h4>
   </div>
 </template>
 

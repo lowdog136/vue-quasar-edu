@@ -6,7 +6,7 @@
     >
       <q-tab name="event" icon="event">{{ datenews }}
       </q-tab>
-      <q-tab name="star" @click=countUpEvent icon="star" label="Оценить">
+      <q-tab name="star" disable @click=countUpEvent icon="star" label="Оценить">
         <q-badge color="dark"  text-color="white" floating>{{ count }}</q-badge>
       </q-tab>
     </q-tabs>
