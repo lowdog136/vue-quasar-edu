@@ -83,7 +83,7 @@ import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
 const eventCollectionRef = collection(db, 'events')
-const eventCollectionCount = collection(db, 'events')
+// const eventCollectionCount = collection(db, 'events')
 
 const newTodoContent = ref('')
 const newTodoTitle = ref('')
@@ -220,8 +220,8 @@ export default {
     // }
     const countUp = id => {
       const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionCount, id), {
-        count: 666
+      updateDoc(doc(eventCollectionRef, id), {
+        count: 11
       })
       console.log('length', events.value[index].count)
     }
@@ -253,6 +253,7 @@ export default {
       newEventTitle,
       newEventTeam1,
       newEventTeam2,
+      newCount: 6,
       register,
       deleteTodo,
       deleteEvent,
