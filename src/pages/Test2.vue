@@ -52,7 +52,11 @@
             hint="add Team2"
             lazy-rules
           />
-
+          <q-input
+            v-model='newEventCount'
+            hint="edit count"
+            lazy-rules
+          />
         </div>
         <q-btn @click="addEvent" label="add event"/>
       </q-form>
@@ -78,7 +82,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, increment } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
@@ -221,9 +225,9 @@ export default {
     const countUp = id => {
       const index = events.value.findIndex(event => event.id === id)
       updateDoc(doc(eventCollectionRef, id), {
-        count: 11
+        count: increment(1)
       })
-      console.log('length', events.value[index].count)
+      console.log('count', events.value[index].count)
     }
     // eslint-disable-next-line camelcase
     const login_form = ref({})
@@ -253,6 +257,7 @@ export default {
       newEventTitle,
       newEventTeam1,
       newEventTeam2,
+      newEventCount,
       newCount: 6,
       register,
       deleteTodo,
