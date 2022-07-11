@@ -52,11 +52,6 @@
             hint="add Team2"
             lazy-rules
           />
-          <q-input
-            v-model='newEventCount'
-            hint="edit count"
-            lazy-rules
-          />
         </div>
         <q-btn @click="addEvent" label="add event"/>
       </q-form>
