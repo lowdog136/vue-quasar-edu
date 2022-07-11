@@ -38,6 +38,7 @@
           :datenews="NewsCard.datenews"
           :divclassFootTab="divclassFootTab"
           :countUpEvent="countUpEvent"
+          :NewsCard="NewsCard"
         />
         <NewsCardDetailPopUp
           :PopyUpSubTitleNews="NewsCard.subtitle"
@@ -58,7 +59,7 @@ import { ref, onMounted } from 'vue'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 import NewsCardFootTab from '../NewsCard/NewsCardFootTab'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
+import { collection, doc, increment, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
 
 // NewsCard block
@@ -103,9 +104,9 @@ export default {
     const countUpEvent = id => {
       const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionRef, id), {
-        count: NewsCards.value[index].count++
+        count: increment(1)
       })
-      console.log('countUP', NewsCards.value[index].count)
+      console.log('count Like:', NewsCards.value[index].count)
     }
     return {
       NewsCards,
@@ -128,14 +129,7 @@ export default {
     PopyUpTitleNews: String,
     PopyUpSrcNews: String,
     PopyUpFullNews: String,
-    PopyUpHowWatch: String,
-
-    product_data: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
+    PopyUpHowWatch: String
   }
 }
 </script>
