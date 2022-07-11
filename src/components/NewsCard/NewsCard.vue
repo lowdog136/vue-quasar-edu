@@ -106,7 +106,8 @@ export default {
       updateDoc(doc(newsCardCollectionRef, id), {
         count: increment(1)
       })
-      console.log('count Like:', NewsCards.value[index].count)
+      console.log('count id:', NewsCards.value[index].id)
+      console.log('count:', NewsCards.value[index].count)
     }
     return {
       NewsCards,

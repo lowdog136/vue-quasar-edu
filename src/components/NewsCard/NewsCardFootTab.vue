@@ -28,7 +28,7 @@ export default {
     datenews: String,
     count: String,
     countUpEvent: Function,
-    NewsCard: Function,
+    NewsCard: String,
     divclassFootTab: String
   }
 }
