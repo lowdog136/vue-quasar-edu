@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-list>
+    <q-list v-if="greetingDone">
       <q-item-section>{{ greetingTitle }}</q-item-section>
       <q-separator/>
       <div>
@@ -8,11 +8,15 @@
       </div>
       <q-separator/>
       <div>
-        <q-item>{{ greetingBody }}</q-item>
+        <q-item>{{ greetingBody }}
+          <div>
+            <q-btn @click=greetingBtn />
+          </div>
+        </q-item>
       </div>
       <q-separator/>
       <div>
-        <q-item>{{ greetingDate }}</q-item>
+        <q-item>{{ greetingDate }} </q-item>
       </div>
     </q-list>
   </div>
@@ -23,8 +27,10 @@ export default {
   name: 'TestListComp',
   props: {
     greetingAuthor: String,
+    greetingBtn: String,
     greetingBody: String,
     greetingTitle: String,
+    greetingDone: Boolean,
     greetingDate: String
   }
 }
