@@ -9,6 +9,9 @@ export default {
   name: 'TestTitleComp',
   props: {
     greetingMessage: String
+  },
+  setup (props) {
+    console.log(props.greetingMessage)
   }
 }
 </script>

@@ -18,6 +18,9 @@
       <div>
         <q-item>{{ greetingDate }} </q-item>
       </div>
+      <div>
+        <q-item>{{ greetingCount }} </q-item>
+      </div>
     </q-list>
   </div>
 </template>
@@ -27,11 +30,12 @@ export default {
   name: 'TestListComp',
   props: {
     greetingAuthor: String,
-    greetingBtn: String,
+    greetingBtn: Function,
     greetingBody: String,
     greetingTitle: String,
     greetingDone: Boolean,
-    greetingDate: String
+    greetingDate: String,
+    greetingCount: String
   }
 }
 </script>
