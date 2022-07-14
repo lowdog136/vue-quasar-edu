@@ -17,6 +17,10 @@
                      :greeting-count="author.count"
        />
     </div>
+    <q-input v-model="countTest" label='text here' />
+    <div style="color: #ae0000">
+      {{ titleTest }}
+    </div>
     <q-separator />
     <q-btn @click="countTest++" label="btnUp"/>
     {{ countTest }}
