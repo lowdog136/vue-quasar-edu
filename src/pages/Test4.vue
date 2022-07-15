@@ -38,41 +38,68 @@
       v-model="redModel"
     />
     <div v-if="redModel">
-      <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
-        <q-card>
-          <q-toolbar class="bg-primary text-white shadow-2">
-            <!--            Update subtitle block-->
-            <q-toolbar-title>
-              <q-input v-model="event.subtitle" @submit="updateSubTitle"/>
-              <q-btn @click="updateSubTitle(event.id)" size="xs" icon="done" />
-            </q-toolbar-title>
-          </q-toolbar>
-          <q-list v-if="event.done">
-            <q-item-section>
-              {{ event.count }}
-            </q-item-section>
-<!--            Update title block-->
-            <q-item>
-              <q-input v-model="event.title" @submit="updateTitle(event.id)"/>
-              <q-btn @click="updateTitle(event.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <q-input v-model="event.team1" @submit="updateTeam1"/>
-              <q-btn @click="updateTeam1(event.id)" size="xs" icon="done"/>
-              <q-input v-model="event.team2" @submit="updateTeam2"/>
-              <q-btn @click="updateTeam2(event.id)" size="xs" icon="done"/>
-            </q-item>
-          </q-list>
-          <q-tabs
-            v-model="tab"
-            class="bg-teal text-yellow shadow-2"
-          >
-            <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
-            <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
-          </q-tabs>
-        </q-card>
+      <div>
+        <q-btn @click="listCount--" label="down"/>
+        {{ listCount }}
+        <q-btn @click="listCount++" label="up"/>
+        <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
+          {{ events.length }}
+          <q-card>
+            <q-toolbar class="bg-primary text-white shadow-2">
+              <!--            Update subtitle block-->
+              <q-toolbar-title>
+                <q-input v-model="event.subtitle" @submit="updateSubTitle"/>
+                <div>
+                  <q-btn @click="updateSubTitle(event.id)" size="xs" icon="done" />
+                </div>
+              </q-toolbar-title>
+            </q-toolbar>
+            <q-list v-if="event.done">
+              <q-item-section>
+                {{ event.count }}
+              </q-item-section>
+              <!--            Update title block-->
+              <q-item>
+                <q-input v-model="event.title" @submit="updateTitle(event.id)"/>
+                <q-btn @click="updateTitle(event.id)" size="xs" icon="done"/>
+              </q-item>
+              <q-item>
+                <q-input v-model="event.team1" @submit="updateTeam1"/>
+                <q-btn @click="updateTeam1(event.id)" size="xs" icon="done"/>
+                <q-input v-model="event.team2" @submit="updateTeam2"/>
+                <q-btn @click="updateTeam2(event.id)" size="xs" icon="done"/>
+              </q-item>
+            </q-list>
+            <q-tabs
+              v-model="tab"
+              class="bg-teal text-yellow shadow-2"
+            >
+              <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
+              <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
+              <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
+            </q-tabs>
+          </q-card>
+        </div>
       </div>
+    </div>
+  </div>
+  <div v-if="redModel">
+    <div>
+      <h4> Text here </h4>
+    </div>
+    <q-btn @click="listCount++" label="+"/>
+    <q-btn @click="listCount--" label="-"/>
+    <div>
+      {{ listCount }}
+    </div>
+    <div v-if="author2[listCount]">
+      {{ author1[listCount] }}
+    </div>
+  </div>
+  <div>
+    <h5>text herer 2</h5>
+    <div v-for="text in texts" :key="text.length">
+      {{ text }}
     </div>
   </div>
 </template>
@@ -119,16 +146,17 @@ export default {
   data () {
     return {
       tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
+      author1: ['Room view', 'Room service', 'Food', 'Clean', 'Washing'],
+      author2: [1, 2, 3, 4, 5],
       BtnName: 'pump',
       BtnSize: 'xs',
-      tourCount: 0,
-      count: '',
-      items: []
+      count: ''
     }
   },
   setup () {
+    const texts = ref('12 33 44 55')
+    const listCount = ref('')
+    const activeCard = ref('')
     const todos = ref([])
     const events = ref([])
     onMounted(async () => {
@@ -213,7 +241,7 @@ export default {
       newEventTeam2,
       newEventCount,
       done: ref(true),
-      redModel: ref(true),
+      redModel: ref(false),
       deleteEvent,
       deleteDoc,
       toggleEvent,
@@ -223,7 +251,10 @@ export default {
       updateTeam1,
       updateTeam2,
       addEvent,
+      activeCard,
+      listCount,
       events,
+      texts,
       todos,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
