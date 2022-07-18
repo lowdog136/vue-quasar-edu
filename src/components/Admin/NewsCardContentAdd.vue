@@ -56,17 +56,25 @@
       <div class="q-pa-md" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>{{ NewsCard.subtitle }}</q-toolbar-title>
+            <q-toolbar-title>
+              <q-item>
+                <q-input v-model="NewsCard.subtitle" @submit="updateSubTitle(NewsCard.id)"/>
+                <q-btn @click="updateSubTitle(NewsCard.id)" size="xs" icon="done"/>
+              </q-item>
+            </q-toolbar-title>
           </q-toolbar>
           <q-list v-if="NewsCard.done">
             <q-item-section>
               {{ NewsCard.data }}
             </q-item-section>
             <q-item>
-              {{ NewsCard.title }}
+              <q-input v-model="NewsCard.title" @submit="updateTitle(NewsCard.id)"/>
+              <q-btn @click="updateTitle(NewsCard.id)" size="xs" icon="done"/>
             </q-item>
             <q-item>
-              {{ NewsCard.preview }}<br/>{{ NewsCard.datenews }}
+              <q-input v-model="NewsCard.preview" @submit="updatePreView(NewsCard.id)" autogrow/>
+              <q-btn @click="updatePreView(NewsCard.id)" size="xs" icon="done"/>
+              <br/>{{ NewsCard.datenews }}
             </q-item>
             <q-item>
               <NewsCardDetailPopUp
@@ -199,6 +207,28 @@ export default {
       })
       console.log('countUP', NewsCards.value[index].count)
     }
+    // Edit data in NewsCard block
+    const updateSubTitle = id => {
+      const index = NewsCards.value.findIndex(event => event.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        subtitle: NewsCards.value[index].subtitle
+      })
+      console.log('subtitle update', NewsCards.value[index].subtitle, 'subtitle id', NewsCards.value[index].id)
+    }
+    const updateTitle = id => {
+      const index = NewsCards.value.findIndex(event => event.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        title: NewsCards.value[index].title
+      })
+      console.log('title update', NewsCards.value[index].title, 'title id', NewsCards.value[index].id)
+    }
+    const updatePreView = id => {
+      const index = NewsCards.value.findIndex(event => event.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        preview: NewsCards.value[index].preview
+      })
+      console.log('title update', NewsCards.value[index].title, 'title id', NewsCards.value[index].id)
+    }
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       newNewsCardDateNews,
@@ -209,7 +239,7 @@ export default {
       newNewsCardSrcNews,
       done: ref(true),
       redModel: ref(false),
-      greenModel: ref(false),
+      greenModel: ref(true),
       PopyUpBtnName: 'popup',
       addNewsCard,
       deleteNewsCard,
@@ -217,6 +247,9 @@ export default {
       toggleEvent,
       countUpEvent,
       NewsCards,
+      updateSubTitle,
+      updateTitle,
+      updatePreView,
       tab: ref(['alarms', 'mails'])
     }
   },
