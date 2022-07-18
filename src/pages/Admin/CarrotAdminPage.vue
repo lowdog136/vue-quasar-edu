@@ -21,7 +21,7 @@
       <q-page-container v-if="panelSiteUpdate">
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            <siteUpdate />
+            <NewsSiteContentAdd />
           </p>
         </q-page>
       </q-page-container>
@@ -59,12 +59,12 @@
 import { defineComponent, ref } from 'vue'
 import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
 import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
-import siteUpdate from 'components/SiteUpdate/siteUpdate'
+import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd'
 import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
 
 export default defineComponent({
   name: 'CarrotAdminPage',
-  components: { NewsCardContentAdd, ResultMatchResultCardAddDataAdmin, GamesNowEventAdd, siteUpdate },
+  components: { NewsCardContentAdd, ResultMatchResultCardAddDataAdmin, GamesNowEventAdd, NewsSiteContentAdd },
   data () {
     return {
       panelSiteUpdate: false,

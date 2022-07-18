@@ -22,7 +22,7 @@ export default store(function (/* { ssrContext } */) {
     },
     state: {
       // Дата обновления новостей о сайте
-      NavigationReleaseDateSite: '04.07.22',
+      NavigationReleaseDateSite: '18.07.22',
       // Дата обновления новостей о команде
       NavigationReleaseNewsSite: '04.07.22',
       // Дата обновления календаря чемпионата

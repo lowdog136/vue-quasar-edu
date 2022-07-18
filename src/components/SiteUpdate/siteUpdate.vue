@@ -31,7 +31,6 @@ const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
 const newEventVer = ref('')
 const newEventTitle = ref('')
 const newEventBody = ref('')
-const newEventTeam2 = ref('')
 const newEventDateUpd = ref('')
 const newEventDate = ref('')
 const newEventCount = ref('')
@@ -133,7 +132,6 @@ export default {
       newEventTitle,
       newEventBody,
       newEventDateUpd,
-      newEventTeam2,
       newEventCount,
       done: ref(true),
       redModel: ref(false),

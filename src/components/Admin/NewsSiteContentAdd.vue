@@ -6,28 +6,29 @@
       >
         <div>
           <q-input
-            v-model='newEventVer'
+            v-model='newSiteUpdateVer'
             hint="add Ver"
             lazy-rules
           />
           <q-input
-            v-model='newEventTitle'
+            v-model='newSiteUpdateTitle'
             hint="add Title"
             lazy-rules
           />
           <q-input
-            v-model='newEventBody'
+            v-model='newSiteUpdateBody'
             hint="add Body"
+            autogrow
             lazy-rules
           />
           <q-input
-            v-model='newEventDate'
-            type="text"
+            v-model='newSiteUpdateDateUpd'
+            type="date"
             hint="add date"
             lazy-rules
           />
         </div>
-        <q-btn @click="addEvent" label="add event"/>
+        <q-btn @click="addSiteUpdate" label="add event"/>
       </q-form>
     </div>
     <q-toggle
@@ -38,20 +39,24 @@
       v-model="redModel"
     />
     <div v-if="redModel">
-      <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 650px">
+      <div class="q-pa-md" v-for="SiteUpdate in SiteUpdates" :key="SiteUpdate.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>{{ event.ver }}</q-toolbar-title>
+            <q-toolbar-title>
+              <q-input v-model="SiteUpdate.ver" hint="ver" @submit="updateVer(SiteUpdate.id)"/>
+              <q-btn @click="updateVer(SiteUpdate.id)" size="xs" icon="done"/></q-toolbar-title>
           </q-toolbar>
-          <q-list v-if="event.done">
+          <q-list v-if="SiteUpdate.done">
             <q-item-section>
-              {{ event.data }}
+              {{ SiteUpdate.dateupd }}
             </q-item-section>
             <q-item>
-              {{ event.title }}
+              <q-input v-model="SiteUpdate.title" hint="title" @submit="updateTitle(SiteUpdate.id)"/>
+              <q-btn @click="updateTitle(SiteUpdate.id)" size="xs" icon="done"/>
             </q-item>
             <q-item>
-              {{ event.body }}
+              <q-input v-model="SiteUpdate.body" autogrow hint="body" @submit="updateBody(SiteUpdate.id)"/>
+              <q-btn @click="updateBody(SiteUpdate.id)" size="xs" icon="done"/>
             </q-item>
           </q-list>
           <q-tabs
@@ -60,178 +65,127 @@
           >
             <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
             <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
-            <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
+            <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
           </q-tabs>
         </q-card>
       </div>
     </div>
-  </div>
-  <div class="q-px-lg q-pb-md">
-    <q-timeline color="secondary" >
-      <q-timeline-entry heading >
-        Timeline heading
-      </q-timeline-entry>
-      <q-timeline-entry v-for="event in events" :key="event.id"
-                        :title=event.title
-                        :subtitle=event.date
-                        icon="done"
-      >
-        <div>
-          ver: {{ event.ver }}
-        </div>
-        <div>
-          {{ event.body }}
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit } from 'firebase/firestore'
-import { db } from '../firebase'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 
-const eventCollectionRef = collection(db, 'siteUpdates')
-const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
-const newEventVer = ref('')
-const newEventTitle = ref('')
-const newEventBody = ref('')
-const newEventTeam2 = ref('')
-const newEventDate = ref('')
-const newEventCount = ref('')
+const siteUpdateCollectionRef = collection(db, 'siteUpdates')
+const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
+const newSiteUpdateVer = ref('')
+const newSiteUpdateTitle = ref('')
+const newSiteUpdateBody = ref('')
+const newSiteUpdateDate = ref('')
+const newSiteUpdateCount = ref('')
+const newSiteUpdateDateUpd = ref('')
 
-const addEvent = () => {
-  addDoc(eventCollectionRef, {
-    ver: newEventVer.value,
-    title: newEventTitle.value,
-    body: newEventBody.value,
-    date: newEventDate.value,
+const addSiteUpdate = () => {
+  addDoc(siteUpdateCollectionRef, {
+    ver: newSiteUpdateVer.value,
+    title: newSiteUpdateTitle.value,
+    body: newSiteUpdateBody.value,
+    dateupd: newSiteUpdateDateUpd.value,
+    date: Date.now(),
     done: true
   })
-  newEventVer.value = ''
-  newEventTitle.value = ''
-  newEventBody.value = ''
-  newEventDate.value = ''
-  newEventCount.value = ''
-  console.log('add todo', newEventDate.value)
+  newSiteUpdateVer.value = ''
+  newSiteUpdateTitle.value = ''
+  newSiteUpdateBody.value = ''
+  newSiteUpdateDate.value = ''
+  newSiteUpdateCount.value = ''
+  newSiteUpdateDateUpd.value = ''
+  console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
 
-const deleteEvent = id => {
-  deleteDoc(doc(eventCollectionRef, id))
+const deleteSiteUpdate = id => {
+  deleteDoc(doc(siteUpdateCollectionRef, id))
 }
 
 export default {
-  name: 'GamesNowEventAdd',
+  name: 'NewsSiteContentAdd',
   components: {},
   data () {
     return {
-      tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
-      BtnName: 'pump',
-      BtnSize: 'xs',
-      tourCount: 0,
-      count: '',
-      items: []
     }
   },
-  mounted () {
-    // axios
-    //   .post('http://localhost:3001/posts/', {
-    //     id: '4',
-    //     userId: '3',
-    //     title: 'Article title4-1',
-    //     body: 'Article body content44'
-    //   })
-    //   .then((response) => console.log(response))
-    // axios
-    //   .get('http://localhost:3001/posts')
-    //   .then((response) => {
-    //     this.posts = response.data
-    //   })
-  },
   setup () {
-    const todos = ref([])
-    const events = ref([])
+    const SiteUpdate = ref([])
+    const SiteUpdates = ref([])
     onMounted(async () => {
-      onSnapshot(eventCollectionQuery, (querySnapshot) => {
-        const fbTodos = []
+      // NewsCard Module
+      onSnapshot(siteUpdateCollectionQuery, (querySnapshot) => {
+        const fbSiteUpdates = []
         querySnapshot.forEach((doc) => {
-          const todo = {
+          const SiteUpdate = {
             id: doc.id,
-            content: doc.data().content,
-            title: doc.data().title,
-            done: doc.data().done
-          }
-          fbTodos.push(todo)
-        })
-        todos.value = fbTodos
-      })
-      onSnapshot(collection(db, 'siteUpdates'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const event = {
-            id: doc.id,
-            ver: doc.data().ver,
+            dateupd: doc.data().dateupd,
             title: doc.data().title,
             body: doc.data().body,
+            ver: doc.data().ver,
             date: doc.data().date,
             done: doc.data().done
           }
-          fbEvents.push(event)
+          fbSiteUpdates.push(SiteUpdate)
         })
-        events.value = fbEvents
+        SiteUpdates.value = fbSiteUpdates
       })
     })
-    const toggleEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        done: !events.value[index].done
+    // Edit SiteUpdate Block
+    const updateVer = id => {
+      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        ver: SiteUpdate.value[index].ver
       })
+      console.log('ver update', SiteUpdate.value[index].ver, 'SiteUpdate id', SiteUpdate.value[index].id)
     }
-    const countUpEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        count: events.value[index].count++
+    const updateTitle = id => {
+      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        title: SiteUpdate.value[index].title
       })
-      console.log('countUP', events.value[index].count)
+      console.log('title update', SiteUpdate.value[index].title, 'SiteUpdate id', SiteUpdate.value[index].id)
+    }
+    const updateBody = id => {
+      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        body: SiteUpdate.value[index].body
+      })
+      console.log('body update', SiteUpdate.value[index].body, 'SiteUpdate id', SiteUpdate.value[index].id)
     }
     return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      titleMainEvent: 'samething title2',
-      newEventVer,
-      newEventTitle,
-      newEventBody,
-      newEventDate,
-      newEventTeam2,
-      newEventCount,
+      newSiteUpdateVer,
+      newSiteUpdateTitle,
+      newSiteUpdateBody,
+      newSiteUpdateDate,
+      newSiteUpdateCount,
       done: ref(true),
-      redModel: ref(false),
-      deleteEvent,
+      redModel: ref(true),
+      deleteSiteUpdate,
       deleteDoc,
-      toggleEvent,
-      countUpEvent,
-      addEvent,
-      events,
-      todos,
+      addSiteUpdate,
+      SiteUpdates,
+      updateVer,
+      updateTitle,
+      updateBody,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
   },
   computed: {
     ...mapGetters([
-      'dropDown'
     ])
   },
   methods: {
     ...mapActions([
-      'togledropDown',
-      'changePush',
-      'myCountZero',
-      'myCountUp',
-      'howWatch'
     ])
   },
 
