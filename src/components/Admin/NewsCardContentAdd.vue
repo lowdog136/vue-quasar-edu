@@ -53,7 +53,7 @@
       v-model="greenModel"
     />
     <div v-if="greenModel">
-      <div class="q-pa-md" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
+      <div class="my-card" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
             <q-toolbar-title>
@@ -68,13 +68,24 @@
               {{ NewsCard.data }}
             </q-item-section>
             <q-item>
-              <q-input v-model="NewsCard.title" @submit="updateTitle(NewsCard.id)"/>
+              <q-input v-model="NewsCard.title" hint="title" @submit="updateTitle(NewsCard.id)"/>
               <q-btn @click="updateTitle(NewsCard.id)" size="xs" icon="done"/>
             </q-item>
             <q-item>
-              <q-input v-model="NewsCard.preview" @submit="updatePreView(NewsCard.id)" autogrow/>
+              <q-input v-model="NewsCard.preview" hint="subtitle" @submit="updatePreView(NewsCard.id)" autogrow/>
               <q-btn @click="updatePreView(NewsCard.id)" size="xs" icon="done"/>
-              <br/>{{ NewsCard.datenews }}
+            </q-item>
+            <q-item>
+              <q-input v-model="NewsCard.datenews" hint="datenews" @submit="updateDateNews(NewsCard.id)" type="date" autogrow/>
+              <q-btn @click="updateDateNews(NewsCard.id)" size="xs" icon="done"/>
+            </q-item>
+            <q-item>
+              <q-input v-model="NewsCard.fullnews" hint="fullnews" @submit="updateFullNews(NewsCard.id)"/>
+              <q-btn @click="updateFullNews(NewsCard.id)" size="xs" icon="done"/>
+            </q-item>
+            <q-item>
+              <q-input v-model="NewsCard.srcnews" hint="srcnews" @submit="updateSrcNews(NewsCard.id)"/>
+              <q-btn @click="updateSrcNews(NewsCard.id)" size="xs" icon="done"/>
             </q-item>
             <q-item>
               <NewsCardDetailPopUp
@@ -91,18 +102,12 @@
             v-model="tab"
             class="bg-teal text-yellow shadow-2"
           >
-            <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
+            <q-tab  @click="countUpEvent(NewsCard.id)" name="mails" icon="arrow_upward" />
+            <q-tab @click="toggleEvent(NewsCard.id)" name="alarms" icon="done" />
             <q-tab @click="deleteNewsCard(NewsCard.id)" name="movies" icon="delete" />
           </q-tabs>
         </q-card>
       </div>
-    </div>
-  </div>
-  <div v-if="greenModel" class="q-px-lg q-pb-md">
-    AddNewsBlock Mode
-    <div v-for="NewsCard in NewsCards" :key="NewsCard.id">
-      {{ NewsCard.title }}
     </div>
   </div>
 </template>
@@ -209,25 +214,46 @@ export default {
     }
     // Edit data in NewsCard block
     const updateSubTitle = id => {
-      const index = NewsCards.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionRef, id), {
         subtitle: NewsCards.value[index].subtitle
       })
       console.log('subtitle update', NewsCards.value[index].subtitle, 'subtitle id', NewsCards.value[index].id)
     }
     const updateTitle = id => {
-      const index = NewsCards.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionRef, id), {
         title: NewsCards.value[index].title
       })
       console.log('title update', NewsCards.value[index].title, 'title id', NewsCards.value[index].id)
     }
     const updatePreView = id => {
-      const index = NewsCards.value.findIndex(event => event.id === id)
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
       updateDoc(doc(newsCardCollectionRef, id), {
         preview: NewsCards.value[index].preview
       })
-      console.log('title update', NewsCards.value[index].title, 'title id', NewsCards.value[index].id)
+      console.log('preview update', NewsCards.value[index].preview, 'title id', NewsCards.value[index].id)
+    }
+    const updateDateNews = id => {
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        datenews: NewsCards.value[index].datenews
+      })
+      console.log('datenews update', NewsCards.value[index].datenews, 'title id', NewsCards.value[index].id)
+    }
+    const updateFullNews = id => {
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        fullnews: NewsCards.value[index].fullnews
+      })
+      console.log('datenews update', NewsCards.value[index].datenews, 'title id', NewsCards.value[index].id)
+    }
+    const updateSrcNews = id => {
+      const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
+      updateDoc(doc(newsCardCollectionRef, id), {
+        srcnews: NewsCards.value[index].srcnews
+      })
+      console.log('datenews update', NewsCards.value[index].srcnews, 'title id', NewsCards.value[index].id)
     }
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -250,6 +276,9 @@ export default {
       updateSubTitle,
       updateTitle,
       updatePreView,
+      updateDateNews,
+      updateFullNews,
+      updateSrcNews,
       tab: ref(['alarms', 'mails'])
     }
   },
@@ -264,6 +293,30 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 550px
+  background: #2c3e50
+  .root
+    width: 400px
+    margin: 0 auto
+    background-color: #fff
+    padding: 30px
+    margin-top: 100px
+    border-radius: 20px
+  input
+    border: none
+    outline: none
+    border-bottom: 1px solid #ddd
+    font-size: 1em
+    padding: 5px 0
+    margin: 10px 0 5px 0
+    width: 100%
+  button
+    background-color: #3498db
+    padding: 10px 20px
+    margin-top: 10px
+    border: none
+    color: white
 </style>
