@@ -47,8 +47,19 @@
           <q-card>
             <q-toolbar class="bg-primary text-white shadow-2">
               <!--            Update subtitle block-->
+              <div class="q-gutter-md">
+                <div class="cursor-pointer" style="width: 100px">
+                  {{ event.subtitle }}
+                  <q-popup-edit v-model="event.subtitle" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </div>
+              </div>
               <q-toolbar-title>
-                <q-input v-model="event.subtitle" @submit="updateSubTitle"/>
                 <div>
                   <q-btn @click="updateSubTitle(event.id)" size="xs" icon="done" />
                 </div>
@@ -60,13 +71,46 @@
               </q-item-section>
               <!--            Update title block-->
               <q-item>
-                <q-input v-model="event.title" @submit="updateTitle(event.id)"/>
+                <div class="q-gutter-md">
+                  <div class="cursor-pointer" style="width: 100px">
+                    {{ event.title }}
+                    <q-popup-edit v-model="event.title" class="bg-accent text-white" v-slot="scope">
+                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateTitle(event.id)" @keyup.enter="scope.set">
+                        <template v-slot:append>
+                          <q-icon name="edit" />
+                        </template>
+                      </q-input>
+                    </q-popup-edit>
+                  </div>
+                </div>
                 <q-btn @click="updateTitle(event.id)" size="xs" icon="done"/>
               </q-item>
               <q-item>
-                <q-input v-model="event.team1" @submit="updateTeam1"/>
+                <div class="q-gutter-md">
+                  <div class="cursor-pointer" style="width: 100px">
+                    {{ event.team1 }}
+                    <q-popup-edit v-model="event.team1" class="bg-accent text-white" v-slot="scope">
+                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                        <template v-slot:append>
+                          <q-icon name="edit" />
+                        </template>
+                      </q-input>
+                    </q-popup-edit>
+                  </div>
+                </div>
                 <q-btn @click="updateTeam1(event.id)" size="xs" icon="done"/>
-                <q-input v-model="event.team2" @submit="updateTeam2"/>
+                <div class="q-gutter-md">
+                  <div class="cursor-pointer" style="width: 100px">
+                    {{ event.team2 }}
+                    <q-popup-edit v-model="event.team2" class="bg-accent text-white" v-slot="scope">
+                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                        <template v-slot:append>
+                          <q-icon name="edit" />
+                        </template>
+                      </q-input>
+                    </q-popup-edit>
+                  </div>
+                </div>
                 <q-btn @click="updateTeam2(event.id)" size="xs" icon="done"/>
               </q-item>
             </q-list>
@@ -117,6 +161,20 @@
           {{ text.body }}
         </q-card-section>
       </q-card>
+    </div>
+  </div>
+  <div class="q-pa-md">
+    <div class="q-gutter-md">
+      <div class="cursor-pointer" style="width: 100px">
+        {{ label }}
+        <q-popup-edit v-model="label" class="bg-accent text-white" v-slot="scope">
+          <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+            <template v-slot:append>
+              <q-icon name="edit" />
+            </template>
+          </q-input>
+        </q-popup-edit>
+      </div>
     </div>
   </div>
 </template>
@@ -257,13 +315,11 @@ export default {
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       titleMainEvent: 'samething title2',
-      newEventSubTitle,
+      newEventSubTitle: ref(''),
       newEventTitle,
       newEventTeam1,
       newEventTeam2,
       newEventCount,
-      done: ref(true),
-      redModel: ref(false),
       deleteEvent,
       deleteDoc,
       toggleEvent,
@@ -279,7 +335,11 @@ export default {
       events,
       texts,
       todos,
+      done: ref(true),
+      redModel: ref(false),
       tab: ref(['alarms', 'mails']),
+      label: ref('Click me'),
+      label2: ref('Also click me'),
       expanded: ref(false)
     }
   },
