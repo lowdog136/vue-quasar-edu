@@ -127,12 +127,12 @@
       </div>
     </div>
   </div>
-  <div v-if="redModel">
+<!--  <div v-if="redModel">
     <div>
       <h4> Text here </h4>
     </div>
     <q-btn @click="listCount++" label="+"/>
-    <q-btn @click="listCount--" label="-"/>
+    <q-btn @click="listCount&#45;&#45;" label="-"/>
     <div>
       {{ listCount }}
     </div>
@@ -141,7 +141,7 @@
     </div>
   </div>
   <div>
-    <q-btn @click="pageCount--" icon="chevron_left"/>
+    <q-btn @click="pageCount&#45;&#45;" icon="chevron_left"/>
     {{ pageCount }}
     <q-btn @click="pageCount++" icon="chevron_right"/>
     <h5>text herer 2</h5>
@@ -162,21 +162,7 @@
         </q-card-section>
       </q-card>
     </div>
-  </div>
-  <div class="q-pa-md">
-    <div class="q-gutter-md">
-      <div class="cursor-pointer" style="width: 100px">
-        {{ label }}
-        <q-popup-edit v-model="label" class="bg-accent text-white" v-slot="scope">
-          <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-            <template v-slot:append>
-              <q-icon name="edit" />
-            </template>
-          </q-input>
-        </q-popup-edit>
-      </div>
-    </div>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -315,7 +301,7 @@ export default {
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       titleMainEvent: 'samething title2',
-      newEventSubTitle: ref(''),
+      newEventSubTitle,
       newEventTitle,
       newEventTeam1,
       newEventTeam2,
@@ -338,8 +324,6 @@ export default {
       done: ref(true),
       redModel: ref(false),
       tab: ref(['alarms', 'mails']),
-      label: ref('Click me'),
-      label2: ref('Also click me'),
       expanded: ref(false)
     }
   },
