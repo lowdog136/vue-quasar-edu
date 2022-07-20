@@ -93,12 +93,6 @@ export default defineComponent({
     }
   },
   methods: {
-    panelViewOnSiteUpdate () {
-      this.panelSiteUpdate = true
-    },
-    panelViewOffSiteUpdate () {
-      this.panelSiteUpdate = false
-    },
     panelViewOnEventCard () {
       this.panelViewEvent = true
     },
@@ -110,12 +104,6 @@ export default defineComponent({
     },
     panelViewOffResultCard () {
       this.panelViewItemResultCard = false
-    },
-    panelViewOnNewsCard () {
-      this.panelViewItem = true
-    },
-    panelViewOffNewsCard () {
-      this.panelViewItem = false
     }
   },
   props: {
