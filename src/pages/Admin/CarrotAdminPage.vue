@@ -11,14 +11,26 @@
             CarrotAdminPage
           </q-toolbar-title>
           <q-btn to="/" color="black" flat round dense icon="first_page" />
-          <q-btn @click="panelViewOnSiteUpdate" @dblclick="panelViewOffSiteUpdate" color="white" flat round dense icon="sync_alt" />
+          <q-toggle
+            :false-value="false"
+            :true-value="true"
+            color="white"
+            v-model="panelViewSiteUpdate"
+            icon="sync_alt"
+          />
           <q-btn @click="panelViewOnEventCard" @dblclick="panelViewOffEventCard" color="white" flat round dense icon="event" />
           <q-btn @click="panelViewOnResultCard" @dblclick="panelViewOffResultCard" color="white" flat round dense icon="smart_toy" />
-          <q-btn @click="panelViewOnNewsCard" @dblclick="panelViewOffNewsCard" color="white" flat round dense icon="help" />
+          <q-toggle
+            :false-value="false"
+            :true-value="true"
+            color="white"
+            v-model="panelViewNewsCard"
+            icon="help"
+          />
         </q-toolbar>
       </q-header>
       <!--      Показать админку добавление обновления сайта-->
-      <q-page-container v-if="panelSiteUpdate">
+      <q-page-container v-if="panelViewSiteUpdate">
         <q-page padding>
           <p v-for="n in 1" :key="n">
             <NewsSiteContentAdd />
@@ -34,7 +46,7 @@
         </q-page>
       </q-page-container>
       <!--      Показать админку добавление новостей-->
-      <q-page-container v-if="panelViewItem">
+      <q-page-container v-if="panelViewNewsCard">
         <q-page padding>
           <p v-for="n in 1" :key="n">
             <NewsCardContentAdd />
@@ -76,7 +88,8 @@ export default defineComponent({
   },
   setup () {
     return {
-      redModel: ref('panelViewEvent')
+      panelViewSiteUpdate: ref(false),
+      panelViewNewsCard: ref(false)
     }
   },
   methods: {
