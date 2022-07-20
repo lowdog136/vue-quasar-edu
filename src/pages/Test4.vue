@@ -99,6 +99,9 @@
                   </div>
                 </div>
                 <q-btn @click="updateTeam1(event.id)" size="xs" icon="done"/>
+                <q-space />
+<!--              </q-item>-->
+<!--              <q-item>-->
                 <div class="q-gutter-md">
                   <div class="cursor-pointer" style="width: 100px">
                     {{ event.team2 }}
