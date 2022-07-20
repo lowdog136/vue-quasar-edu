@@ -43,28 +43,74 @@
         <q-card>
           <q-toolbar class="bg-primary text-white shadow-2">
             <q-toolbar-title>
-              <q-input v-model="SiteUpdate.ver" hint="ver" @submit="updateVer(SiteUpdate.id)"/>
-              <q-btn @click="updateVer(SiteUpdate.id)" size="xs" icon="done"/></q-toolbar-title>
+              <div class="q-gutter-md">
+                <div class="cursor-pointer" style="width: 100px">
+                  {{ SiteUpdate.ver }}
+                  <q-popup-edit v-model="SiteUpdate.ver" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                  <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                </div>
+              </div>
+            </q-toolbar-title>
           </q-toolbar>
           <q-list v-if="SiteUpdate.done">
             <q-item-section>
-              {{ SiteUpdate.dateupd }}
+              <div class="q-gutter-md">
+                <div class="cursor-pointer" style="width: 100px">
+                  {{ SiteUpdate.dateupd }}
+                  <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                  <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                </div>
+              </div>
             </q-item-section>
             <q-item>
-              <q-input v-model="SiteUpdate.title" hint="title" @submit="updateTitle(SiteUpdate.id)"/>
-              <q-btn @click="updateTitle(SiteUpdate.id)" size="xs" icon="done"/>
+              <div class="q-gutter-md">
+                <div class="cursor-pointer" style="width: 100px">
+                  {{ SiteUpdate.title }}
+                  <q-popup-edit v-model="SiteUpdate.title" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </div>
+              </div>
+              <q-btn @click="updateTitle(SiteUpdate.id)" flat size="xs" icon="done"/>
             </q-item>
             <q-item>
-              <q-input v-model="SiteUpdate.body" autogrow hint="body" @submit="updateBody(SiteUpdate.id)"/>
-              <q-btn @click="updateBody(SiteUpdate.id)" size="xs" icon="done"/>
+              <div class="q-gutter-md">
+                <div class="cursor-pointer" style="width: 100px">
+                  {{ SiteUpdate.body }}
+                  <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </div>
+              </div>
+              <q-btn @click="updateBody(SiteUpdate.id)" flat size="xs" icon="done"/>
             </q-item>
           </q-list>
           <q-tabs
             v-model="tab"
             class="bg-teal text-yellow shadow-2"
           >
-            <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
+            <q-tab  @click="countUpEvent(SiteUpdate.id)" name="mails" icon="arrow_upward" />
+            <q-tab @click="toggleEvent(SiteUpdate.id)" name="alarms" icon="done" />
             <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
           </q-tabs>
         </q-card>
@@ -161,6 +207,13 @@ export default {
       })
       console.log('body update', SiteUpdate.value[index].body, 'SiteUpdate id', SiteUpdate.value[index].id)
     }
+    const updateDateUpd = id => {
+      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        dateupd: SiteUpdate.value[index].dateupd
+      })
+      console.log('dateupd update', SiteUpdate.value[index].dateupd, 'dateupd id', SiteUpdate.value[index].id)
+    }
     return {
       newSiteUpdateVer,
       newSiteUpdateTitle,
@@ -169,7 +222,7 @@ export default {
       newSiteUpdateCount,
       newSiteUpdateDateUpd,
       done: ref(true),
-      redModel: ref(false),
+      redModel: ref(true),
       deleteSiteUpdate,
       deleteDoc,
       addSiteUpdate,
@@ -177,6 +230,7 @@ export default {
       updateVer,
       updateTitle,
       updateBody,
+      updateDateUpd,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
