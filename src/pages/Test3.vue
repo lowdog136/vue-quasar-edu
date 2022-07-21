@@ -1,17 +1,16 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <NewsCardContentAdd />
-    <NewsCardSubTitleSelect />
+    <NewsSiteContentAddDUPLICATE />
   </div>
 </template>
 
 <script>
 
-import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
-import NewsCardSubTitleSelect from 'components/Selects/NewsCardSubTitleSelect'
+import NewsSiteContentAddDUPLICATE from 'components/Admin/NewsSiteContentAddDUPLICATE'
+
 export default {
   name: 'test3',
-  components: { NewsCardSubTitleSelect, NewsCardContentAdd },
+  components: { NewsSiteContentAddDUPLICATE },
   data () {
     return {}
   },
