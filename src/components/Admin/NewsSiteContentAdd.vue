@@ -1,6 +1,8 @@
 <template>
+<!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
-    <div class="q-pa-md">
+
+    <q-card dark bordered class="bg-grey-9 my-card">
       <q-form
         class="q-gutter-md"
       >
@@ -27,57 +29,56 @@
             hint="add date"
             lazy-rules
           />
-        </div>
-        <q-btn @click="addSiteUpdate" label="add event"/>
+        </div><br/>
       </q-form>
-    </div>
-    <q-toggle
-      :false-value="false"
-      :label="`Показываем ${redModel}`"
-      :true-value="true"
-      color="red"
-      v-model="redModel"
-    />
-    <div v-if="redModel">
-      <div class="q-pa-md" v-for="SiteUpdate in SiteUpdates" :key="SiteUpdate.id" style="max-width: 650px">
-        <q-card>
-          <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>
-              <div class="q-gutter-md">
-                <div class="cursor-pointer" style="width: 100px">
-                  {{ SiteUpdate.ver }}
+      <q-separator dark inset />
+      <q-card-section>
+        <q-btn @click="addSiteUpdate" label="add event"/>
+        <q-toggle
+          :false-value="false"
+          :label="`Показываем ${redModel}`"
+          :true-value="true"
+          color="red"
+          v-model="redModel"
+        />
+      </q-card-section>
+    </q-card>
+  </div>
+  <!--  edit mode block-->
+  <div class="q-pa-md row items-start q-gutter-md" v-if="redModel">
+
+    <q-card
+      class="bg-grey-9 my-card"
+      v-for="SiteUpdate in SiteUpdates"
+      :key="SiteUpdate.id"
+      dark bordered >
+      <q-card-section>
+        <div class="text-h6">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label caption>id:{{ SiteUpdate.id }}</q-item-label>
+                <q-item-label>{{ SiteUpdate.ver }}
                   <q-popup-edit v-model="SiteUpdate.ver" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateVer(SiteUpdate.ver)" @keyup.enter="scope.set">
                       <template v-slot:append>
                         <q-icon name="edit" />
                       </template>
                     </q-input>
                   </q-popup-edit>
-                  <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
-                </div>
-              </div>
-            </q-toolbar-title>
-          </q-toolbar>
-          <q-list v-if="SiteUpdate.done">
-            <q-item-section>
-              <div class="q-gutter-md">
-                <div class="cursor-pointer" style="width: 100px">
-                  {{ SiteUpdate.dateupd }}
-                  <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                  <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
-                </div>
-              </div>
-            </q-item-section>
-            <q-item>
-              <div class="q-gutter-md">
-                <div class="cursor-pointer" style="width: 100px">
-                  {{ SiteUpdate.title }}
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateVer(SiteUpdate.ver)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>title: {{ SiteUpdate.title }}
                   <q-popup-edit v-model="SiteUpdate.title" class="bg-accent text-white" v-slot="scope">
                     <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
                       <template v-slot:append>
@@ -85,37 +86,57 @@
                       </template>
                     </q-input>
                   </q-popup-edit>
-                </div>
-              </div>
-              <q-btn @click="updateTitle(SiteUpdate.id)" flat size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <div class="q-gutter-md">
-                <div class="cursor-pointer" style="width: 100px">
-                  {{ SiteUpdate.body }}
-                  <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </div>
-              </div>
-              <q-btn @click="updateBody(SiteUpdate.id)" flat size="xs" icon="done"/>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateTitle(SiteUpdate.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
             </q-item>
           </q-list>
-          <q-tabs
-            v-model="tab"
-            class="bg-teal text-yellow shadow-2"
-          >
-            <q-tab  @click="countUpEvent(SiteUpdate.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(SiteUpdate.id)" name="alarms" icon="done" />
-            <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
-          </q-tabs>
-        </q-card>
-      </div>
-    </div>
+        </div>
+        <div class="text-subtitle2">
+          {{ SiteUpdate.dateupd }}
+          <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
+            <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+              <template v-slot:append>
+                <q-icon name="edit" />
+              </template>
+            </q-input>
+          </q-popup-edit>
+        </div>
+      </q-card-section>
+
+      <q-separator dark inset />
+
+      <q-card-section>
+        <q-list>
+          <q-item >
+            <q-item-section>
+              <q-item-label>Body: {{ SiteUpdate.body }}
+                <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <template v-slot:append>
+                      <q-icon name="edit" />
+                    </template>
+                  </q-input>
+                </q-popup-edit>
+              </q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+              <q-btn @click="updateBody(SiteUpdate.id)"  flat size="xs" icon="done"/>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+      <q-tabs
+        v-model="tab"
+        class="bg-teal text-yellow shadow-2"
+      >
+        <q-tab  name="mails" icon="arrow_upward" />
+        <q-tab  name="alarms" icon="done" />
+        <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
+      </q-tabs>
+    </q-card>
   </div>
 </template>
 
@@ -123,7 +144,7 @@
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { db } from 'src/firebase'
 
 const siteUpdateCollectionRef = collection(db, 'siteUpdates')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
@@ -154,6 +175,7 @@ const addSiteUpdate = () => {
 
 const deleteSiteUpdate = id => {
   deleteDoc(doc(siteUpdateCollectionRef, id))
+  console.log('del SiteUpdate', newSiteUpdateDate.value)
 }
 
 export default {
@@ -187,11 +209,11 @@ export default {
     })
     // Edit SiteUpdate Block
     const updateVer = id => {
-      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.name === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
         ver: SiteUpdate.value[index].ver
       })
-      console.log('ver update', SiteUpdate.value[index].ver, 'SiteUpdate id', SiteUpdate.value[index].id)
+      console.log('ver update', SiteUpdate.value, 'ver id', SiteUpdate.value)
     }
     const updateTitle = id => {
       const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
@@ -205,7 +227,7 @@ export default {
       updateDoc(doc(siteUpdateCollectionRef, id), {
         body: SiteUpdate.value[index].body
       })
-      console.log('body update', SiteUpdate.value[index].body, 'SiteUpdate id', SiteUpdate.value[index].id)
+      console.log('body update', SiteUpdate.value[index].body, 'body id', SiteUpdate.value[index].id)
     }
     const updateDateUpd = id => {
       const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
