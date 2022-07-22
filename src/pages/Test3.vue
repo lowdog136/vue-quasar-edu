@@ -1,12 +1,14 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
+    <AuthPanel />
   </div>
 </template>
 
 <script>
+import AuthPanel from 'components/Auth/AuthPanel'
 export default {
   name: 'test3',
-  components: {},
+  components: { AuthPanel },
   data () {
     return {}
   },
