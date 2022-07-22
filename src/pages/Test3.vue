@@ -1,16 +1,12 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <NewsSiteContentAddDUPLICATE />
   </div>
 </template>
 
 <script>
-
-import NewsSiteContentAddDUPLICATE from 'components/Admin/NewsSiteContentAddDUPLICATE'
-
 export default {
   name: 'test3',
-  components: { NewsSiteContentAddDUPLICATE },
+  components: {},
   data () {
     return {}
   },
