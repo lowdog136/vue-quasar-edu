@@ -52,7 +52,7 @@
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addNewsCard" label="add news"/>
+        <q-btn @click="addNewsCard" color="primary" label="add news" flat/>
         <q-toggle
           :false-value="false"
           :label="`Показываем ${ greenModel }`"
@@ -65,7 +65,6 @@
   </div>
   <!--  edit mode block-->
   <div class="q-pa-md row items-start q-gutter-md" v-if="greenModel">
-
     <q-card
       class="bg-grey-9 my-card"
       v-for="NewsCard in NewsCards"
@@ -268,21 +267,6 @@ export default {
   components: { NewsCardDetailPopUp },
   data () {
     return {}
-  },
-  mounted () {
-    // axios
-    //   .post('http://localhost:3001/posts/', {
-    //     id: '4',
-    //     userId: '3',
-    //     title: 'Article title4-1',
-    //     body: 'Article body content44'
-    //   })
-    //   .then((response) => console.log(response))
-    // axios
-    //   .get('http://localhost:3001/posts')
-    //   .then((response) => {
-    //     this.posts = response.data
-    //   })
   },
   setup () {
     const NewsCards = ref([])
