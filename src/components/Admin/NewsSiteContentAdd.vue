@@ -188,7 +188,7 @@ export default {
   setup () {
     const SiteUpdates = ref([])
     onMounted(async () => {
-      // NewsCard Module
+      // Get data in firebase Module
       onSnapshot(siteUpdateCollectionQuery, (querySnapshot) => {
         const fbSiteUpdates = []
         querySnapshot.forEach((doc) => {
@@ -243,7 +243,7 @@ export default {
       newSiteUpdateCount,
       newSiteUpdateDateUpd,
       done: ref(true),
-      redModel: ref(true),
+      redModel: ref(false),
       deleteSiteUpdate,
       deleteDoc,
       addSiteUpdate,
