@@ -69,7 +69,7 @@
                 </q-item-label>
               </q-item-section>
               <q-item-section avatar>
-                <q-btn @click="updateVer(SiteUpdate.ver)"  flat size="xs" icon="done"/>
+                <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
               </q-item-section>
             </q-item>
           </q-list>
@@ -186,7 +186,6 @@ export default {
     }
   },
   setup () {
-    const SiteUpdate = ref([])
     const SiteUpdates = ref([])
     onMounted(async () => {
       // NewsCard Module
@@ -209,32 +208,32 @@ export default {
     })
     // Edit SiteUpdate Block
     const updateVer = id => {
-      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.name === id)
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
-        ver: SiteUpdate.value[index].ver
+        ver: SiteUpdates.value[index].ver
       })
-      console.log('ver update', SiteUpdate.value, 'ver id', SiteUpdate.value)
+      console.log('ver update', SiteUpdates.value, 'ver id', SiteUpdates.value)
     }
     const updateTitle = id => {
-      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
-        title: SiteUpdate.value[index].title
+        title: SiteUpdates.value[index].title
       })
-      console.log('title update', SiteUpdate.value[index].title, 'SiteUpdate id', SiteUpdate.value[index].id)
+      console.log('title update', SiteUpdates.value[index].title, 'SiteUpdate id', SiteUpdates.value[index].id)
     }
     const updateBody = id => {
-      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
-        body: SiteUpdate.value[index].body
+        body: SiteUpdates.value[index].body
       })
-      console.log('body update', SiteUpdate.value[index].body, 'body id', SiteUpdate.value[index].id)
+      console.log('body update', SiteUpdates.value[index].body, 'body id', SiteUpdates.value[index].id)
     }
     const updateDateUpd = id => {
-      const index = SiteUpdate.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
-        dateupd: SiteUpdate.value[index].dateupd
+        dateupd: SiteUpdates.value[index].dateupd
       })
-      console.log('dateupd update', SiteUpdate.value[index].dateupd, 'dateupd id', SiteUpdate.value[index].id)
+      console.log('dateupd update', SiteUpdates.value[index].dateupd, 'dateupd id', SiteUpdates.value[index].id)
     }
     return {
       newSiteUpdateVer,

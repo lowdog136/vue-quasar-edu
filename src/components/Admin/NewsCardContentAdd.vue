@@ -116,7 +116,7 @@
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { db } from 'src/firebase'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 
 // NewsCard block
