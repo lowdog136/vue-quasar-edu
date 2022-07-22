@@ -1,7 +1,8 @@
 <template>
+  <!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
-    <div class="q-pa-md" style="max-width: 650px">
-      <!--    addNewsCard-->
+
+    <q-card dark bordered class="bg-grey-9 my-card">
       <q-form
         class="q-gutter-md"
       >
@@ -41,74 +42,181 @@
             hint="add srcnews"
             lazy-rules
           />
-        </div>
-        <q-btn @click="addNewsCard" label="add news"/>
+          <q-input
+            v-model='newNewsCardSrcNews'
+            type="text"
+            hint="add date"
+            lazy-rules
+          />
+        </div><br/>
       </q-form>
-    </div>
-    <q-toggle
-      :false-value="false"
-      :label="`Показываем NewsAddModule ${greenModel}`"
-      :true-value="true"
-      color="red"
-      v-model="greenModel"
-    />
-    <div v-if="greenModel">
-      <div class="my-card" v-for="NewsCard in NewsCards" :key="NewsCard.id" style="max-width: 650px">
-        <q-card>
-          <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>
-              <q-item>
-                <q-input v-model="NewsCard.subtitle" @submit="updateSubTitle(NewsCard.id)"/>
-                <q-btn @click="updateSubTitle(NewsCard.id)" size="xs" icon="done"/>
-              </q-item>
-            </q-toolbar-title>
-          </q-toolbar>
-          <q-list v-if="NewsCard.done">
-            <q-item-section>
-              {{ NewsCard.data }}
-            </q-item-section>
-            <q-item>
-              <q-input v-model="NewsCard.title" hint="title" @submit="updateTitle(NewsCard.id)"/>
-              <q-btn @click="updateTitle(NewsCard.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <q-input v-model="NewsCard.preview" hint="subtitle" @submit="updatePreView(NewsCard.id)" autogrow/>
-              <q-btn @click="updatePreView(NewsCard.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <q-input v-model="NewsCard.datenews" hint="datenews" @submit="updateDateNews(NewsCard.id)" type="date" autogrow/>
-              <q-btn @click="updateDateNews(NewsCard.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <q-input v-model="NewsCard.fullnews" hint="fullnews" @submit="updateFullNews(NewsCard.id)"/>
-              <q-btn @click="updateFullNews(NewsCard.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <q-input v-model="NewsCard.srcnews" hint="srcnews" @submit="updateSrcNews(NewsCard.id)"/>
-              <q-btn @click="updateSrcNews(NewsCard.id)" size="xs" icon="done"/>
-            </q-item>
-            <q-item>
-              <NewsCardDetailPopUp
-                :PopyUpSubTitleNews="NewsCard.subtitle"
-                :PopyUpSrcNews="NewsCard.srcnews"
-                :PopyUpFullNews="NewsCard.fullnews"
-                :PopyUpTitleNews="NewsCard.title"
-                :PopyUpItem="NewsCard.item"
-                :PopyUpBtnName="PopyUpBtnName"
-              />
+      <q-separator dark inset />
+      <q-card-section>
+        <q-btn @click="addNewsCard" label="add news"/>
+        <q-toggle
+          :false-value="false"
+          :label="`Показываем ${ greenModel }`"
+          :true-value="true"
+          color="red"
+          v-model="greenModel"
+        />
+      </q-card-section>
+    </q-card>
+  </div>
+  <!--  edit mode block-->
+  <div class="q-pa-md row items-start q-gutter-md" v-if="greenModel">
+
+    <q-card
+      class="bg-grey-9 my-card"
+      v-for="NewsCard in NewsCards"
+      :key="NewsCard.id"
+      dark bordered >
+      <q-card-section>
+        <div class="text-h6">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label caption>id:{{ NewsCard.id }}</q-item-label>
+                <q-item-label>subtitle: {{ NewsCard.subtitle }}
+                  <q-popup-edit v-model="NewsCard.subtitle" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateVer(SiteUpdate.ver)" @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateSubTitle(NewsCard.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
             </q-item>
           </q-list>
-          <q-tabs
-            v-model="tab"
-            class="bg-teal text-yellow shadow-2"
-          >
-            <q-tab  @click="countUpEvent(NewsCard.id)" name="mails" icon="arrow_upward" />
-            <q-tab @click="toggleEvent(NewsCard.id)" name="alarms" icon="done" />
-            <q-tab @click="deleteNewsCard(NewsCard.id)" name="movies" icon="delete" />
-          </q-tabs>
-        </q-card>
-      </div>
-    </div>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>title: {{ NewsCard.title }}
+                  <q-popup-edit v-model="NewsCard.title" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateTitle(NewsCard.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>datenews: {{ NewsCard.datenews }}
+                  <q-popup-edit v-model="NewsCard.datenews" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateDateNews(NewsCard.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+      </q-card-section>
+
+      <q-separator dark inset />
+
+      <q-card-section>
+        <q-list>
+<!--          preview block-->
+          <q-item >
+            <q-item-section>
+              <q-item-label>preview: {{ NewsCard.preview }}
+                <q-popup-edit v-model="NewsCard.preview" class="bg-accent text-white" v-slot="scope">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <template v-slot:append>
+                      <q-icon name="edit" />
+                    </template>
+                  </q-input>
+                </q-popup-edit>
+              </q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+              <q-btn @click="updatePreView(NewsCard.id)"  flat size="xs" icon="done"/>
+            </q-item-section>
+          </q-item>
+<!--          fullnews block-->
+          <q-item >
+            <q-item-section>
+              <q-item-label>fullnews: {{ NewsCard.fullnews }}
+                <q-popup-edit v-model="NewsCard.fullnews" class="bg-accent text-white" v-slot="scope">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <template v-slot:append>
+                      <q-icon name="edit" />
+                    </template>
+                  </q-input>
+                </q-popup-edit>
+              </q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+              <q-btn @click="updateFullNews(NewsCard.id)"  flat size="xs" icon="done"/>
+            </q-item-section>
+          </q-item>
+          <q-separator dark inset />
+          <q-item >
+            <q-item-section>
+              <q-item-label>srcnews: {{ NewsCard.srcnews }}
+                <q-popup-edit v-model="NewsCard.srcnews" class="bg-accent text-white" v-slot="scope">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <template v-slot:append>
+                      <q-icon name="edit" />
+                    </template>
+                  </q-input>
+                </q-popup-edit>
+              </q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+              <q-btn @click="updateSrcNews(NewsCard.id)"  flat size="xs" icon="done"/>
+            </q-item-section>
+          </q-item>
+          <q-item >
+            <q-item-section>
+              <q-item-label>
+                <NewsCardDetailPopUp
+                  :PopyUpSubTitleNews="NewsCard.subtitle"
+                  :PopyUpSrcNews="NewsCard.srcnews"
+                  :PopyUpFullNews="NewsCard.fullnews"
+                  :PopyUpTitleNews="NewsCard.title"
+                  :PopyUpItem="NewsCard.item"
+                  :PopyUpBtnName="PopyUpBtnName"
+                />
+              </q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+      <q-tabs
+        v-model="tab"
+        class="bg-teal text-yellow shadow-2"
+      >
+        <q-tab  name="mails" icon="arrow_upward" />
+        <q-tab  name="alarms" icon="done" />
+        <q-tab @click="deleteNewsCard(NewsCard.id)" name="movies" icon="delete" />
+      </q-tabs>
+    </q-card>
   </div>
 </template>
 
@@ -265,7 +373,7 @@ export default {
       newNewsCardSrcNews,
       done: ref(true),
       redModel: ref(false),
-      greenModel: ref(true),
+      greenModel: ref(false),
       PopyUpBtnName: 'popup',
       addNewsCard,
       deleteNewsCard,
