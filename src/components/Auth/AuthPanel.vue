@@ -37,8 +37,22 @@
 <!--    Регистрация-->
     <q-form v-if=!logMode>
       <div class="q-gutter-y-md column" style="max-width: 300px">
-          Регистрация: <br />
-          введите свой email в качестве логина и придумайте пароль.
+        <div class="text-h6">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>Регистрация
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label>введите свой email в качестве логина и придумайте пароль.
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
         <q-input outlined v-model="login_form.email" type="email" label="Емайл" >
           <template v-slot:prepend>
             <q-icon name="face" />
@@ -55,8 +69,13 @@
             <q-icon name="close" @click="login_form.password = ''" class="cursor-pointer" />
           </template>
         </q-input>
-        <q-btn class="q-mt-sm" label="Регистрация" @click="login" color="primary"/>
-        <q-btn class="q-mt-sm" label="Вернуться" @click="changeMode" color="primary"/>
+        <q-toggle v-model="accept" :label="`${ siteRuleCheck }`" />
+
+        <div class="q-gutter-y-md column" style="max-width: 300px" v-if="accept">
+          <q-btn class="q-mt-sm" label="Регистрация" @click="register" color="primary"/>
+          <q-btn class="q-mt-sm" label="Вернуться" @click="changeMode" color="primary"/>
+        </div>
+
       </div>
     </q-form>
   </div>
@@ -68,25 +87,37 @@ import { useStore } from 'vuex'
 
 export default {
   name: 'AuthPanel',
+  data () {
+    return {}
+  },
   setup: function () {
+    const store = useStore()
     const state = reactive({})
+    // eslint-disable-next-line camelcase
+    const register_form = ref({})
     // eslint-disable-next-line camelcase
     const login_form = ref({})
     // eslint-disable-next-line camelcase
     const login = () => {
       store.dispatch('login', login_form.value)
     }
-    const store = useStore()
     onBeforeMount(() => {
       store.dispatch('fetchUser')
     })
-
+    const register = () => {
+      store.dispatch('login', register_form.value)
+    }
+    const accept = ref(false)
     return {
+      siteRuleCheck: 'Согласиться с правилами сайта',
       text: ref(''),
       logMode: ref(true),
       state,
       login_form,
-      login
+      register_form,
+      login,
+      register,
+      accept
     }
   },
   methods: {

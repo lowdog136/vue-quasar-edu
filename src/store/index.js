@@ -546,7 +546,7 @@ export default store(function (/* { ssrContext } */) {
             case 'auth/user-not-found':
               alert('user not found')
               break
-            case 'aith/wrong-password':
+            case 'auth/wrong-password':
               alert('wrong password')
               break
             default:
@@ -582,7 +582,7 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
-        this.$router.push({ path: '/' })
+        await this.$router.push({ path: '/' })
       },
       async logout ({ commit }) {
         await signOut(auth)
