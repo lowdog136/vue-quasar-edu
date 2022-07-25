@@ -1,8 +1,19 @@
 <template>
   <div class="q-pa-md">
-    <q-btn class="q-mt-sm" label="Войти" @click=toggleLogMode color="primary"/>
-    <q-btn class="q-mt-sm" label="Регистрация" @click="!regMode" color="primary"/>
+    <div v-if=logMode>
+      <h5>
+        Не зарегистрированы?
+        <div>
+          <q-btn class="q-mt-sm" label="Регистрация" @click="changeMode" color="primary"/>
+        </div>
+      </h5>
+
+    </div>
+
     <q-form v-if=logMode>
+      <h5>
+        Вход в профиль:
+      </h5>
       <div class="q-gutter-y-md column" style="max-width: 300px">
         <q-input outlined v-model="login_form.email" type="email" label="Емайл" >
           <template v-slot:prepend>
@@ -25,7 +36,11 @@
     </q-form>
     <br />
     <q-separator dark />
-    <q-form v-if=regMode>
+    <q-form v-if=!logMode>
+      <h5>
+        Регистрация:1 <br />
+        введите свой email в качестве логина и придумайте пароль.
+      </h5>
       <div class="q-gutter-y-md column" style="max-width: 300px">
         <q-input outlined v-model="login_form.email" type="email" label="Емайл" >
           <template v-slot:prepend>
@@ -77,7 +92,11 @@ export default {
       login
     }
   },
-  methods: {}
+  methods: {
+    changeMode () {
+      this.logMode = !this.logMode
+    }
+  }
 }
 </script>
 
