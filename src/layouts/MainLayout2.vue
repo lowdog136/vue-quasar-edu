@@ -31,7 +31,7 @@
             <q-dialog v-model="dialog">
               <q-card>
                 <q-card-section>
-                  <div class="text-h6"><LogoPast /></div>
+                  <div class="text-h6"><AuthPanel /></div>
                 </q-card-section>
                 <q-card-section class="row items-center q-gutter-sm">
                   <q-btn v-close-popup label="Закрыть" color="primary" />
@@ -69,12 +69,12 @@
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer'
-import LogoPast from 'components/LogoPast'
 import NewsDrawerResultGame from 'components/NewsDrawerResultGame'
+import AuthPanel from 'components/Auth/AuthPanel'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { NewsDrawerResultGame, LogoPast, NewsDrawer },
+  components: { AuthPanel, NewsDrawerResultGame, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)

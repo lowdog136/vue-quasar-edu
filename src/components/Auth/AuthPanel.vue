@@ -9,12 +9,10 @@
       </h5>
 
     </div>
-
+<!--    Вход-->
     <q-form v-if=logMode>
-      <h5>
-        Вход в профиль:
-      </h5>
       <div class="q-gutter-y-md column" style="max-width: 300px">
+          Вход в профиль:
         <q-input outlined v-model="login_form.email" type="email" label="Емайл" >
           <template v-slot:prepend>
             <q-icon name="face" />
@@ -36,12 +34,11 @@
     </q-form>
     <br />
     <q-separator dark />
+<!--    Регистрация-->
     <q-form v-if=!logMode>
-      <h5>
-        Регистрация:1 <br />
-        введите свой email в качестве логина и придумайте пароль.
-      </h5>
       <div class="q-gutter-y-md column" style="max-width: 300px">
+          Регистрация: <br />
+          введите свой email в качестве логина и придумайте пароль.
         <q-input outlined v-model="login_form.email" type="email" label="Емайл" >
           <template v-slot:prepend>
             <q-icon name="face" />
@@ -59,6 +56,7 @@
           </template>
         </q-input>
         <q-btn class="q-mt-sm" label="Регистрация" @click="login" color="primary"/>
+        <q-btn class="q-mt-sm" label="Вернуться" @click="changeMode" color="primary"/>
       </div>
     </q-form>
   </div>
@@ -86,7 +84,6 @@ export default {
     return {
       text: ref(''),
       logMode: ref(true),
-      regMode: ref(false),
       state,
       login_form,
       login
@@ -95,6 +92,7 @@ export default {
   methods: {
     changeMode () {
       this.logMode = !this.logMode
+      console.log('changeMode', this.logMode)
     }
   }
 }
