@@ -1,14 +1,16 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <AuthPanel />
+    <vue-lidate />
   </div>
 </template>
 
 <script>
 import AuthPanel from 'components/Auth/AuthPanel'
+import VueLidate from 'components/vueLidate'
 export default {
   name: 'test3',
-  components: { AuthPanel },
+  components: { VueLidate, AuthPanel },
   data () {
     return {}
   },

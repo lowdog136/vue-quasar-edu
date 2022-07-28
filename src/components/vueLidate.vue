@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <div class="root">
-      <h2>Create an Account</h2>
+      <h5>Create an Account</h5>
       <p>
         <input type="text" placeholder="Email" v-model="state.email" />
         <span v-if="v$.email.$error">

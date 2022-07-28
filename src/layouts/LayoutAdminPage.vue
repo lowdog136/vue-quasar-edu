@@ -56,6 +56,7 @@
           <q-dialog v-model="dialog">
             <q-card>
               <q-card-section>
+                До свидания, {{ $store.state.user }}
                 <div class="text-h6">До свидания, {{ $store.state.user.email }} </div>
               </q-card-section>
               <q-card-section class="row items-center q-gutter-sm">
@@ -87,7 +88,6 @@ export default defineComponent({
     onBeforeMount(() => {
       store.dispatch('fetchUser')
     })
-
     return {
       panelView: ref(true),
       leftDrawerOpenResultGame,
