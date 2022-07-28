@@ -169,11 +169,10 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit, increment } from 'firebase/firestore'
-import { db, firebase } from '../firebase'
+import { db } from '../firebase'
 
 const eventCollectionRef = collection(db, 'events')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
@@ -227,16 +226,6 @@ export default {
     const pageCount = ref('1')
     const listCount = ref('')
     const activeCard = ref('')
-    const router = useRouter()
-    const authListener = firebase.auth().onAuthStateChanged(function (user) {
-      if (!user) {
-        alert('you must be logged in to view this. redirecting to the home page')
-        router.push('/')
-      }
-    })
-    onBeforeUnmount(() => {
-      authListener()
-    })
     const todos = ref([])
     const events = ref([])
     onMounted(async () => {

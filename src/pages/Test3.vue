@@ -1,18 +1,28 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <AuthPanel />
-    <vue-lidate />
+      <div>
+        <h2>Sign Up</h2>
+        {{ email }} {{ password }}
+        <p><input type="text" placeholder="Email" v-model="email" /></p>
+        <p>
+          <input type="password" placeholder="Password" v-model="password" />
+        </p>
+        <p class="error-message" v-show="password.length < 6">
+          The password must be at least 6 characters
+        </p>
+      </div>
   </div>
 </template>
 
 <script>
-import AuthPanel from 'components/Auth/AuthPanel'
-import VueLidate from 'components/vueLidate'
 export default {
   name: 'test3',
-  components: { VueLidate, AuthPanel },
+  components: { },
   data () {
-    return {}
+    return {
+      email: '',
+      password: ''
+    }
   },
   mounted () {},
   setup () {
