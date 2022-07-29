@@ -69,8 +69,23 @@
             <q-icon name="close" @click="login_form.password = ''" class="cursor-pointer" />
           </template>
         </q-input>
-        <q-toggle v-model="accept" :label="`${ siteRuleCheck }`" />
-
+        <div class="text-h6">
+          <q-list>
+            <q-item >
+              <q-item-section v-show="login_form.password.length < 8">
+                <q-item-label style="color: #ae0000">{{ sitePasswordCheck }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label>
+                  <q-toggle v-model="accept" :label="`${ siteRuleCheck }`" />
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
         <div class="q-gutter-y-md column" style="max-width: 300px" v-if="accept">
           <q-btn class="q-mt-sm" label="Регистрация" @click="register" color="primary"/>
           <q-btn class="q-mt-sm" label="Вернуться" @click="changeMode" color="primary"/>
@@ -110,6 +125,7 @@ export default {
     const accept = ref(false)
     return {
       siteRuleCheck: 'Согласиться с правилами сайта',
+      sitePasswordCheck: 'Минимальная длина пароля 8 символов',
       text: ref(''),
       logMode: ref(true),
       state,
