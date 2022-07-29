@@ -1,6 +1,15 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
       <div>
+        <nav>
+          <router-link to="/"> Home </router-link> |
+          <router-link to="/feed"> Feed </router-link> |
+          <router-link to="/Test2"> Register </router-link> |
+          <router-link to="/sign-in"> Login </router-link> |
+        </nav>
+        <router-view />
+      </div>
+    <div>
         <h2>Sign Up</h2>
         {{ email }} {{ password }}
         <p><input type="text" placeholder="Email" v-model="email" /></p>
