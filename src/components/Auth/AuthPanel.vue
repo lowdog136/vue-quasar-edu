@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-gutter-y-md column" style="max-width: 300px">
     <div v-if=logMode>
       <h5>
         Не зарегистрированы?
@@ -86,8 +86,8 @@
             </q-item>
           </q-list>
         </div>
-        <div class="q-gutter-y-md column" style="max-width: 300px" v-if="accept">
-          <q-btn class="q-mt-sm" label="Регистрация" @click="register" color="primary"/>
+        <div class="q-gutter-y-md column" style="max-width: 300px">
+          <q-btn v-if="accept" class="q-mt-sm" label="Регистрация" @click="register" color="primary"/>
           <q-btn class="q-mt-sm" label="Вернуться" @click="changeMode" color="primary"/>
         </div>
 
