@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'test3',
+  name: 'trest3',
   components: { },
   data () {
     return {

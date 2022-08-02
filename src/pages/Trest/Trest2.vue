@@ -78,7 +78,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useStore, mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, increment } from 'firebase/firestore'
-import { db } from '../firebase'
+import { db } from '../../firebase'
 
 const todosCollectionRef = collection(db, 'todos')
 const eventCollectionRef = collection(db, 'events')
@@ -128,7 +128,7 @@ const deleteTodo = id => {
 }
 
 export default {
-  name: 'test2',
+  name: 'trest2',
   components: {},
   data () {
     return {

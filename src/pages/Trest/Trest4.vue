@@ -172,7 +172,7 @@
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit, increment } from 'firebase/firestore'
-import { db } from '../firebase'
+import { db } from '../../firebase'
 
 const eventCollectionRef = collection(db, 'events')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
@@ -205,7 +205,7 @@ const deleteEvent = id => {
 }
 
 export default {
-  name: 'GamesNowEventAdd',
+  name: 'trest4',
   components: {},
   data () {
     return {

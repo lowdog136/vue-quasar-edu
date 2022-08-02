@@ -49,11 +49,18 @@ const routes = [
           { path: '/GamesNow/GamesNowTable', name: 'GamesNowTable', component: () => import('pages/GamesNow/GamesNowTable.vue') }
         ]
       },
-      { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') },
-      { path: '/Test4', name: 'Test4', component: () => import('pages/Test4.vue') },
-      { path: '/Test3', name: 'Test3', component: () => import('pages/Test3.vue') },
-      { path: '/Test2', name: 'Test2', component: () => import('pages/Test2.vue') },
-      { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') }
+      {
+        path: '/Trest',
+        meta: { requiresAuth: true },
+        component: () => import('layouts/MainLayout2.vue'),
+        children: [
+          { path: '/Trest4', name: 'Trest4', component: () => import('pages/Trest/Trest4.vue') },
+          { path: '/Trest3', name: 'Trest3', component: () => import('pages/Trest/Trest3.vue') },
+          { path: '/Trest2', name: 'Trest2', component: () => import('pages/Trest/Trest2.vue') },
+          { path: '/Trest', name: 'Trest', component: () => import('pages/Trest/Trest.vue') }
+        ]
+      },
+      { path: '/CucumberPage', name: 'CucumberPage', component: () => import('pages/CucumberPage.vue') }
     ]
   },
 

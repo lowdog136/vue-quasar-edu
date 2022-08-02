@@ -80,6 +80,7 @@ import vueLidate from 'components/vueLidate'
 
 export default {
   components: { vueLidate },
+  name: 'trest',
   data () {
     return {
       posts: [],
