@@ -149,8 +149,8 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[13].Caption }}</q-item-label>
         </q-item-section>
           <q-item-section side top>
-            <q-item-label caption >
-              <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ $store.state.NavigationReleaseDateSite }}</span>
+            <q-item-label caption v-for="event in events.slice(0,1)" :key="event.id">
+              <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders"> {{ event.dateupd }}</span>
             </q-item-label>
         </q-item-section>
       </q-item>
@@ -169,12 +169,41 @@
 
 <script>
 
+import { onMounted, ref } from 'vue'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from 'src/firebase'
+const eventCollectionRef = collection(db, 'siteUpdates')
+const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
+
 export default {
   name: 'NewsDrawer',
   setup () {
+    const events = ref([])
+    onMounted(async () => {
+      onSnapshot(eventCollectionQuery, (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const event = {
+            id: doc.id,
+            ver: doc.data().ver,
+            title: doc.data().title,
+            body: doc.data().body,
+            dateupd: doc.data().dateupd,
+            date: doc.data().date,
+            done: doc.data().done
+          }
+          fbEvents.push(event)
+        })
+        events.value = fbEvents
+      })
+    })
     return {
-      labelAboutSite: 'О сайте'
+      labelAboutSite: 'О сайте',
+      events
     }
+  },
+  props: {
+    text: String
   }
 }
 </script>
