@@ -24,8 +24,10 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[2].Caption }}</q-item-label>
         </q-item-section>
         <q-item-section side top>
-          <q-item-label caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ $store.state.NavigationReleaseNewsSite }}</span>
+          <!--            Блок "Новости клуба". Дата новости -->
+          <q-item-label v-for="NewsCard in NewsCards.slice(0,1)"
+                        :key="NewsCard.id" caption>
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ NewsCard.datenews }}</span>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -149,6 +151,7 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[13].Caption }}</q-item-label>
         </q-item-section>
           <q-item-section side top>
+<!--            Блок "о сайте". Дата новости -->
             <q-item-label caption v-for="event in events.slice(0,1)" :key="event.id">
               <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders"> {{ event.dateupd }}</span>
             </q-item-label>
@@ -172,6 +175,10 @@
 import { onMounted, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from 'src/firebase'
+// NewsCard block
+const newsCardCollectionRef = collection(db, 'siteNews')
+const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
+// раздел "О сайте"
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
 
@@ -179,18 +186,24 @@ export default {
   name: 'NewsDrawer',
   setup () {
     const events = ref([])
+    const NewsCards = ref([])
     onMounted(async () => {
+      onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
+        const fbNewsCards = []
+        querySnapshot.forEach((doc) => {
+          const NewsCard = {
+            datenews: doc.data().datenews
+          }
+          fbNewsCards.push(NewsCard)
+        })
+        NewsCards.value = fbNewsCards
+      })
+      // раздел "О сайте"
       onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const event = {
-            id: doc.id,
-            ver: doc.data().ver,
-            title: doc.data().title,
-            body: doc.data().body,
-            dateupd: doc.data().dateupd,
-            date: doc.data().date,
-            done: doc.data().done
+            dateupd: doc.data().dateupd
           }
           fbEvents.push(event)
         })
@@ -199,6 +212,7 @@ export default {
     })
     return {
       labelAboutSite: 'О сайте',
+      NewsCards,
       events
     }
   },
