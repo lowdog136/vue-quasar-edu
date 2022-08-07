@@ -79,7 +79,7 @@ import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
-  name: 'LayoutUserPage',
+  name: 'LayoutAdminPage',
   components: {},
   setup () {
     const leftDrawerOpen = ref(false)

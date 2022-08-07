@@ -517,6 +517,9 @@ export default store(function (/* { ssrContext } */) {
       howWatch (state) {
         return state.NewsCardHowWatch
       },
+      userName (state) {
+        return state.user.email
+      },
       ratingNewsCardUp (state) {
         return state.ratingNewsCard
       },

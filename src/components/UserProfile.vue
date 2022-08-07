@@ -1,8 +1,44 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-<!--    <h4> Привет, {{ $store.state.user.email }}</h4>-->
-    <h4> Привет, username</h4>
-    <h4> Матчи, которые ты хочешь посетить:</h4>
+    <q-list>
+      <q-item>
+        <q-item-section avatar>
+          <q-icon color="primary" name="account_circle" />
+        </q-item-section>
+        <q-item-section><h6> Привет, {{ $store.getters.userName }} </h6></q-item-section>
+        <q-item-section side>
+          <q-item-label caption>meta</q-item-label>
+        </q-item-section>
+      </q-item>
+      <q-separator spaced inset />
+      <q-item>
+        <q-item-section avatar>
+          <q-icon color="primary" name="next_plan" />
+        </q-item-section>
+        <q-item-section><h6> Матчи, которые ты хочешь посетить:</h6></q-item-section>
+        <q-item-section side >
+          <q-toggle color="red" v-model="notif" val="picture" />
+        </q-item-section>
+      </q-item>
+      <q-list v-if="notif">
+        <q-item>
+          <q-item-section avatar>
+            <q-icon color="primary" name="account_circle" />
+          </q-item-section>
+          <q-item-section><h6> Привет, {{ $store.getters.userName }} </h6></q-item-section>
+          <q-item-section side>
+            <q-item-label caption>meta</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator spaced inset />
+        <q-item>
+          <q-item-section avatar>
+            <q-icon color="primary" name="next_plan" />
+          </q-item-section>
+          <q-item-section><h6> Матч, который ты хочешь посетить:</h6></q-item-section>
+        </q-item>
+      </q-list>
+    </q-list>
   </div>
 </template>
 
@@ -21,9 +57,9 @@ export default defineComponent({
     onBeforeMount(() => {
       store.dispatch('fetchUser')
     })
-
     return {
       panelView: ref(true),
+      notif: ref(false),
       leftDrawerOpenResultGame,
       mobileData: ref(true),
       bluetooth: ref(false),
