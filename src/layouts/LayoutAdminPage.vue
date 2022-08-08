@@ -23,29 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <q-list padding>
-                    <q-item-label header>Настройки</q-item-label>
-                    <q-item to="/User/ProfilePage">
-                      <q-item-section avatar>
-                        <q-icon color="primary" name="account_circle" />
-                      </q-item-section>
-                      <q-item-section>Профиль</q-item-section>
-                    </q-item>
-                    <q-separator spaced inset />
-                    <q-item to="/Admin/CarrotAdminPage">
-                      <q-item-section avatar>
-                        <q-icon color="primary" name="admin_panel_settings" />
-                      </q-item-section>
-                      <q-item-section>CarrotAdminPage</q-item-section>
-                    </q-item>
-                    <q-separator spaced inset />
-                    <q-item to="/" @click="$store.dispatch('logout')" >
-                      <q-item-section avatar>
-                        <q-icon color="primary" name="logout" />
-                      </q-item-section>
-                      <q-item-section>Выйти</q-item-section>
-                    </q-item>
-                  </q-list>
+                  <SettingsList />
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />
@@ -86,10 +64,11 @@
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
+import SettingsList from 'components/Profile/SettingsList'
 
 export default defineComponent({
   name: 'LayoutAdminPage',
-  components: {},
+  components: { SettingsList },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)

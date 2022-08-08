@@ -23,15 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <q-list padding>
-                    <q-item-label header>Настройки</q-item-label>
-                    <q-item to="/User/ProfilePage">
-                      <q-item-section avatar>
-                        <q-icon color="primary" name="account_circle" />
-                      </q-item-section>
-                      <q-item-section>Профиль</q-item-section>
-                    </q-item>
-                  </q-list>
+                  <SettingsListUser />
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />
@@ -78,10 +70,11 @@
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
+import SettingsListUser from 'components/Profile/SettingsListUser'
 
 export default defineComponent({
   name: 'LayoutUserPage',
-  components: {},
+  components: { SettingsListUser },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
