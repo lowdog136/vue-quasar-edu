@@ -24,6 +24,7 @@
               <div class="row no-wrap q-pa-md">
                 <div class="column">
                   <div class="text-h6 q-mb-md">Настройки</div>
+                  <q-btn flat dense to="/User/ProfilePage" label="Профиль" />
                   <q-btn flat dense to="/Admin/ExitAdmin" label="Use Mobile Data" />
                   <q-btn flat dense to="/Admin/CarrotAdminPage" icon="help" label="CarrotAdminPage" />
                   <q-toggle disable v-model="panelView" label="Use Carrot Data" />

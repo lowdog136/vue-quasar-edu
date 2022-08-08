@@ -24,6 +24,7 @@
               <div class="row no-wrap q-pa-md">
                 <div class="column">
                   <div class="text-h6 q-mb-md" >Настройки</div>
+                  <q-btn flat dense to="/User/UserProfile" label="Профиль" />
                   <q-toggle disable v-model="dark_mode" label="Ночной режим" />
                 </div>
 

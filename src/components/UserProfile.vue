@@ -5,35 +5,52 @@
         <q-item-section avatar>
           <q-icon color="primary" name="account_circle" />
         </q-item-section>
-        <q-item-section><h6> Привет, {{ $store.getters.userName }} </h6></q-item-section>
+        <q-item-section>
+          <h6> Привет, {{ $store.getters.userName }} </h6>
+        </q-item-section>
         <q-item-section side>
           <q-item-label caption>meta</q-item-label>
         </q-item-section>
       </q-item>
+    </q-list>
       <q-separator spaced inset />
+    <q-list>
       <q-item>
         <q-item-section avatar>
-          <q-icon color="primary" name="next_plan" />
+          <q-icon color="primary" name="edit" />
         </q-item-section>
-        <q-item-section><h6> Матчи, которые ты хочешь посетить:</h6></q-item-section>
+        <q-item-section>
+          <h6> Редактировать профиль:</h6>
+        </q-item-section>
         <q-item-section side >
-          <q-toggle color="red" v-model="notif" val="picture" />
+          <q-toggle color="red" v-model="notifProf" val="picture" />
         </q-item-section>
       </q-item>
-      <q-list v-if="notif">
+      <q-list v-if="notifProf">
         <q-item>
           <q-item-section avatar>
             <q-icon color="primary" name="account_circle" />
           </q-item-section>
-          <q-item-section><h6> Привет, {{ $store.getters.userName }} </h6></q-item-section>
+          <q-item-section><h6> Отредактировать, {{ $store.getters.userName }} </h6></q-item-section>
           <q-item-section side>
             <q-item-label caption>meta</q-item-label>
           </q-item-section>
         </q-item>
-        <q-separator spaced inset />
+      </q-list>
+      <q-separator spaced inset />
+      <q-item>
+        <q-item-section avatar>
+          <q-icon color="primary" name="bookmarks" />
+        </q-item-section>
+        <q-item-section><h6> Матчи, которые ты хочешь посетить:</h6></q-item-section>
+        <q-item-section side >
+          <q-toggle color="red" v-model="notifMatch" val="picture" />
+        </q-item-section>
+      </q-item>
+      <q-list v-if="notifMatch">
         <q-item>
           <q-item-section avatar>
-            <q-icon color="primary" name="next_plan" />
+            <q-icon color="primary" name="bookmark" />
           </q-item-section>
           <q-item-section><h6> Матч, который ты хочешь посетить:</h6></q-item-section>
         </q-item>
@@ -59,7 +76,8 @@ export default defineComponent({
     })
     return {
       panelView: ref(true),
-      notif: ref(false),
+      notifProf: ref(false),
+      notifMatch: ref(false),
       leftDrawerOpenResultGame,
       mobileData: ref(true),
       bluetooth: ref(false),
