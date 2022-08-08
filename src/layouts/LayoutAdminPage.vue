@@ -23,12 +23,29 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <div class="text-h6 q-mb-md">Настройки</div>
-                  <q-btn flat dense to="/User/ProfilePage" label="Профиль" />
-                  <q-btn flat dense to="/Admin/ExitAdmin" label="Use Mobile Data" />
-                  <q-btn flat dense to="/Admin/CarrotAdminPage" icon="help" label="CarrotAdminPage" />
-                  <q-toggle disable v-model="panelView" label="Use Carrot Data" />
-                  <q-toggle disable v-model="dark_mode" label="Ночной режим" />
+                  <q-list padding>
+                    <q-item-label header>Настройки</q-item-label>
+                    <q-item to="/User/ProfilePage">
+                      <q-item-section avatar>
+                        <q-icon color="primary" name="account_circle" />
+                      </q-item-section>
+                      <q-item-section>Профиль</q-item-section>
+                    </q-item>
+                    <q-separator spaced inset />
+                    <q-item to="/Admin/CarrotAdminPage">
+                      <q-item-section avatar>
+                        <q-icon color="primary" name="admin_panel_settings" />
+                      </q-item-section>
+                      <q-item-section>CarrotAdminPage</q-item-section>
+                    </q-item>
+                    <q-separator spaced inset />
+                    <q-item to="/" @click="$store.dispatch('logout')" >
+                      <q-item-section avatar>
+                        <q-icon color="primary" name="logout" />
+                      </q-item-section>
+                      <q-item-section>Выйти</q-item-section>
+                    </q-item>
+                  </q-list>
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />
@@ -40,15 +57,6 @@
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.email }} </div>
 
-                  <q-btn
-                    color="primary"
-                    @click="$store.dispatch('logout')"
-                    label="Выйти"
-                    to="/"
-                    push
-                    size="sm"
-                    v-close-popup
-                  />
                 </div>
               </div>
             </q-menu>
