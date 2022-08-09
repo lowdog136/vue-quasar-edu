@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
+    <HistoryClubCard />
     <q-card class="my-card">
       <q-img :src="require('assets/image/imgTitle/title_0.png' )" />
 
@@ -53,9 +54,11 @@
 
 <script>
 import { defineComponent } from 'vue'
+import HistoryClubCard from 'components/HistoryClubCard/HistoryClubCard'
 
 export default defineComponent({
-  name: 'HistoryClub'
+  name: 'HistoryClub',
+  components: { HistoryClubCard }
 })
 </script>
 
