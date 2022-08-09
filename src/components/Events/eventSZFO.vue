@@ -124,10 +124,10 @@ export default {
             {
               id: 1,
               tour: '8 тур',
-              nameEvent: 'ФК "Север" - СШ "Электрон"',
-              color: 'teal',
+              nameEvent: 'ФК "Север" 7-0 СШ "Электрон"',
+              color: 'orange-14',
               data: 'август 6, 2022',
-              icon: 'event',
+              icon: 'done_all',
               planeVisitCount: 0
             },
             {

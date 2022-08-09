@@ -40,6 +40,7 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[3].Caption }}</q-item-label>
         </q-item-section>
       </q-item>
+<!--      Стадион-->
       <q-expansion-item
         v-model="expanded"
         icon="stadium"
@@ -49,6 +50,7 @@
         disable
       />
     </q-expansion-item>
+<!--    Текущие соревнования-->
     <q-expansion-item
       v-model="expanded"
       icon="emoji_events"

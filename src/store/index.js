@@ -26,7 +26,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о команде
       // NavigationReleaseNewsSite: '04.07.22',
       // Дата обновления календаря чемпионата
-      GamesNowEventUpdateDate: '04.07.22',
+      GamesNowEventUpdateDate: '09.08.22',
       // Дата обновления таблицы чемпионата
       GamesNowTableUpdateDate: '04.07.22',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),

@@ -63,21 +63,6 @@ export default {
   data () {
     return {}
   },
-  mounted () {
-    // axios
-    //   .post('http://localhost:3001/posts/', {
-    //     id: '4',
-    //     userId: '3',
-    //     title: 'Article title4-1',
-    //     body: 'Article body content44'
-    //   })
-    //   .then((response) => console.log(response))
-    // axios
-    //   .get('http://localhost:3001/posts')
-    //   .then((response) => {
-    //     this.posts = response.data
-    //   })
-  },
   setup () {
     const todos = ref([])
     const events = ref([])
