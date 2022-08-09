@@ -5,7 +5,7 @@
       <q-item-section avatar>
         <q-icon color="primary" name="account_circle" />
       </q-item-section>
-      <q-item-section>Профиль</q-item-section>
+      <q-item-section>{{ settingLists[0].name }}</q-item-section>
     </q-item>
     <q-separator spaced inset />
     <q-item to="/Admin/CarrotAdminPage">
@@ -26,7 +26,31 @@
 
 <script>
 export default {
-  name: 'SettingsList'
+  name: 'SettingsList',
+  setup () {
+    const settingLists = [
+      {
+        id: 1,
+        name: 'Профиль',
+        icon: 'account_circle',
+        to: '/User/ProfilePage'
+      },
+      {
+        id: 2,
+        name: 'CarrotAdminPage',
+        icon: 'admin_panel_settings',
+        to: '/Admin/CarrotAdminPage'
+      },
+      {
+        id: 3,
+        name: 'Выйти',
+        icon: 'logout',
+        to: '/'
+      }]
+    return {
+      settingLists
+    }
+  }
 }
 </script>
 

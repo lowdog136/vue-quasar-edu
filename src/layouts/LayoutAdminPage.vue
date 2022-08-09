@@ -23,7 +23,7 @@
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <SettingsList />
+                  <SettingsListAdmin />
                 </div>
 
                 <q-separator vertical inset class="q-mx-lg" />
@@ -64,11 +64,11 @@
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import SettingsList from 'components/Profile/SettingsList'
+import SettingsListAdmin from 'components/Profile/SettingsListAdmin'
 
 export default defineComponent({
   name: 'LayoutAdminPage',
-  components: { SettingsList },
+  components: { SettingsListAdmin },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
