@@ -133,10 +133,10 @@ export default {
             {
               id: 2,
               tour: '9 тур',
-              nameEvent: 'ФК "Север" - ФК "Новград"',
-              color: 'teal',
+              nameEvent: 'ФК "Север" 3-0 ФК "Новград"',
+              color: 'orange-14',
               data: 'август 9, 2022',
-              icon: 'event',
+              icon: 'done_all',
               planeVisitCount: 0
             },
             {
