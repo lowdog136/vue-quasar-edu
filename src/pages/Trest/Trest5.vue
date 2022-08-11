@@ -1,9 +1,44 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <div v-for="event in events" :key="event.id">
-      <h4>
-        date:{{ event.date }}
-      </h4>
+  <div class="q-pa-md row items-start q-gutter-md" >
+    <q-splitter
+      v-model="splitterModel"
+      style="height: 450px"
+    >
+      <template v-slot:before>
+        <div class="q-pa-md">
+          <q-date
+            v-model="date"
+            :events="listEvents"
+            event-color="orange-14"
+          />
+        </div>
+      </template>
+
+      <template v-slot:after>
+        <q-tab-panels
+          v-model="date"
+          v-for="event in events" :key="event.id"
+          animated
+          transition-prev="jump-up"
+          transition-next="jump-up"
+        >
+          <q-tab-panel :name=event.date>
+            <div class="text-h4 q-mb-md">{{ event.date }}</div>
+            <p>event:{{ event }}</p>
+            <p>name:{{ event.name }}</p>
+            <p>text:{{ event.text }}</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+        </q-tab-panels>
+      </template>
+    </q-splitter>
+  </div>
+  <div v-if=" author1.length == 4">
+    <h5> {{ author1 }} - {{ author1.length }} </h5>
+    {{ store.state.myCount }}
+    <div>
+      <q-btn @click=myCountZero label="null" />
+      <q-btn @click=myCountUp label="+" />
     </div>
   </div>
 </template>
@@ -16,10 +51,9 @@ import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, increment } 
 import { db } from '../../firebase'
 
 const timeStamp = Date.now()
-const formattedString = date.formatDate(timeStamp, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+const formattedString = date.formatDate(timeStamp, 'YYYY-MM-DDTHH:mm:ss')
 const todosCollectionRef = collection(db, 'todos')
-const eventCollectionRef = collection(db, 'events')
-// const eventCollectionCount = collection(db, 'events')
+const eventCollectionRef = collection(db, 'washes')
 
 const newTodoContent = ref('')
 const newTodoTitle = ref('')
@@ -65,13 +99,13 @@ const deleteTodo = id => {
 }
 
 export default {
-  name: 'trest2',
+  name: 'Trest5',
   components: {},
   data () {
     return {
       tests: [],
-      author1: ['Room view', 'Room service', 'Food'],
-      author2: 'Room service',
+      author1: ['Room view', 'Room service', 'Food', 'Wash'],
+      author2: 'strio',
       BtnName: 'pump',
       BtnSize: 'xs',
       tourCount: 0,
@@ -79,38 +113,10 @@ export default {
       items: []
     }
   },
-  mounted () {
-    // axios
-    //   .post('http://localhost:3001/posts/', {
-    //     id: '4',
-    //     userId: '3',
-    //     title: 'Article title4-1',
-    //     body: 'Article body content44'
-    //   })
-    //   .then((response) => console.log(response))
-    // axios
-    //   .get('http://localhost:3001/posts')
-    //   .then((response) => {
-    //     this.posts = response.data
-    //   })
-  },
   setup () {
     const todos = ref([])
     const events = ref([])
     onMounted(async () => {
-      // const querySnapshot = await getDocs(collection(db, 'todos'))
-      // const fbTodos = []
-      // querySnapshot.forEach((doc) => {
-      //   console.log(doc.id, ' => ', doc.data())
-      //   const todo = {
-      //     id: doc.id,
-      //     content: doc.data().content,
-      //     done: doc.data().done
-      //   }
-      //   fbTodos.push(todo)
-      // })
-      // todos.value = fbTodos
-      // console.log('mounted')
       onSnapshot(collection(db, 'todos'), (querySnapshot) => {
         const fbTodos = []
         querySnapshot.forEach((doc) => {
@@ -124,18 +130,15 @@ export default {
         })
         todos.value = fbTodos
       })
-      onSnapshot(collection(db, 'events'), (querySnapshot) => {
+      onSnapshot(collection(db, 'washes'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const event = {
             id: doc.id,
-            subtitle: doc.data().subtitle,
-            title: doc.data().title,
-            team1: doc.data().team1,
-            team2: doc.data().team2,
             done: doc.data().done,
             date: doc.data().date,
-            count: doc.data().count
+            name: doc.data().name,
+            text: doc.data().text
           }
           fbEvents.push(event)
         })
@@ -164,7 +167,6 @@ export default {
     // const increaseCount = () => {
     //   count.value++
     // }
-
     const login = () => {
       store.dispatch('login', login_form.value)
     }
@@ -194,20 +196,25 @@ export default {
       countUp,
       addTodo,
       addEvent,
+      listEvents: (['2022/08/07', '2022/08/18']),
       events,
       todos,
       store,
+      date: ref('2022/08/01'),
       expanded: ref(false)
     }
   },
   computed: {
     ...mapGetters([
-      'dropDown'
+      'dropDown',
+      'doublemyCount'
     ])
   },
   methods: {
     ...mapActions([
       'togledropDown',
+      'incrementCounter',
+      'myCountLen',
       'changePush',
       'myCountZero',
       'myCountUp',

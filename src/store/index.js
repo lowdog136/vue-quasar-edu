@@ -475,10 +475,11 @@ export default store(function (/* { ssrContext } */) {
       InsertValue: [],
       myCount: 2,
       ratingNewsCard: 0,
-      count: 'Июнь 29, 2022',
+      count: '1',
       uid: 'wTZJonX7ZaWDPXOikF8gfzfvwfm1',
       NewsCardHowWatch: 0,
-      user: null
+      user: null,
+      event: null
     },
     mutations: {
       SET_USER (state, user) {
@@ -489,6 +490,9 @@ export default store(function (/* { ssrContext } */) {
       },
       clearCount (state) {
         state.myCount = null
+      },
+      lenCounter (state) {
+        state.myCount = 666
       },
       CLEAR_USER (state) {
         state.user = null
@@ -520,16 +524,22 @@ export default store(function (/* { ssrContext } */) {
       userName (state) {
         return state.user.email
       },
+      eventListDay (state) {
+        return state.event
+      },
       ratingNewsCardUp (state) {
         return state.ratingNewsCard
       },
       dropDown (state) {
-        return state.colorCode
+        return state.myCount
       },
       validPosts (state) {
         return state.posts.filter(p => {
           return p.title && p.body
         })
+      },
+      doublemyCount (state) {
+        return state.myCount.length
       },
       allPosts (state) {
         return state.posts
@@ -613,6 +623,9 @@ export default store(function (/* { ssrContext } */) {
       },
       myCountUp ({ commit }) {
         commit('incrementCounter')
+      },
+      myCountLen ({ commit }) {
+        commit('lenCounter')
       },
       ratingNewsCardUp ({ commit }) {
         commit('ratingNewsCardUp')
