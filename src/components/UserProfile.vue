@@ -1,60 +1,80 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <q-list>
-      <q-item>
+    <q-list padding>
+      <q-item-label header>User Controls</q-item-label>
+
+      <q-item v-ripple>
         <q-item-section avatar>
-          <q-icon color="primary" name="account_circle" />
-        </q-item-section>
+        <q-icon color="primary" name="account_circle" />
+      </q-item-section>
         <q-item-section>
-          <h6> Привет, {{ $store.getters.userName }} </h6>
-        </q-item-section>
-        <q-item-section side>
-          <q-item-label caption>meta</q-item-label>
+          <q-item-label>Привет, {{ $store.getters.userName }}</q-item-label>
+          <q-item-label caption>
+            Set the content filtering level to restrict
+            apps that can be downloaded
+          </q-item-label>
         </q-item-section>
       </q-item>
-    </q-list>
-      <q-separator spaced inset />
-    <q-list>
-      <q-item>
+
+      <q-separator spaced />
+      <q-item-label header>Редактирование профиля</q-item-label>
+
+      <q-item v-ripple>
         <q-item-section avatar>
           <q-icon color="primary" name="edit" />
         </q-item-section>
         <q-item-section>
-          <h6> Редактировать профиль:</h6>
+          <q-item-label>Редактировать профиль:</q-item-label>
+          <q-item-label caption>
+            Set the content filtering level to restrict
+            apps that can be downloaded
+          </q-item-label>
         </q-item-section>
         <q-item-section side >
           <q-toggle color="red" v-model="notifProf" val="picture" />
         </q-item-section>
       </q-item>
-      <q-list v-if="notifProf">
-        <q-item>
-          <q-item-section avatar>
-            <q-icon color="primary" name="account_circle" />
-          </q-item-section>
-          <q-item-section><h6> Отредактировать, {{ $store.getters.userName }} </h6></q-item-section>
-          <q-item-section side>
-            <q-item-label caption>meta</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-      <q-separator spaced inset />
-      <q-item>
+      <q-item v-ripple v-if="notifProf">
+        <q-item-section avatar>
+          <q-icon color="primary" name="account_circle" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Отредактировать, {{ $store.getters.userName }}</q-item-label>
+          <q-item-label caption>
+            Set the content filtering level to restrict
+            apps that can be downloaded
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+     <q-separator spaced />
+      <q-item-label header>SeverFans</q-item-label>
+
+      <q-item v-ripple>
         <q-item-section avatar>
           <q-icon color="primary" name="bookmarks" />
         </q-item-section>
-        <q-item-section><h6> Матчи, которые ты хочешь посетить:</h6></q-item-section>
-        <q-item-section side >
+        <q-item-section>
+          <q-item-label>Матчи, которые ты хочешь посетить:</q-item-label>
+          <q-item-label caption>
+            Показать список матчей которые вы отметили для посещения
+          </q-item-label>
+        </q-item-section>
+          <q-item-section side >
           <q-toggle color="red" v-model="notifMatch" val="picture" />
         </q-item-section>
       </q-item>
-      <q-list v-if="notifMatch">
-        <q-item>
-          <q-item-section avatar>
-            <q-icon color="primary" name="bookmark" />
-          </q-item-section>
-          <q-item-section><h6> Матч, который ты хочешь посетить:</h6></q-item-section>
-        </q-item>
-      </q-list>
+      <q-item v-ripple v-if="notifMatch">
+        <q-item-section avatar>
+          <q-icon color="primary" name="bookmark" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Матчи, которые ты отметил:</q-item-label>
+          <q-item-label caption>
+            Set the content filtering level to restrict
+            apps that can be downloaded
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
   </div>
 </template>
