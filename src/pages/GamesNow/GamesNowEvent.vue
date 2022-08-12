@@ -1,14 +1,14 @@
 <template>
   <div class="q-px-lg q-pb-md">
-    <eventSZFO />
+    <eventSZFO2 />
   </div>
 </template>
 
 <script>
-import eventSZFO from 'components/Events/eventSZFO'
+import eventSZFO2 from 'components/Events/eventSZFO2'
 
 export default {
-  components: { eventSZFO }
+  components: { eventSZFO2 }
 }
 </script>
 

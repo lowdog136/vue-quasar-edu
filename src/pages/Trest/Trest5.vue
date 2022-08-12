@@ -33,14 +33,6 @@
       </template>
     </q-splitter>
   </div>
-  <div v-if=" author1.length == 4">
-    <h5> {{ author1 }} - {{ author1.length }} </h5>
-    {{ store.state.myCount }}
-    <div>
-      <q-btn @click=myCountZero label="null" />
-      <q-btn @click=myCountUp label="+" />
-    </div>
-  </div>
 </template>
 <script>
 import { ref, onMounted } from 'vue'
@@ -220,6 +212,9 @@ export default {
       'myCountUp',
       'howWatch'
     ]),
+    setSelect (event) {
+      this.tourCount = event
+    },
     async addProfilesT () {
       await axios.post('http://localhost:3001/profile/', {
         name: this.name,

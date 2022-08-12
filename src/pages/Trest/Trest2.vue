@@ -58,6 +58,7 @@
     </div>
     <div class="q-pa-md" v-for="event in events" :key="event.id" style="max-width: 550px">
       <q-list bordered separator>
+        {{ event }}
         <q-item v-ripple>
           <q-item-section v-if="event.done">{{ event.subtitle }}</q-item-section>
           <q-item-section v-if="event.done">{{ event.title }}</q-item-section>
