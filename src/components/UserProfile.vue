@@ -19,7 +19,7 @@
       <q-separator spaced />
       <q-item-label header>Редактирование профиля</q-item-label>
 
-      <q-item v-ripple>
+      <q-item clickable v-ripple>
         <q-item-section avatar>
           <q-icon color="primary" name="edit" />
         </q-item-section>
@@ -34,18 +34,46 @@
           <q-toggle color="red" v-model="notifProf" val="picture" />
         </q-item-section>
       </q-item>
-      <q-item v-ripple v-if="notifProf">
-        <q-item-section avatar>
-          <q-icon color="primary" name="account_circle" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Отредактировать, {{ $store.getters.userName }}</q-item-label>
-          <q-item-label caption>
-            Set the content filtering level to restrict
-            apps that can be downloaded
-          </q-item-label>
-        </q-item-section>
-      </q-item>
+      <div v-if="notifProf">
+        <q-item v-ripple >
+          <q-item-section avatar>
+            <q-icon color="primary" name="account_circle" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Отредактировать имя</q-item-label>
+            <q-item-label caption>
+              Set the content filtering level to restrict
+              apps that can be downloaded
+            </q-item-label>
+            <q-input
+              v-model='newEventSubTitle'
+              hint="add SubTitle"
+              lazy-rules
+            />
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple >
+          <q-item-section avatar>
+            <q-icon color="primary" name="account_circle" />
+          </q-item-section>
+          <q-item-section >
+            <q-item-label>Сменить аватар</q-item-label>
+            <q-item-label caption>
+              Set the content filtering level to restrict
+              apps that can be downloaded
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <div v-if="notifProf">
+          <q-uploader
+            url="http://localhost:4444/upload"
+            color="primary"
+            flat
+            bordered
+            style="max-width: 300px"
+          />
+        </div>
+      </div>
      <q-separator spaced />
       <q-item-label header>SeverFans</q-item-label>
 
