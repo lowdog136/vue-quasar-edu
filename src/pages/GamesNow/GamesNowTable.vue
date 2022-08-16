@@ -33,85 +33,93 @@ const columns = [
 
 const rows = [
   {
+    id: 1,
     name: 'Север',
     colorCode: 'primary',
-    games: 7,
-    win: 6,
+    games: 10,
+    win: 9,
     draw: 1,
     lose: 0,
-    ball_io: '15-3',
-    score: 19,
-    last_game: 'ВВНВВB'
+    ball_io: '27-4',
+    score: 28,
+    last_game: 'BBBBB'
   },
   {
+    id: 2,
     name: 'Псков',
-    games: 5,
-    win: 6,
+    games: 8,
+    win: 7,
     draw: 0,
     lose: 1,
-    ball_io: '15-4',
-    score: 18,
-    last_game: 'ВВВПВB'
+    ball_io: '20-5',
+    score: 21,
+    last_game: 'ПВВВВ'
   },
   {
+    id: 3,
     name: 'СШ №2 ВО Звезда',
-    games: 6,
-    win: 2,
+    games: 10,
+    win: 5,
     draw: 1,
-    lose: 3,
-    ball_io: '12-12',
-    score: '7',
-    last_game: 'ВППВП'
+    lose: 4,
+    ball_io: '20-16',
+    score: '16',
+    last_game: 'ПВВВП'
   },
   {
+    id: 7,
     name: 'Химик',
-    games: 7,
+    games: 9,
     win: 1,
     draw: 3,
-    lose: 3,
-    ball_io: '12-13',
+    lose: 5,
+    ball_io: '14-20',
     score: '6',
-    last_game: 'ННППВ'
+    last_game: 'ППВПП'
   },
   {
+    id: 5,
     name: 'Новград',
-    games: 4,
+    games: 8,
     win: 1,
-    draw: 2,
-    lose: 1,
-    ball_io: '4-4',
-    score: 5,
-    last_game: 'НПВН'
+    draw: 3,
+    lose: 4,
+    ball_io: '6-14',
+    score: 6,
+    last_game: 'ННППП'
   },
   {
+    id: 6,
     name: 'СШ Ленинградец',
-    games: 6,
-    win: 2,
-    draw: 1,
+    games: 8,
+    win: 3,
+    draw: 2,
     lose: 3,
-    ball_io: '14-10',
-    score: '7',
-    last_game: 'ВНВПП'
+    ball_io: '17-12',
+    score: '11',
+    last_game: 'ВППНВ'
   },
   {
+    id: 7,
     name: 'СШ №7 Карелия',
-    games: 5,
-    win: 2,
+    games: 9,
+    win: 4,
     draw: 1,
-    lose: 2,
-    ball_io: '7-7',
-    score: '7',
-    last_game: 'ППВНП'
+    lose: 4,
+    ball_io: '17-11',
+    score: '13',
+    last_game: 'ВПВПВ'
   },
   {
+    id: 8,
     name: 'СШ Электрон',
-    games: 7,
+    games: 10,
     win: 0,
     draw: 1,
-    lose: 6,
-    ball_io: '3-27',
+    lose: 9,
+    ball_io: '3-42',
     score: '1',
-    last_game: 'ППППНП'
+    last_game: 'НПППП'
   }
 ]
 

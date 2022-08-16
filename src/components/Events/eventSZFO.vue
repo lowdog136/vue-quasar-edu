@@ -142,10 +142,10 @@ export default {
             {
               id: 3,
               tour: '10 тур',
-              nameEvent: 'ФК "Север" - СШ №2 ВО "Звезда"',
-              color: 'teal',
+              nameEvent: 'ФК "Север" 2-1 СШ №2 ВО "Звезда"',
+              color: 'orange-14',
               data: 'август 13, 2022',
-              icon: 'event',
+              icon: 'done_all',
               planeVisitCount: 0
             },
             {
