@@ -4,7 +4,7 @@
       {{titleMainEvent }}
     </div>
     <q-timeline :layout="layout" color="secondary" v-for="item in events.slice(id).reverse()" :key="item.id">
-      <q-timeline-entry heading >{{ item.mounth }}</q-timeline-entry>
+      <q-timeline-entry heading >{{ item }}</q-timeline-entry>
       <q-timeline-entry
         :title=item.nameEvent
         :subtitle=item.date
@@ -232,18 +232,6 @@ export default {
           mounth: doc.data().mounth,
           nameEvent: doc.data().nameEvent,
           tour: doc.data().tour
-        }
-        fbEvents.push(event)
-      })
-      events.value = fbEvents
-    })
-    onSnapshot(collection(db, 'siteEvents', 'eventsMounth'), (querySnapshot) => {
-      const fbEvents = []
-      querySnapshot.forEach((doc) => {
-        const event = {
-          id: doc.id,
-          color: doc.data().color,
-          date: doc.data().date
         }
         fbEvents.push(event)
       })
