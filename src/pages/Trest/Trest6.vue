@@ -1,26 +1,25 @@
 <template>
   <div class="q-px-lg q-pb-md">
-    <div class="title">
+        <div class="title">
       {{titleMainEvent }}
     </div>
-    <q-timeline :layout="layout" color="secondary" v-for="item in events.slice(id).reverse()" :key="item.id">
-      <q-timeline-entry heading v-for="itemM in eventsMounth" :key="itemM.id">{{ itemM.mounth}}</q-timeline-entry>
-      <q-timeline-entry
-        :title=item.nameEvent
-        :subtitle=item.date
-        side="left"
-        :color=item.color
-        :icon=item.icon
-      >
+    <div>
+      <div v-for="item in events.slice(id).reverse()" :key="item.id">
         <div>
-          {{ item.tour}}
+          {{ item.id }}
+          <p>{{ item.date }}</p>
+          <p>{{ item.nameEvent }}</p>
         </div>
+      </div>
+    </div>
+    <q-separator />
+    <div>
+      <div v-for="itemM in eventsMounth.slice(id).reverse()" :key="itemM.id">
         <div>
-          {{ item.nameEvent}}
-          <q-item-label caption>планируют посетить: </q-item-label>
+          {{ itemM }}
         </div>
-      </q-timeline-entry>
-    </q-timeline>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,7 +32,7 @@ import { useQuasar } from 'quasar'
 const eventsCollectionRef = collection(db, 'siteEvents')
 
 export default {
-  name: 'eventSZFO',
+  name: 'trest6',
   components: {},
   data () {
     return {
@@ -219,7 +218,7 @@ export default {
       ]
     }
   },
-  setup () {
+  setup: function () {
     const events = ref([])
     const eventsMounth = ref([])
     onSnapshot(collection(db, 'siteEvents'), (querySnapshot) => {
@@ -230,13 +229,14 @@ export default {
           color: doc.data().color,
           date: doc.data().date,
           icon: doc.data().icon,
-          mounth: doc.data().mounth,
+          // mounth: doc.data().mounth,
           nameEvent: doc.data().nameEvent,
           tour: doc.data().tour
         }
         fbEvents.push(event)
       })
       events.value = fbEvents
+      console.log('fbEvents', events.value)
     })
     onSnapshot(collection(db, 'siteEventsMounth'), (querySnapshot) => {
       const fbEventsMounth = []
@@ -248,6 +248,7 @@ export default {
         fbEventsMounth.push(eventMounth)
       })
       eventsMounth.value = fbEventsMounth
+      console.log('fbEventsMounth', eventsMounth.value)
     })
     const toggleDone = id => {
       const index = events.value.findIndex(event => event.id === id)

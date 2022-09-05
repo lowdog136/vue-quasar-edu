@@ -54,6 +54,7 @@ const routes = [
         meta: { requiresAuth: true },
         component: () => import('layouts/MainLayout2.vue'),
         children: [
+          { path: '/Trest6', name: 'Trest6', component: () => import('pages/Trest/Trest6.vue') },
           { path: '/Trest5', name: 'Trest5', component: () => import('pages/Trest/Trest5.vue') },
           { path: '/Trest4', name: 'Trest4', component: () => import('pages/Trest/Trest4.vue') },
           { path: '/Trest3', name: 'Trest3', component: () => import('pages/Trest/Trest3.vue') },
