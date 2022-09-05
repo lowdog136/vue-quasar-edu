@@ -18,7 +18,8 @@
     <div>
       <div v-for="itemM in eventsMounth.slice(id).reverse()" :key="itemM.id">
         <div>
-          {{ itemM }}
+          {{ itemM.mounth }}
+          {{ itemM.mounth[1] }}
         </div>
       </div>
     </div>
@@ -245,14 +246,15 @@ export default {
       querySnapshot.forEach((doc) => {
         const eventMounth = {
           id: doc.id,
-          siteEventsMounthMay: doc.data().siteEventsMounthMay,
+          name: doc.data().name,
           date: doc.data().date,
           mounth: doc.data().mounth
         }
         fbEventsMounth.push(eventMounth)
       })
       eventsMounth.value = fbEventsMounth
-      console.log('fbEventsMounth', eventsMounth.value)
+      console.log(doc)
+      // console.log('fbEventsMounth', eventsMounth.value)
     })
     const toggleDone = id => {
       const index = events.value.findIndex(event => event.id === id)
