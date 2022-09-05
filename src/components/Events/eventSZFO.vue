@@ -151,8 +151,8 @@ export default {
             {
               id: 4,
               tour: '11 тур',
-              nameEvent: 'СШ №7 Карелия - ФК "Север"',
-              color: 'teal',
+              nameEvent: 'СШ №7 Карелия 0-7 ФК "Север"',
+              color: 'orange-14',
               data: 'август 20, 2022',
               icon: 'sentiment_very_satisfied',
               planeVisitCount: 0
@@ -160,8 +160,8 @@ export default {
             {
               id: 5,
               tour: '12 тур',
-              nameEvent: 'ФК "Химик" - ФК "Север"',
-              color: 'teal',
+              nameEvent: 'ФК "Химик" 0-0 ФК "Север"',
+              color: 'orange-14',
               data: 'август 25, 2022',
               icon: 'event',
               planeVisitCount: 0

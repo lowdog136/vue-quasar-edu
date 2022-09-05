@@ -26,7 +26,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления новостей о команде
       // NavigationReleaseNewsSite: '04.07.22',
       // Дата обновления календаря чемпионата
-      GamesNowEventUpdateDate: '2022-08-16',
+      GamesNowEventUpdateDate: '2022-09-05',
       // Дата обновления таблицы чемпионата
       GamesNowTableUpdateDate: '2022-08-16',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
@@ -63,13 +63,55 @@ export default store(function (/* { ssrContext } */) {
         },
         {
           id: 6,
-          name: '5 тур',
+          name: '6 тур',
           other: '',
           count: ''
         },
         {
           id: 7,
           name: '7 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 8,
+          name: '8 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 9,
+          name: '9 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 10,
+          name: '10 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 11,
+          name: '11 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 12,
+          name: '12 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 13,
+          name: '13 тур',
+          other: '',
+          count: ''
+        },
+        {
+          id: 14,
+          name: '14 тур',
           other: '',
           count: ''
         }
