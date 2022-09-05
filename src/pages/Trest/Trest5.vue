@@ -188,11 +188,11 @@ export default {
       countUp,
       addTodo,
       addEvent,
-      listEvents: (['2022/08/07', '2022/08/18']),
+      listEvents: (['2022/09/14', '2022/09/20']),
       events,
       todos,
       store,
-      date: ref('2022/08/01'),
+      date: ref('2022/09/01'),
       expanded: ref(false)
     }
   },

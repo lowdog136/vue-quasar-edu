@@ -7,8 +7,10 @@
       <div v-for="item in events.slice(id).reverse()" :key="item.id">
         <div>
           {{ item.id }}
-          <p>{{ item.date }}</p>
-          <p>{{ item.nameEvent }}</p>
+          <p>date:{{ item.date }}</p>
+          <p>mounth:{{ item.mounth }}</p>
+          <p>nameEvent:{{ item.nameEvent }}</p>
+          ---
         </div>
       </div>
     </div>
@@ -229,7 +231,7 @@ export default {
           color: doc.data().color,
           date: doc.data().date,
           icon: doc.data().icon,
-          // mounth: doc.data().mounth,
+          mounth: doc.data().mounth,
           nameEvent: doc.data().nameEvent,
           tour: doc.data().tour
         }
@@ -243,6 +245,8 @@ export default {
       querySnapshot.forEach((doc) => {
         const eventMounth = {
           id: doc.id,
+          siteEventsMounthMay: doc.data().siteEventsMounthMay,
+          date: doc.data().date,
           mounth: doc.data().mounth
         }
         fbEventsMounth.push(eventMounth)
