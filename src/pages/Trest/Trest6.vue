@@ -18,8 +18,25 @@
     <div>
       <div v-for="itemM in eventsMounth.slice(id).reverse()" :key="itemM.id">
         <div>
-          {{ itemM.mounth }}
-          {{ itemM.mounth[1] }}
+          {{ itemM }}
+        </div>
+      </div>
+      <div v-for="itemM in eventsMounthL.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
+        </div>
+      </div>
+    </div>
+    <q-separator />
+    <div>
+      <div v-for="itemM in matchEvents.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
+        </div>
+      </div>
+      <div v-for="itemM in matchEvents.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
         </div>
       </div>
     </div>
@@ -224,6 +241,8 @@ export default {
   setup: function () {
     const events = ref([])
     const eventsMounth = ref([])
+    const eventsMounthL = ref([])
+    const matchEvents = ref([])
     onSnapshot(collection(db, 'siteEvents'), (querySnapshot) => {
       const fbEvents = []
       querySnapshot.forEach((doc) => {
@@ -241,18 +260,45 @@ export default {
       events.value = fbEvents
       console.log('fbEvents', events.value)
     })
-    onSnapshot(collection(db, 'siteEventsMounth'), (querySnapshot) => {
+    onSnapshot(collection(db, 'matchEvents/tours/tours'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const matchEvents = {
+          id: doc.id,
+          name: doc.data().name,
+          color: doc.data().color
+        }
+        fbEventsMounth.push(matchEvents)
+      })
+      matchEvents.value = fbEventsMounth
+      // console.log(doc)
+      console.log('matchEvents', matchEvents.value)
+    })
+    onSnapshot(collection(db, 'siteEventsMounth/os/win'), (querySnapshot) => {
       const fbEventsMounth = []
       querySnapshot.forEach((doc) => {
         const eventMounth = {
           id: doc.id,
           name: doc.data().name,
-          date: doc.data().date,
-          mounth: doc.data().mounth
+          color: doc.data().color
         }
         fbEventsMounth.push(eventMounth)
       })
       eventsMounth.value = fbEventsMounth
+      console.log(doc)
+      // console.log('fbEventsMounth', eventsMounth.value)
+    })
+    onSnapshot(collection(db, 'siteEventsMounth/os/linux'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const eventMounthL = {
+          id: doc.id,
+          name: doc.data().name,
+          color: doc.data().color
+        }
+        fbEventsMounth.push(eventMounthL)
+      })
+      eventsMounthL.value = fbEventsMounth
       console.log(doc)
       // console.log('fbEventsMounth', eventsMounth.value)
     })
@@ -269,6 +315,8 @@ export default {
       toggleDone,
       events,
       eventsMounth,
+      matchEvents,
+      eventsMounthL,
       btnSize: 'xs',
       titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
       layout: computed(() => {
