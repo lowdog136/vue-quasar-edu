@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <q-separator />
+    <q-separator color="primary"/>
     <div>
       <div v-for="itemM in eventsMounth.slice(id).reverse()" :key="itemM.id">
         <div>
@@ -27,13 +27,8 @@
         </div>
       </div>
     </div>
-    <q-separator />
+    <q-separator color="primary"/>
     <div>
-      <div v-for="itemM in matchEvents.slice(id).reverse()" :key="itemM.id">
-        <div>
-          {{ itemM }}
-        </div>
-      </div>
       <div v-for="itemM in matchEvents.slice(id).reverse()" :key="itemM.id">
         <div>
           {{ itemM }}
@@ -260,15 +255,15 @@ export default {
       events.value = fbEvents
       console.log('fbEvents', events.value)
     })
-    onSnapshot(collection(db, 'matchEvents/tours/tours'), (querySnapshot) => {
+    onSnapshot(collection(db, 'eventsTeams'), (querySnapshot) => {
       const fbEventsMounth = []
       querySnapshot.forEach((doc) => {
-        const matchEvents = {
+        const eventsTeams = {
           id: doc.id,
           name: doc.data().name,
-          color: doc.data().color
+          city: doc.data().city
         }
-        fbEventsMounth.push(matchEvents)
+        fbEventsMounth.push(eventsTeams)
       })
       matchEvents.value = fbEventsMounth
       // console.log(doc)
