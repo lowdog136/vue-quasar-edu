@@ -17,21 +17,72 @@
       <template v-slot:after>
         <q-tab-panels
           v-model="date"
-          v-for="event in events" :key="event.id"
+          v-for="itemM in listDateEvent.slice(id).reverse()" :key="itemM.id"
           animated
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel :name=event.date>
-            <div class="text-h4 q-mb-md">{{ event.date }}</div>
-            <p>event:{{ event }}</p>
-            <p>name:{{ event.name }}</p>
-            <p>text:{{ event.text }}</p>
+          <q-tab-panel :name=itemM.date>
+            <div class="text-h4 q-mb-md">{{ itemM.date }}</div>
+            <p>event:{{ itemM }}</p>
+            <p>name:{{ itemM.name }}</p>
+            <p>text:{{ itemM.text }}</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
           </q-tab-panel>
         </q-tab-panels>
       </template>
     </q-splitter>
+  </div>
+  <q-separator color="primary"/>
+<!--  <div class="q-pa-md row items-start q-gutter-md" >-->
+<!--    <q-splitter-->
+<!--      v-model="splitterModel"-->
+<!--      style="height: 450px"-->
+<!--    >-->
+<!--      <template v-slot:before>-->
+<!--        <div class="q-pa-md">-->
+<!--          <q-date-->
+<!--            v-model="date"-->
+<!--            :events="listEvents"-->
+<!--            event-color="orange-14"-->
+<!--          />-->
+<!--        </div>-->
+<!--      </template>-->
+
+<!--      <template v-slot:after>-->
+<!--        <q-tab-panels-->
+<!--          v-model="date"-->
+<!--          v-for="event in events" :key="event.id"-->
+<!--          animated-->
+<!--          transition-prev="jump-up"-->
+<!--          transition-next="jump-up"-->
+<!--        >-->
+<!--          <q-tab-panel :name=event.date>-->
+<!--            <div class="text-h4 q-mb-md">{{ event.date }}</div>-->
+<!--            <p>event:{{ event }}</p>-->
+<!--            <p>name:{{ event.name }}</p>-->
+<!--            <p>text:{{ event.text }}</p>-->
+<!--            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>-->
+<!--          </q-tab-panel>-->
+<!--        </q-tab-panels>-->
+<!--      </template>-->
+<!--    </q-splitter>-->
+<!--  </div>-->
+  <q-separator color="primary"/>
+  <div>
+    <div v-for="itemM in listDateEvent.slice(id).reverse()" :key="itemM.id">
+      <div>
+        {{ itemM }}
+      </div>
+    </div>
+  </div>
+  <q-separator color="primary"/>
+  <div>
+    <div v-for="itemM in listEvent.slice(id).reverse()" :key="itemM.id">
+      <div>
+        {{ itemM }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -108,6 +159,8 @@ export default {
   setup () {
     const todos = ref([])
     const events = ref([])
+    const listDateEvent = ref([])
+    const listEvent = ref([])
     onMounted(async () => {
       onSnapshot(collection(db, 'todos'), (querySnapshot) => {
         const fbTodos = []
@@ -135,6 +188,32 @@ export default {
           fbEvents.push(event)
         })
         events.value = fbEvents
+      })
+      onSnapshot(collection(db, 'coffeeWashes/listDateEvents/listDate'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            date: doc.data().date,
+            name: doc.data().name,
+            text: doc.data().text
+          }
+          fbEvents.push(listDateEvent)
+        })
+        listDateEvent.value = fbEvents
+      })
+      onSnapshot(collection(db, 'coffeeWashes/listEvents/listEvent'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listEvent = {
+            id: doc.id,
+            date: doc.data().date,
+            name: doc.data().name,
+            text: doc.data().text
+          }
+          fbEvents.push(listEvent)
+        })
+        listEvent.value = fbEvents
       })
     })
     const toggleDone = id => {
@@ -180,6 +259,7 @@ export default {
       newEventTeam2,
       newEventCount,
       newCount: 6,
+      listEvent,
       register,
       deleteTodo,
       deleteEvent,
@@ -190,6 +270,7 @@ export default {
       addEvent,
       listEvents: (['2022/09/14', '2022/09/20']),
       events,
+      listDateEvent,
       todos,
       store,
       date: ref('2022/09/01'),
