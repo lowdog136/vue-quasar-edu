@@ -27,7 +27,9 @@
 
 <script>
 import { useQuasar } from 'quasar'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from 'src/firebase'
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
@@ -197,10 +199,26 @@ export default {
   },
   setup () {
     const $q = useQuasar()
+    const matchEvents = ref([])
+    onSnapshot(collection(db, 'eventsTeams'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const eventsTeams = {
+          id: doc.id,
+          name: doc.data().name,
+          city: doc.data().city
+        }
+        fbEventsMounth.push(eventsTeams)
+      })
+      matchEvents.value = fbEventsMounth
+      // console.log(doc)
+      console.log('matchEvents', matchEvents.value)
+    })
 
     return {
       titleEvent: 'Чемпионат СЗФО',
       btnSize: 'xs',
+      matchEvents,
       titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
