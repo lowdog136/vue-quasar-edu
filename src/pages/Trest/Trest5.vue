@@ -1,73 +1,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md" >
-    <q-splitter
-      v-model="splitterModel"
-      style="height: 450px"
-    >
-      <template v-slot:before>
-        <div class="q-pa-md">
-          <q-date
-            v-model="date"
-            :events="listEvents"
-            event-color="orange-14"
-          />
-        </div>
-      </template>
-
-      <template v-slot:after>
-        <q-tab-panels
-          v-model="date"
-          v-for="itemM in listDateEvent.slice(id).reverse()" :key="itemM.id"
-          animated
-          transition-prev="jump-up"
-          transition-next="jump-up"
-        >
-          <q-tab-panel :name=itemM.date>
-            <div class="text-h4 q-mb-md">{{ itemM.date }}</div>
-            <p>event:{{ itemM }}</p>
-            <p>name:{{ itemM.name }}</p>
-            <p>text:{{ itemM.text }}</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-        </q-tab-panels>
-      </template>
-    </q-splitter>
+      <listDateEvent :event-list-value="listEvents"/>
   </div>
-  <q-separator color="primary"/>
-<!--  <div class="q-pa-md row items-start q-gutter-md" >-->
-<!--    <q-splitter-->
-<!--      v-model="splitterModel"-->
-<!--      style="height: 450px"-->
-<!--    >-->
-<!--      <template v-slot:before>-->
-<!--        <div class="q-pa-md">-->
-<!--          <q-date-->
-<!--            v-model="date"-->
-<!--            :events="listEvents"-->
-<!--            event-color="orange-14"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </template>-->
-
-<!--      <template v-slot:after>-->
-<!--        <q-tab-panels-->
-<!--          v-model="date"-->
-<!--          v-for="event in events" :key="event.id"-->
-<!--          animated-->
-<!--          transition-prev="jump-up"-->
-<!--          transition-next="jump-up"-->
-<!--        >-->
-<!--          <q-tab-panel :name=event.date>-->
-<!--            <div class="text-h4 q-mb-md">{{ event.date }}</div>-->
-<!--            <p>event:{{ event }}</p>-->
-<!--            <p>name:{{ event.name }}</p>-->
-<!--            <p>text:{{ event.text }}</p>-->
-<!--            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>-->
-<!--          </q-tab-panel>-->
-<!--        </q-tab-panels>-->
-<!--      </template>-->
-<!--    </q-splitter>-->
-<!--  </div>-->
   <q-separator color="primary"/>
   <div>
     <div v-for="itemM in listDateEvent.slice(id).reverse()" :key="itemM.id">
@@ -89,6 +23,7 @@
 import { ref, onMounted } from 'vue'
 import { date } from 'quasar'
 import axios from 'axios'
+import listDateEvent from 'components/TestComp/listDateEvent'
 import { useStore, mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, increment } from 'firebase/firestore'
 import { db } from '../../firebase'
@@ -143,7 +78,7 @@ const deleteTodo = id => {
 
 export default {
   name: 'Trest5',
-  components: {},
+  components: { listDateEvent },
   data () {
     return {
       tests: [],
