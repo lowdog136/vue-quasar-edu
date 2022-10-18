@@ -177,7 +177,7 @@ export default {
             {
               id: 1,
               tour: '13 тур',
-              nameEvent: 'ФК "Север" - ФК "Псков"',
+              nameEvent: 'ФК "Север" 0-1 ФК "Псков"',
               color: 'red',
               data: 'сентябрь 14, 2022',
               icon: 'local_fire_department',
@@ -186,10 +186,34 @@ export default {
             {
               id: 1,
               tour: '14 тур',
-              nameEvent: 'ФК "Север" - СШ Ленинградец',
-              color: 'teal',
+              nameEvent: 'ФК "Север" 3-1 СШ Ленинградец',
+              color: 'orange-14',
               data: 'сентябрь 17, 2022',
-              icon: 'event',
+              icon: 'done_all',
+              planeVisitCount: 0
+            }
+          ]
+        },
+        {
+          id: 6,
+          mounth: 'Октябрь, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '1 круг',
+              nameEvent: 'СШ №7" 0-6 ФК "Север"',
+              color: 'orange-14',
+              data: 'октябрь 09, 2022',
+              icon: 'done_all',
+              planeVisitCount: 0
+            },
+            {
+              id: 2,
+              tour: '2 круг',
+              nameEvent: 'ФК "Север" 2-1 ФК "Псков"',
+              color: 'red',
+              data: 'октябрь 15, 2022',
+              icon: 'local_fire_department',
               planeVisitCount: 0
             }
           ]

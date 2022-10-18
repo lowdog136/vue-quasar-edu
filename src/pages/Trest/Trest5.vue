@@ -1,37 +1,5 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md" >
-    <q-splitter
-      v-model="splitterModel"
-      style="height: 450px"
-    >
-      <template v-slot:before>
-        <div class="q-pa-md">
-          <q-date
-            v-model="date"
-            :events="listEvents"
-            event-color="orange-14"
-          />
-        </div>
-      </template>
-
-      <template v-slot:after>
-        <q-tab-panels
-          v-model="date"
-          v-for="itemM in listDateEvent.slice(id).reverse()" :key="itemM.id"
-          animated
-          transition-prev="jump-up"
-          transition-next="jump-up"
-        >
-          <q-tab-panel :name=itemM.date>
-            <div class="text-h4 q-mb-md">{{ itemM.date }}</div>
-            <p>event:{{ itemM }}</p>
-            <p>name:{{ itemM.name }}</p>
-            <p>text:{{ itemM.text }}</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-          </q-tab-panel>
-        </q-tab-panels>
-      </template>
-    </q-splitter>
   </div>
   <q-separator color="primary"/>
 <!--  <div class="q-pa-md row items-start q-gutter-md" >-->
@@ -77,7 +45,8 @@
     </div>
   </div>
   <q-separator color="primary"/>
-  <div>
+  <div>11
+      {{ setDate }}
     <div v-for="itemM in listEvent.slice(id).reverse()" :key="itemM.id">
       <div>
         {{ itemM }}
@@ -201,6 +170,7 @@ export default {
           fbEvents.push(listDateEvent)
         })
         listDateEvent.value = fbEvents
+        console.log(listDateEvent)
       })
       onSnapshot(collection(db, 'coffeeWashes/listEvents/listEvent'), (querySnapshot) => {
         const fbEvents = []
@@ -293,6 +263,9 @@ export default {
       'myCountUp',
       'howWatch'
     ]),
+    setDate (llist) {
+      this.listDateEvent = llist
+    },
     setSelect (event) {
       this.tourCount = event
     },
