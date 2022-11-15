@@ -5,22 +5,24 @@
     </div>
     <q-timeline :layout="layout" color="secondary" v-for="game in games.slice(id).reverse()" :key="game.id">
       <q-timeline-entry heading>{{ game.mounth }}</q-timeline-entry>
-      <q-timeline-entry
-        v-for="matchEvent in game.matchEvents.slice(id).reverse()" :key="matchEvent.id"
-        :title='titleEvent'
-        :subtitle=matchEvent.data
-        side="left"
-        :color=matchEvent.color
-        :icon=matchEvent.icon
-      >
-        <div>
-          {{ matchEvent.tour}}
-        </div>
-        <div>
-          {{ matchEvent.nameEvent}}
-          <q-item-label caption>планируют посетить: {{ matchEvent.planeVisitCount }}</q-item-label>
-        </div>
-      </q-timeline-entry>
+      <div v-show="titleEventTest[1] == 2">
+        <q-timeline-entry
+          v-for="matchEvent in game.matchEvents.slice(id).reverse()" :key="matchEvent.id"
+          :title='titleEvent'
+          :subtitle=matchEvent.data
+          side="left"
+          :color=matchEvent.color
+          :icon=matchEvent.icon
+        >
+          <div>
+            {{ matchEvent.tour}}
+          </div>
+          <div>
+            {{ matchEvent.nameEvent}}
+            <q-item-label caption>планируют посетить: {{ matchEvent.planeVisitCount }}</q-item-label>
+          </div>
+        </q-timeline-entry>
+      </div>
     </q-timeline>
   </div>
 </template>
@@ -193,30 +195,6 @@ export default {
               planeVisitCount: 0
             }
           ]
-        },
-        {
-          id: 6,
-          mounth: 'Октябрь, 2022',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '1 круг',
-              nameEvent: 'СШ №7" 0-6 ФК "Север"',
-              color: 'orange-14',
-              data: 'октябрь 09, 2022',
-              icon: 'done_all',
-              planeVisitCount: 0
-            },
-            {
-              id: 2,
-              tour: '2 круг',
-              nameEvent: 'ФК "Север" 2-1 ФК "Псков"',
-              color: 'red',
-              data: 'октябрь 15, 2022',
-              icon: 'local_fire_department',
-              planeVisitCount: 0
-            }
-          ]
         }
       ]
     }
@@ -240,10 +218,12 @@ export default {
     })
 
     return {
-      titleEvent: 'Чемпионат СЗФО',
+      titleEvent: ['Чемпионат СЗФО'],
+      titleEventTest: ['1', '2', '3'],
+      titleEvent1: 'TitileEventValue1',
       btnSize: 'xs',
       matchEvents,
-      titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
+      titleMainEvent: '',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })

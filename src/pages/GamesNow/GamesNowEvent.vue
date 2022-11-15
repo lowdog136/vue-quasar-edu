@@ -1,14 +1,16 @@
 <template>
   <div class="q-px-lg q-pb-md">
+    <eventCupSZFO />
     <eventSZFO />
   </div>
 </template>
 
 <script>
 import eventSZFO from 'components/Events/eventSZFO'
+import eventCupSZFO from 'components/Events/eventCupSZFO'
 
 export default {
-  components: { eventSZFO }
+  components: { eventSZFO, eventCupSZFO }
 }
 </script>
 
