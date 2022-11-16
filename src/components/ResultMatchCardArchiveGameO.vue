@@ -28,6 +28,16 @@
             <div class="text-h5 q-mb-md">О турнире:</div>
             <p>Чемпионат СЗФО по футболу среди мужских команд 2022 г. Представлен 8 командами: ФК "Север", ФК ""Псков", СШ "Ленинградец", СШ №2 ВО "Звезда", СШ №7 "Карелия", ФК "Химик", ФК "Новград", СШ "Электрон".</p>
             </q-tab-panel>
+          <q-tab-panel :name=tours[13]>
+            <div class="text-h4 q-mb-md">{{ tours[13] }}</div>
+            <p>17 сентября</p>
+            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} 3 - 1 {{$store.state.teams[1].name}} {{$store.state.teams[1].city}}</p>
+          </q-tab-panel>
+          <q-tab-panel :name=tours[12]>
+            <div class="text-h4 q-mb-md">{{ tours[12] }}</div>
+            <p>14 сентября</p>
+            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} 0 - 1 {{$store.state.teams[2].name}} {{$store.state.teams[2].city}}</p>
+          </q-tab-panel>
           <q-tab-panel :name=tours[11]>
             <div class="text-h4 q-mb-md">{{ tours[11] }}</div>
             <p>25 августа</p>
@@ -126,6 +136,14 @@ export default {
         {
           label: 'Чемпионат СЗФО 2022',
           children: [
+            {
+              label: '14 тур',
+              icon: 'done'
+            },
+            {
+              label: '13 тур',
+              icon: 'done'
+            },
             {
               label: '12 тур',
               icon: 'done'

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ResultMatchCardArchiveGameCupO />
     <ResultMatchCardArchiveGameO />
     <ResultMatchCardArchiveGameF />
   </div>
@@ -9,11 +10,12 @@
 import axios from 'axios'
 import ResultMatchCardArchiveGameF from 'components/ResultMatchCardArchiveGameF'
 import ResultMatchCardArchiveGameO from 'components/ResultMatchCardArchiveGameO'
+import ResultMatchCardArchiveGameCupO from 'components/ResultMatchCardArchiveGameCupO'
 const baseURL = 'https://severfans.ru'
 
 export default {
   name: 'ResultMatchCard',
-  components: { ResultMatchCardArchiveGameF, ResultMatchCardArchiveGameO },
+  components: { ResultMatchCardArchiveGameF, ResultMatchCardArchiveGameO, ResultMatchCardArchiveGameCupO },
   data () {
     return {}
   },

@@ -4,7 +4,11 @@
       {{titleMainEvent }}
     </div>
     <q-timeline :layout="layout" color="secondary" v-for="game in games.slice(id).reverse()" :key="game.id">
-      <q-timeline-entry heading>{{ game.mounth }}</q-timeline-entry>
+      <q-timeline-entry heading>
+        <div class="title" style="color: #ae0000">
+          {{ game.mounth }}
+        </div>
+      </q-timeline-entry>
       <div v-show="titleEventTest[1] == 2">
         <q-timeline-entry
           v-for="matchEvent in game.matchEvents.slice(id).reverse()" :key="matchEvent.id"
