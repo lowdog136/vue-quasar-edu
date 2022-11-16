@@ -40,6 +40,15 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[3].Caption }}</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable v-ripple :active="active" to="/Achievement">
+        <q-item-section avatar>
+          <q-icon name="celebration" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $store.state.NavigationListMenu[15].Name }}</q-item-label>
+          <q-item-label caption>{{ $store.state.NavigationListMenu[15].Caption }}</q-item-label>
+        </q-item-section>
+      </q-item>
 <!--      Стадион-->
       <q-expansion-item
         v-model="expanded"
@@ -47,14 +56,6 @@
         label="Стадион"
         caption="Стадион"
         to="/Stadium"
-        disable
-      />
-      <q-expansion-item
-        v-model="expanded"
-        icon="celebration"
-        label="Достижения"
-        caption="Достижения клуба"
-        to="/Awards"
         disable
       />
     </q-expansion-item>

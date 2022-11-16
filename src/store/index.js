@@ -287,6 +287,11 @@ export default store(function (/* { ssrContext } */) {
           id: 15,
           Name: 'История',
           Caption: 'История ресурса'
+        },
+        {
+          id: 16,
+          Name: 'Достижения',
+          Caption: 'Награды, медали'
         }
       ],
       NewsClubNewsCard: [
