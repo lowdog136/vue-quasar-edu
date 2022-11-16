@@ -51,7 +51,7 @@ export default {
             {
               id: 1,
               tour: 'Групповой этап, 2 тур',
-              nameEvent: 'СШ №7" 0-6 ФК "Север"',
+              nameEvent: 'СШ №7 "Карелия" 0-6 ФК "Север"',
               color: 'orange-14',
               data: 'октябрь 09, 2022',
               icon: 'done_all',

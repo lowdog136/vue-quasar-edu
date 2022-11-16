@@ -49,6 +49,14 @@
         to="/Stadium"
         disable
       />
+      <q-expansion-item
+        v-model="expanded"
+        icon="celebration"
+        label="Достижения"
+        caption="Достижения клуба"
+        to="/Awards"
+        disable
+      />
     </q-expansion-item>
 <!--    Текущие соревнования-->
     <q-expansion-item

@@ -12,6 +12,7 @@ const routes = [
       { path: '/HistoryClub', name: 'HistoryClub', component: () => import('pages/HistoryClub.vue') },
       { path: '/ResultMatch', name: 'ResultMatch', component: () => import('pages/ResultMatch.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
+      { path: '/Achievement', name: 'Achievement', component: () => import('pages/Achievement.vue') },
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
       { path: '/MyTestNewsClub', name: 'MyTestNewsClub', component: () => import('pages/MyTestNewsClub.vue') },
