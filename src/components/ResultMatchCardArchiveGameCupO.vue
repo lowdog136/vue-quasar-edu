@@ -30,12 +30,12 @@
             </q-tab-panel>
           <q-tab-panel :name=tours[1]>
             <div class="text-h4 q-mb-md">{{ tours[1] }}</div>
-            <p>17 сентября</p>
-            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} {{scores[1]}}{{$store.state.teams[1].name}} {{$store.state.teams[1].city}}</p>
+            <p>17 октября</p>
+            <p>{{$store.state.teams[0].name}} {{$store.state.teams[0].city}} {{scores[1]}}{{$store.state.teams[2].name}} {{$store.state.teams[2].city}}</p>
           </q-tab-panel>
           <q-tab-panel :name=tours[0]>
             <div class="text-h4 q-mb-md">{{ tours[0] }}</div>
-            <p>14 сентября</p>
+            <p>14 октября</p>
             <p>{{$store.state.teams[4].name}} {{$store.state.teams[4].city}} {{scores[0]}} {{$store.state.teams[0].name}} {{$store.state.teams[0].city}}</p>
           </q-tab-panel>
         </q-tab-panels>
