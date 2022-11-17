@@ -4,7 +4,7 @@
       <div class="bg-grey-2 q-pa-sm rounded-borders">
         Выберите год:
         <q-option-group
-          name="preferred_genre"
+          name="выбран"
           v-model="preferred"
           :options="options"
           color="primary"
@@ -16,24 +16,24 @@
       </div>
     </q-form>
 
-    <q-card v-if="submitResult.length > 0" flat bordered class="q-mt-md bg-grey-2">
-      <q-card-section>Submitted form contains the following formData (key = value):</q-card-section>
-      <q-separator />
-      <q-card-section class="row q-gutter-sm items-center">
+    <q-card v-if="submitResult.length > 0" flat bordered class="q-mt-md bg-grey-11">
         <div
           v-for="(item, index) in submitResult"
           :key="index"
           class="q-px-sm q-py-xs bg-grey-8 text-white rounded-borders text-center text-no-wrap"
         >{{ item.name }} = {{ item.value }}
           <div v-for="itema in archiveGames" :key="itema.id">
-            <div v-show="itema.title === item.value">
+            <div v-show="itema.year === item.value">
               <p>{{ itema.title }}</p>
-              <p>{{ itema.body }}</p>
+              <p>{{ itema.dateupd }}</p>
+              <p>{{ itema.score }}</p>
             </div>
           </div>
         </div>
-      </q-card-section>
     </q-card>
+  </div>
+  <div v-for="itemz in archiveGames2007" :key="itemz.id">
+    {{ itemz }}
   </div>
 </template>
 
@@ -45,6 +45,7 @@ import { db } from '../../firebase'
 export default {
   setup: function () {
     const archiveGames = ref([])
+    const archiveGames2007 = ref([])
     const eventsMounth = ref([])
     const eventsMounthL = ref([])
     const matchEvents = ref([])
@@ -54,6 +55,8 @@ export default {
         const event = {
           id: doc.id,
           title: doc.data().title,
+          year: doc.data().year,
+          dateupd: doc.data().dateupd,
           body: doc.data().body
         }
         fbAGames.push(event)
@@ -74,6 +77,21 @@ export default {
       matchEvents.value = fbEventsMounth
       // console.log(doc)
       console.log('matchEvents', matchEvents.value)
+    })
+    onSnapshot(collection(db, 'clubArchiveGames/archive/2007'), (querySnapshot) => {
+      const fbAGames = []
+      querySnapshot.forEach((doc) => {
+        const event = {
+          id: doc.id,
+          title: doc.data().title,
+          year: doc.data().year,
+          dateupd: doc.data().dateupd,
+          body: doc.data().body
+        }
+        fbAGames.push(event)
+      })
+      archiveGames.value = fbAGames
+      console.log('fbAGames2007', archiveGames.value)
     })
     onSnapshot(collection(db, 'siteEventsMounth/os/win'), (querySnapshot) => {
       const fbEventsMounth = []
@@ -108,11 +126,16 @@ export default {
 
     return {
       preferred: ref('2022'),
+      archiveGames2007,
       archiveGames,
       accepted: ref([]),
       submitResult,
 
       options: [
+        {
+          label: '2007',
+          value: '2007'
+        },
         {
           label: '2022',
           value: '2022'
