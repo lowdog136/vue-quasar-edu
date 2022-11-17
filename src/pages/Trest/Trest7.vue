@@ -1,18 +1,10 @@
 <template>
   <div class="q-px-lg q-pb-md">
-        <div class="title">
+    <div class="title">
       {{titleMainEvent }}
     </div>
-    <div>
-      <div v-for="item in events.slice(id).reverse()" :key="item.id">
-        <div>
-          {{ item.id }}
-          <p>date:{{ item.date }}</p>
-          <p>mounth:{{ item.mounth }}</p>
-          <p>nameEvent:{{ item.nameEvent }}</p>
-          ---
-        </div>
-      </div>
+    <div class="title">
+      <ArchiveGamesViewList />
     </div>
     <q-separator color="primary"/>
     <div>
@@ -43,12 +35,13 @@ import { ref, computed } from 'vue'
 import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useQuasar } from 'quasar'
+import ArchiveGamesViewList from 'components/ArchiveGames/ArchiveGamesViewList'
 
 const eventsCollectionRef = collection(db, 'siteEvents')
 
 export default {
   name: 'trest6',
-  components: {},
+  components: { ArchiveGamesViewList },
   data () {
     return {
       tames: [
@@ -313,7 +306,7 @@ export default {
       matchEvents,
       eventsMounthL,
       btnSize: 'xs',
-      titleMainEvent: 'Календарь игр ФК "Север" в 2222 году',
+      titleMainEvent: 'Архив игр',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })

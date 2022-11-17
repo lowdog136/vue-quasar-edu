@@ -1,378 +1,333 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <div class="q-pa-md">
-      <q-form
-        class="q-gutter-md"
-      >
-        <div>
-          <q-input
-            v-model='newEventSubTitle'
-            hint="add SubTitle"
-            lazy-rules
-          />
-          <q-input
-            v-model='newEventTitle'
-            hint="add Title"
-            lazy-rules
-          />
-          <q-input
-            v-model='newEventTeam1'
-            hint="add Team1"
-            lazy-rules
-          />
-          <q-input
-            v-model='newEventTeam2'
-            hint="add Team2"
-            lazy-rules
-          />
-
-        </div>
-        <q-btn @click="addEvent" label="add event"/>
-      </q-form>
+  <div class="q-px-lg q-pb-md">
+    <div class="title">
+      {{titleMainEvent }}
     </div>
-    <q-toggle
-      :false-value="false"
-      :label="`Показываем ${redModel}`"
-      :true-value="true"
-      color="red"
-      v-model="redModel"
-    />
-    <div v-if="redModel">
-      <div>
-        <q-btn @click="listCount--" label="down"/>
-        {{ listCount }}
-        <q-btn @click="listCount++" label="up"/>
-        <div class="q-pa-md" v-for="event in events" :key="event.date" style="max-width: 650px">
-          {{ events.length }}
-          <q-card>
-            <q-toolbar class="bg-primary text-white shadow-2">
-              <!--            Update subtitle block-->
-              <div class="q-gutter-md">
-                <div class="cursor-pointer" style="width: 100px">
-                  {{ event.subtitle }}
-                  <q-popup-edit v-model="event.subtitle" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </div>
-              </div>
-              <q-toolbar-title>
-                <div>
-                  <q-btn @click="updateSubTitle(event.id)" size="xs" icon="done" />
-                </div>
-              </q-toolbar-title>
-            </q-toolbar>
-            <q-list v-if="event.done">
-              <q-item-section>
-                {{ event.count }}
-              </q-item-section>
-              <!--            Update title block-->
-              <q-item>
-                <div class="q-gutter-md">
-                  <div class="cursor-pointer" style="width: 100px">
-                    {{ event.title }}
-                    <q-popup-edit v-model="event.title" class="bg-accent text-white" v-slot="scope">
-                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateTitle(event.id)" @keyup.enter="scope.set">
-                        <template v-slot:append>
-                          <q-icon name="edit" />
-                        </template>
-                      </q-input>
-                    </q-popup-edit>
-                  </div>
-                </div>
-                <q-btn @click="updateTitle(event.id)" size="xs" icon="done"/>
-              </q-item>
-              <q-item>
-                <div class="q-gutter-md">
-                  <div class="cursor-pointer" style="width: 100px">
-                    {{ event.team1 }}
-                    <q-popup-edit v-model="event.team1" class="bg-accent text-white" v-slot="scope">
-                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                        <template v-slot:append>
-                          <q-icon name="edit" />
-                        </template>
-                      </q-input>
-                    </q-popup-edit>
-                  </div>
-                </div>
-                <q-btn @click="updateTeam1(event.id)" size="xs" icon="done"/>
-                <q-space />
-<!--              </q-item>-->
-<!--              <q-item>-->
-                <div class="q-gutter-md">
-                  <div class="cursor-pointer" style="width: 100px">
-                    {{ event.team2 }}
-                    <q-popup-edit v-model="event.team2" class="bg-accent text-white" v-slot="scope">
-                      <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                        <template v-slot:append>
-                          <q-icon name="edit" />
-                        </template>
-                      </q-input>
-                    </q-popup-edit>
-                  </div>
-                </div>
-                <q-btn @click="updateTeam2(event.id)" size="xs" icon="done"/>
-              </q-item>
-            </q-list>
-            <q-tabs
-              v-model="tab"
-              class="bg-teal text-yellow shadow-2"
-            >
-              <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
-              <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
-              <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
-            </q-tabs>
-          </q-card>
+    <div>
+      <div v-for="item in events.slice(id).reverse()" :key="item.id">
+        <div>
+          {{ item.id }}
+          <p>date:{{ item.date }}</p>
+          <p>mounth:{{ item.mounth }}</p>
+          <p>nameEvent:{{ item.nameEvent }}</p>
+          ---
+        </div>
+      </div>
+    </div>
+    <q-separator color="primary"/>
+    <div>
+      <div v-for="itemM in eventsMounth.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
+        </div>
+      </div>
+      <div v-for="itemM in eventsMounthL.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
+        </div>
+      </div>
+    </div>
+    <q-separator color="primary"/>
+    <div>
+      <div v-for="itemM in matchEvents.slice(id).reverse()" :key="itemM.id">
+        <div>
+          {{ itemM }}
         </div>
       </div>
     </div>
   </div>
-<!--  <div v-if="redModel">
-    <div>
-      <h4> Text here </h4>
-    </div>
-    <q-btn @click="listCount++" label="+"/>
-    <q-btn @click="listCount&#45;&#45;" label="-"/>
-    <div>
-      {{ listCount }}
-    </div>
-    <div v-if="author2[listCount]">
-      {{ author1[listCount] }}
-    </div>
-  </div>
-  <div>
-    <q-btn @click="pageCount&#45;&#45;" icon="chevron_left"/>
-    {{ pageCount }}
-    <q-btn @click="pageCount++" icon="chevron_right"/>
-    <h5>text herer 2</h5>
-    <div       v-for="text in texts"
-               :key="text.id">
-      <q-card
-        v-show="pageCount == text.id"
-        class="my-card text-white"
-        style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-      >
-        <q-card-section>
-          <div class="text-h6">{{  text.title }}</div>
-          <div class="text-subtitle2">by {{ text.author }}</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          {{ text.body }}
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>-->
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit, increment } from 'firebase/firestore'
+import { ref, computed } from 'vue'
+import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
+import { useQuasar } from 'quasar'
 
-const eventCollectionRef = collection(db, 'events')
-const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
-const newEventSubTitle = ref('')
-const newEventTitle = ref('')
-const newEventTeam1 = ref('')
-const newEventTeam2 = ref('')
-const newEventCount = ref('')
-
-const addEvent = () => {
-  addDoc(eventCollectionRef, {
-    subtitle: newEventSubTitle.value,
-    title: newEventTitle.value,
-    team1: newEventTeam1.value,
-    team2: newEventTeam2.value,
-    date: Date.now(),
-    count: 0,
-    done: true
-  })
-  newEventSubTitle.value = ''
-  newEventTitle.value = ''
-  newEventTeam1.value = ''
-  newEventTeam2.value = ''
-  newEventCount.value = ''
-  console.log('add todo', newEventSubTitle.value)
-}
-
-const deleteEvent = id => {
-  deleteDoc(doc(eventCollectionRef, id))
-}
+const eventsCollectionRef = collection(db, 'siteEvents')
 
 export default {
-  name: 'trest4',
+  name: 'trest6',
   components: {},
   data () {
     return {
-      tests: [],
-      author1: ['Room view', 'Room service', 'Food', 'Clean', 'Washing'],
-      author2: [1, 2, 3, 4, 5],
-      BtnName: 'pump',
-      BtnSize: 'xs',
-      count: ''
+      tames: [
+        {
+          id: 1,
+          mounth: 'Май, 2022'
+        },
+        {
+          id: 2,
+          mounth: 'Июнь, 2022'
+        },
+        {
+          id: 3,
+          mounth: 'Июль, 2022'
+        },
+        {
+          id: 4,
+          mounth: 'Август, 2022'
+        },
+        {
+          id: 5,
+          mounth: 'Сентябрь, 2022'
+        }
+      ],
+      games: [
+        {
+          id: 1,
+          mounth: 'Май, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '1 тур',
+              nameEvent: 'СШ "Электрон" 0-3 ФК "Север"',
+              color: 'orange-14',
+              data: 'май 29, 2022',
+              mounth: 'май',
+              icon: 'done_all'
+            }
+          ]
+        },
+        {
+          id: 2,
+          mounth: 'Июнь, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '2 тур',
+              nameEvent: 'СШ "Ленинградец" 1-2 ФК "Север"',
+              color: 'orange-14',
+              data: 'Июнь 1, 2022',
+              mounth: 'June',
+              icon: 'done_all'
+            },
+            {
+              id: 2,
+              tour: '3 тур',
+              nameEvent: 'ФК "Новград" 1-1 ФК "Север"',
+              color: 'orange-14',
+              data: 'Июнь 11, 2022',
+              mounth: 'June',
+              icon: 'done_all'
+            },
+            {
+              id: 3,
+              tour: '4 тур',
+              nameEvent: 'ФК "Псков" 0-2 ФК "Север"',
+              color: 'red',
+              data: 'Июнь 15, 2022',
+              mounth: 'June',
+              icon: 'local_fire_department'
+            },
+            {
+              id: 3,
+              tour: '5 тур',
+              nameEvent: 'СШ №2 ВО "Звезда" 1-2 ФК "Север"',
+              color: 'orange-14',
+              data: 'Июнь 18, 2022',
+              mounth: 'June',
+              icon: 'done_all'
+            },
+            {
+              id: 3,
+              tour: '6 тур',
+              nameEvent: 'ФК "Север" 3-0 ФК "Химик',
+              color: 'orange-14',
+              data: 'Июнь 29, 2022',
+              mounth: 'June',
+              icon: 'done_all'
+            }
+          ]
+        },
+        {
+          id: 3,
+          mounth: 'Июль, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '7 тур',
+              nameEvent: 'ФК "Север" 2-0 СШ №7 Карелия',
+              color: 'orange-14',
+              data: 'июль 2, 2022',
+              mounth: 'июль',
+              icon: 'sentiment_very_satisfied'
+            }
+          ]
+        },
+        {
+          id: 4,
+          mounth: 'Август, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '8 тур',
+              nameEvent: 'ФК "Север" 7-0 СШ "Электрон"',
+              color: 'orange-14',
+              data: 'август 6, 2022',
+              icon: 'done_all',
+              planeVisitCount: 0
+            },
+            {
+              id: 2,
+              tour: '9 тур',
+              nameEvent: 'ФК "Север" 3-0 ФК "Новград"',
+              color: 'orange-14',
+              data: 'август 9, 2022',
+              icon: 'done_all',
+              planeVisitCount: 0
+            },
+            {
+              id: 3,
+              tour: '10 тур',
+              nameEvent: 'ФК "Север" - СШ №2 ВО "Звезда"',
+              color: 'teal',
+              data: 'август 13, 2022',
+              icon: 'event',
+              planeVisitCount: 0
+            },
+            {
+              id: 4,
+              tour: '11 тур',
+              nameEvent: 'СШ №7 Карелия - ФК "Север"',
+              color: 'teal',
+              data: 'август 20, 2022',
+              icon: 'sentiment_very_satisfied',
+              planeVisitCount: 0
+            },
+            {
+              id: 5,
+              tour: '12 тур',
+              nameEvent: 'ФК "Химик" - ФК "Север"',
+              color: 'teal',
+              data: 'август 25, 2022',
+              icon: 'event',
+              planeVisitCount: 0
+            }
+          ]
+        },
+        {
+          id: 5,
+          mounth: 'Сентябрь, 2022',
+          matchEvents: [
+            {
+              id: 1,
+              tour: '13 тур',
+              nameEvent: 'ФК "Север" - ФК "Псков"',
+              color: 'red',
+              data: 'сентябрь 14, 2022',
+              icon: 'local_fire_department',
+              planeVisitCount: 0
+            },
+            {
+              id: 1,
+              tour: '14 тур',
+              nameEvent: 'ФК "Север" - СШ Ленинградец',
+              color: 'teal',
+              data: 'сентябрь 17, 2022',
+              icon: 'event',
+              planeVisitCount: 0
+            }
+          ]
+        }
+      ]
     }
   },
-  setup () {
-    const texts = ref([
-      { id: 1, title: 'My 1 title', author: 'B.J.Greys', body: '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"\n' },
-      { id: 2, title: 'My 2 title', author: 'A.Brown', body: '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"\n' },
-      { id: 3, title: 'My 3 title', author: 'W.Loyds', body: '"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."\n' },
-      { id: 4, title: 'My 4 title', author: 'S.K.J.Mouse', body: '"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?""\n' }])
-    const pageCount = ref('1')
-    const listCount = ref('')
-    const activeCard = ref('')
-    const todos = ref([])
+  setup: function () {
     const events = ref([])
-    onMounted(async () => {
-      onSnapshot(eventCollectionQuery, (querySnapshot) => {
-        const fbTodos = []
-        querySnapshot.forEach((doc) => {
-          const todo = {
-            id: doc.id,
-            content: doc.data().content,
-            date: doc.date().date,
-            title: doc.data().title,
-            done: doc.data().done
-          }
-          fbTodos.push(todo)
-        })
-        todos.value = fbTodos
+    const eventsMounth = ref([])
+    const eventsMounthL = ref([])
+    const matchEvents = ref([])
+    onSnapshot(collection(db, 'siteEvents'), (querySnapshot) => {
+      const fbEvents = []
+      querySnapshot.forEach((doc) => {
+        const event = {
+          id: doc.id,
+          color: doc.data().color,
+          date: doc.data().date,
+          icon: doc.data().icon,
+          mounth: doc.data().mounth,
+          nameEvent: doc.data().nameEvent,
+          tour: doc.data().tour
+        }
+        fbEvents.push(event)
       })
-      onSnapshot(collection(db, 'events'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const event = {
-            id: doc.id,
-            subtitle: doc.data().subtitle,
-            title: doc.data().title,
-            team1: doc.data().team1,
-            team2: doc.data().team2,
-            count: doc.data().count,
-            done: doc.data().done
-          }
-          fbEvents.push(event)
-        })
-        events.value = fbEvents
-      })
+      events.value = fbEvents
+      console.log('fbEvents', events.value)
     })
-    const toggleEvent = id => {
+    onSnapshot(collection(db, 'eventsTeams'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const eventsTeams = {
+          id: doc.id,
+          name: doc.data().name,
+          city: doc.data().city
+        }
+        fbEventsMounth.push(eventsTeams)
+      })
+      matchEvents.value = fbEventsMounth
+      // console.log(doc)
+      console.log('matchEvents', matchEvents.value)
+    })
+    onSnapshot(collection(db, 'siteEventsMounth/os/win'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const eventMounth = {
+          id: doc.id,
+          name: doc.data().name,
+          color: doc.data().color
+        }
+        fbEventsMounth.push(eventMounth)
+      })
+      eventsMounth.value = fbEventsMounth
+      console.log(doc)
+      // console.log('fbEventsMounth', eventsMounth.value)
+    })
+    onSnapshot(collection(db, 'siteEventsMounth/os/linux'), (querySnapshot) => {
+      const fbEventsMounth = []
+      querySnapshot.forEach((doc) => {
+        const eventMounthL = {
+          id: doc.id,
+          name: doc.data().name,
+          color: doc.data().color
+        }
+        fbEventsMounth.push(eventMounthL)
+      })
+      eventsMounthL.value = fbEventsMounth
+      console.log(doc)
+      // console.log('fbEventsMounth', eventsMounth.value)
+    })
+    const toggleDone = id => {
       const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
+      updateDoc(doc(eventsCollectionRef, id), {
         done: !events.value[index].done
       })
     }
-    const countUpEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        count: increment(1)
-      })
-      console.log('countUP', events.value[index].count)
-    }
-    const updateSubTitle = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        subtitle: events.value[index].subtitle
-      })
-      console.log('subtitle update', events.value[index].subtitle, 'subtitle id', events.value[index].id)
-    }
-    const updateTitle = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        title: events.value[index].title
-      })
-      console.log('title update', events.value[index].title)
-    }
-    const updateTeam1 = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        team1: events.value[index].team1
-      })
-      console.log('team1 update', events.value[index].team1)
-    }
-    const updateTeam2 = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        team2: events.value[index].team2
-      })
-      console.log('team2 update', events.value[index].team2)
-    }
-    return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      titleMainEvent: 'samething title2',
-      newEventSubTitle,
-      newEventTitle,
-      newEventTeam1,
-      newEventTeam2,
-      newEventCount,
-      deleteEvent,
-      deleteDoc,
-      toggleEvent,
-      countUpEvent,
-      updateSubTitle,
-      updateTitle,
-      updateTeam1,
-      updateTeam2,
-      addEvent,
-      pageCount,
-      activeCard,
-      listCount,
-      events,
-      texts,
-      todos,
-      done: ref(true),
-      redModel: ref(false),
-      tab: ref(['alarms', 'mails']),
-      expanded: ref(false)
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'dropDown'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'togledropDown',
-      'changePush',
-      'myCountZero',
-      'myCountUp',
-      'howWatch'
-    ])
-  },
+    const $q = useQuasar()
 
-  props: {}
+    return {
+      titleEvent: 'Чемпионат СЗФО',
+      toggleDone,
+      events,
+      eventsMounth,
+      matchEvents,
+      eventsMounthL,
+      btnSize: 'xs',
+      titleMainEvent: 'Архив игр',
+      layout: computed(() => {
+        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
+      })
+    }
+  }
 }
 </script>
 
 <style lang="sass" scoped>
+.title
+  font-size: 28px
+  text-align: center
+  color: #2c3e50
 .my-card
   width: 100%
-  max-width: 550px
-  background: #2c3e50
-  .root
-    width: 400px
-    margin: 0 auto
-    background-color: #fff
-    padding: 30px
-    margin-top: 100px
-    border-radius: 20px
-  input
-    border: none
-    outline: none
-    border-bottom: 1px solid #ddd
-    font-size: 1em
-    padding: 5px 0
-    margin: 10px 0 5px 0
-    width: 100%
-  button
-    background-color: #3498db
-    padding: 10px 20px
-    margin-top: 10px
-    border: none
-    color: white
+  max-width: 350px
 </style>

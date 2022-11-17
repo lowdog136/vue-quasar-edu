@@ -1,16 +1,27 @@
 <template>
   <div class="q-px-lg q-pb-md">
-    <eventCupSZFO />
-    <eventSZFO />
+    <div class="title">
+      {{titleMainEvent }}
+    </div>
+    <p class="text-body1" style="text-align: center">
+        {{bodyMainEvent }}
+    </p>
+<!--    <eventCupSZFO />-->
+<!--    <eventSZFO />-->
   </div>
 </template>
 
 <script>
-import eventSZFO from 'components/Events/eventSZFO'
-import eventCupSZFO from 'components/Events/eventCupSZFO'
-
 export default {
-  components: { eventSZFO, eventCupSZFO }
+  components: {},
+  setup () {
+    return {
+      titleEvent: ['Кубок СЗФО'],
+      bodyMainEvent: 'Календаря соревнований на текущий момент времени - нет. Приходите позже.',
+      btnSize: 'xs',
+      titleMainEvent: 'Календарь игр ФК "Север" в 2023 году'
+    }
+  }
 }
 </script>
 

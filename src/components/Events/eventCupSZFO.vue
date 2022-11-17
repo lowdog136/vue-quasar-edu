@@ -95,7 +95,7 @@ export default {
       titleEvent1: 'TitileEventValue1',
       btnSize: 'xs',
       matchEvents,
-      titleMainEvent: 'Календарь игр ФК "Север" в 2022 году',
+      titleMainEvent: 'Календарь игр ФК "Север" в 2023 году',
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })
