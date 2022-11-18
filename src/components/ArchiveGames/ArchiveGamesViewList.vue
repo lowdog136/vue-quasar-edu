@@ -21,17 +21,17 @@
         <div
           v-for="(item, index) in submitResult"
           :key="index"
-          class="q-px-sm q-py-xs bg-grey-8 text-white rounded-borders text-center text-no-wrap"
+          class="q-px-sm q-py-xs rounded-borders text-left text-no-wrap"
         >{{ item.name }} = {{ item.value }}
           <div v-for="itema in archiveGames.slice(id).reverse()" :key="itema.id">
             <div v-show="itema.year === item.value">
               <q-card class="my-card" flat bordered>
                 <q-card-section horizontal>
                   <q-card-section class="q-pt-xs">
-                    <div class="text-overline text-red">{{ itema.event }}</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs text-red">{{ itema.title }} {{ itema.score }}</div>
-                    <div class="q-mt-sm text-caption text-red">
-                      {{ itema.result }}
+                    <div class="text-overline">{{ itema.event }}</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
+                    <div class="q-mt-sm text-caption">
+                      Результат матча: {{ itema.result }}
                     </div>
                   </q-card-section>
                 </q-card-section>
@@ -40,12 +40,11 @@
                    <q-btn flat color="primary">
                     {{ itema.date }}
                   </q-btn>
-                  <q-btn flat color="primary">
+                  <q-btn flat color="primary" disable>
                     Подробнее
                   </q-btn>
                 </q-card-actions>
               </q-card>
-              <q-separator color="primary"/>
             </div>
           </div>
         </div>
