@@ -219,27 +219,6 @@
             </q-item>
           </q-list>
         </div>
-        <q-separator inset />
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>dateupd: {{ SiteUpdate.dateupd }}
-                  <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateDateUpd(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
       </q-card-section>
       <q-separator dark inset />
       <q-card-section>
@@ -410,7 +389,7 @@ export default {
       newSiteUpdateResult,
       newSiteUpdateDateUpd,
       done: ref(true),
-      redModel: ref(true),
+      redModel: ref(false),
       deleteSiteUpdate,
       deleteDoc,
       addSiteUpdate,
