@@ -3,6 +3,7 @@
     <q-form @submit="onSubmit" class="q-gutter-md">
       <div class="bg-grey-2 q-pa-sm rounded-borders">
         Выберите год:
+        <q-separator color="primary"/>
         <q-option-group
           name="выбран"
           v-model="preferred"
@@ -22,11 +23,29 @@
           :key="index"
           class="q-px-sm q-py-xs bg-grey-8 text-white rounded-borders text-center text-no-wrap"
         >{{ item.name }} = {{ item.value }}
-          <div v-for="itema in archiveGames" :key="itema.id">
+          <div v-for="itema in archiveGames.slice(id).reverse()" :key="itema.id">
             <div v-show="itema.year === item.value">
-              <p>{{ itema.title }}</p>
-              <p>{{ itema.dateupd }}</p>
-              <p>{{ itema.score }}</p>
+              <q-card class="my-card" flat bordered>
+                <q-card-section horizontal>
+                  <q-card-section class="q-pt-xs">
+                    <div class="text-overline text-red">{{ itema.event }}</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs text-red">{{ itema.title }} {{ itema.score }}</div>
+                    <div class="q-mt-sm text-caption text-red">
+                      {{ itema.result }}
+                    </div>
+                  </q-card-section>
+                </q-card-section>
+                <q-separator />
+                <q-card-actions>
+                   <q-btn flat color="primary">
+                    {{ itema.date }}
+                  </q-btn>
+                  <q-btn flat color="primary">
+                    Подробнее
+                  </q-btn>
+                </q-card-actions>
+              </q-card>
+              <q-separator color="primary"/>
             </div>
           </div>
         </div>
@@ -39,24 +58,24 @@
 
 <script>
 import { ref } from 'vue'
-import { collection, onSnapshot, doc } from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../firebase'
 
 export default {
   setup: function () {
     const archiveGames = ref([])
-    const archiveGames2007 = ref([])
-    const eventsMounth = ref([])
-    const eventsMounthL = ref([])
-    const matchEvents = ref([])
-    onSnapshot(collection(db, 'clubArchiveGames'), (querySnapshot) => {
+    onSnapshot(collection(db, 'clubArchiveGames/archive/year'), (querySnapshot) => {
       const fbAGames = []
       querySnapshot.forEach((doc) => {
         const event = {
           id: doc.id,
           title: doc.data().title,
           year: doc.data().year,
-          dateupd: doc.data().dateupd,
+          event: doc.data().event,
+          score: doc.data().score,
+          datestamp: doc.data().datestamp,
+          date: doc.data().date,
+          result: doc.data().result,
           body: doc.data().body
         }
         fbAGames.push(event)
@@ -64,69 +83,11 @@ export default {
       archiveGames.value = fbAGames
       console.log('fbAGames', archiveGames.value)
     })
-    onSnapshot(collection(db, 'eventsTeams'), (querySnapshot) => {
-      const fbEventsMounth = []
-      querySnapshot.forEach((doc) => {
-        const eventsTeams = {
-          id: doc.id,
-          name: doc.data().name,
-          city: doc.data().city
-        }
-        fbEventsMounth.push(eventsTeams)
-      })
-      matchEvents.value = fbEventsMounth
-      // console.log(doc)
-      console.log('matchEvents', matchEvents.value)
-    })
-    onSnapshot(collection(db, 'clubArchiveGames/archive/2007'), (querySnapshot) => {
-      const fbAGames = []
-      querySnapshot.forEach((doc) => {
-        const event = {
-          id: doc.id,
-          title: doc.data().title,
-          year: doc.data().year,
-          dateupd: doc.data().dateupd,
-          body: doc.data().body
-        }
-        fbAGames.push(event)
-      })
-      archiveGames.value = fbAGames
-      console.log('fbAGames2007', archiveGames.value)
-    })
-    onSnapshot(collection(db, 'siteEventsMounth/os/win'), (querySnapshot) => {
-      const fbEventsMounth = []
-      querySnapshot.forEach((doc) => {
-        const eventMounth = {
-          id: doc.id,
-          name: doc.data().name,
-          color: doc.data().color
-        }
-        fbEventsMounth.push(eventMounth)
-      })
-      eventsMounth.value = fbEventsMounth
-      console.log(doc)
-      // console.log('fbEventsMounth', eventsMounth.value)
-    })
-    onSnapshot(collection(db, 'siteEventsMounth/os/linux'), (querySnapshot) => {
-      const fbEventsMounth = []
-      querySnapshot.forEach((doc) => {
-        const eventMounthL = {
-          id: doc.id,
-          name: doc.data().name,
-          color: doc.data().color
-        }
-        fbEventsMounth.push(eventMounthL)
-      })
-      eventsMounthL.value = fbEventsMounth
-      console.log(doc)
-      // console.log('fbEventsMounth', eventsMounth.value)
-    })
 
     const submitResult = ref([])
 
     return {
-      preferred: ref('2022'),
-      archiveGames2007,
+      preferred: ref('2007'),
       archiveGames,
       accepted: ref([]),
       submitResult,
@@ -168,3 +129,7 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+</style>
