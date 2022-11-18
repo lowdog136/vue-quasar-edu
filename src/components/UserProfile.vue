@@ -113,7 +113,7 @@ import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
-  name: 'LayoutUserPage',
+  name: 'UserProfile',
   components: {},
   setup () {
     const leftDrawerOpen = ref(false)

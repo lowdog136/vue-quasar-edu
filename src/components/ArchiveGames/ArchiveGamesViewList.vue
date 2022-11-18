@@ -50,9 +50,6 @@
         </div>
     </q-card>
   </div>
-  <div v-for="itemz in archiveGames2007" :key="itemz.id">
-    {{ itemz }}
-  </div>
 </template>
 
 <script>

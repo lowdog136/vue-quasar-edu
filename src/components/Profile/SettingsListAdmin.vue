@@ -15,6 +15,13 @@
       <q-item-section>CarrotAdminPage</q-item-section>
     </q-item>
     <q-separator spaced inset />
+    <q-item to="/Admin/TomatAdminPage">
+      <q-item-section avatar>
+        <q-icon color="primary" name="admin_panel_settings" />
+      </q-item-section>
+      <q-item-section>NewAdminPage</q-item-section>
+    </q-item>
+    <q-separator spaced inset />
     <q-item to="/" @click="$store.dispatch('logout')" >
       <q-item-section avatar>
         <q-icon color="primary" name="logout" />
@@ -43,6 +50,12 @@ export default {
       },
       {
         id: 3,
+        name: 'TomatAdminPage',
+        icon: 'admin_panel_settings',
+        to: '/Admin/TomatAdminPage'
+      },
+      {
+        id: 4,
         name: 'Выйти',
         icon: 'logout',
         to: '/'
