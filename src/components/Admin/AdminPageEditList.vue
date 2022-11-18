@@ -11,13 +11,23 @@
           apps that can be downloaded
         </q-item-label>
       </q-item-section>
+      <q-item-section side >
+        <q-toggle color="red" v-model="greetingDone" val="picture" />
+      </q-item-section>
     </q-item>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AdminPageEditList'
+  name: 'AdminPageEditList',
+  setup () {
+    return {
+    }
+  },
+  props: {
+    greetingDone: Boolean
+  }
 }
 </script>
 
