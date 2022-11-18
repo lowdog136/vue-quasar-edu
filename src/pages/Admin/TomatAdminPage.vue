@@ -1,14 +1,14 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <q-list padding>
-      <q-item-label header>User Controls</q-item-label>
-
-      <q-item v-ripple>
+      <q-item-label header>Административная панель управления:</q-item-label>
+      <TestTitleComp :greeting-message="notifProf"/>
+      <q-item >
         <q-item-section avatar>
           <q-icon color="primary" name="account_circle" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>Привет, </q-item-label>
+          <q-item-label>Привет, admin </q-item-label>
           <q-item-label caption>
             Set the content filtering level to restrict
             apps that can be downloaded
@@ -18,7 +18,7 @@
     </q-list>
   </div>
   <q-separator spaced />
-  <q-item v-ripple>
+  <q-item >
     <q-item-section avatar>
       <q-icon color="primary" name="edit" />
     </q-item-section>
@@ -38,13 +38,17 @@
       <ArchiveGamesAdd/>
     </div>
   </div>
+  <q-separator spaced />
+  <AdminPageEditList greetingDone/>
 </template>
 <script>
 import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd'
 import { onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
+import AdminPageEditList from 'components/Admin/AdminPageEditList'
+import TestTitleComp from 'components/TestComp/TestTitleComp'
 export default {
-  components: { ArchiveGamesAdd },
+  components: { TestTitleComp, AdminPageEditList, ArchiveGamesAdd },
   setup () {
     const store = useStore()
     onBeforeMount(() => {
