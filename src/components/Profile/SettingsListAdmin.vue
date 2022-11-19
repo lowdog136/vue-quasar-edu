@@ -8,18 +8,18 @@
       <q-item-section>{{ settingLists[0].name }}</q-item-section>
     </q-item>
     <q-separator spaced inset />
-    <q-item to="/Admin/CarrotAdminPage">
-      <q-item-section avatar>
-        <q-icon color="primary" name="admin_panel_settings" />
-      </q-item-section>
-      <q-item-section>CarrotAdminPage</q-item-section>
-    </q-item>
-    <q-separator spaced inset />
     <q-item to="/Admin/TomatAdminPage">
       <q-item-section avatar>
         <q-icon color="primary" name="admin_panel_settings" />
       </q-item-section>
-      <q-item-section>NewAdminPage</q-item-section>
+      <q-item-section>AdminPage</q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+    <q-item to="/Admin/CarrotAdminPage">
+      <q-item-section avatar>
+        <q-icon color="primary" name="admin_panel_settings" />
+      </q-item-section>
+      <q-item-section>AdminPageE</q-item-section>
     </q-item>
     <q-separator spaced inset />
     <q-item to="/" @click="$store.dispatch('logout')" >
