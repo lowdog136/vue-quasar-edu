@@ -12,7 +12,7 @@
         </q-item-label>
       </q-item-section>
       <q-item-section side >
-        <q-toggle color="red" v-model="greetingDone" val="picture" />
+        <q-toggle color="red" v-model:product_data="notifProf1" val="picture" />
       </q-item-section>
     </q-item>
   </div>
@@ -26,7 +26,14 @@ export default {
     }
   },
   props: {
-    greetingDone: Boolean
+    product_data: {
+      type: Object,
+      default () {
+        return {
+          notifProf1: Boolean
+        }
+      }
+    }
   }
 }
 </script>
