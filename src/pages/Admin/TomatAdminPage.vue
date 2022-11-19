@@ -23,7 +23,7 @@
       <q-icon color="primary" name="edit" />
     </q-item-section>
     <q-item-section>
-      <q-item-label>Редактировать архив игр:</q-item-label>
+      <q-item-label>Добавить информацию о игре в архив:</q-item-label>
       <q-item-label caption>
         Set the content filtering level to restrict
         apps that can be downloaded
@@ -38,17 +38,38 @@
       <ArchiveGamesAdd/>
     </div>
   </div>
-  <q-separator spaced />
+  <q-separator />
 <!--  Second block admin mode-->
   <q-item >
     <q-item-section avatar>
       <q-icon color="primary" name="edit" />
     </q-item-section>
     <q-item-section>
-      <q-item-label>Редактировать новости сайта:</q-item-label>
+      <q-item-label>Добавить новость о команде:</q-item-label>
       <q-item-label caption>
         Set the content filtering level to restrict
         apps that can be downloaded
+      </q-item-label>
+    </q-item-section>
+    <q-item-section side >
+      <q-toggle color="red" v-model="notifyClubNews" val="picture" />
+    </q-item-section>
+  </q-item>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <div v-if="notifyClubNews">
+      <NewsCardContentAdd />
+    </div>
+  </div>
+  <q-separator />
+  <!--  Threed block admin mode-->
+  <q-item >
+    <q-item-section avatar>
+      <q-icon color="primary" name="edit" />
+    </q-item-section>
+    <q-item-section>
+      <q-item-label>Добавить новость о сайте:</q-item-label>
+      <q-item-label caption>
+        Обновления с версии на версию. Что нового.
       </q-item-label>
     </q-item-section>
     <q-item-section side >
@@ -57,7 +78,7 @@
   </q-item>
   <div class="q-pa-md row items-start q-gutter-md">
     <div v-if="notifySiteNews">
-      <NewsCardContentAdd />
+      <NewsSiteContentAdd />
     </div>
   </div>
 </template>
@@ -66,9 +87,10 @@ import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd'
 import { onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
 import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
+import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd'
 
 export default {
-  components: { NewsCardContentAdd, ArchiveGamesAdd },
+  components: { NewsCardContentAdd, ArchiveGamesAdd, NewsSiteContentAdd },
   setup () {
     const store = useStore()
     onBeforeMount(() => {
@@ -76,6 +98,7 @@ export default {
     })
     return {
       notifyArchiveGames: ref(false),
+      notifyClubNews: ref(false),
       notifySiteNews: ref(false)
     }
   }
