@@ -8,7 +8,7 @@
           </q-avatar>
 
           <q-toolbar-title>
-            CarrotAdminPage
+            CarrotAdminPage (experiment panel)
           </q-toolbar-title>
           <q-btn to="/" color="black" flat round dense icon="first_page" />
           <q-toggle
