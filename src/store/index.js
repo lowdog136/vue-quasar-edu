@@ -525,7 +525,7 @@ export default store(function (/* { ssrContext } */) {
       count: '1',
       uid: 'wTZJonX7ZaWDPXOikF8gfzfvwfm1',
       NewsCardHowWatch: 0,
-      user: null,
+      user: name,
       event: null
     },
     mutations: {

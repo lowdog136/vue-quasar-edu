@@ -7,7 +7,7 @@
           <q-icon color="primary" name="account_circle" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>Привет, admin </q-item-label>
+          <q-item-label>Привет, {{ $store.getters.userName }} </q-item-label>
           <q-item-label caption>
             Set the content filtering level to restrict
             apps that can be downloaded

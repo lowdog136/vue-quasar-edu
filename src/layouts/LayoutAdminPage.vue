@@ -43,8 +43,7 @@
           <q-dialog v-model="dialog">
             <q-card>
               <q-card-section>
-                До свидания, {{ $store.state.user }}
-                <div class="text-h6">До свидания, {{ $store.state.user.email }} </div>
+                <div class="text-h6">До свидания, {{ $store.getters.userName }} </div>
               </q-card-section>
               <q-card-section class="row items-center q-gutter-sm">
                 <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />
