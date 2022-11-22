@@ -90,57 +90,57 @@ export default {
 
       options: [
         {
-          id: 0,
+          id: 1,
           label: '2007',
           value: '2007',
           done: true
         },
         {
-          id: 1,
+          id: 2,
           label: '2008',
           value: '2008',
           done: true
         },
         {
-          id: 0,
-          label: '2022',
-          value: '2022',
-          done: true
-        },
-        {
           id: 3,
-          label: '2010',
-          value: '2010',
-          done: true
-        },
-        {
-          id: 2,
           label: '2009',
           value: '2009',
           done: true
         },
         {
           id: 4,
+          label: '2010',
+          value: '2010',
+          done: true
+        },
+        {
+          id: 5,
           label: '2011',
           value: '2011',
           done: true
         },
         {
-          id: 5,
+          id: 6,
           label: '2013',
           value: '2013',
           done: true
         },
         {
-          id: 6,
+          id: 7,
           label: '2014',
           value: '2014',
           done: true
         },
         {
-          id: 7,
+          id: 8,
           label: '2016',
           value: '2016',
+          done: true
+        },
+        {
+          id: 9,
+          label: '2022',
+          value: '2022',
           done: true
         }
 
