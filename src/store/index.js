@@ -256,8 +256,9 @@ export default store(function (/* { ssrContext } */) {
         {
           id: 9,
           Name: 'Результаты матчей',
-          Caption: 'Результаты матчей'
+          Caption: 'Результаты матчей в этом году'
         },
+
         {
           id: 10,
           Name: 'Фанаты',
@@ -292,6 +293,11 @@ export default store(function (/* { ssrContext } */) {
           id: 16,
           Name: 'Достижения',
           Caption: 'Награды, медали'
+        },
+        {
+          id: 17,
+          Name: 'Результаты матчей',
+          Caption: 'Результаты матчей прошлых лет'
         }
       ],
       NewsClubNewsCard: [

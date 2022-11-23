@@ -11,6 +11,7 @@ const routes = [
       { path: '/Foto', name: 'Foto', component: () => import('pages/Foto.vue') },
       { path: '/HistoryClub', name: 'HistoryClub', component: () => import('pages/HistoryClub.vue') },
       { path: '/ArchiveGames', name: 'ArchiveGames', component: () => import('pages/ArchiveGames.vue') },
+      { path: '/ArchiveGamesBefore', name: 'ArchiveGamesBefore', component: () => import('pages/ArchiveGamesBefore.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
       { path: '/Achievement', name: 'Achievement', component: () => import('pages/Achievement.vue') },
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
