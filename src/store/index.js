@@ -296,7 +296,7 @@ export default store(function (/* { ssrContext } */) {
         },
         {
           id: 17,
-          Name: 'Результаты матчей',
+          Name: 'Старые записи',
           Caption: 'Результаты матчей прошлых лет'
         }
       ],

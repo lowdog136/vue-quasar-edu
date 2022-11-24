@@ -130,7 +130,7 @@
       </q-item>
       <q-item clickable v-ripple :active="active" to="/ArchiveGamesBefore">
         <q-item-section avatar>
-          <q-icon name="scoreboard" />
+          <q-icon name="find_in_page" />
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ $store.state.NavigationListMenu[16].Name }}</q-item-label>

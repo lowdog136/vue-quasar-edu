@@ -9,10 +9,26 @@
                         :subtitle=event.dateupd
                         :icon=event.icon
                         :color=event.color
-      >
-        <div style="max-width: 650px">
-<!--          {{ event.body }}-->
-        </div>
+      >            <q-btn flat color="primary" disable>
+        Подробнее
+      </q-btn>
+        <q-card v-show="event.done" class="my-card" flat bordered>
+          <q-card-section horizontal>
+            <q-card-section class="q-pt-xs">
+              <div class="text-overline">!!!!</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">!!!!</div>
+              <div class="q-mt-sm text-caption">
+                Результат матча: !!!!
+              </div>
+            </q-card-section>
+          </q-card-section>
+          <q-separator />
+          <q-card-actions>
+            <div class="q-mt-sm text-caption">
+              Результат матча: !!!!
+            </div>
+          </q-card-actions>
+        </q-card>
       </q-timeline-entry>
     </q-timeline>
   </div>
@@ -36,7 +52,9 @@ export default {
   name: 'achievement-list',
   components: {},
   data () {
-    return {}
+    return {
+      avatar: 'src="https://cdn.quasar.dev/img/avatar4.jpg"'
+    }
   },
   setup () {
     const todos = ref([])
