@@ -10,7 +10,7 @@
                         :icon=event.icon
                         :color=event.color
       >
-        <q-btn @click="toggleDone(event.id)" flat color="primary" >
+        <q-btn @click="toggleDone(event.id)" flat color="primary" disable>
           Подробнее
         </q-btn>
 
