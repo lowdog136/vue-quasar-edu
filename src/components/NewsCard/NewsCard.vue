@@ -51,6 +51,7 @@
         />
       </q-tabs>
     </q-card>
+    <ScrollUp />
   </div>
 </template>
 
@@ -61,6 +62,7 @@ import NewsCardFootTab from '../NewsCard/NewsCardFootTab'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, doc, increment, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import ScrollUp from 'components/ScrollUp'
 
 // NewsCard block
 const newsCardCollectionRef = collection(db, 'siteNews')
@@ -68,7 +70,7 @@ const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'de
 
 export default {
   name: 'NewsCard',
-  components: { NewsCardDetailPopUp, NewsCardFootTab },
+  components: { ScrollUp, NewsCardDetailPopUp, NewsCardFootTab },
   data () {
     return {
       btnName: 'Подробно',
