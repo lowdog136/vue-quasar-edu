@@ -9,25 +9,20 @@
                         :subtitle=event.dateupd
                         :icon=event.icon
                         :color=event.color
-      >            <q-btn @click="toggleDone(event.id)" flat color="primary" disable>
-        Подробнее
-      </q-btn>
+      >
+        <q-btn @click="toggleDone(event.id)" flat color="primary" >
+          Подробнее
+        </q-btn>
+
+        <q-separator spaced />
         <q-card v-show="event.done" class="my-card" flat bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-overline">!!!!</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">!!!!</div>
               <div class="q-mt-sm text-caption">
-                Результат матча: !!!!
+                {{ event.body }}
               </div>
             </q-card-section>
           </q-card-section>
-          <q-separator />
-          <q-card-actions>
-            <div class="q-mt-sm text-caption">
-              Результат матча: !!!!
-            </div>
-          </q-card-actions>
         </q-card>
       </q-timeline-entry>
     </q-timeline>
