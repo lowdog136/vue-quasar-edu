@@ -9,7 +9,7 @@
                         :subtitle=event.dateupd
                         :icon=event.icon
                         :color=event.color
-      >            <q-btn flat color="primary" disable>
+      >            <q-btn @click="toggleDone(event.id)" flat color="primary" disable>
         Подробнее
       </q-btn>
         <q-card v-show="event.done" class="my-card" flat bordered>
@@ -79,7 +79,7 @@ export default {
         events.value = fbEvents
       })
     })
-    const toggleEvent = id => {
+    const toggleDone = id => {
       const index = events.value.findIndex(event => event.id === id)
       updateDoc(doc(eventCollectionRef, id), {
         done: !events.value[index].done
@@ -103,7 +103,7 @@ export default {
       done: ref(true),
       redModel: ref(false),
       deleteDoc,
-      toggleEvent,
+      toggleDone,
       countUpEvent,
       events,
       todos,
