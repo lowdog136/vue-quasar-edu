@@ -14,7 +14,7 @@
           Подробнее
         </q-btn>
 
-        <q-separator spaced />
+        <q-space />
         <q-card v-show="event.done" class="my-card" flat bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">

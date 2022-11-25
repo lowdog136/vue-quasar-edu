@@ -17,6 +17,7 @@
         </div>
       </q-timeline-entry>
     </q-timeline>
+    <ScrollUp />
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from '../../firebase'
+import ScrollUp from 'components/ScrollUp'
 
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
@@ -59,7 +61,7 @@ const deleteEvent = id => {
 
 export default {
   name: 'siteUpdate',
-  components: {},
+  components: { ScrollUp },
   data () {
     return {}
   },
