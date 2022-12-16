@@ -29,13 +29,23 @@
       </div>
     </q-timeline>
   </div>
+  <div>
+    <div v-for="item in NewsCards" :key="item.id">
+      {{ item.title }}
+    </div>
+  </div>
 </template>
 
 <script>
 import { useQuasar } from 'quasar'
-import { computed, ref } from 'vue'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { computed, onMounted, ref } from 'vue'
+import { collection, onSnapshot, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
+
+// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+// const newsCardCollectionRef = collection(db, 'events', 'polpred')
+// const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
+
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
@@ -65,19 +75,21 @@ export default {
   setup () {
     const $q = useQuasar()
     const matchEvents = ref([])
-    onSnapshot(collection(db, 'eventsTeams'), (querySnapshot) => {
-      const fbEventsMounth = []
-      querySnapshot.forEach((doc) => {
-        const eventsTeams = {
-          id: doc.id,
-          name: doc.data().name,
-          city: doc.data().city
-        }
-        fbEventsMounth.push(eventsTeams)
+    const NewsCards = ref([])
+    onMounted(async () => {
+      // NewsCard Module
+      onSnapshot(collection(db, 'events/polpred/2023'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCards.value = fbEvents
+        console.log(NewsCards)
       })
-      matchEvents.value = fbEventsMounth
-      // console.log(doc)
-      console.log('matchEvents', matchEvents.value)
     })
 
     return {
@@ -85,6 +97,7 @@ export default {
       titleEventTest: ['1', '2', '3'],
       titleEvent1: 'TitileEventValue1',
       btnSize: 'xs',
+      NewsCards,
       matchEvents,
       titleMainEvent: '',
       layout: computed(() => {
