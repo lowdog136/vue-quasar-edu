@@ -6,18 +6,20 @@
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
     </p>
+    <event-pred />
 <!--    <eventCupSZFO />-->
 <!--    <eventSZFO />-->
   </div>
 </template>
 
 <script>
+import EventPred from 'components/Events/eventPred'
 export default {
-  components: {},
+  components: { EventPred },
   setup () {
     return {
       titleEvent: ['Кубок СЗФО'],
-      bodyMainEvent: 'Календаря соревнований на текущий момент времени - нет. Приходите позже.',
+      bodyMainEvent: '',
       btnSize: 'xs',
       titleMainEvent: 'Календарь игр ФК "Север" в 2023 году'
     }
