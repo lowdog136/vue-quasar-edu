@@ -8,14 +8,15 @@
     </p>
     <event-pred />
 <!--    <eventCupSZFO />-->
-<!--    <eventSZFO />-->
+    <eventSZFO />
   </div>
 </template>
 
 <script>
 import EventPred from 'components/Events/eventPred'
+import eventSZFO from 'components/Events/eventSZFO'
 export default {
-  components: { EventPred },
+  components: { EventPred, eventSZFO },
   setup () {
     return {
       titleEvent: ['Кубок СЗФО'],
