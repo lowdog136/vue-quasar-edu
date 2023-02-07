@@ -1,46 +1,24 @@
 <template>
-  <div class="q-px-lg q-pb-md">
-    <div class="title">
-      {{titleMainEvent }}
-    </div>
-    <q-timeline :layout="layout" color="secondary" v-for="game in games.slice(id).reverse()" :key="game.id">
+  <div class="q-pa-lg">
+    <q-timeline :layout="layout" :side="side" color="secondary" v-for="item in NewsCards" :key="item.id">
       <q-timeline-entry heading>
         <div class="title" style="color: #ae0000">
-          {{ game.mounth }}
+          {{ item.mounth }}
         </div>
       </q-timeline-entry>
-      <div v-show="titleEventTest[1] == 2">
-        <q-timeline-entry
-          v-for="matchEvent in game.matchEvents.slice(id).reverse()" :key="matchEvent.id"
-          :title='titleEvent'
-          :subtitle=matchEvent.data
-          side="left"
-          :color=matchEvent.color
-          :icon=matchEvent.icon
-        >
-          <div>
-            {{ matchEvent.tour}}
-          </div>
-          <div>
-            {{ matchEvent.nameEvent}}
-            <q-item-label caption>планируют посетить: {{ matchEvent.planeVisitCount }}</q-item-label>
-          </div>
-        </q-timeline-entry>
-      </div>
-    </q-timeline>
-  </div>
-  <div class="q-pa-lg">
-    <q-timeline-entry heading>Timeline heading</q-timeline-entry>
-    <q-timeline :layout="layout" :side="side" color="secondary" v-for="item in NewsCards" :key="item.id">
       <q-timeline-entry
-        :title="item.title"
+        :title="item.eventName"
         :subtitle="item.date"
         :color="item.color"
         :icon="item.icon"
         side="left"
       >
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{ item.tour}}
+        </div>
+        <div>
+          {{ item.title }}
+          <q-item-label caption>планируют посетить: 0 </q-item-label>
         </div>
       </q-timeline-entry>
       <q-timeline-entry heading></q-timeline-entry>
@@ -68,18 +46,11 @@ export default {
       games: [
         {
           id: 1,
-          mounth: 'Февраль, 2023',
-          matchEvents: [
-            {
-              id: 1,
-              tour: '1 тур',
-              nameEvent: '',
-              color: 'orange-14',
-              data: 'февраль 13, 2023',
-              mounth: 'февраль',
-              icon: 'event'
-            }
-          ]
+          mounth: 'Февраль, 2023'
+        },
+        {
+          id: 1,
+          mounth: 'Март, 2023'
         }
       ]
     }
@@ -98,6 +69,9 @@ export default {
             title: doc.data().title,
             color: doc.data().color,
             date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
             icon: doc.data().icon
           }
           fbEvents.push(listDateEvent)
