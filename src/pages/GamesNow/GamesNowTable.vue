@@ -1,11 +1,13 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Турнирная таблица"
+      title="Турнирная таблица, группа А"
       :rows="rows"
       :columns="columns"
       row-key="name"
+      class="header-table"
       color="primary"
+      :separator="separator"
     />
   </div>
 </template>
@@ -36,90 +38,57 @@ const rows = [
     id: 1,
     name: 'Север',
     colorCode: 'primary',
-    games: 12,
-    win: 10,
-    draw: 2,
+    games: 0,
+    win: 0,
+    draw: 0,
     lose: 0,
-    ball_io: '34-4',
-    score: 32,
-    last_game: 'BBBBH'
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
   },
   {
     id: 2,
     name: 'Псков',
-    games: 11,
-    win: 9,
-    draw: 1,
-    lose: 1,
-    ball_io: '27-7',
-    score: 28,
-    last_game: 'ВВHBВ'
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
   },
   {
     id: 3,
-    name: 'СШ №2 ВО Звезда',
-    games: 12,
-    win: 5,
-    draw: 1,
-    lose: 6,
-    ball_io: '21-24',
-    score: '16',
-    last_game: 'ВВППП'
+    name: 'Звезда-м',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
   },
   {
-    id: 7,
-    name: 'Химик',
-    games: 12,
-    win: 3,
-    draw: 4,
-    lose: 5,
-    ball_io: '24-20',
-    score: '13',
-    last_game: 'ППHBB'
+    id: 4,
+    name: 'СШОР Зенит',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
   },
   {
     id: 5,
-    name: 'Новград',
-    games: 12,
-    win: 1,
-    draw: 3,
-    lose: 8,
-    ball_io: '6-26',
-    score: 6,
-    last_game: 'ППППП'
-  },
-  {
-    id: 6,
-    name: 'СШ Ленинградец',
-    games: 11,
-    win: 5,
-    draw: 3,
-    lose: 3,
-    ball_io: '27-14',
-    score: '18',
-    last_game: 'НВHBB'
-  },
-  {
-    id: 7,
-    name: 'СШ №7 Карелия',
-    games: 12,
-    win: 5,
-    draw: 1,
-    lose: 6,
-    ball_io: '29-21',
-    score: '16',
-    last_game: 'ПВППВ'
-  },
-  {
-    id: 8,
-    name: 'СШ Электрон',
-    games: 12,
-    win: 1,
-    draw: 1,
-    lose: 9,
-    ball_io: '6-49',
-    score: '4',
-    last_game: 'ППППB'
+    name: 'Динамо',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
   }
 ]
 
@@ -132,3 +101,20 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.header-table
+  /* height or max-height is important */
+  height: 400px
+
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th
+    /* bg color is important for th; just specify one */
+    background-color: #e5e5e5
+
+  thead tr th
+    position: sticky
+    z-index: 1
+  thead tr:first-child th
+    top: 0
+</style>
