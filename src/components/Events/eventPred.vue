@@ -1,12 +1,12 @@
 <template>
   <div class="q-pa-lg">
-    <q-timeline :layout="layout" :side="side" color="secondary" v-for="item in NewsCards" :key="item.id">
+    <q-timeline :layout="layout" :side="side" color="secondary">
       <q-timeline-entry heading>
         <div class="title" style="color: #ae0000">
-          {{ item.mounth }}
+          Февраль, 2023
         </div>
       </q-timeline-entry>
-      <q-timeline-entry
+      <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
         :title="item.eventName"
         :subtitle="item.date"
         :color="item.color"
@@ -15,13 +15,13 @@
       >
         <div>
           {{ item.tour}}
+          {{ item.mounth}}
         </div>
         <div>
           {{ item.title }}
           <q-item-label caption>планируют посетить: 0 </q-item-label>
         </div>
       </q-timeline-entry>
-      <q-timeline-entry heading></q-timeline-entry>
     </q-timeline>
   </div>
 </template>
@@ -72,6 +72,7 @@ export default {
             mounth: doc.data().mounth,
             tour: doc.data().tour,
             eventName: doc.data().eventName,
+            time: doc.data().time,
             icon: doc.data().icon
           }
           fbEvents.push(listDateEvent)
