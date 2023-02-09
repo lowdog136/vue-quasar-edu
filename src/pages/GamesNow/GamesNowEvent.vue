@@ -6,16 +6,16 @@
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
     </p>
-    <event-pred />
+    <event-pred2 />
 <!--    <eventCupSZFO />-->
 <!--    <eventSZFO />-->
   </div>
 </template>
 
 <script>
-import EventPred from 'components/Events/eventPred'
+import EventPred2 from 'components/Events/eventPred2'
 export default {
-  components: { EventPred },
+  components: { EventPred2 },
   setup () {
     return {
       titleEvent: ['Кубок СЗФО'],
