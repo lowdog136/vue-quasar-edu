@@ -1,25 +1,4 @@
 <template>
-  <div>
-    <div v-for="items in NewsCards" :key="items.id">
-      {{ items.title }}
-    </div>
-    <div>
-      <div>
-        <h5>March</h5>
-        <div v-for="items in eventsMounthMarch" :key="items.id">
-          <div v-show="items.title === items.title">
-            {{ items.title }}-{{ items.mounth }}
-          </div>
-        </div>
-      </div>
-      <div>
-        <h5>February</h5>
-        <div v-for="items in eventsMounthFebruary" :key="items.id">
-          {{ items.title }}-{{ items.mounth }}
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="q-px-lg q-pb-md">
     <q-timeline color="secondary" v-for="items in NewsCards" :key="items.id">
       <q-timeline-entry heading>
