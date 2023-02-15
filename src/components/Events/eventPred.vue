@@ -19,6 +19,7 @@
         </div>
         <div>
           {{ item.title }}
+          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
           <q-item-label caption>планируют посетить: 0 </q-item-label>
         </div>
       </q-timeline-entry>
@@ -73,7 +74,8 @@ export default {
             tour: doc.data().tour,
             eventName: doc.data().eventName,
             time: doc.data().time,
-            icon: doc.data().icon
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
           }
           fbEvents.push(listDateEvent)
         })
