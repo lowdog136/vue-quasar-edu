@@ -30,6 +30,17 @@
           </template>
         </q-input>
         <q-btn class="q-mt-sm" label="Войти" @click="login" color="primary"/>
+        <q-btn class="q-mt-sm" label="googleAuth" @click="signIn" color="primary"/>
+        <div v-if="isLogin" class="login">
+          <Avatar :src="user.photoURL" />
+          <button class="text-gray-400 hover:text-white" @click="signOut">
+            Sign Out
+          </button>
+        </div>
+
+        <button v-else class="bg-green-500 hover:bg-green-600" @click="signIn">
+          Sign in
+        </button>
       </div>
     </q-form>
     <br />
@@ -99,6 +110,7 @@
 <script>
 import { ref, reactive, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
+import { auth } from 'src/firebase'
 
 export default {
   name: 'AuthPanel',
@@ -123,6 +135,7 @@ export default {
       store.dispatch('login', register_form.value)
     }
     const accept = ref(false)
+    const { user, isLogin, signOut, signIn } = auth
     return {
       siteRuleCheck: 'Согласиться с правилами сайта',
       sitePasswordCheck: 'Минимальная длина пароля 8 символов',
@@ -132,6 +145,10 @@ export default {
       login_form,
       register_form,
       login,
+      user,
+      isLogin,
+      signOut,
+      signIn,
       register,
       accept
     }
