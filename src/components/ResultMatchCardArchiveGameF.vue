@@ -100,36 +100,12 @@ export default {
 
       simple: [
         {
-          label: 'Товарищеские игры 2022',
+          label: 'Товарищеские игры 2023',
           children: [
-            {
-              label: 'против Константиновское',
-              icon: 'done'
-            },
-            {
-              label: 'против Висты',
-              icon: 'done'
-            },
-            {
-              label: 'против Анапы',
-              icon: 'done'
-            },
-            {
-              label: 'против Черноморец-М',
-              icon: 'done'
-            },
-            {
-              label: 'против Фаворита',
-              icon: 'done'
-            },
-            {
-              label: 'против Звезды',
-              icon: 'done'
-            },
-            {
-              label: 'против Динамо',
-              icon: 'done'
-            }
+            // {
+            //   label: 'против команда_имя',
+            //   icon: 'done'
+            // }
           ]
         }
       ]
