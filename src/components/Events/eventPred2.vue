@@ -1,24 +1,15 @@
 <template>
   <div class="q-px-lg q-pb-md">
-    <q-timeline color="secondary" v-for="items in NewsCards" :key="items.id">
-      <q-timeline-entry heading>
+    <q-timeline color="secondary">
+      <q-timeline-entry heading v-for="items in NewsCards" :key="items.id">
         {{ items.title }}
       </q-timeline-entry>
-      <div v-for="items in eventsMounthMarch" :key="items.id">
-        <q-timeline-entry
+      <div>
+        <q-timeline-entry v-for="items in eventsMounthMarch" :key="items.id"
                           :title="items.title"
-                          subtitle="February 22, 1986"
+                          subtitle="March, 1986"
         >
           <div >
-            {{ items.mounth }}
-            --
-          </div>
-        </q-timeline-entry>
-        <q-timeline-entry v-for="items in eventsMounthFebruary" :key="items.id"
-                          :title="items.title"
-                          subtitle="February 22, 1986"
-        >
-          <div>
             {{ items.mounth }}
             --
           </div>
