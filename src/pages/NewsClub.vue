@@ -60,6 +60,7 @@ export default {
     }
     return {
       NewsCards,
+      current: ref(3),
       countUpEvent
     }
   }

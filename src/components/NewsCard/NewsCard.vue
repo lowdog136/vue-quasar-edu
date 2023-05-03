@@ -1,8 +1,9 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md"
        v-for="NewsCard in NewsCards"
-       :key="NewsCard.id">
-    <q-card v-if="NewsCard.done" class="my-card" flat bordered>
+       :key="NewsCard.id"
+       >
+    <q-card v-if="NewsCard.done" class="my-card" flat bordered v-model:pagination="pagination">
         <q-img :src="require('assets/image/imgTitle/title_0.png' )" />
         <q-card-section>
           <div class="text-overline text-deep-orange-14">
@@ -80,6 +81,7 @@ export default {
     }
   },
   setup () {
+    const pagination = ref({ rowsPerPage: 3, page: 1 })
     const NewsCards = ref([])
     onMounted(async () => {
       // NewsCard Module
@@ -113,6 +115,7 @@ export default {
     }
     return {
       NewsCards,
+      pagination,
       countUpEvent
     }
   },
