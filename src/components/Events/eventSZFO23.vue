@@ -24,6 +24,54 @@
         </div>
       </q-timeline-entry>
     </q-timeline>
+    <q-timeline :layout="layout" :side="side" color="secondary">
+      <q-timeline-entry heading>
+        <div class="title" style="color: #ae0000">
+          Июнь, 2023
+        </div>
+      </q-timeline-entry>
+      <q-timeline-entry v-for="item in NewsCardsJ.slice(id)" :key="item.id"
+                        :title="item.eventName"
+                        :subtitle="item.date"
+                        :color="item.color"
+                        :icon="item.icon"
+                        side="left"
+      >
+        <div>
+          {{ item.tour}}
+          {{ item.mounth}}
+        </div>
+        <div>
+          {{ item.title }}
+          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
+          <q-item-label caption>планируют посетить: 0 </q-item-label>
+        </div>
+      </q-timeline-entry>
+    </q-timeline>
+    <q-timeline :layout="layout" :side="side" color="secondary">
+      <q-timeline-entry heading>
+        <div class="title" style="color: #ae0000">
+          Июль, 2023
+        </div>
+      </q-timeline-entry>
+      <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
+                        :title="item.eventName"
+                        :subtitle="item.date"
+                        :color="item.color"
+                        :icon="item.icon"
+                        side="left"
+      >
+        <div>
+          {{ item.tour}}
+          {{ item.mounth}}
+        </div>
+        <div>
+          {{ item.title }}
+          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
+          <q-item-label caption>планируют посетить: 0 </q-item-label>
+        </div>
+      </q-timeline-entry>
+    </q-timeline>
   </div>
 </template>
 
@@ -60,9 +108,11 @@ export default {
     const $q = useQuasar()
     const matchEvents = ref([])
     const NewsCards = ref([])
+    const NewsCardsJ = ref([])
+    const NewsCardsJl = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events/szfo/2023'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/2023/may/'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -82,6 +132,46 @@ export default {
         NewsCards.value = fbEvents
         console.log(NewsCards)
       })
+      onSnapshot(collection(db, '/events/szfo/2023/june/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsJ.value = fbEvents
+        console.log(NewsCardsJ)
+      })
+      onSnapshot(collection(db, '/events/szfo/2023/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsJl.value = fbEvents
+        console.log(NewsCardsJl)
+      })
     })
 
     return {
@@ -90,6 +180,8 @@ export default {
       titleEvent1: 'TitileEventValue1',
       btnSize: 'xs',
       NewsCards,
+      NewsCardsJ,
+      NewsCardsJl,
       matchEvents,
       titleMainEvent: '',
       layout: computed(() => {
