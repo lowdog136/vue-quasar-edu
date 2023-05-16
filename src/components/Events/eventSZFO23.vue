@@ -112,7 +112,7 @@ export default {
     const NewsCardsJl = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events/2023/may/'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2023/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
