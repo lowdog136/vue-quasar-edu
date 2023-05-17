@@ -3,6 +3,30 @@
     <q-timeline :layout="layout" :side="side" color="secondary">
       <q-timeline-entry heading>
         <div class="title" style="color: #ae0000">
+          Апрель, 2023
+        </div>
+      </q-timeline-entry>
+      <q-timeline-entry v-for="item in NewsCardsA.slice(id)" :key="item.id"
+                        :title="item.eventName"
+                        :subtitle="item.date"
+                        :color="item.color"
+                        :icon="item.icon"
+                        side="left"
+      >
+        <div>
+          {{ item.tour}}
+          {{ item.mounth}}
+        </div>
+        <div>
+          {{ item.title }}
+          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
+          <q-item-label caption>планируют посетить: 0 </q-item-label>
+        </div>
+      </q-timeline-entry>
+    </q-timeline>
+    <q-timeline :layout="layout" :side="side" color="secondary">
+      <q-timeline-entry heading>
+        <div class="title" style="color: #ae0000">
           Май, 2023
         </div>
       </q-timeline-entry>
@@ -110,6 +134,7 @@ export default {
     const NewsCards = ref([])
     const NewsCardsJ = ref([])
     const NewsCardsJl = ref([])
+    const NewsCardsA = ref([])
     onMounted(async () => {
       // NewsCard Module
       onSnapshot(collection(db, '/events/szfo/2023/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
@@ -172,6 +197,26 @@ export default {
         NewsCardsJl.value = fbEvents
         console.log(NewsCardsJl)
       })
+      onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsA.value = fbEvents
+        console.log(NewsCardsA)
+      })
     })
 
     return {
@@ -182,6 +227,7 @@ export default {
       NewsCards,
       NewsCardsJ,
       NewsCardsJl,
+      NewsCardsA,
       matchEvents,
       titleMainEvent: '',
       layout: computed(() => {
