@@ -64,7 +64,7 @@
       v-model="expanded"
       icon="emoji_events"
       label="Текущие соревнования"
-      caption="XXIV турнир полпреда СЗФО"
+      caption="Чемпионат СЗФО"
     >
       <q-item clickable v-ripple :active="active" to="/GamesNow/GamesNowEvent">
         <q-item-section avatar>
