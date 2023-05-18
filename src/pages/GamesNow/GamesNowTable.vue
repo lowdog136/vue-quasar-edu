@@ -7,7 +7,7 @@
       row-key="name"
       class="header-table"
       color="primary"
-      :separator="separator"
+      :pagination="initialPagination"
     />
   </div>
 </template>
@@ -91,7 +91,7 @@ const rows = [
     last_game: '-'
   },
   {
-    id: 5,
+    id: 6,
     name: 'Карелия',
     games: 0,
     win: 0,
@@ -102,7 +102,7 @@ const rows = [
     last_game: '-'
   },
   {
-    id: 5,
+    id: 7,
     name: 'Тосно',
     games: 0,
     win: 0,
@@ -117,6 +117,13 @@ const rows = [
 export default {
   setup () {
     return {
+      initialPagination: {
+        sortBy: 'name',
+        descending: false,
+        page: 1,
+        rowsPerPage: 7
+        // rowsNumber: xx if getting data from a server
+      },
       columns,
       rows
     }
@@ -126,7 +133,7 @@ export default {
 <style lang="sass">
 .header-table
   /* height or max-height is important */
-  height: 400px
+  height: 540px
 
   .q-table__top,
   .q-table__bottom,
