@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Турнирная таблица, группа А"
+      title="Турнирная таблица, Чемпионат СЗФО 2023"
       :rows="rows"
       :columns="columns"
       row-key="name"
@@ -59,7 +59,7 @@ const rows = [
   },
   {
     id: 3,
-    name: 'Звезда-м',
+    name: 'Химик',
     games: 0,
     win: 0,
     draw: 0,
@@ -70,7 +70,7 @@ const rows = [
   },
   {
     id: 4,
-    name: 'СШОР Зенит',
+    name: 'СШ Ленинградец',
     games: 0,
     win: 0,
     draw: 0,
@@ -81,7 +81,29 @@ const rows = [
   },
   {
     id: 5,
-    name: 'Динамо',
+    name: 'Звезда',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
+  },
+  {
+    id: 5,
+    name: 'Карелия',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0',
+    score: 0,
+    last_game: '-'
+  },
+  {
+    id: 5,
+    name: 'Тосно',
     games: 0,
     win: 0,
     draw: 0,

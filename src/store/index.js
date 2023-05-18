@@ -28,7 +28,7 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления календаря чемпионата
       GamesNowEventUpdateDate: '2023-05-17',
       // Дата обновления таблицы чемпионата
-      GamesNowTableUpdateDate: '2023-02-08',
+      GamesNowTableUpdateDate: '2023-05-18',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
       tours: [
         {
