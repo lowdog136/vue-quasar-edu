@@ -1,12 +1,11 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      grid
       flat bordered
-      card-class="bg-primary text-white"
+      grid
       title="Treats"
-      :rows="rows"
-      :columns="columns"
+      :rows="NewsCardsRows"
+      :columns="NewsCardsColumns"
       row-key="name"
       :filter="filter"
       hide-header
@@ -24,7 +23,7 @@
        v-for="NewsCard in NewsCards"
        :key="NewsCard.id"
   >
-    <q-card v-if="NewsCard.done" class="my-card" flat bordered>
+    <q-card v-if="NewsCard.done" class="my-card" flat bordered v-model:pagination="pagination">
       <q-img :src="require('assets/image/imgTitle/title_0.png' )" />
       <q-card-section>
         <div class="text-overline text-deep-orange-14">
@@ -75,6 +74,11 @@
     </q-card>
     <ScrollUp />
   </div>
+  <div class="q-pa-md row items-start q-gutter-md"
+       v-for="NewsCard in NewsCardsColumns"
+       :key="NewsCard.id">
+    {{ NewsCard.name}}
+  </div>
 </template>
 
 <script>
@@ -90,6 +94,14 @@ import ScrollUp from 'components/ScrollUp'
 const newsCardCollectionRef = collection(db, 'siteNews')
 const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
 
+// NewsCardColumns block
+const newsCardColumnsCollectionRef = collection(db, 'Columns')
+const newsCardColumnsCollectionQuery = query(newsCardColumnsCollectionRef, orderBy('date', 'desc'))
+
+// NewsCardRows block
+const newsCardRowsCollectionRef = collection(db, 'Rows')
+const newsCardRowsCollectionQuery = query(newsCardRowsCollectionRef, orderBy('date', 'desc'))
+
 export default {
   name: 'NewsCard',
   components: { ScrollUp, NewsCardDetailPopUp, NewsCardFootTab },
@@ -102,6 +114,52 @@ export default {
     }
   },
   setup () {
+    const columns = [
+      {
+        name: 'desc',
+        required: true,
+        label: 'Dessert (100g serving)',
+        align: 'left',
+        field: row => row.name,
+        format: val => `${val}`,
+        sortable: true
+      },
+      { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
+      { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
+      { name: 'carbs', label: 'Carbs (g)', field: 'carbs' }
+    ]
+    const rows = [
+      {
+        name: 'Frozen Yogurt',
+        calories: 159,
+        fat: 6.0,
+        carbs: 24
+      },
+      {
+        name: 'Ice cream sandwich',
+        calories: 237,
+        fat: 9.0,
+        carbs: 37
+      },
+      {
+        name: 'Eclair',
+        calories: 262,
+        fat: 16.0,
+        carbs: 23
+      },
+      {
+        name: 'Cupcake',
+        calories: 305,
+        fat: 3.7,
+        carbs: 67
+      },
+      {
+        name: 'Gingerbread',
+        calories: 356,
+        fat: 16.0,
+        carbs: 49
+      }
+    ]
     const pagination = ref({ rowsPerPage: 3, page: 1 })
     const NewsCards = ref([])
     onMounted(async () => {
@@ -125,6 +183,57 @@ export default {
         })
         NewsCards.value = fbNewsCards
       })
+      console.log('NewsCard -', NewsCards)
+    })
+    const NewsCardsColumns = ref([])
+    onMounted(async () => {
+      // NewsCardColumns Module
+      onSnapshot(newsCardColumnsCollectionQuery, (querySnapshot) => {
+        const fbNewsCardsColumns = []
+        querySnapshot.forEach((doc) => {
+          const NewsCardColumn = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            preview: doc.data().preview,
+            fullnews: doc.data().fullnews,
+            datenews: doc.data().datenews,
+            srcnews: doc.data().srcnews,
+            date: doc.data().date,
+            name: doc.data().name,
+            done: doc.data().done,
+            count: doc.data().count
+          }
+          fbNewsCardsColumns.push(NewsCardColumn)
+        })
+        NewsCardsColumns.value = fbNewsCardsColumns
+      })
+      console.log('Columns -', NewsCardsColumns)
+    })
+    const NewsCardsRows = ref([])
+    onMounted(async () => {
+      // NewsCardColumns Module
+      onSnapshot(newsCardRowsCollectionQuery, (querySnapshot) => {
+        const fbNewsCardsRows = []
+        querySnapshot.forEach((doc) => {
+          const NewsCardsRows = {
+            id: doc.id,
+            subtitle: doc.data().subtitle,
+            title: doc.data().title,
+            preview: doc.data().preview,
+            fullnews: doc.data().fullnews,
+            datenews: doc.data().datenews,
+            srcnews: doc.data().srcnews,
+            date: doc.data().date,
+            name: doc.data().name,
+            done: doc.data().done,
+            count: doc.data().count
+          }
+          fbNewsCardsRows.push(NewsCardsRows)
+        })
+        NewsCardsRows.value = fbNewsCardsRows
+      })
+      console.log('Rows -', NewsCardsRows)
     })
     const countUpEvent = id => {
       const index = NewsCards.value.findIndex(NewsCard => NewsCard.id === id)
@@ -135,8 +244,12 @@ export default {
       console.log('count:', NewsCards.value[index].count)
     }
     return {
+      columns,
       filter: ref(''),
+      rows,
       NewsCards,
+      NewsCardsColumns,
+      NewsCardsRows,
       pagination,
       countUpEvent
     }
