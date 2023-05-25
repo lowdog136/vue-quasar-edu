@@ -1,14 +1,19 @@
 <template>
   <div class="q-pa-md">
     <q-table
+      flat bordered
       title="Турнирная таблица, Чемпионат СЗФО 2023"
       :rows="rows"
       :columns="columns"
-      row-key="name"
-      class="header-table"
-      color="primary"
+      row-key="id"
       :pagination="initialPagination"
-    />
+      hide-bottom
+      color="primary"
+      card-class="bg-grey-1 text-brown"
+      table-class="text-grey-8"
+      table-header-class="text-deep-orange-10"
+    >
+    </q-table>
   </div>
 </template>
 
@@ -17,7 +22,7 @@
 const columns = [
   {
     name: 'desc',
-    required: true,
+    required: false,
     label: '',
     align: 'left',
     field: row => row.name,
@@ -29,7 +34,7 @@ const columns = [
   { name: 'draw', label: 'Н', field: 'draw' },
   { name: 'lose', label: 'П', field: 'lose' },
   { name: 'ball_io', label: 'Разница', field: 'ball_io' },
-  { name: 'score', label: 'О', field: 'score', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 10) },
   { name: 'last_game', label: 'Форма', field: 'last_game', sortable: false, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
 ]
 
@@ -71,13 +76,13 @@ const rows = [
   {
     id: 4,
     name: 'СШ Ленинградец',
-    games: 0,
-    win: 0,
+    games: 1,
+    win: 1,
     draw: 0,
     lose: 0,
-    ball_io: '0',
-    score: 0,
-    last_game: '-'
+    ball_io: '6-1',
+    score: 3,
+    last_game: 'В'
   },
   {
     id: 5,
@@ -104,13 +109,13 @@ const rows = [
   {
     id: 7,
     name: 'Тосно',
-    games: 0,
+    games: 1,
     win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '0',
+    lose: 1,
+    ball_io: '1-6',
     score: 0,
-    last_game: '-'
+    last_game: 'П'
   }
 ]
 
@@ -118,7 +123,7 @@ export default {
   setup () {
     return {
       initialPagination: {
-        sortBy: 'name',
+        sortBy: 'score',
         descending: false,
         page: 1,
         rowsPerPage: 7
