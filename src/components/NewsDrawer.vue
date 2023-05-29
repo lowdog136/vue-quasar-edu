@@ -75,6 +75,7 @@
           <q-item-label caption>Расписание матчей</q-item-label>
         </q-item-section>
         <q-item-section side top>
+          <!--            Блок "Календарь игр". Дата обновления календаря игр -->
           <q-item-label caption>
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ $store.state.GamesNowEventUpdateDate }}</span>
           </q-item-label>
@@ -201,12 +202,20 @@ const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'de
 // раздел "О сайте"
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
+// раздел "Календарь игр"
+const eventCollectionRefGamesNowEvent = collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/')
+const eventCollectionQueryGamesNowEvent = query(eventCollectionRefGamesNowEvent, orderBy('date', 'desc'))
+// раздел "Турнирная таблица"
+const eventCollectionRefGamesNowTable = collection(db, 'siteNewsDrawer/')
+const eventCollectionQueryGamesNowTable = query(eventCollectionRefGamesNowTable, orderBy('date', 'desc'))
 
 export default {
   name: 'NewsDrawer',
   setup () {
     const events = ref([])
     const NewsCards = ref([])
+    const GamesNowEvents = ref([])
+    const GamesNowTables = ref([])
     onMounted(async () => {
       onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
         const fbNewsCards = []
@@ -229,10 +238,35 @@ export default {
         })
         events.value = fbEvents
       })
+      // раздел "Календарь игр"
+      onSnapshot(eventCollectionQueryGamesNowEvent, (querySnapshot) => {
+        const fbGamesNowEvents = []
+        querySnapshot.forEach((doc) => {
+          const GamesNowEvent = {
+            datenews: doc.data().datenews
+          }
+          fbGamesNowEvents.push(GamesNowEvent)
+        })
+        GamesNowEvents.value = fbGamesNowEvents
+        console.log('Дата обновления календаря игр', GamesNowEvents)
+      })
+      // раздел "Турнирная таблица"
+      onSnapshot(eventCollectionQueryGamesNowTable, (querySnapshot) => {
+        const fbGamesNowTables = []
+        querySnapshot.forEach((doc) => {
+          const GamesNowTable = {
+            datenews: doc.data().datenews
+          }
+          fbGamesNowTables.push(GamesNowTable)
+        })
+        GamesNowTables.value = fbGamesNowTables
+      })
     })
     return {
       labelAboutSite: 'О сайте',
       NewsCards,
+      GamesNowEvents,
+      GamesNowTables,
       events
     }
   },
