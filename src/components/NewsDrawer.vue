@@ -76,8 +76,9 @@
         </q-item-section>
         <q-item-section side top>
           <!--            Блок "Календарь игр". Дата обновления календаря игр -->
-          <q-item-label caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ $store.state.GamesNowEventUpdateDate }}</span>
+          <q-item-label v-for="GamesNowEvent in GamesNowEvents"
+                        :key="GamesNowEvent.id" caption>
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ GamesNowEvent.datenews }}</span>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -90,8 +91,10 @@
           <q-item-label caption>Итоговая таблица</q-item-label>
         </q-item-section>
         <q-item-section side top>
-          <q-item-label caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ $store.state.GamesNowTableUpdateDate }}</span>
+          <!--            Блок "Турнирная таблица". Дата обновления турнирной таблицы -->
+          <q-item-label v-for="GamesNowTable in GamesNowTables"
+                        :key="GamesNowTable.id" caption>
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ GamesNowTable.datenews }}</span>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -202,12 +205,6 @@ const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'de
 // раздел "О сайте"
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
-// раздел "Календарь игр"
-const eventCollectionRefGamesNowEvent = collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/')
-const eventCollectionQueryGamesNowEvent = query(eventCollectionRefGamesNowEvent, orderBy('date', 'desc'))
-// раздел "Турнирная таблица"
-const eventCollectionRefGamesNowTable = collection(db, 'siteNewsDrawer/')
-const eventCollectionQueryGamesNowTable = query(eventCollectionRefGamesNowTable, orderBy('date', 'desc'))
 
 export default {
   name: 'NewsDrawer',
@@ -239,7 +236,7 @@ export default {
         events.value = fbEvents
       })
       // раздел "Календарь игр"
-      onSnapshot(eventCollectionQueryGamesNowEvent, (querySnapshot) => {
+      onSnapshot(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbGamesNowEvents = []
         querySnapshot.forEach((doc) => {
           const GamesNowEvent = {
@@ -251,7 +248,7 @@ export default {
         console.log('Дата обновления календаря игр', GamesNowEvents)
       })
       // раздел "Турнирная таблица"
-      onSnapshot(eventCollectionQueryGamesNowTable, (querySnapshot) => {
+      onSnapshot(collection(db, '/siteNewsDrawer/GamesNowTable/dateUpdate/'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbGamesNowTables = []
         querySnapshot.forEach((doc) => {
           const GamesNowTable = {
