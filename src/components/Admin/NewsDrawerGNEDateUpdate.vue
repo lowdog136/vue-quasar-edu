@@ -7,16 +7,17 @@
         class="q-gutter-md"
       >
         <div>
+          <q-item-label>NewsDrawerGNEDateUpdate</q-item-label>
           <q-input
             v-model='newSiteUpdateVer'
-            hint="add Ver"
+            hint="add date"
             lazy-rules
           />
         </div><br/>
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addSiteUpdate" label="add event"/>
+        <q-btn @click="addDateUpdate" label="add event"/>
         <q-toggle
           :false-value="false"
           :label="`Показываем ${redModel}`"
@@ -103,7 +104,7 @@ import { db } from 'src/firebase'
 // const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateVer = ref('')
 
-const addSiteUpdate = () => {
+const addDateUpdate = () => {
   addDoc(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), orderBy('date', 'desc'), {
     datenews: newSiteUpdateVer.value
   })
@@ -111,13 +112,13 @@ const addSiteUpdate = () => {
   console.log('add SiteUpdate', newSiteUpdateVer.value)
 }
 
-const deleteSiteUpdate = id => {
+const deleteDateUpdate = id => {
   deleteDoc(doc(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), id))
   console.log('del SiteUpdate', newSiteUpdateVer.value)
 }
 
 export default {
-  name: 'NewsDrawerDateUpdate',
+  name: 'NewsDrawerGNEDateUpdate',
   components: {},
   data () {
     return {
@@ -145,25 +146,17 @@ export default {
       updateDoc(doc(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), id), {
         datenews: SiteUpdates.value[index].datenews
       })
-      console.log('ver update', SiteUpdates.value, 'ver id', SiteUpdates.value)
-    }
-    const updateTitle = id => {
-      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
-      updateDoc(doc(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), id), {
-        title: SiteUpdates.value[index].title
-      })
-      console.log('title update', SiteUpdates.value[index].title, 'SiteUpdate id', SiteUpdates.value[index].id)
+      console.log('date update', SiteUpdates.value, 'ver id', SiteUpdates.value)
     }
     return {
       newSiteUpdateVer,
       done: ref(true),
       redModel: ref(false),
-      deleteSiteUpdate,
+      deleteDateUpdate,
       deleteDoc,
-      addSiteUpdate,
+      addDateUpdate,
       SiteUpdates,
       updateVer,
-      updateTitle,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
