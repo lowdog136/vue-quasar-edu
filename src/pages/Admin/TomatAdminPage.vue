@@ -69,7 +69,7 @@
     <q-item-section>
       <q-item-label>Правка дат в NewsDrawer:</q-item-label>
       <q-item-label caption>
-        Правка дат обновлений в "Календаре игр" и "Турнирная таблица"
+        Правка раздела "Текущие соревнования".Даты обновлений в "Календаре игр" и "Турнирная таблица"
       </q-item-label>
     </q-item-section>
     <q-item-section side >
@@ -78,7 +78,8 @@
   </q-item>
   <div class="q-pa-md row items-start q-gutter-md">
     <div v-if="notifyUpdateDate">
-      <NewsDrawerDateUpdate />
+      <NewsDrawerGNEDateUpdate />
+      <NewsDrawerGNTDateUpdate />
     </div>
   </div>
   <q-separator />
@@ -109,10 +110,11 @@ import { onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
 import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
 import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd'
-import NewsDrawerDateUpdate from 'components/Admin/NewsDrawerDateUpdate'
+import NewsDrawerGNEDateUpdate from 'components/Admin/NewsDrawerGNEDateUpdate.vue'
+import NewsDrawerGNTDateUpdate from 'components/Admin/NewsDrawerGNTDateUpdate.vue'
 
 export default {
-  components: { NewsCardContentAdd, ArchiveGamesAdd, NewsSiteContentAdd, NewsDrawerDateUpdate },
+  components: { NewsDrawerGNTDateUpdate, NewsCardContentAdd, ArchiveGamesAdd, NewsSiteContentAdd, NewsDrawerGNEDateUpdate },
   setup () {
     const store = useStore()
     onBeforeMount(() => {
