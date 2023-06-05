@@ -34,22 +34,22 @@ const columns = [
   { name: 'draw', label: 'Н', field: 'draw' },
   { name: 'lose', label: 'П', field: 'lose' },
   { name: 'ball_io', label: 'Разница', field: 'ball_io' },
-  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 10) },
+  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 20) },
   { name: 'last_game', label: 'Форма', field: 'last_game', sortable: false, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
 ]
 
 const rows = [
   {
-    id: 1,
+    id: 4,
     name: 'Север',
     colorCode: 'primary',
-    games: 1,
-    win: 1,
+    games: 2,
+    win: 2,
     draw: 0,
     lose: 0,
-    ball_io: '4-1',
-    score: 3,
-    last_game: 'В'
+    ball_io: '6-2',
+    score: 6,
+    last_game: 'ВВ'
   },
   {
     id: 2,
@@ -65,16 +65,16 @@ const rows = [
   {
     id: 3,
     name: 'Химик',
-    games: 0,
+    games: 1,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 0,
-    ball_io: '0',
-    score: 0,
-    last_game: '-'
+    ball_io: '2-2',
+    score: 1,
+    last_game: 'Н'
   },
   {
-    id: 4,
+    id: 1,
     name: 'СШ Ленинградец',
     games: 2,
     win: 2,
@@ -87,24 +87,24 @@ const rows = [
   {
     id: 5,
     name: 'Звезда',
-    games: 1,
+    games: 2,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 1,
-    ball_io: '1-2',
-    score: 0,
-    last_game: 'П'
+    ball_io: '3-4',
+    score: 1,
+    last_game: 'ПН'
   },
   {
     id: 6,
     name: 'Карелия',
-    games: 1,
+    games: 2,
     win: 0,
     draw: 0,
-    lose: 1,
-    ball_io: '0-3',
+    lose: 2,
+    ball_io: '1-5',
     score: 0,
-    last_game: 'П'
+    last_game: 'ПП'
   },
   {
     id: 7,
