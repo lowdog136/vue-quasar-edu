@@ -23,7 +23,7 @@
           :key="index"
           class="q-px-sm q-py-xs rounded-borders text-left text-no-wrap"
         >{{ item.name }} = {{ item.value }}
-          <div v-for="itema in archiveGames.slice(id).reverse()" :key="itema.id">
+          <div v-for="itema in archiveGames" :key="itema.id">
             <div v-show="itema.year === item.value">
               <q-card class="my-card" flat bordered>
                 <q-card-section horizontal>
@@ -69,7 +69,6 @@ export default {
           year: doc.data().year,
           event: doc.data().event,
           score: doc.data().score,
-          datestamp: doc.data().datestamp,
           date: doc.data().date,
           result: doc.data().result,
           body: doc.data().body
@@ -141,6 +140,12 @@ export default {
           id: 9,
           label: '2022',
           value: '2022',
+          done: true
+        },
+        {
+          id: 10,
+          label: '2023',
+          value: '2023',
           done: true
         }
 
