@@ -54,13 +54,13 @@ const rows = [
   {
     id: 2,
     name: 'Псков',
-    games: 1,
+    games: 2,
     win: 1,
-    draw: 0,
+    draw: 1,
     lose: 0,
     ball_io: '2-1',
-    score: 3,
-    last_game: 'В'
+    score: 4,
+    last_game: 'ВН'
   },
   {
     id: 3,
@@ -109,12 +109,12 @@ const rows = [
   {
     id: 7,
     name: 'Тосно',
-    games: 2,
+    games: 3,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 2,
     ball_io: '2-10',
-    score: 0,
+    score: 1,
     last_game: 'ПП'
   }
 ]
