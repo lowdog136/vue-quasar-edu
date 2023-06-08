@@ -54,13 +54,15 @@
 
 <script>
 import { ref } from 'vue'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
 
+const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
+const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
   setup: function () {
     const archiveGames = ref([])
-    onSnapshot(collection(db, 'clubArchiveGames/archive/year'), (querySnapshot) => {
+    onSnapshot(archiveGamesQuery, (querySnapshot) => {
       const fbAGames = []
       querySnapshot.forEach((doc) => {
         const event = {
@@ -71,6 +73,7 @@ export default {
           score: doc.data().score,
           date: doc.data().date,
           result: doc.data().result,
+          datestamp: doc.data().datestamp,
           body: doc.data().body
         }
         fbAGames.push(event)

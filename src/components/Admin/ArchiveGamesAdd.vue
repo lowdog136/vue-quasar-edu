@@ -322,6 +322,7 @@ export default {
             body: doc.data().body,
             event: doc.data().event,
             date: doc.data().date,
+            datestamp: doc.data().datestamp,
             done: doc.data().done
           }
           fbSiteUpdates.push(SiteUpdate)
