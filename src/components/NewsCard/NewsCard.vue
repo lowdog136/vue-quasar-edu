@@ -48,6 +48,7 @@
           :PopyUpTitleNews="NewsCard.title"
           :PopyUpItem="NewsCard.item"
           :PopyUpBtnName="btnName"
+          :PopyUpBtnColor="btnColor"
           :PopyUpDivMain = "btnDivMain"
         />
       </q-tabs>
@@ -74,6 +75,7 @@ export default {
   components: { ScrollUp, NewsCardDetailPopUp, NewsCardFootTab },
   data () {
     return {
+      btnColor: 'primary',
       btnName: 'Подробно',
       // кнопка что бы не прилипала к краю
       btnDivMain: 'q-pa-md',

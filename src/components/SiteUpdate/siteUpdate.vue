@@ -13,7 +13,7 @@
           ver: {{ event.ver }}
         </div>
         <div style="max-width: 650px">
-          {{ event.body }}
+            {{ event.body }}
         </div>
       </q-timeline-entry>
     </q-timeline>
@@ -95,6 +95,7 @@ export default {
             done: doc.data().done
           }
           fbEvents.push(event)
+          console.log('body-', event.body)
         })
         events.value = fbEvents
       })

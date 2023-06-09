@@ -40,8 +40,15 @@
                    <q-btn flat color="primary">
                     {{ itema.date }}
                   </q-btn>
-                  <q-btn flat color="primary" disable>
-                    Подробнее
+                  <q-btn flat color="primary">
+                    <NewsCardDetailPopUp
+                      :PopyUpSubTitleNews="itema.event"
+                      :PopyUpFullNews="itema.body"
+                      :PopyUpTitleNews="itema.title + itema.score"
+                      :PopyUpBtnColor="btnColor"
+                      :PopyUpBtnName="btnName"
+                      :PopyUpDivMain = "btnDivMain"
+                    />
                   </q-btn>
                 </q-card-actions>
               </q-card>
@@ -56,10 +63,21 @@
 import { ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 
 const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
+  components: { NewsCardDetailPopUp },
+  data () {
+    return {
+      btnColor: 'blue-grey-10',
+      btnName: 'Подробно',
+      // кнопка что бы не прилипала к краю
+      btnDivMain: 'q-pa-md',
+      divclassFootTab: 'q-pa-m'
+    }
+  },
   setup: function () {
     const archiveGames = ref([])
     onSnapshot(archiveGamesQuery, (querySnapshot) => {
@@ -89,6 +107,8 @@ export default {
       archiveGames,
       accepted: ref([]),
       submitResult,
+      dialog: ref(false),
+      cancelEnabled: ref(false),
 
       options: [
         {
