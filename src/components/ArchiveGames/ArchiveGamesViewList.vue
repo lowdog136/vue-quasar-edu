@@ -13,15 +13,15 @@
         />
       </div>
       <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Выбрать" type="submit" color="primary"/>
       </div>
     </q-form>
 
-    <q-card v-if="submitResult.length > 0" flat bordered class="q-mt-md bg-grey-11">
+    <q-card v-if="submitResult.length > 0" flat bordered class="row items-start">
         <div
           v-for="(item, index) in submitResult"
           :key="index"
-          class="q-px-sm q-py-xs rounded-borders text-left text-no-wrap"
+          class="q-px-sm q-py-xs rounded-borders text-left text-overline text-black-9"
         >{{ item.name }} = {{ item.value }}
           <div v-for="itema in archiveGames" :key="itema.id">
             <div v-show="itema.year === item.value">
@@ -29,6 +29,7 @@
                 <q-card-section horizontal>
                   <q-card-section class="q-pt-xs">
                     <div class="text-overline">{{ itema.event }}</div>
+                    <div class="text-overline text-orange-14">{{ itema.tour }}</div>
                     <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
                     <div class="q-mt-sm text-caption">
                       Результат матча: {{ itema.result }}
@@ -91,6 +92,7 @@ export default {
           score: doc.data().score,
           date: doc.data().date,
           result: doc.data().result,
+          tour: doc.data().tour,
           datestamp: doc.data().datestamp,
           body: doc.data().body
         }
