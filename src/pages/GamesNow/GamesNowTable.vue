@@ -115,7 +115,7 @@ const rows = [
     lose: 2,
     ball_io: '2-10',
     score: 1,
-    last_game: 'ПП'
+    last_game: 'ППН'
   }
 ]
 
