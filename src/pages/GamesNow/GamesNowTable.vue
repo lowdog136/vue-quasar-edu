@@ -34,7 +34,7 @@ const columns = [
   { name: 'draw', label: 'Н', field: 'draw' },
   { name: 'lose', label: 'П', field: 'lose' },
   { name: 'ball_io', label: 'Разница', field: 'ball_io' },
-  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 20) },
+  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 10) },
   { name: 'last_game', label: 'Форма', field: 'last_game', sortable: false, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
 ]
 
@@ -65,24 +65,24 @@ const rows = [
   {
     id: 3,
     name: 'Химик',
-    games: 1,
+    games: 3,
     win: 0,
     draw: 1,
-    lose: 0,
-    ball_io: '2-2',
+    lose: 2,
+    ball_io: '3-8',
     score: 1,
-    last_game: 'Н'
+    last_game: 'НПП'
   },
   {
     id: 1,
     name: 'СШ Ленинградец',
-    games: 2,
-    win: 2,
+    games: 3,
+    win: 3,
     draw: 0,
     lose: 0,
-    ball_io: '9-1',
-    score: 6,
-    last_game: 'ВВ'
+    ball_io: '11-1',
+    score: 9,
+    last_game: 'ВВВ'
   },
   {
     id: 5,
@@ -98,13 +98,13 @@ const rows = [
   {
     id: 6,
     name: 'Карелия',
-    games: 2,
-    win: 0,
+    games: 3,
+    win: 1,
     draw: 0,
     lose: 2,
-    ball_io: '1-5',
-    score: 0,
-    last_game: 'ПП'
+    ball_io: '5-5',
+    score: 3,
+    last_game: 'ППВ'
   },
   {
     id: 7,
