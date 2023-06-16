@@ -43,13 +43,13 @@ const rows = [
     id: 4,
     name: 'Север',
     colorCode: 'primary',
-    games: 2,
-    win: 2,
+    games: 3,
+    win: 3,
     draw: 0,
     lose: 0,
-    ball_io: '6-2',
-    score: 6,
-    last_game: 'ВВ'
+    ball_io: '11-1',
+    score: 9,
+    last_game: 'ВВВ'
   },
   {
     id: 2,
@@ -65,13 +65,13 @@ const rows = [
   {
     id: 3,
     name: 'Химик',
-    games: 3,
+    games: 4,
     win: 0,
     draw: 1,
-    lose: 2,
-    ball_io: '3-8',
+    lose: 3,
+    ball_io: '3-12',
     score: 1,
-    last_game: 'НПП'
+    last_game: 'НППП'
   },
   {
     id: 1,
@@ -102,7 +102,7 @@ const rows = [
     win: 1,
     draw: 0,
     lose: 2,
-    ball_io: '5-5',
+    ball_io: '4-7',
     score: 3,
     last_game: 'ППВ'
   },
