@@ -1,101 +1,223 @@
 <template>
   <div class="q-pa-lg">
-    <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>
-        <div class="title" style="color: #ae0000">
-          Апрель, 2023
-        </div>
-      </q-timeline-entry>
-      <q-timeline-entry v-for="item in NewsCardsA.slice(id)" :key="item.id"
-                        :title="item.eventName"
-                        :subtitle="item.date"
-                        :color="item.color"
-                        :icon="item.icon"
-                        side="left"
-      >
-        <div>
-          {{ item.tour}}
-          {{ item.mounth}}
-        </div>
-        <div>
-          {{ item.title }}
-          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
-          <q-item-label caption>планируют посетить: 0 </q-item-label>
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
-    <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>
-        <div class="title" style="color: #ae0000">
-          Май, 2023
-        </div>
-      </q-timeline-entry>
-      <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
-        :title="item.eventName"
-        :subtitle="item.date"
-        :color="item.color"
-        :icon="item.icon"
-        side="left"
-      >
-        <div>
-          {{ item.tour}}
-          {{ item.mounth}}
-        </div>
-        <div>
-          {{ item.title }}
-          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
-          <q-item-label caption>планируют посетить: 0 </q-item-label>
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
-    <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>
-        <div class="title" style="color: #ae0000">
-          Июнь, 2023
-        </div>
-      </q-timeline-entry>
-      <q-timeline-entry v-for="item in NewsCardsJ.slice(id)" :key="item.id"
-                        :title="item.eventName"
-                        :subtitle="item.date"
-                        :color="item.color"
-                        :icon="item.icon"
-                        side="left"
-      >
-        <div>
-          {{ item.tour}}
-          {{ item.mounth}}
-        </div>
-        <div>
-          {{ item.title }}
-          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
-          <q-item-label caption>планируют посетить: 0 </q-item-label>
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
-    <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>
-        <div class="title" style="color: #ae0000">
-          Июль, 2023
-        </div>
-      </q-timeline-entry>
-      <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
-                        :title="item.eventName"
-                        :subtitle="item.date"
-                        :color="item.color"
-                        :icon="item.icon"
-                        side="left"
-      >
-        <div>
-          {{ item.tour}}
-          {{ item.mounth}}
-        </div>
-        <div>
-          {{ item.title }}
-          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
-          <q-item-label caption>планируют посетить: 0 </q-item-label>
-        </div>
-      </q-timeline-entry>
-    </q-timeline>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Апрель, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsA.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Май, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Июнь, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsJ.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Июль, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                {{ item.tour}}
+                {{ item.mounth}}
+              </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body4 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
   </div>
 </template>
 
@@ -104,6 +226,7 @@ import { useQuasar } from 'quasar'
 import { computed, onMounted, ref } from 'vue'
 import { collection, onSnapshot, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 // const newsCardCollectionRef = collection(db, 'events', 'polpred')
@@ -113,19 +236,14 @@ import { db } from 'src/firebase'
 
 export default {
   name: 'eventSZFO23',
-  components: {},
+  components: { NewsCardDetailPopUp },
   data () {
     return {
-      games: [
-        {
-          id: 1,
-          mounth: 'Февраль, 2023'
-        },
-        {
-          id: 1,
-          mounth: 'Март, 2023'
-        }
-      ]
+      btnColor: 'blue-grey-10',
+      btnName: 'Подробно',
+      // кнопка что бы не прилипала к краю
+      btnDivMain: '',
+      divclassFootTab: 'q-pa-m'
     }
   },
   setup () {
