@@ -1,329 +1,367 @@
-<!--
 <template>
-  <div class="q-pa-md">
-    <div>
-      <q-item-label v-for="NewsCard in GamesNowEvents"
-                    :key="NewsCard.id" caption>
-        <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ NewsCard.datenews }}</span>
-        <span class="q-px-sm">{{ NewsCard.title }}</span>
-      </q-item-label>
-        <q-item-label v-for="NewsCard in GamesNowEvents"
-                      :key="NewsCard.id" caption>
-        </q-item-label>
-      <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ NewTitle[0] }}</span>
-    </div>
-  </div>
-</template>
-<script>
-import { onMounted, ref } from 'vue'
-import { collection, onSnapshot } from 'firebase/firestore'
-import { db } from 'src/firebase'
-export default {
-  name: 'NewsDrawer',
-  setup () {
-    const events = ref([])
-    const NewsCards = ref([])
-    const GamesNowEvents = ref([])
-    const GamesNowTables = ref([])
-    const NewTitle = ref([GamesNowEvents])
-    onMounted(async () => {
-      // раздел "Календарь игр"
-      onSnapshot(collection(db, '/siteNewsDrawer/GamesNowTest/dateUpdate/'), (querySnapshot) => {
-        const fbGamesNowEvents = []
-        querySnapshot.forEach((doc) => {
-          const GamesNowEvent = {
-            datenews: doc.data().datenews,
-            title: doc.data().title
-          }
-          fbGamesNowEvents.push(GamesNowEvent)
-        })
-        GamesNowEvents.value = fbGamesNowEvents
-        console.log('Дата обновления календаря игр', GamesNowEvents)
-      })
-    })
-    return {
-      labelAboutSite: 'О сайте',
-      NewsCards,
-      NewTitle,
-      GamesNowEvents,
-      GamesNowTables,
-      events
-    }
-  },
-  props: {
-    text: String
-  }
-}
-</script>
--->
-<template>
-  <q-card v-if="submitResult.length > 0" flat bordered class="row items-start">
-    <div
-      v-for="(item, index) in submitResult"
-      :key="index"
-      class="q-px-sm q-py-xs rounded-borders text-left text-overline text-black-9"
-    >{{ item.name }} = {{ item.value }}
-      <div v-for="itema in archiveGames" :key="itema.id">
-        <div v-show="itema.year === item.value">
-          <q-card class="my-card" flat bordered>
-            <q-card-section horizontal>
-              <q-card-section class="q-pt-xs">
-                <div class="text-overline">
-                  <div class="example-cell col-5" tabindex="0"> {{ itema.event }}</div>
-                </div>
-                <div class="text-overline text-orange-14">{{ itema.tour }}</div>
-                <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
-                <div class="q-mt-sm text-caption">
-                  Результат матча: {{ itema.result }}
-                </div>
-              </q-card-section>
-            </q-card-section>
-            <q-separator />
-            <q-card-actions>
-              <q-btn flat color="primary">
-                {{ itema.date }}
-              </q-btn>
-              <q-btn flat color="primary">
-                <NewsCardDetailPopUp
-                  :PopyUpSubTitleNews="itema.event"
-                  :PopyUpFullNews="itema.body"
-                  :PopyUpTitleNews="itema.title + itema.score"
-                  :PopyUpBtnColor="btnColor"
-                  :PopyUpBtnName="btnName"
-                  :PopyUpDivMain = "btnDivMain"
-                />
-              </q-btn>
-            </q-card-actions>
-          </q-card>
-        </div>
-      </div>
-    </div>
-  </q-card>
-  <div class="q-pa-md example-break-row">
-    <div class="row items-start example-container" v-for="itema in archiveGames" :key="itema.id">
-      <div class="example-cell col-5" tabindex="0"> {{ itema.event }}</div>
-      <div class="flex-break q-py-md"></div>
-      <div class="example-cell" tabindex="0">Фк "Север"</div>
-      <div class="example-cell" tabindex="0">Мурманск</div>
-      <div class="example-cell" tabindex="0">3</div>
-      <div class="flex-break q-py-md"></div>
-      <div class="example-cell" tabindex="0">Фк Псков</div>
-      <div class="example-cell" tabindex="0">Псков</div>
-      <div class="example-cell" tabindex="0">2</div>
-      <div class="flex-break q-py-md"></div>
-      <div class="example-cell" tabindex="0">Результат матча: {{ itema.result }}</div>
-      <div class="flex-break"></div>
-      <div class="example-cell" tabindex="0">Иванов</div>
-      <div class="flex-break"></div>
-      <div class="example-cell" tabindex="0">Победа была сложной, но команда старалась как могла</div>
-    </div>
-
-  </div>
-  <div class="q-pa-md">
-    <q-form @submit="onSubmit" class="q-gutter-md">
-      <div class="bg-grey-2 q-pa-sm rounded-borders">
-        Выберите год:
-        <q-separator color="primary"/>
-        <q-option-group
-          name="выбран"
-          v-model="preferred"
-          :options="options"
-          color="primary"
-          inline
-        />
-      </div>
-      <div>
-        <q-btn label="Выбрать" type="submit" color="primary"/>
-      </div>
-    </q-form>
-
-    <q-card v-if="submitResult.length > 0" flat bordered class="row items-start">
-      <div
-        v-for="(item, index) in submitResult"
-        :key="index"
-        class="q-px-sm q-py-xs rounded-borders text-left text-overline text-black-9"
-      >{{ item.name }} = {{ item.value }}
-        <div v-for="itema in archiveGames" :key="itema.id">
-          <div v-show="itema.year === item.value">
-            <q-card class="my-card" flat bordered>
-              <q-card-section horizontal>
-                <q-card-section class="q-pt-xs">
-                  <div class="text-overline">{{ itema.event }}</div>
-                  <div class="text-overline text-orange-14">{{ itema.tour }}</div>
-                  <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
-                  <div class="q-mt-sm text-caption">
-                    Результат матча: {{ itema.result }}
-                  </div>
-                </q-card-section>
-              </q-card-section>
-              <q-separator />
-              <q-card-actions>
-                <q-btn flat color="primary">
-                  {{ itema.date }}
-                </q-btn>
-                <q-btn flat color="primary">
+  <div class="q-pa-lg">
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Апрель, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsA.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 wrap">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
                   <NewsCardDetailPopUp
-                    :PopyUpSubTitleNews="itema.event"
-                    :PopyUpFullNews="itema.body"
-                    :PopyUpTitleNews="itema.title + itema.score"
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
-                  />
-                </q-btn>
-              </q-card-actions>
-            </q-card>
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
           </div>
-        </div>
-      </div>
-    </q-card>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Май, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Июнь, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsJ.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Июль, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                {{ item.tour}}
+                {{ item.mounth}}
+              </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body4 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
-import { db } from '../firebase'
-import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
+import { useQuasar } from 'quasar'
+import { computed, onMounted, ref } from 'vue'
+import { collection, onSnapshot, orderBy } from 'firebase/firestore'
+import { db } from 'src/firebase'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 
-const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
-const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
+// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+// const newsCardCollectionRef = collection(db, 'events', 'polpred')
+// const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
+
+// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+
 export default {
+  name: 'eventSZFO23',
   components: { NewsCardDetailPopUp },
   data () {
     return {
       btnColor: 'blue-grey-10',
       btnName: 'Подробно',
       // кнопка что бы не прилипала к краю
-      btnDivMain: 'q-pa-md',
+      btnDivMain: '',
       divclassFootTab: 'q-pa-m'
     }
   },
-  setup: function () {
-    const archiveGames = ref([])
-    onSnapshot(archiveGamesQuery, (querySnapshot) => {
-      const fbAGames = []
-      querySnapshot.forEach((doc) => {
-        const event = {
-          id: doc.id,
-          title: doc.data().title,
-          year: doc.data().year,
-          event: doc.data().event,
-          score: doc.data().score,
-          date: doc.data().date,
-          result: doc.data().result,
-          tour: doc.data().tour,
-          datestamp: doc.data().datestamp,
-          body: doc.data().body
-        }
-        fbAGames.push(event)
+  setup () {
+    const $q = useQuasar()
+    const matchEvents = ref([])
+    const NewsCards = ref([])
+    const NewsCardsJ = ref([])
+    const NewsCardsJl = ref([])
+    const NewsCardsA = ref([])
+    onMounted(async () => {
+      // NewsCard Module
+      onSnapshot(collection(db, '/events/szfo/2023/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCards.value = fbEvents
+        console.log(NewsCards)
       })
-      archiveGames.value = fbAGames
-      console.log('fbAGames', archiveGames.value)
+      onSnapshot(collection(db, '/events/szfo/2023/june/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsJ.value = fbEvents
+        console.log(NewsCardsJ)
+      })
+      onSnapshot(collection(db, '/events/szfo/2023/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsJl.value = fbEvents
+        console.log(NewsCardsJl)
+      })
+      onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsA.value = fbEvents
+        console.log(NewsCardsA)
+      })
     })
 
-    const submitResult = ref([])
-
     return {
-      preferred: ref('2007'),
-      archiveGames,
-      accepted: ref([]),
-      submitResult,
-      dialog: ref(false),
-      cancelEnabled: ref(false),
-
-      options: [
-        {
-          id: 1,
-          label: '2007',
-          value: '2007',
-          done: true
-        },
-        {
-          id: 2,
-          label: '2008',
-          value: '2008',
-          done: true
-        },
-        {
-          id: 3,
-          label: '2009',
-          value: '2009',
-          done: true
-        },
-        {
-          id: 4,
-          label: '2010',
-          value: '2010',
-          done: true
-        },
-        {
-          id: 5,
-          label: '2011',
-          value: '2011',
-          done: true
-        },
-        {
-          id: 6,
-          label: '2013',
-          value: '2013',
-          done: true
-        },
-        {
-          id: 7,
-          label: '2014',
-          value: '2014',
-          done: true
-        },
-        {
-          id: 8,
-          label: '2016',
-          value: '2016',
-          done: true
-        },
-        {
-          id: 9,
-          label: '2022',
-          value: '2022',
-          done: true
-        },
-        {
-          id: 10,
-          label: '2023',
-          value: '2023',
-          done: true
-        }
-
-      ],
-
-      onSubmit (evt) {
-        const formData = new FormData(evt.target)
-        const data = []
-
-        for (const [name, value] of formData.entries()) {
-          data.push({
-            name,
-            value
-          })
-        }
-
-        submitResult.value = data
-        console.log(submitResult.value)
-      }
+      titleEvent: ['XXIV Турнир полпреда СЗФО'],
+      titleEventTest: ['1', '2', '3'],
+      titleEvent1: 'TitileEventValue1',
+      btnSize: 'xs',
+      NewsCards,
+      NewsCardsJ,
+      NewsCardsJl,
+      NewsCardsA,
+      matchEvents,
+      titleMainEvent: '',
+      layout: computed(() => {
+        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
+      })
     }
   }
 }
 </script>
+
 <style lang="sass" scoped>
+.title
+  font-size: 28px
+  text-align: center
+  color: #2c3e50
 .my-card
   width: 100%
-.example-break-row
-  .flex-break
-    flex: 1 0 100% !important
-    height: 0 !important
-
-  .example-container
-    .example-cell
-      margin: 1px
-      padding: 4px 8px
+  max-width: 350px
 </style>
