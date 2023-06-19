@@ -38,6 +38,17 @@
                 </q-card-section>
               </q-card>
             </q-dialog>
+          <q-btn flat dense round icon="logout" @click="dialogLogOut = true" />
+          <q-dialog v-model="dialogLogOut">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">До свидания, {{ $store.getters.userName }} </div>
+              </q-card-section>
+              <q-card-section class="row items-center q-gutter-sm">
+                <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />
+              </q-card-section>
+            </q-card>
+          </q-dialog>
         </div>
       </q-toolbar>
     </q-header>
@@ -87,6 +98,7 @@ export default defineComponent({
       leftDrawerOpen,
       leftDrawerOpenResultGame,
       dialog: ref(false),
+      dialogLogOut: ref(false),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
