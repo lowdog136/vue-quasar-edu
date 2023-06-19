@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-lg">
+  <div class="q-pa-sm wrap rounded-borders">
     <q-item>
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
@@ -28,7 +28,7 @@
               </q-item-section>
             </q-item>
             <q-item >
-              <q-item-section>
+              <q-item-section >
                 <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
                   голы: {{ item.scorer }}
                 </q-item-label>
@@ -121,6 +121,7 @@
                           :color="item.color"
                           :icon="item.icon"
                           side="left"
+                          class="q-pa-sm wrap rounded-borders"
         >
           <div>
             {{ item.tour}}
@@ -128,7 +129,7 @@
           </div>
           <div>
             <!--          {{ item.title }}-->
-            <q-item>
+            <q-item >
               <q-item-section>
                 <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
                   {{ item.title }}
@@ -136,7 +137,7 @@
               </q-item-section>
             </q-item>
             <q-item >
-              <q-item-section>
+              <q-item-section >
                 <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
                   голы: {{ item.scorer }}
                 </q-item-label>
@@ -321,6 +322,7 @@ export default {
           const listDateEvent = {
             id: doc.id,
             title: doc.data().title,
+            body: doc.data().body,
             color: doc.data().color,
             date: doc.data().date,
             mounth: doc.data().mounth,
@@ -348,6 +350,7 @@ export default {
       NewsCardsA,
       matchEvents,
       titleMainEvent: '',
+      side: ref('right'),
       layout: computed(() => {
         return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
       })
