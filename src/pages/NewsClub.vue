@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="full-width row wrap justify-center items-center content-center">
     <NewsCard />
     <q-card class="my-card" flat>
       <q-card-section flat>
