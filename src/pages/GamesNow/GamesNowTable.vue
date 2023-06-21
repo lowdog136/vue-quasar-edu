@@ -54,24 +54,24 @@ const rows = [
   {
     id: 2,
     name: 'Псков',
-    games: 2,
-    win: 1,
+    games: 3,
+    win: 2,
     draw: 1,
     lose: 0,
-    ball_io: '2-1',
-    score: 4,
-    last_game: 'ВН'
+    ball_io: '4-1',
+    score: 7,
+    last_game: 'ВНВ'
   },
   {
     id: 3,
     name: 'Химик',
-    games: 4,
+    games: 5,
     win: 0,
     draw: 1,
-    lose: 3,
-    ball_io: '3-12',
+    lose: 4,
+    ball_io: '3-14',
     score: 1,
-    last_game: 'НППП'
+    last_game: 'НПППП'
   },
   {
     id: 1,
@@ -87,35 +87,35 @@ const rows = [
   {
     id: 5,
     name: 'Звезда',
-    games: 2,
+    games: 3,
     win: 0,
     draw: 1,
-    lose: 1,
-    ball_io: '3-4',
+    lose: 2,
+    ball_io: '3-6',
     score: 1,
-    last_game: 'ПН'
+    last_game: 'ПНП'
   },
   {
     id: 6,
     name: 'Карелия',
-    games: 3,
-    win: 1,
+    games: 5,
+    win: 2,
     draw: 0,
-    lose: 2,
-    ball_io: '4-7',
-    score: 3,
-    last_game: 'ППВ'
+    lose: 3,
+    ball_io: '8-10',
+    score: 6,
+    last_game: 'ППВВП'
   },
   {
     id: 7,
     name: 'Тосно',
-    games: 3,
-    win: 0,
+    games: 4,
+    win: 1,
     draw: 1,
     lose: 2,
-    ball_io: '2-10',
-    score: 1,
-    last_game: 'ППН'
+    ball_io: '5-12',
+    score: 4,
+    last_game: 'ППНВ'
   }
 ]
 
