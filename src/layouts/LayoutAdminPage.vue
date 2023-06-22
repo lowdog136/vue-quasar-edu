@@ -18,7 +18,7 @@
         <q-toolbar-title>
           SeverFans
         </q-toolbar-title>
-        <div>
+        <div v-show="$store.state.user">
           <q-btn color="" flat dense label="" icon="settings">
             <q-menu transition-show="rotate" transition-hide="rotate">
               <div class="row no-wrap q-pa-md">
@@ -82,6 +82,7 @@ export default defineComponent({
       bluetooth: ref(false),
       fab2: ref(false),
       dialog: ref(false),
+      dialogLogOut: ref(false),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
