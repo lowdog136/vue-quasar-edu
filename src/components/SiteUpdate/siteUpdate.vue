@@ -1,20 +1,34 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-timeline color="secondary" >
-      <q-timeline-entry heading >
-        Хронология обновлений
-      </q-timeline-entry>
+  <div class="fit row wrap justify-start items-start content-start">
+    <q-timeline color="primary" >
+      <q-item-label header>Хронология обновлений</q-item-label>
       <q-timeline-entry v-for="event in events" :key="event.id"
                         :title=event.title
                         :subtitle=event.dateupd
                         icon="done"
       >
-        <div>
-          ver: {{ event.ver }}
-        </div>
-        <div style="max-width: 650px">
-            {{ event.body }}
-        </div>
+        <q-item>
+          <q-item-section top>
+            <q-item-label lines="1">
+              <span class="text-weight-medium">{{ event.ver }}</span>
+            </q-item-label>
+            <q-item-label style="max-width: flex" caption lines="1">
+              {{ event.body }}
+            </q-item-label>
+            <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="event.event"
+                    :PopyUpFullNews="event.body"
+                    :PopyUpTitleNews="event.title"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+            </q-item-label>
+            <q-separator spaced />
+          </q-item-section>
+        </q-item>
       </q-timeline-entry>
     </q-timeline>
     <ScrollUp />
@@ -27,6 +41,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from '../../firebase'
 import ScrollUp from 'components/ScrollUp'
+import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
@@ -61,9 +76,15 @@ const deleteEvent = id => {
 
 export default {
   name: 'siteUpdate',
-  components: { ScrollUp },
+  components: { ScrollUp, NewsCardDetailPopUp },
   data () {
-    return {}
+    return {
+      btnColor: 'blue-grey-10',
+      btnName: 'Подробно',
+      // кнопка что бы не прилипала к краю
+      btnDivMain: '',
+      divclassFootTab: 'q-pa-m'
+    }
   },
   setup () {
     const todos = ref([])
