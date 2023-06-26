@@ -219,6 +219,62 @@
         </q-timeline-entry>
       </q-timeline>
     </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Август, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsAu.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                {{ item.tour}}
+                {{ item.mounth}}
+              </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body4 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
   </div>
 </template>
 
@@ -253,6 +309,7 @@ export default {
     const NewsCards = ref([])
     const NewsCardsJ = ref([])
     const NewsCardsJl = ref([])
+    const NewsCardsAu = ref([])
     const NewsCardsA = ref([])
     onMounted(async () => {
       // NewsCard Module
@@ -316,6 +373,26 @@ export default {
         NewsCardsJl.value = fbEvents
         console.log(NewsCardsJl)
       })
+      onSnapshot(collection(db, '/events/szfo/2023/august/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsAu.value = fbEvents
+        console.log(NewsCardsAu)
+      })
       onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
@@ -348,6 +425,7 @@ export default {
       NewsCardsJ,
       NewsCardsJl,
       NewsCardsA,
+      NewsCardsAu,
       matchEvents,
       titleMainEvent: '',
       side: ref('right'),
