@@ -11,6 +11,9 @@
           <div class="text-caption text-blue-grey-10">
             <h6>{{ PopyUpFullNews }} </h6>
           </div>
+          <div class="text-caption text-blue-grey-10">
+            <h6>{{ PopyUpFullNews2 }} </h6>
+          </div>
           <div class="text-caption text-grey">
             {{ PopyUpSrcNews }}
           </div>
@@ -71,6 +74,7 @@ export default {
     PopyUpSubImgNews: String,
     PopyUpTitleNews: String,
     PopyUpFullNews: String,
+    PopyUpFullNews2: String,
     PopyUpSrcNews: String
   },
   methods: {
