@@ -24,7 +24,8 @@
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
-                  /></span>
+                  />
+                </span>
             </q-item-label>
             <q-separator spaced />
           </q-item-section>
