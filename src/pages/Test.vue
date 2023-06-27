@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
+    <MainNotify />
     <q-timeline color="primary" >
       <q-item-label header>Хронология обновлений</q-item-label>
       <q-timeline-entry v-for="event in events" :key="event.id"
@@ -43,6 +44,7 @@ import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, order
 import { db } from '../firebase'
 import ScrollUp from 'components/ScrollUp'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
+import MainNotify from 'components/Admin/MainNotify.vue'
 
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
@@ -77,7 +79,7 @@ const deleteEvent = id => {
 
 export default {
   name: 'siteUpdate',
-  components: { ScrollUp, NewsCardDetailPopUp },
+  components: { MainNotify, ScrollUp, NewsCardDetailPopUp },
   data () {
     return {
       btnColor: 'blue-grey-10',
