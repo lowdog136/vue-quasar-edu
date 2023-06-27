@@ -52,7 +52,6 @@
         </div>
       </q-toolbar>
     </q-header>
-
     <q-drawer
       width="320"
       v-model="leftDrawerOpen"
@@ -70,6 +69,7 @@
       </q-list>
     </q-drawer>
     <q-page-container>
+      <MainNotify />
       <router-view />
     </q-page-container>
   </q-layout>
@@ -82,10 +82,11 @@ import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer'
 import NewsDrawerResultGame from 'components/NewsDrawerResultGame'
 import AuthPanel from 'components/Auth/AuthPanel'
+import MainNotify from 'components/Admin/MainNotify.vue'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { AuthPanel, NewsDrawerResultGame, NewsDrawer },
+  components: { MainNotify, AuthPanel, NewsDrawerResultGame, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
