@@ -40,7 +40,7 @@
                   <NewsCardDetailPopUp
                     :PopyUpSubTitleNews="item.event"
                     :PopyUpFullNews="item.body"
-                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpTitleNews="item.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -94,7 +94,7 @@
                   <NewsCardDetailPopUp
                     :PopyUpSubTitleNews="item.event"
                     :PopyUpFullNews="item.body"
-                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpTitleNews="item.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -149,7 +149,7 @@
                   <NewsCardDetailPopUp
                     :PopyUpSubTitleNews="item.event"
                     :PopyUpFullNews="item.body"
-                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpTitleNews="item.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -205,7 +205,7 @@
                   <NewsCardDetailPopUp
                     :PopyUpSubTitleNews="item.event"
                     :PopyUpFullNews="item.body"
-                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpTitleNews="item.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -261,7 +261,63 @@
                   <NewsCardDetailPopUp
                     :PopyUpSubTitleNews="item.event"
                     :PopyUpFullNews="item.body"
-                    :PopyUpTitleNews="item.title + item.score"
+                    :PopyUpTitleNews="item.title"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Сентябрь, 2023
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsSep.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+        >
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item>
+              <q-item-section>
+                {{ item.tour}}
+                {{ item.mounth}}
+              </q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body4 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.eventName"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -310,6 +366,7 @@ export default {
     const NewsCardsJ = ref([])
     const NewsCardsJl = ref([])
     const NewsCardsAu = ref([])
+    const NewsCardsSep = ref([])
     const NewsCardsA = ref([])
     onMounted(async () => {
       // NewsCard Module
@@ -326,6 +383,7 @@ export default {
             eventName: doc.data().eventName,
             time: doc.data().time,
             icon: doc.data().icon,
+            body: doc.data().body,
             scorer: doc.data().scorer
           }
           fbEvents.push(listDateEvent)
@@ -346,6 +404,7 @@ export default {
             eventName: doc.data().eventName,
             time: doc.data().time,
             icon: doc.data().icon,
+            body: doc.data().body,
             scorer: doc.data().scorer
           }
           fbEvents.push(listDateEvent)
@@ -366,6 +425,7 @@ export default {
             eventName: doc.data().eventName,
             time: doc.data().time,
             icon: doc.data().icon,
+            body: doc.data().body,
             scorer: doc.data().scorer
           }
           fbEvents.push(listDateEvent)
@@ -386,12 +446,34 @@ export default {
             eventName: doc.data().eventName,
             time: doc.data().time,
             icon: doc.data().icon,
+            body: doc.data().body,
             scorer: doc.data().scorer
           }
           fbEvents.push(listDateEvent)
         })
         NewsCardsAu.value = fbEvents
         console.log(NewsCardsAu)
+      })
+      onSnapshot(collection(db, '/events/szfo/2023/september/match'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbEvents = []
+        querySnapshot.forEach((doc) => {
+          const listDateEvent = {
+            id: doc.id,
+            title: doc.data().title,
+            color: doc.data().color,
+            date: doc.data().date,
+            mounth: doc.data().mounth,
+            tour: doc.data().tour,
+            eventName: doc.data().eventName,
+            time: doc.data().time,
+            icon: doc.data().icon,
+            body: doc.data().body,
+            scorer: doc.data().scorer
+          }
+          fbEvents.push(listDateEvent)
+        })
+        NewsCardsSep.value = fbEvents
+        console.log(NewsCardsSep)
       })
       onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
@@ -426,6 +508,7 @@ export default {
       NewsCardsJl,
       NewsCardsA,
       NewsCardsAu,
+      NewsCardsSep,
       matchEvents,
       titleMainEvent: '',
       side: ref('right'),
