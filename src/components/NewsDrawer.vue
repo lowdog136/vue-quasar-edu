@@ -123,15 +123,6 @@
           <q-item-label caption>{{ $store.state.NavigationListMenu[7].Caption }}</q-item-label>
         </q-item-section>
       </q-item>
-      <q-item clickable v-ripple :active="active" to="/ArchiveGames">
-        <q-item-section avatar>
-          <q-icon name="scoreboard" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ $store.state.NavigationListMenu[8].Name }}</q-item-label>
-          <q-item-label caption>{{ $store.state.NavigationListMenu[8].Caption }}</q-item-label>
-        </q-item-section>
-      </q-item>
       <q-item clickable v-ripple :active="active" to="/ArchiveGamesBefore">
         <q-item-section avatar>
           <q-icon name="find_in_page" />

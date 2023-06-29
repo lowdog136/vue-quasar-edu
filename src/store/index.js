@@ -297,7 +297,7 @@ export default store(function (/* { ssrContext } */) {
         {
           id: 17,
           Name: 'Старые записи',
-          Caption: 'Результаты матчей прошлых лет'
+          Caption: 'Все результаты матчей'
         }
       ],
       NewsClubNewsCard: [
