@@ -18,6 +18,7 @@ const routes = [
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
       { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
+      { path: '/eventSZFO', name: 'eventSZFO', component: () => import('pages/EventsList/eventSZFO.vue') },
       {
         path: '/User',
         meta: { requiresAuth: true },
