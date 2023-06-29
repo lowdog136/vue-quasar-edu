@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-md">
-    <events-s-z-f-o />
-    <cup-s-z-f-o />
-  </div>
+    <div class="q-pa-md">
+      <cup-s-z-f-o />
+      <events-s-z-f-o />
+    </div>
 </template>
 
 <script>
