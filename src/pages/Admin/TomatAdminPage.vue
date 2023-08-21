@@ -103,6 +103,26 @@
       <NewsSiteContentAdd />
     </div>
   </div>
+  <!--  5 block admin mode-->
+  <q-item >
+    <q-item-section avatar>
+      <q-icon color="primary" name="edit" />
+    </q-item-section>
+    <q-item-section>
+      <q-item-label>Редактировать календарь игр:</q-item-label>
+      <q-item-label caption>
+        Обновления с версии на версию. Что нового.
+      </q-item-label>
+    </q-item-section>
+    <q-item-section side >
+      <q-toggle color="red" v-model="notifySiteNews" val="picture" />
+    </q-item-section>
+  </q-item>
+  <div class="q-pa-md row items-start q-gutter-md">
+    <div v-if="notifySiteNews">
+      <NewsSiteContentAdd />
+    </div>
+  </div>
 </template>
 <script>
 import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd'
