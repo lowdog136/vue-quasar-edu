@@ -115,12 +115,12 @@
       </q-item-label>
     </q-item-section>
     <q-item-section side >
-      <q-toggle color="red" v-model="notifySiteNews" val="picture" />
+      <q-toggle color="red" v-model="notifyEventEdit" val="picture" />
     </q-item-section>
   </q-item>
   <div class="q-pa-md row items-start q-gutter-md">
-    <div v-if="notifySiteNews">
-      <NewsSiteContentAdd />
+    <div v-if="notifyEventEdit">
+      <games-now-event-edit />
     </div>
   </div>
 </template>
@@ -132,9 +132,10 @@ import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd'
 import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd'
 import NewsDrawerGNEDateUpdate from 'components/Admin/NewsDrawerGNEDateUpdate.vue'
 import NewsDrawerGNTDateUpdate from 'components/Admin/NewsDrawerGNTDateUpdate.vue'
+import GamesNowEventEdit from 'components/Admin/gamesNowEventEdit.vue'
 
 export default {
-  components: { NewsDrawerGNTDateUpdate, NewsCardContentAdd, ArchiveGamesAdd, NewsSiteContentAdd, NewsDrawerGNEDateUpdate },
+  components: { GamesNowEventEdit, NewsDrawerGNTDateUpdate, NewsCardContentAdd, ArchiveGamesAdd, NewsSiteContentAdd, NewsDrawerGNEDateUpdate },
   setup () {
     const store = useStore()
     onBeforeMount(() => {
@@ -144,7 +145,8 @@ export default {
       notifyArchiveGames: ref(false),
       notifyClubNews: ref(false),
       notifySiteNews: ref(false),
-      notifyUpdateDate: ref(false)
+      notifyUpdateDate: ref(false),
+      notifyEventEdit: ref(false)
     }
   }
 }
