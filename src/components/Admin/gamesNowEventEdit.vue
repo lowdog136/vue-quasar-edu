@@ -46,7 +46,7 @@
   </div>
   <!--  edit mode block-->
   <div class="q-pa-md row items-start q-gutter-md" v-if="redModel">
-
+    <event-s-z-f-o23 />
     <q-card
       class="bg-grey-9 my-card"
       v-for="SiteUpdate in SiteUpdates"
@@ -155,9 +155,12 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import EventSZFO23 from 'pages/Test.vue'
 
 const siteUpdateCollectionRef = collection(db, '/events/szfo/2023/september/match')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
+const mmCollectionRef = collection(db, '/events/szfo/2023/august/match')
+const mmCollectionQuery = query(mmCollectionRef, orderBy('date', 'desc'))
 // const eventListMonthCollectionRef = collection(db, '/events')
 // const eventListMonthCollectionQuery = query(eventListMonthCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateVer = ref('')
@@ -192,7 +195,7 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'gamesNowEventEdit',
-  components: {},
+  components: { EventSZFO23 },
   data () {
     return {
     }
@@ -217,6 +220,7 @@ export default {
           fbSiteUpdates.push(SiteUpdate)
         })
         SiteUpdates.value = fbSiteUpdates
+        console.log('SiteUpdate:', SiteUpdates.value[0])
       })
       onSnapshot(collection(db, '/events/szfo/2023'), (querySnapshot) => {
         const fbEventListMonths = []
@@ -228,7 +232,19 @@ export default {
           fbEventListMonths.push(EventListMonth)
         })
         EventListMonths.value = fbEventListMonths
-        console.log('eventListMonth:', EventListMonths.value)
+        console.log('eventListMonth:', EventListMonths.value[0])
+      })
+      onSnapshot(mmCollectionQuery, (querySnapshot) => {
+        const fbEventListMonths = []
+        querySnapshot.forEach((doc) => {
+          const EventListMonth = {
+            id: doc.id,
+            name: doc.data().name
+          }
+          fbEventListMonths.push(EventListMonth)
+        })
+        EventListMonths.value = fbEventListMonths
+        console.log('mm:', EventListMonths.value)
       })
     })
     // Edit SiteUpdate Block
