@@ -5,11 +5,13 @@
         v-model="panel"
         inline
         :options="[
+          { label: 'Свернуть', value: 'reset' },
           { label: 'Игры в архиве', value: 'game' },
           { label: 'Новость на главную', value: 'team' },
           { label: 'Правка дат', value: 'date' },
           { label: 'Обновление сайта', value: 'site' },
-          { label: 'Правка календаря игр', value: 'eventlist' }
+          { label: 'Правка календаря игр', value: 'eventlist' },
+          { label: 'Смена оформления главной страницы', value: 'changeMainPage' }
         ]"
       />
 
@@ -39,6 +41,11 @@
           <div class="text-h6">Редактировать календарь игр:</div>
           <games-now-event-edit />
         </q-tab-panel>
+
+        <q-tab-panel name="changeMainPage">
+          <div class="text-h6">Выбрать оформление:</div>
+          <change-main-pain />
+        </q-tab-panel>
       </q-tab-panels>
     </div>
   </div>
@@ -52,12 +59,13 @@ import NewsDrawerGNEDateUpdate from 'components/Admin/NewsDrawerGNEDateUpdate.vu
 import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd.vue'
 import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd.vue'
 import GamesNowEventEdit from 'components/Admin/gamesNowEventEdit.vue'
+import ChangeMainPain from 'components/Admin/changeMainPain.vue'
 
 export default {
-  components: { GamesNowEventEdit, NewsSiteContentAdd, ArchiveGamesAdd, NewsDrawerGNEDateUpdate, NewsDrawerGNTDateUpdate, NewsCardContentAdd },
+  components: { ChangeMainPain, GamesNowEventEdit, NewsSiteContentAdd, ArchiveGamesAdd, NewsDrawerGNEDateUpdate, NewsDrawerGNTDateUpdate, NewsCardContentAdd },
   setup () {
     return {
-      panel: ref('mails')
+      panel: ref('reset')
     }
   }
 }
