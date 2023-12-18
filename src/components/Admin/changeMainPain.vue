@@ -5,7 +5,7 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <h3>
-      Text
+      Text 2
     </h3>
   </div>
 
