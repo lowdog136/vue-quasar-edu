@@ -30,6 +30,16 @@ export default store(function (/* { ssrContext } */) {
       // Дата обновления таблицы чемпионата
       GamesNowTableUpdateDate: '2023-06-01',
       posts: JSON.parse(localStorage.getItem('posts') || '[]'),
+      mainLogos: [
+        {
+          id: 1,
+          url: 'https://severfans.ru/img/fcsever_logo_ny.f62d4c97.png'
+        },
+        {
+          id: 2,
+          url: 'https://severfans.ru/img/3.2947b614.jpg'
+        }
+      ],
       tours: [
         {
           id: 1,
@@ -685,6 +695,9 @@ export default store(function (/* { ssrContext } */) {
       },
       howWatch ({ commit }) {
         commit('howWatch')
+      },
+      changeLogo ({ commit }) {
+        commit('changeLogo')
       },
       togledropDown ({ commit }) {
         commit('changedropDown')
