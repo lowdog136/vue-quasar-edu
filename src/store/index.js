@@ -538,7 +538,7 @@ export default store(function (/* { ssrContext } */) {
       InsertValue: [],
       myCount: 2,
       ratingNewsCard: 0,
-      count: '111111',
+      count: '1111dgsg11',
       uid: 'wTZJonX7ZaWDPXOikF8gfzfvwfm1',
       NewsCardHowWatch: 0,
       user: name,
