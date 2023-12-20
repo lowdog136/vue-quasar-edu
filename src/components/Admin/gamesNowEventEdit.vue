@@ -314,7 +314,7 @@ export default {
 <style lang="sass" scoped>
 .my-card
   width: 100%
-  .root
+  root
   width: 100%
     margin: 0 auto
     background-color: #fff
