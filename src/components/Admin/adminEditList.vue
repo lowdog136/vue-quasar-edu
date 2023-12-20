@@ -44,7 +44,7 @@
 
         <q-tab-panel name="changeMainPage">
           <div class="text-h6">Выбрать оформление:</div>
-          <change-main-pain />
+          <change-main-page-logo />
         </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -59,10 +59,10 @@ import NewsDrawerGNEDateUpdate from 'components/Admin/NewsDrawerGNEDateUpdate.vu
 import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd.vue'
 import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd.vue'
 import GamesNowEventEdit from 'components/Admin/gamesNowEventEdit.vue'
-import ChangeMainPain from 'components/Admin/changeMainPain.vue'
+import ChangeMainPageLogo from 'components/Admin/changeMainPageLogo.vue'
 
 export default {
-  components: { ChangeMainPain, GamesNowEventEdit, NewsSiteContentAdd, ArchiveGamesAdd, NewsDrawerGNEDateUpdate, NewsDrawerGNTDateUpdate, NewsCardContentAdd },
+  components: { ChangeMainPageLogo, GamesNowEventEdit, NewsSiteContentAdd, ArchiveGamesAdd, NewsDrawerGNEDateUpdate, NewsDrawerGNTDateUpdate, NewsCardContentAdd },
   setup () {
     return {
       panel: ref('reset')
