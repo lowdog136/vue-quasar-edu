@@ -1,7 +1,7 @@
 <template>
-  <div class="q-pa-md">
+  <div >
     <div class="row q-gutter-sm">
-      <q-btn no-caps color="primary" @click="triggerCustomRegisteredType2" label="Прочтите пожалуйста" />
+      <q-icon name="info" color="orange-14" @click="triggerCustomRegisteredType2"/>
     </div>
   </div>
 </template>
