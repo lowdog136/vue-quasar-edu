@@ -5,22 +5,22 @@
     </div>
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
-      <event-s-z-f-o23 />
+      <event-pred24 />
     </p>
   </div>
 </template>
 
 <script>
 
-import EventSZFO23 from 'components/Events/eventSZFO23'
+import EventPred24 from 'components/Events/eventPred24.vue'
 export default {
-  components: { EventSZFO23 },
+  components: { EventPred24 },
   setup () {
     return {
       titleEvent: ['Кубок СЗФО'],
       bodyMainEvent: '',
       btnSize: 'xs',
-      titleMainEvent: 'Календарь игр ФК "Север" в 2023 году'
+      titleMainEvent: 'Календарь игр ФК "Север" в 2024 году'
     }
   }
 }
