@@ -1,17 +1,17 @@
-<script setup>
-
-import MainNotify from 'components/Admin/MainNotify.vue'
-</script>
-
 <template>
-  <div class="text-h6">
-    SeverFans
-    <q-badge color="primary">
+  <div >
+    <q-toolbar class="text-white">
       <main-notify />
-    </q-badge>
+      <q-toolbar-title>
+        SeverFans
+      </q-toolbar-title>
+    </q-toolbar>
   </div>
 </template>
 
 <style scoped lang="sass">
 
 </style>
+<script setup>
+import MainNotify from 'components/Admin/MainNotify.vue'
+</script>

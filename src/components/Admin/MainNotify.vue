@@ -1,8 +1,8 @@
 <template>
   <div >
-    <div class="row q-gutter-sm">
-      <q-icon name="info" color="orange-14" @click="triggerCustomRegisteredType2"/>
-    </div>
+    <q-btn flat round dense icon="info" @click="triggerCustomRegisteredType2">
+      <q-badge floating color="red">1</q-badge>
+    </q-btn>
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 import { useQuasar } from 'quasar'
 
 export default {
+  components: {},
   setup () {
     const $q = useQuasar()
 
