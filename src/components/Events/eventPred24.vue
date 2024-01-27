@@ -14,6 +14,9 @@
         side="left"
       >
         <div>
+          <div style="font-size: 10pt; color: #414040">
+            {{ item.place}}
+          </div>
           {{ item.tour}}
           {{ item.mounth}}
         </div>
