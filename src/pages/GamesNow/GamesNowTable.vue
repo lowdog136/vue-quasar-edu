@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-table
       flat bordered
-      title="Турнирная таблица, Чемпионат СЗФО 2023"
+      title="Турнирная таблица, XXV турнир полпреда СЗФО, группа 'Б'"
       :rows="rows"
       :columns="columns"
       row-key="id"
@@ -43,79 +43,57 @@ const rows = [
     id: 4,
     name: 'Север',
     colorCode: 'primary',
-    games: 3,
-    win: 3,
+    games: 1,
+    win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '11-1',
-    score: 9,
-    last_game: 'ВВВ'
+    lose: 1,
+    ball_io: '0-1',
+    score: 0,
+    last_game: 'П'
   },
   {
     id: 2,
-    name: 'Псков',
-    games: 3,
-    win: 2,
-    draw: 1,
-    lose: 0,
-    ball_io: '4-1',
-    score: 7,
-    last_game: 'ВНВ'
+    name: 'СШОР Зенит',
+    games: 1,
+    win: 0,
+    draw: 0,
+    lose: 1,
+    ball_io: '1-3',
+    score: 0,
+    last_game: 'П'
   },
   {
     id: 3,
-    name: 'Химик',
-    games: 5,
-    win: 0,
-    draw: 1,
-    lose: 4,
-    ball_io: '3-14',
-    score: 1,
-    last_game: 'НПППП'
+    name: 'МФК Чисто Питер',
+    games: 1,
+    win: 1,
+    draw: 0,
+    lose: 0,
+    ball_io: '3-1',
+    score: 3,
+    last_game: 'В'
   },
   {
     id: 1,
     name: 'СШ Ленинградец',
-    games: 3,
-    win: 3,
+    games: 0,
+    win: 0,
     draw: 0,
     lose: 0,
-    ball_io: '11-1',
-    score: 9,
-    last_game: 'ВВВ'
+    ball_io: '0-0',
+    score: 0,
+    last_game: ''
   },
   {
-    id: 5,
+    id: 2,
     name: 'Звезда',
-    games: 3,
-    win: 0,
-    draw: 1,
-    lose: 2,
-    ball_io: '3-6',
-    score: 1,
-    last_game: 'ПНП'
-  },
-  {
-    id: 6,
-    name: 'Карелия',
-    games: 5,
-    win: 2,
-    draw: 0,
-    lose: 3,
-    ball_io: '8-10',
-    score: 6,
-    last_game: 'ППВВП'
-  },
-  {
-    id: 7,
-    name: 'Тосно',
-    games: 4,
+    games: 1,
     win: 1,
-    draw: 1,
-    lose: 2,
-    ball_io: '5-12',
-    score: 4,
-    last_game: 'ППНВ'
+    draw: 0,
+    lose: 0,
+    ball_io: '1-0',
+    score: 3,
+    last_game: 'В'
   }
 ]
 
