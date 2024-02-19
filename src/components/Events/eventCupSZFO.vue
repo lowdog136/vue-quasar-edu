@@ -1,7 +1,7 @@
 <template>
   <div class="q-px-lg q-pb-md">
     <div class="title">
-      {{titleMainEvent }}
+<!--      {{titleMainEvent }}-->
     </div>
     <q-timeline :layout="layout" color="secondary" v-for="game in games.slice(id).reverse()" :key="game.id">
       <q-timeline-entry heading>

@@ -4,7 +4,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Апрель, 2023
+            Апрель, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCardsA.slice(id)" :key="item.id"
@@ -58,7 +58,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Май, 2023
+            Май, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
@@ -112,7 +112,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Июнь, 2023
+            Июнь, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCardsJ.slice(id)" :key="item.id"
@@ -167,7 +167,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Июль, 2023
+            Июль, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
@@ -223,7 +223,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Август, 2023
+            Август, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCardsAu.slice(id)" :key="item.id"
@@ -279,7 +279,7 @@
       <q-timeline :layout="layout" :side="side" color="secondary">
         <q-timeline-entry heading>
           <div class="title" style="color: #ae0000">
-            Сентябрь, 2023
+            Сентябрь, 2024
           </div>
         </q-timeline-entry>
         <q-timeline-entry v-for="item in NewsCardsSep.slice(id)" :key="item.id"
@@ -370,7 +370,7 @@ export default {
     const NewsCardsA = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events/szfo/2023/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -391,7 +391,7 @@ export default {
         NewsCards.value = fbEvents
         console.log(NewsCards)
       })
-      onSnapshot(collection(db, '/events/szfo/2023/june/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/june/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -412,7 +412,7 @@ export default {
         NewsCardsJ.value = fbEvents
         console.log(NewsCardsJ)
       })
-      onSnapshot(collection(db, '/events/szfo/2023/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -433,7 +433,7 @@ export default {
         NewsCardsJl.value = fbEvents
         console.log(NewsCardsJl)
       })
-      onSnapshot(collection(db, '/events/szfo/2023/august/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/august/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -454,7 +454,7 @@ export default {
         NewsCardsAu.value = fbEvents
         console.log(NewsCardsAu)
       })
-      onSnapshot(collection(db, '/events/szfo/2023/september/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/september/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -475,7 +475,7 @@ export default {
         NewsCardsSep.value = fbEvents
         console.log(NewsCardsSep)
       })
-      onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/szfo/2024/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {

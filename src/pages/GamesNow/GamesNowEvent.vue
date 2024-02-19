@@ -6,15 +6,17 @@
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
       <event-pred24 />
+      <event-s-z-f-o23 />
     </p>
   </div>
 </template>
 
 <script>
 
+import EventSZFO23 from 'components/Events/eventSZFO23'
 import EventPred24 from 'components/Events/eventPred24.vue'
 export default {
-  components: { EventPred24 },
+  components: { EventPred24, EventSZFO23 },
   setup () {
     return {
       titleEvent: ['Кубок СЗФО'],
