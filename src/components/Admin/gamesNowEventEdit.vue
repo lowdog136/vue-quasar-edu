@@ -1,7 +1,6 @@
 <template>
   <!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
-
     <q-card dark bordered class="bg-grey-9 my-card">
       <q-form
         class="q-gutter-md"
