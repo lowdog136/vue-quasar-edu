@@ -8,7 +8,7 @@
           name="выбран"
           v-model="preferred"
           :options="options"
-          color="primary"
+          :color="primary"
           inline
         />
       </div>
@@ -34,6 +34,9 @@
                     <div class="q-mt-sm text-caption">
                       Результат матча: {{ itema.result }}
                     </div>
+                    <div class="q-mt-sm text-caption">
+                      {{ Winirs = 'sdfdsf ' }}
+                    </div>
                   </q-card-section>
                 </q-card-section>
                 <q-separator />
@@ -51,6 +54,10 @@
                       :PopyUpDivMain = "btnDivMain"
                     />
                   </q-btn>
+<!--                  <div class="row no-wrap items-center">-->
+<!--                    <q-rating size="18px" v-model="stars" :max="5" color="primary" />-->
+<!--                    <span class="text-caption text-grey q-ml-sm">4.2 (551)</span>-->
+<!--                  </div>-->
                 </q-card-actions>
               </q-card>
             </div>
@@ -61,7 +68,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
@@ -94,6 +101,7 @@ export default {
           result: doc.data().result,
           tour: doc.data().tour,
           datestamp: doc.data().datestamp,
+          pobeda: doc.data().pobeda,
           body: doc.data().body
         }
         fbAGames.push(event)
@@ -103,9 +111,31 @@ export default {
     })
 
     const submitResult = ref([])
+    const Zagolovok = ref('Game result:')
+    const randomTritle = ref([])
+    const Pobeda = ref('')
+    const Winirs = computed(
+      {
+        get () {
+          return Zagolovok.value + ' ' + Pobeda.value
+        },
+        set (newValue) {
+          [Zagolovok.value, Pobeda.value] = newValue.split('')
+        }
+      }
+    )
+    const myTest = computed(
+      {
+        get () {
+          return randomTritle.value
+        }
+      }
+    )
 
     return {
-      preferred: ref('2007'),
+      preferred: ref('2024'),
+      Winirs,
+      myTest,
       archiveGames,
       accepted: ref([]),
       submitResult,

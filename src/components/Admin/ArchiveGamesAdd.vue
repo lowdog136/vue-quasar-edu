@@ -74,181 +74,201 @@
       v-for="SiteUpdate in SiteUpdates"
       :key="SiteUpdate.id"
       dark bordered >
-      <q-card-section>
-        <div class="text-h6">
-          <q-list>
-            <div class="text-subtitle2">
-              <q-list>
-                <q-item >
-                  <q-item-section>
-                    <q-item-label style="color: #f1cc19">id:{{ SiteUpdate.id }}
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </div>
-            <q-separator color="orange" inset />
-          </q-list>
-        </div>
-        <q-separator inset />
-        <!--        event edit-->
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>event: {{ SiteUpdate.event }}
-                  <q-popup-edit v-model="SiteUpdate.event" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateEvent(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <q-separator inset />
-<!--        year edit-->
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>year: {{ SiteUpdate.year }}
-                  <q-popup-edit v-model="SiteUpdate.year" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateYear(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <q-separator inset />
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>title: {{ SiteUpdate.title }}
-                  <q-popup-edit v-model="SiteUpdate.title" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateTitle(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <q-separator inset />
-        <!--        date edit-->
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>date: {{ SiteUpdate.date }}
-                  <q-popup-edit v-model="SiteUpdate.date" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateDate(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-<!--        score edit-->
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>score: {{ SiteUpdate.score }}
-                  <q-popup-edit v-model="SiteUpdate.score" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateScore(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <q-separator inset />
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>result: {{ SiteUpdate.result }}
-                  <q-popup-edit v-model="SiteUpdate.result" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateResult(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-      </q-card-section>
-      <q-separator dark inset />
-      <q-card-section>
-        <q-list>
-          <q-item >
-            <q-item-section>
-              <q-item-label>Body: {{ SiteUpdate.body }}
-                <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
-                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                    <template v-slot:append>
-                      <q-icon name="edit" />
-                    </template>
-                  </q-input>
-                </q-popup-edit>
-              </q-item-label>
-            </q-item-section>
-            <q-item-section avatar>
-              <q-btn @click="updateBody(SiteUpdate.id)"  flat size="xs" icon="done"/>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-card-section>
-      <q-tabs
-        v-model="tab"
-        class="bg-teal text-yellow shadow-2"
-      >
-        <q-tab  name="mails" icon="arrow_upward" />
-        <q-tab  name="alarms" icon="done" />
-        <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
-      </q-tabs>
+            <q-card-section>
+                <div class="text-h6">
+                    <q-list>
+                        <div class="text-subtitle2">
+                            <q-list>
+                                <q-item >
+                                    <q-item-section>
+                                        <q-item-label style="color: #f1cc19">id:{{ SiteUpdate.id }}
+                                        </q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                            </q-list>
+                        </div>
+                        <q-separator color="orange" inset />
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <!--        event edit-->
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>event: {{ SiteUpdate.event }}
+                                    <q-popup-edit v-model="SiteUpdate.event" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateEvent(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <!--        year edit-->
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>year: {{ SiteUpdate.year }}
+                                    <q-popup-edit v-model="SiteUpdate.year" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateYear(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>title: {{ SiteUpdate.title }}
+                                    <q-popup-edit v-model="SiteUpdate.title" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateTitle(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <!--        date edit-->
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>date: {{ SiteUpdate.date }}
+                                    <q-popup-edit v-model="SiteUpdate.date" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateDate(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <!--        score edit-->
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>score: {{ SiteUpdate.score }}
+                                    <q-popup-edit v-model="SiteUpdate.score" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateScore(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <!--        DONE edit-->
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>DONE: {{ SiteUpdate.done }}
+                                </q-item-label>
+                                <div v-show='SiteUpdate.done'>
+                                    <div>
+                                        WINNERS
+                                    </div>
+                                </div>
+                            </q-item-section>
+                            <q-item-section avatar v-show='SiteUpdate.done'>
+                                <q-btn @click="updateScore(SiteUpdate.id)"  flat size="xs" icon="bookmark"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+                <q-separator inset />
+                <div class="text-subtitle2">
+                    <q-list>
+                        <q-item >
+                            <q-item-section>
+                                <q-item-label>result: {{ SiteUpdate.result }}
+                                    <q-popup-edit v-model="SiteUpdate.result" class="bg-accent text-white" v-slot="scope">
+                                        <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                            <template v-slot:append>
+                                                <q-icon name="edit" />
+                                            </template>
+                                        </q-input>
+                                    </q-popup-edit>
+                                </q-item-label>
+                            </q-item-section>
+                            <q-item-section avatar>
+                                <q-btn @click="updateResult(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </div>
+            </q-card-section>
+            <q-separator dark inset />
+            <q-card-section>
+                <q-list>
+                    <q-item >
+                        <q-item-section>
+                            <q-item-label>Body: {{ SiteUpdate.body }}
+                                <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
+                                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                                        <template v-slot:append>
+                                            <q-icon name="edit" />
+                                        </template>
+                                    </q-input>
+                                </q-popup-edit>
+                            </q-item-label>
+                        </q-item-section>
+                        <q-item-section avatar>
+                            <q-btn @click="updateBody(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </q-card-section>
+            <q-tabs
+                    v-model="tab"
+                    class="bg-teal text-yellow shadow-2"
+            >
+                <q-tab  name="mails" icon="arrow_upward" />
+                <q-tab  name="alarms" icon="done" />
+                <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
+            </q-tabs>
     </q-card>
   </div>
 </template>
@@ -391,6 +411,7 @@ export default {
       newSiteUpdateDateUpd,
       done: ref(true),
       redModel: ref(false),
+      getYear2024: ref(false),
       deleteSiteUpdate,
       deleteDoc,
       addSiteUpdate,
