@@ -44,14 +44,14 @@ export default {
       ResultCardResult: ''
     }
   },
-  async created () {
-    try {
-      const res = await axios.get(`${baseURL}/items`)
-      this.items = res.data
-    } catch (error) {
-      console.log(error)
-    }
-  },
+  // async created () {
+  //   try {
+  //     const res = await axios.get(`${baseURL}/items`)
+  //     this.items = res.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // },
   setup () {
     return {
       dialog: ref(false)
