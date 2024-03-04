@@ -1,38 +1,44 @@
 <template>
-  <div class="q-pa-md">
-    <q-card-section>
-      <div class="text-h6 text-deep-orange-14 ">История ФК Север г. Мурманск</div>
-      <div class="text-subtitle2 text-grey">Материал из Википедии — свободной энциклопедии.</div>
-      <q-img :src="require('assets/image/imgTitle/title_0.png' )" style="max-height: 450px; max-width: 450px"/>
-    </q-card-section>
-    <q-stepper
-      v-model="step"
-      ref="stepper"
-      color="primary"
-      header-nav
-      animated
-      v-for="itema in archiveGames" :key="itema.id">
-    >
-      <q-step
-        :name=itema.name
-        :title=itema.title
-        :caption=itema.caption
-        :icon=itema.icon
-        :error=itema.error
-        :done=itema.done
-      >
-        <div class="text-h7">
-          {{ itema.body }}
-        </div>
-      </q-step>
+  <div class="q-pa-md row items-start q-gutter-md"
+       v-for="itema in archiveGames"
+       :key="itema.id">
+    <q-card class="my-card" flat bordered>
+      <q-img
+        src="https://cdn.quasar.dev/img/parallax2.jpg"
+      />
 
-      <template v-slot:navigation>
-        <q-stepper-navigation>
-          <q-btn @click="$refs.stepper.next()" color="primary" :label="itema.step === 3 ? 'Конец' : 'Далее'" />
-          <q-btn v-if="itema.step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Назад" class="q-ml-sm" />
-        </q-stepper-navigation>
-      </template>
-    </q-stepper>
+      <q-card-section>
+        <div class="text-overline text-orange-9">{{ itema.overline }}</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }}</div>
+        <div class="text-caption text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </q-card-section>
+
+      <q-card-actions>
+        <q-btn flat color="primary" label="Share" />
+        <q-btn flat color="secondary" label="Book" />
+
+        <q-space />
+
+        <q-btn
+          color="red"
+          round
+          flat
+          dense
+          :icon="itema.done ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="itema.done = !itema.done"
+        />
+      </q-card-actions>
+      <q-slide-transition>
+        <div v-show="itema.done">
+          <q-separator />
+          <q-card-section class="text-subtitle2">
+            {{ itema.body }}
+          </q-card-section>
+        </div>
+      </q-slide-transition>
+    </q-card>
   </div>
 </template>
 
@@ -68,6 +74,7 @@ export default {
           date: doc.data().date,
           name: doc.data().name,
           done: doc.data().done,
+          overline: doc.data().overline,
           datestamp: doc.data().datestamp,
           error: doc.data().error,
           body: doc.data().body
@@ -80,8 +87,8 @@ export default {
 
     const submitResult = ref([])
     const Zagolovok = ref('Game result:')
-    const randomTritle = ref([])
     const Pobeda = ref('')
+    const myStep = ref(1)
     const Winirs = computed(
       {
         get () {
@@ -95,17 +102,20 @@ export default {
     const myTest = computed(
       {
         get () {
-          return randomTritle.value
+          console.log('1', myStep.value)
+          return this.step.value
         }
       }
     )
 
     return {
+      expanded: ref(false),
+      expanded1: ref(false),
+      step: ref(1),
       preferred: ref('2024'),
       Winirs,
       myTest,
       archiveGames,
-      step: ref(1),
       accepted: ref([]),
       submitResult,
       dialog: ref(false),
@@ -199,6 +209,8 @@ export default {
   }
 }
 </script>
-<style scoped lang="sass">
-
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 350px
 </style>
