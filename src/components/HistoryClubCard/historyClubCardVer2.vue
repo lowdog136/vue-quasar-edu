@@ -1,11 +1,13 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md"
-       v-for="itema in archiveGames"
+       v-for="(itema) in archiveGames"
        :key="itema.id">
     <q-card class="my-card" flat bordered>
-      <q-img
-        src="https://cdn.quasar.dev/img/parallax2.jpg"
-      />
+      <img
+        alt="card logo"
+        src="../../assets/image/fcsever_logo.png"
+        style="width: 320px; height: 300px"
+      >
 
       <q-card-section>
         <div class="text-overline text-orange-9">{{ itema.overline }}</div>
@@ -33,8 +35,10 @@
       <q-slide-transition>
         <div v-show="itema.done">
           <q-separator />
-          <q-card-section class="text-subtitle2">
-            {{ itema.body }}
+          <q-card-section class="text-subtitle2" v-for="body in itema.body" :key="body.id">
+            <q-list>
+              {{ body }}
+            </q-list>
           </q-card-section>
         </div>
       </q-slide-transition>
@@ -76,7 +80,7 @@ export default {
           done: doc.data().done,
           overline: doc.data().overline,
           datestamp: doc.data().datestamp,
-          error: doc.data().error,
+          img: doc.data().img,
           body: doc.data().body
         }
         fbAGames.push(event)
@@ -88,7 +92,6 @@ export default {
     const submitResult = ref([])
     const Zagolovok = ref('Game result:')
     const Pobeda = ref('')
-    const myStep = ref(1)
     const Winirs = computed(
       {
         get () {
@@ -99,11 +102,13 @@ export default {
         }
       }
     )
-    const myTest = computed(
+    const Pinirs = computed(
       {
         get () {
-          console.log('1', myStep.value)
-          return this.step.value
+          return Zagolovok.value + ' ' + Pobeda.value
+        },
+        set (newValue) {
+          [Zagolovok.value, Pobeda.value] = newValue.split('')
         }
       }
     )
@@ -114,7 +119,7 @@ export default {
       step: ref(1),
       preferred: ref('2024'),
       Winirs,
-      myTest,
+      Pinirs,
       archiveGames,
       accepted: ref([]),
       submitResult,
