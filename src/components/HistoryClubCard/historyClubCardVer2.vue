@@ -10,28 +10,43 @@
       >
 
       <q-card-section>
-        <div class="text-overline text-orange-9">{{ itema.overline }}</div>
+<!--        <div class="text-overline text-orange-9">{{ itema.overline }}</div>-->
         <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }}</div>
         <div class="text-caption text-grey">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
+        <q-card-actions>
+<!--          <q-btn flat color="primary" label="Share" />-->
+<!--          <q-btn flat color="secondary" label="Done" />-->
+          <div class="text-overline text-orange-9">{{ itema.overline }}</div>
+          <q-space />
+
+          <q-btn
+            color="red"
+            round
+            flat
+            dense
+            :icon="itema.done ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            @click="itema.done = !itema.done"
+          />
+        </q-card-actions>
       </q-card-section>
 
-      <q-card-actions>
-        <q-btn flat color="primary" label="Share" />
-        <q-btn flat color="secondary" label="Book" />
+<!--      <q-card-actions>-->
+<!--        <q-btn flat color="primary" label="Share" />-->
+<!--        <q-btn flat color="secondary" label="Book" />-->
 
-        <q-space />
+<!--        <q-space />-->
 
-        <q-btn
-          color="red"
-          round
-          flat
-          dense
-          :icon="itema.done ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-          @click="itema.done = !itema.done"
-        />
-      </q-card-actions>
+<!--        <q-btn-->
+<!--          color="red"-->
+<!--          round-->
+<!--          flat-->
+<!--          dense-->
+<!--          :icon="itema.done ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"-->
+<!--          @click="itema.done = !itema.done"-->
+<!--        />-->
+<!--      </q-card-actions>-->
       <q-slide-transition>
         <div v-show="itema.done">
           <q-separator />
