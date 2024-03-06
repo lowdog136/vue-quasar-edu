@@ -10,6 +10,7 @@ const routes = [
       { path: '/Fanats', name: 'Fanats', component: () => import('pages/Fanats.vue') },
       { path: '/Foto', name: 'Foto', component: () => import('pages/Foto.vue') },
       { path: '/HistoryClub', name: 'HistoryClub', component: () => import('pages/HistoryClub.vue') },
+      { path: '/HistoryClub2', name: 'HistoryClub2', component: () => import('pages/HistoryClub2.vue') },
       { path: '/ArchiveGames', name: 'ArchiveGames', component: () => import('pages/ArchiveGames.vue') },
       { path: '/ArchiveGamesBefore', name: 'ArchiveGamesBefore', component: () => import('pages/ArchiveGamesBefore.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
