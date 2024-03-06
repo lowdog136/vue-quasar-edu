@@ -1,16 +1,16 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-    <HistoryClubCard />
+    <history-club-card-ver2 />
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import HistoryClubCard from 'components/HistoryClubCard/HistoryClubCard'
+import HistoryClubCardVer2 from 'components/HistoryClubCard/historyClubCardVer2.vue'
 
 export default defineComponent({
   name: 'HistoryClub',
-  components: { HistoryClubCard }
+  components: { HistoryClubCardVer2 }
 })
 </script>
 
