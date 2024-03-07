@@ -1,26 +1,26 @@
 <template>
   <div class="fit row wrap justify-start items-start content-start">
     <q-timeline color="primary" >
-      <q-item-label header>Хронология обновлений</q-item-label>
-      <q-timeline-entry v-for="event in events" :key="event.id"
-                        :title=event.title
-                        :subtitle=event.dateupd
-                        icon="done"
+      <q-item-label header>{{ headerName }}</q-item-label>
+      <q-timeline-entry v-for="update in siteUpdates" :key="update.id"
+                        :title=update.title
+                        :subtitle=update.dateupd
+                        :icon="update.icon"
       >
         <q-item>
           <q-item-section top>
             <q-item-label lines="1">
-              <span class="text-weight-medium">{{ event.ver }}</span>
+              <span class="text-weight-medium">{{ update.ver }}</span>
             </q-item-label>
             <q-item-label style="max-width: flex" caption lines="1">
-              {{ event.body }}
+              {{ update.body[0] }}
             </q-item-label>
             <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase">
                 <span class="cursor-pointer">
                   <NewsCardDetailPopUp
-                    :PopyUpSubTitleNews="event.event"
-                    :PopyUpFullNews="event.body"
-                    :PopyUpTitleNews="event.title"
+                    :PopyUpSubTitleNews="update.event"
+                    :body_data="update.body"
+                    :PopyUpTitleNews="update.title"
                     :PopyUpBtnColor="btnColor"
                     :PopyUpBtnName="btnName"
                     :PopyUpDivMain = "btnDivMain"
@@ -36,49 +36,21 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { onMounted, ref } from 'vue'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { db } from 'src/firebase'
 import ScrollUp from 'components/ScrollUp'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 
 const eventCollectionRef = collection(db, 'siteUpdates')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
-const newEventVer = ref('')
-const newEventTitle = ref('')
-const newEventBody = ref('')
-const newEventDateUpd = ref('')
-const newEventDate = ref('')
-const newEventCount = ref('')
-
-const addEvent = () => {
-  addDoc(eventCollectionRef, {
-    ver: newEventVer.value,
-    title: newEventTitle.value,
-    body: newEventBody.value,
-    dateupd: newEventDateUpd.value,
-    date: Date.now(),
-    done: true
-  })
-  newEventVer.value = ''
-  newEventTitle.value = ''
-  newEventBody.value = ''
-  newEventDateUpd.value = ''
-  newEventDate.value = ''
-  newEventCount.value = ''
-  console.log('add todo', newEventDate.value)
-}
-
-const deleteEvent = id => {
-  deleteDoc(doc(eventCollectionRef, id))
-}
 
 export default {
   name: 'siteUpdate',
   components: { ScrollUp, NewsCardDetailPopUp },
   data () {
     return {
+      headerName: 'Хронология обновлений',
       btnColor: 'blue-grey-10',
       btnName: 'Подробно',
       // кнопка что бы не прилипала к краю
@@ -87,28 +59,15 @@ export default {
     }
   },
   setup () {
-    const todos = ref([])
-    const events = ref([])
+    const siteUpdates = ref([])
     onMounted(async () => {
-      onSnapshot(eventCollectionQuery, (querySnapshot) => {
-        const fbTodos = []
-        querySnapshot.forEach((doc) => {
-          const todo = {
-            id: doc.id,
-            content: doc.data().content,
-            title: doc.data().title,
-            done: doc.data().done
-          }
-          fbTodos.push(todo)
-        })
-        todos.value = fbTodos
-      })
       onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const event = {
             id: doc.id,
             ver: doc.data().ver,
+            icon: doc.data().icon,
             title: doc.data().title,
             body: doc.data().body,
             dateupd: doc.data().dateupd,
@@ -118,56 +77,12 @@ export default {
           fbEvents.push(event)
           console.log('body-', event.body)
         })
-        events.value = fbEvents
+        siteUpdates.value = fbEvents
       })
     })
-    const toggleEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        done: !events.value[index].done
-      })
-    }
-    const countUpEvent = id => {
-      const index = events.value.findIndex(event => event.id === id)
-      updateDoc(doc(eventCollectionRef, id), {
-        count: events.value[index].count++
-      })
-      console.log('countUP', events.value[index].count)
-    }
     return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      titleMainEvent: 'samething title2',
-      newEventVer,
-      newEventTitle,
-      newEventBody,
-      newEventDateUpd,
-      newEventCount,
-      done: ref(true),
-      redModel: ref(false),
-      deleteEvent,
-      deleteDoc,
-      toggleEvent,
-      countUpEvent,
-      addEvent,
-      events,
-      todos,
-      tab: ref(['alarms', 'mails']),
-      expanded: ref(false)
+      siteUpdates
     }
-  },
-  computed: {
-    ...mapGetters([
-      'dropDown'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'togledropDown',
-      'changePush',
-      'myCountZero',
-      'myCountUp',
-      'howWatch'
-    ])
   },
 
   props: {}
