@@ -11,8 +11,8 @@
           <div class="text-caption text-blue-grey-10">
             <h6>{{ PopyUpFullNews }} </h6>
           </div>
-          <div class="text-caption text-blue-grey-10">
-            <h6>{{ PopyUpFullNews2 }} </h6>
+          <div class="text-caption text-blue-grey-10" v-for="body in body_data" :key="body.id">
+            <h6>{{ body }} </h6>
           </div>
           <div class="text-caption text-grey">
             {{ PopyUpSrcNews }}
@@ -31,8 +31,8 @@
 <script>
 import { ref } from 'vue'
 import { mapActions } from 'vuex'
-import axios from 'axios'
-const baseURL = 'https://severfans.ru'
+// import axios from 'axios'
+// const baseURL = 'https://severfans.ru'
 
 export default {
   data () {
@@ -66,6 +66,14 @@ export default {
         }
       }
     },
+    body_data: {
+      type: Object,
+      default () {
+        return {
+          text: String
+        }
+      }
+    },
     PopyUpSubTitleNews: String,
     PopyUpDivMain: String,
     PopyUpBtnSize: String,
@@ -80,19 +88,19 @@ export default {
   methods: {
     ...mapActions([
       'howWatch'
-    ]),
-    async PopyUphowWatchUp (id) {
-      await axios.patch(`${baseURL}/items/${id}`, {
-        howWatch: this.itemNewsClubNewsCardHowWatch++
-      })
-      this.items = this.items.map((item) => {
-        if (item.id === id) {
-          this.item.howWatch = item.howWatch++
-          console.log(item.howWatch)
-        }
-        return item.howWatch
-      })
-    }
+    ])
+    // async PopyUphowWatchUp (id) {
+    //   await axios.patch(`${baseURL}/items/${id}`, {
+    //     howWatch: this.itemNewsClubNewsCardHowWatch++
+    //   })
+    //   this.items = this.items.map((item) => {
+    //     if (item.id === id) {
+    //       this.item.howWatch = item.howWatch++
+    //       console.log(item.howWatch)
+    //     }
+    //     return item.howWatch
+    //   })
+    // }
   }
 }
 </script>
