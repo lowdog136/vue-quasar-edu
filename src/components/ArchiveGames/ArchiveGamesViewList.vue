@@ -8,15 +8,15 @@
           name="выбран"
           v-model="preferred"
           :options="options"
-          :color="primary"
+          color="primary"
           inline
         />
       </div>
-      <div>
-        <q-btn label="Выбрать" type="submit" color="primary"/>
+      <div class="btnChoose">
+        <btn-choose />
       </div>
+      <q-space />
     </q-form>
-
     <q-card v-if="submitResult.length > 0" flat bordered class="row items-start">
         <div
           v-for="(item, index) in submitResult"
@@ -29,41 +29,37 @@
                 <q-card-section horizontal>
                   <q-card-section class="q-pt-xs">
                     <div class="text-overline">{{ itema.event }}</div>
+                    <div class="text-overline text-red-14">{{ itema.date }}</div>
                     <div class="text-overline text-orange-14">{{ itema.tour }}</div>
                     <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
                     <div class="q-mt-sm text-caption">
                       Результат матча: {{ itema.result }}
                     </div>
-                    <div class="q-mt-sm text-caption">
-                      {{ Winirs = 'sdfdsf ' }}
-                    </div>
                   </q-card-section>
                 </q-card-section>
                 <q-separator />
                 <q-card-actions>
-                   <q-btn flat color="primary">
-                    {{ itema.date }}
-                  </q-btn>
-                  <q-btn flat color="primary">
-                    <NewsCardDetailPopUp
-                      :PopyUpSubTitleNews="itema.event"
-                      :PopyUpFullNews="itema.body"
-                      :PopyUpTitleNews="itema.title + itema.score"
-                      :PopyUpBtnColor="btnColor"
-                      :PopyUpBtnName="btnName"
-                      :PopyUpDivMain = "btnDivMain"
-                    />
-                  </q-btn>
+                  <q-space />
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="itema.event"
+                    :PopyUpFullNews="itema.body"
+                    :PopyUpTitleNews="itema.title + itema.score"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  />
 <!--                  <div class="row no-wrap items-center">-->
 <!--                    <q-rating size="18px" v-model="stars" :max="5" color="primary" />-->
 <!--                    <span class="text-caption text-grey q-ml-sm">4.2 (551)</span>-->
 <!--                  </div>-->
                 </q-card-actions>
+                <q-separator />
               </q-card>
             </div>
           </div>
         </div>
     </q-card>
+    <q-space />
   </div>
 </template>
 
@@ -72,11 +68,12 @@ import { computed, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
+import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 
 const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
-  components: { NewsCardDetailPopUp },
+  components: { BtnChoose, NewsCardDetailPopUp },
   data () {
     return {
       btnColor: 'blue-grey-10',
