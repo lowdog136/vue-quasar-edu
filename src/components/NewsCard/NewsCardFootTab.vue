@@ -4,21 +4,32 @@
       v-model="tab"
       class="white text-primary"
     >
-      <q-tab name="event" icon="event">{{ datenews }}
-      </q-tab>
-      <q-tab name="star" @click=countUpEvent(NewsCard.id) icon="star" label="Оценить">
-        <q-badge color="dark"  text-color="white" floating>{{ count }}</q-badge>
-      </q-tab>
+      <tab-foot-date
+      :datenews="datenews"
+      />
+      <tab-foot-star
+        @click=countUpEvent(NewsCard.id)
+        :tab-icon="tabIcon"
+        :tabFootStarRating="count"
+      />
     </q-tabs>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import TabFootStar from 'components/NewsCard/UI/tabFootStar.vue'
+import TabFootDate from 'components/NewsCard/UI/tabFootDate.vue'
 
 export default {
   name: 'NewsCardFootTab',
-  components: {},
+  components: { TabFootDate, TabFootStar },
+  data () {
+    return {
+      tabIcon: 'star',
+      ResultCardTitle: ''
+    }
+  },
   setup () {
     return {
       tab: ref('event')
