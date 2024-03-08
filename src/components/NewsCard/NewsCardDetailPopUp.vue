@@ -1,7 +1,11 @@
 <template>
   <div :class=PopyUpDivMain>
-    <q-btn :label=PopyUpBtnName :color=PopyUpBtnColor :size=PopyUpBtnSize @click="dialog = true" />
-
+    <btn-more
+      :btnName='PopyUpBtnName'
+      :btnColor='PopyUpBtnColor'
+      :btnSize='PopyUpBtnSize'
+      @click="dialog = true"
+    />
     <q-dialog v-model="dialog">
       <q-card class="my-card">
         <q-img :src="require('assets/image/imgTitle/title_0.png' )" />
@@ -32,11 +36,12 @@
 import { ref } from 'vue'
 import { mapActions } from 'vuex'
 import BtnClosed from 'components/NewsCard/UI/btnClosed.vue'
+import BtnMore from 'components/NewsCard/UI/btnMore.vue'
 // import axios from 'axios'
 // const baseURL = 'https://severfans.ru'
 
 export default {
-  components: { BtnClosed },
+  components: { BtnMore, BtnClosed },
   data () {
     return {
       items: [],

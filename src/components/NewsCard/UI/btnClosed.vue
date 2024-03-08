@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'btnClosed',
   data () {
     return {
       btnName: 'Закрыть',
