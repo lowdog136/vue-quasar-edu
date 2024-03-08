@@ -20,7 +20,7 @@
         </q-card-section>
       <q-card >
         <q-card-section class="row items-center q-gutter-sm">
-          <q-btn v-close-popup label="Закрыть" color="primary" />
+          <btn-closed />
         </q-card-section>
       </q-card>
       </q-card>
@@ -31,10 +31,12 @@
 <script>
 import { ref } from 'vue'
 import { mapActions } from 'vuex'
+import BtnClosed from 'components/NewsCard/UI/btnClosed.vue'
 // import axios from 'axios'
 // const baseURL = 'https://severfans.ru'
 
 export default {
+  components: { BtnClosed },
   data () {
     return {
       items: [],
