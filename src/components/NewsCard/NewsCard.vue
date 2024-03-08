@@ -44,7 +44,7 @@
         <NewsCardDetailPopUp
           :PopyUpSubTitleNews="NewsCard.subtitle"
           :PopyUpSrcNews="NewsCard.srcnews"
-          :PopyUpFullNews="NewsCard.fullnews"
+          :body_data="NewsCard.fullnews"
           :PopyUpTitleNews="NewsCard.title"
           :PopyUpItem="NewsCard.item"
           :PopyUpBtnName="btnName"
