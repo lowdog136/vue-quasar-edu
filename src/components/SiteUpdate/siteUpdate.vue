@@ -75,7 +75,7 @@ export default {
             done: doc.data().done
           }
           fbEvents.push(event)
-          console.log('body-', event.body)
+          console.log('siteUpdates', event.body)
         })
         siteUpdates.value = fbEvents
       })
