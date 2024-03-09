@@ -7,33 +7,28 @@
         class="q-gutter-md"
       >
         <div>
-          <q-input
+          <adm-input
             v-model='newSiteUpdateVer'
-            hint="add Ver"
-            lazy-rules
+            :input-hint=inputHintVer
           />
-          <q-input
+          <adm-input
             v-model='newSiteUpdateTitle'
-            hint="add Title"
-            lazy-rules
+            :input-hint=inputHintTitle
           />
-          <q-input
+          <adm-input
             v-model='newSiteUpdateBody'
-            hint="add Body"
+            :input-hint=inputHintBody
             autogrow
-            lazy-rules
           />
-          <q-input
+          <adm-input
             v-model='newSiteUpdateDateUpd'
-            type="date"
-            hint="add date"
-            lazy-rules
+            :type=inputTypeDate
           />
         </div><br/>
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addSiteUpdate" label="add event"/>
+        <btn-add @click="addSiteUpdate"/>
         <q-toggle
           :false-value="false"
           :label="`Показываем ${redModel}`"
@@ -143,8 +138,10 @@
         class="bg-teal text-yellow shadow-2"
       >
         <q-tab  name="mails" icon="arrow_upward" />
-        <q-tab  name="alarms" icon="done" />
-        <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
+<!--        item on or off-->
+        <tab-foot-done />
+<!--        delete item-->
+        <tab-foot-delete @click="deleteSiteUpdate(SiteUpdate.id)" />
       </q-tabs>
     </q-card>
   </div>
@@ -155,6 +152,10 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import BtnAdd from 'components/Admin/UI/btnAdd.vue'
+import AdmInput from 'components/Admin/UI/admInput.vue'
+import TabFootDelete from 'components/Admin/UI/tabFootDelete.vue'
+import TabFootDone from 'components/Admin/UI/tabFootDone.vue'
 
 const siteUpdateCollectionRef = collection(db, 'siteUpdates')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
@@ -169,20 +170,19 @@ const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
     ver: newSiteUpdateVer.value,
     title: newSiteUpdateTitle.value,
-    body: newSiteUpdateBody.value,
+    body: [newSiteUpdateBody.value],
     dateupd: newSiteUpdateDateUpd.value,
     date: Date.now(),
     done: true
   })
   newSiteUpdateVer.value = ''
   newSiteUpdateTitle.value = ''
-  newSiteUpdateBody.value = ''
+  newSiteUpdateBody.value = '[]'
   newSiteUpdateDate.value = ''
   newSiteUpdateCount.value = ''
   newSiteUpdateDateUpd.value = ''
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
-
 const deleteSiteUpdate = id => {
   deleteDoc(doc(siteUpdateCollectionRef, id))
   console.log('del SiteUpdate', newSiteUpdateDate.value)
@@ -190,9 +190,14 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'NewsSiteContentAdd',
-  components: {},
+  components: { TabFootDone, TabFootDelete, AdmInput, BtnAdd },
   data () {
     return {
+      inputHintVer: 'add ver',
+      inputHintTitle: 'add title',
+      inputHintBody: 'add Body',
+      inputHintDate: 'add date',
+      inputTypeDate: 'date'
     }
   },
   setup () {
