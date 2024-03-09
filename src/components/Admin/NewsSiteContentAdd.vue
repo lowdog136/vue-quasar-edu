@@ -28,7 +28,7 @@
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <btn-add @click="addSiteUpdate"/>
+        <btn-add :btn-icon="btnIcon" :btn-name="btnName" @click="addSiteUpdate"/>
         <q-toggle
           :false-value="false"
           :label="`Показываем ${redModel}`"
@@ -197,7 +197,9 @@ export default {
       inputHintTitle: 'add title',
       inputHintBody: 'add Body',
       inputHintDate: 'add date',
-      inputTypeDate: 'date'
+      inputTypeDate: 'date',
+      btnIcon: 'post_add',
+      btnName: 'add update'
     }
   },
   setup () {

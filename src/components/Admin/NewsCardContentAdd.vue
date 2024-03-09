@@ -52,7 +52,7 @@
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addNewsCard" color="primary" label="add news" flat/>
+        <btn-add :btn-icon="btnIcon" :btn-name="btnName" @click="addNewsCard" />
         <q-toggle
           :false-value="false"
           :label="`Показываем ${ greenModel }`"
@@ -225,6 +225,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
+import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
 // NewsCard block
 const newsCardCollectionRef = collection(db, 'siteNews')
@@ -264,9 +265,12 @@ const deleteNewsCard = id => {
 
 export default {
   name: 'NewsCardContentAdd',
-  components: { NewsCardDetailPopUp },
+  components: { BtnAdd, NewsCardDetailPopUp },
   data () {
-    return {}
+    return {
+      btnIcon: 'post_add',
+      btnName: 'add news'
+    }
   },
   setup () {
     const NewsCards = ref([])

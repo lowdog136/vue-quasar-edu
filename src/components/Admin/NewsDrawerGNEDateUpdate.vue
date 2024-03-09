@@ -17,7 +17,7 @@
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addDateUpdate" label="add event"/>
+        <btn-add :btn-icon="btnIcon" :btn-name="btnName" @click="addDateUpdate" />
         <q-toggle
           :false-value="false"
           :label="`Показываем ${redModel}`"
@@ -86,8 +86,6 @@
         v-model="tab"
         class="bg-teal text-yellow shadow-2"
       >
-        <q-tab  name="mails" icon="arrow_upward" />
-        <q-tab  name="alarms" icon="done" />
         <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
       </q-tabs>
     </q-card>
@@ -99,6 +97,7 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, orderBy, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
 // const siteUpdateCollectionRef = collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/')
 // const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
@@ -119,9 +118,11 @@ const deleteDateUpdate = id => {
 
 export default {
   name: 'NewsDrawerGNEDateUpdate',
-  components: {},
+  components: { BtnAdd },
   data () {
     return {
+      btnIcon: 'post_add',
+      btnName: 'add date'
     }
   },
   setup () {

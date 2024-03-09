@@ -55,7 +55,7 @@
       </q-form>
       <q-separator dark inset />
       <q-card-section>
-        <q-btn @click="addSiteUpdate" label="add event"/>
+        <btn-add :btn-icon="btnIcon" :btn-name="btnName" @click="addSiteUpdate"/>
         <q-toggle
           :false-value="false"
           :label="`Показываем ${redModel}`"
@@ -278,6 +278,7 @@ import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
 const siteUpdateCollectionRef = collection(db, 'clubArchiveGames/archive/year')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
@@ -320,9 +321,11 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'NewsSiteContentAdd',
-  components: {},
+  components: { BtnAdd },
   data () {
     return {
+      btnIcon: 'post_add',
+      btnName: 'add update'
     }
   },
   setup () {
