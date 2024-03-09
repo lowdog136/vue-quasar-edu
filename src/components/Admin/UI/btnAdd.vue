@@ -1,5 +1,5 @@
 <template>
-  <q-btn :label='btnName' :color=btnColor :size=btnSize />
+  <q-btn :label='btnName' :color=btnColor :icon=btnIcon />
 </template>
 
 <script>
@@ -8,6 +8,7 @@ export default {
   data () {
     return {
       btnName: 'add event',
+      btnIcon: 'post_add',
       btnColor: '#3498db'
     }
   }
@@ -15,10 +16,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  button
-    background-color: #3498db
-    padding: 10px 20px
-    margin-top: 10px
-    border: none
-    color: white
 </style>
