@@ -117,9 +117,9 @@
         <q-list>
           <q-item >
             <q-item-section>
-              <q-item-label>Body: {{ SiteUpdate.body }}
+              <q-item-label v-for="bodyArray in SiteUpdate.body" :key="bodyArray.id" >Body: {{ bodyArray }}
                 <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
-                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateBody(SiteUpdate.body)" @keyup.enter="scope.set">
                     <template v-slot:append>
                       <q-icon name="edit" />
                     </template>
@@ -177,7 +177,7 @@ const addSiteUpdate = () => {
   })
   newSiteUpdateVer.value = ''
   newSiteUpdateTitle.value = ''
-  newSiteUpdateBody.value = '[]'
+  newSiteUpdateBody.value = []
   newSiteUpdateDate.value = ''
   newSiteUpdateCount.value = ''
   newSiteUpdateDateUpd.value = ''
