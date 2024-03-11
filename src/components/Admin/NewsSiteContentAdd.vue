@@ -24,6 +24,7 @@
             v-model='newSiteUpdateDateUpd'
             :type=inputTypeDate
           />
+          <q-select v-model='newSiteUpdateColorUpd' :options='newSiteUpdateColorUpd' label="Standard" />
         </div><br/>
       </q-form>
       <q-separator dark inset />
@@ -158,13 +159,16 @@ import TabFootDelete from 'components/Admin/UI/tabFootDelete.vue'
 import TabFootDone from 'components/Admin/UI/tabFootDone.vue'
 
 const siteUpdateCollectionRef = collection(db, 'siteUpdates')
+// const siteUpdateCollectionRefColor = collection(db, 'siteUpdates')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateVer = ref('')
 const newSiteUpdateTitle = ref('')
-const newSiteUpdateBody = ref('')
+const newSiteUpdateBody = ref([])
 const newSiteUpdateDate = ref('')
 const newSiteUpdateCount = ref('')
 const newSiteUpdateDateUpd = ref('')
+const newSiteUpdateColorUpd = ref(['black', 'red', 'green'])
+const newSiteUpdateIconUpd = ref('done')
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -172,6 +176,8 @@ const addSiteUpdate = () => {
     title: newSiteUpdateTitle.value,
     body: [newSiteUpdateBody.value],
     dateupd: newSiteUpdateDateUpd.value,
+    color: newSiteUpdateColorUpd.value,
+    icon: newSiteUpdateIconUpd.value,
     date: Date.now(),
     done: true
   })
@@ -179,8 +185,10 @@ const addSiteUpdate = () => {
   newSiteUpdateTitle.value = ''
   newSiteUpdateBody.value = []
   newSiteUpdateDate.value = ''
+  newSiteUpdateColorUpd.value = []
   newSiteUpdateCount.value = ''
-  newSiteUpdateDateUpd.value = ''
+  newSiteUpdateCount.value = ''
+  newSiteUpdateIconUpd.value = ''
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
 const deleteSiteUpdate = id => {
@@ -215,6 +223,8 @@ export default {
             title: doc.data().title,
             body: doc.data().body,
             ver: doc.data().ver,
+            icon: doc.data().icon,
+            color: doc.data().color,
             date: doc.data().date,
             done: doc.data().done
           }
@@ -259,6 +269,7 @@ export default {
       newSiteUpdateDate,
       newSiteUpdateCount,
       newSiteUpdateDateUpd,
+      newSiteUpdateColorUpd,
       done: ref(true),
       redModel: ref(false),
       deleteSiteUpdate,
