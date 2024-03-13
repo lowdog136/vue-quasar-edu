@@ -21,7 +21,7 @@
         <div v-show="$store.state.user">
           <q-btn color="" flat dense label="" icon="settings">
             <q-menu transition-show="rotate" transition-hide="rotate">
-              <div class="row no-wrap q-pa-md">
+              <div class="row wrap q-pa-md">
                 <div class="column">
                   <SettingsListAdmin />
                 </div>
@@ -34,6 +34,7 @@
                   </q-avatar>
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.email }} </div>
+                  <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.uid }} </div>
 
                 </div>
               </div>

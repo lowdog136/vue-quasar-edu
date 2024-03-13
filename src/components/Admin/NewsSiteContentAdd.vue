@@ -1,5 +1,5 @@
 <template>
-<!--  input block-->
+  <!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
 
     <q-card dark bordered class="bg-grey-9 my-card">
@@ -23,6 +23,20 @@
           <adm-input
             v-model='newSiteUpdateDateUpd'
             :type=inputTypeDate
+          />
+          <adm-select
+            v-model="newSiteUpdateIconUpd"
+            :options="newSiteUpdateIconUpd"
+            :select-color="green"
+            :select-label="selectLabel[0]"
+            :select-name="selectName[0]"
+          />
+          <adm-select
+            v-model="newSiteUpdateColorUpd"
+            :options="newSiteUpdateColorUpd"
+            :select-color="grey"
+            :select-label="selectLabel[1]"
+            :select-name="selectName[1]"
           />
         </div><br/>
       </q-form>
@@ -93,6 +107,46 @@
           <q-list>
             <q-item >
               <q-item-section>
+                <q-item-label>icon: {{ SiteUpdate.icon }}
+                  <q-popup-edit v-model="SiteUpdate.icon" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateIcon(SiteUpdate.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>icon: {{ SiteUpdate.color }}
+                  <q-popup-edit v-model="SiteUpdate.color" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateColor(SiteUpdate.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
                 <q-item-label>dateupd: {{ SiteUpdate.dateupd }}
                   <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
                     <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
@@ -117,9 +171,9 @@
         <q-list>
           <q-item >
             <q-item-section>
-              <q-item-label>Body: {{ SiteUpdate.body }}
+              <q-item-label v-for="bodyArray in SiteUpdate.body" :key="bodyArray.id" >Body: {{ bodyArray }}
                 <q-popup-edit v-model="SiteUpdate.body" class="bg-accent text-white" v-slot="scope">
-                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                  <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateBody(SiteUpdate.body)" @keyup.enter="scope.set">
                     <template v-slot:append>
                       <q-icon name="edit" />
                     </template>
@@ -138,9 +192,9 @@
         class="bg-teal text-yellow shadow-2"
       >
         <q-tab  name="mails" icon="arrow_upward" />
-<!--        item on or off-->
+        <!--        item on or off-->
         <tab-foot-done />
-<!--        delete item-->
+        <!--        delete item-->
         <tab-foot-delete @click="deleteSiteUpdate(SiteUpdate.id)" />
       </q-tabs>
     </q-card>
@@ -156,6 +210,7 @@ import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 import AdmInput from 'components/Admin/UI/admInput.vue'
 import TabFootDelete from 'components/Admin/UI/tabFootDelete.vue'
 import TabFootDone from 'components/Admin/UI/tabFootDone.vue'
+import AdmSelect from 'components/Admin/UI/admSelect.vue'
 
 const siteUpdateCollectionRef = collection(db, 'siteUpdates')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
@@ -165,6 +220,8 @@ const newSiteUpdateBody = ref('')
 const newSiteUpdateDate = ref('')
 const newSiteUpdateCount = ref('')
 const newSiteUpdateDateUpd = ref('')
+const newSiteUpdateColorUpd = ref(['black', 'grey', 'deep-orange-14'])
+const newSiteUpdateIconUpd = ref(['done', 'settings_applications'])
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -172,15 +229,19 @@ const addSiteUpdate = () => {
     title: newSiteUpdateTitle.value,
     body: [newSiteUpdateBody.value],
     dateupd: newSiteUpdateDateUpd.value,
+    color: newSiteUpdateColorUpd.value,
+    icon: newSiteUpdateIconUpd.value,
     date: Date.now(),
     done: true
   })
   newSiteUpdateVer.value = ''
   newSiteUpdateTitle.value = ''
-  newSiteUpdateBody.value = '[]'
+  newSiteUpdateBody.value = ''
   newSiteUpdateDate.value = ''
   newSiteUpdateCount.value = ''
   newSiteUpdateDateUpd.value = ''
+  newSiteUpdateColorUpd.value = ''
+  newSiteUpdateIconUpd.value = null
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
 const deleteSiteUpdate = id => {
@@ -190,7 +251,7 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'NewsSiteContentAdd',
-  components: { TabFootDone, TabFootDelete, AdmInput, BtnAdd },
+  components: { AdmSelect, TabFootDone, TabFootDelete, AdmInput, BtnAdd },
   data () {
     return {
       inputHintVer: 'add ver',
@@ -199,7 +260,10 @@ export default {
       inputHintDate: 'add date',
       inputTypeDate: 'date',
       btnIcon: 'post_add',
-      btnName: 'add update'
+      btnName: 'add update',
+      selectName: ['icon', 'color'],
+      selectColor: String,
+      selectLabel: ['icon', 'color']
     }
   },
   setup () {
@@ -215,6 +279,8 @@ export default {
             title: doc.data().title,
             body: doc.data().body,
             ver: doc.data().ver,
+            color: doc.data().color,
+            icon: doc.data().icon,
             date: doc.data().date,
             done: doc.data().done
           }
@@ -245,6 +311,20 @@ export default {
       })
       console.log('body update', SiteUpdates.value[index].body, 'body id', SiteUpdates.value[index].id)
     }
+    const updateIcon = id => {
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        icon: SiteUpdates.value[index].icon
+      })
+      console.log('icon update', SiteUpdates.value[index].icon, 'icon id', SiteUpdates.value[index].id)
+    }
+    const updateColor = id => {
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        color: SiteUpdates.value[index].color
+      })
+      console.log('color update', SiteUpdates.value[index].color, 'color id', SiteUpdates.value[index].id)
+    }
     const updateDateUpd = id => {
       const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
@@ -259,6 +339,8 @@ export default {
       newSiteUpdateDate,
       newSiteUpdateCount,
       newSiteUpdateDateUpd,
+      newSiteUpdateColorUpd,
+      newSiteUpdateIconUpd,
       done: ref(true),
       redModel: ref(false),
       deleteSiteUpdate,
@@ -269,6 +351,8 @@ export default {
       updateTitle,
       updateBody,
       updateDateUpd,
+      updateColor,
+      updateIcon,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }

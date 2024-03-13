@@ -6,6 +6,7 @@
                         :title=update.title
                         :subtitle=update.dateupd
                         :icon="update.icon"
+                        :color="update.color"
       >
         <q-item>
           <q-item-section top>
@@ -72,6 +73,7 @@ export default {
             body: doc.data().body,
             dateupd: doc.data().dateupd,
             date: doc.data().date,
+            color: doc.data().color,
             done: doc.data().done
           }
           fbEvents.push(event)
