@@ -1,5 +1,5 @@
 <template>
-<!--  input block-->
+  <!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
 
     <q-card dark bordered class="bg-grey-9 my-card">
@@ -24,7 +24,20 @@
             v-model='newSiteUpdateDateUpd'
             :type=inputTypeDate
           />
-          <q-select v-model='newSiteUpdateColorUpd' :options='newSiteUpdateColorUpd' label="Standard" />
+          <adm-select
+            v-model="newSiteUpdateIconUpd"
+            :options="newSiteUpdateIconUpd"
+            :select-color="green"
+            :select-label="selectLabel[0]"
+            :select-name="selectName[0]"
+          />
+          <adm-select
+            v-model="newSiteUpdateColorUpd"
+            :options="newSiteUpdateColorUpd"
+            :select-color="grey"
+            :select-label="selectLabel[1]"
+            :select-name="selectName[1]"
+          />
         </div><br/>
       </q-form>
       <q-separator dark inset />
@@ -139,9 +152,9 @@
         class="bg-teal text-yellow shadow-2"
       >
         <q-tab  name="mails" icon="arrow_upward" />
-<!--        item on or off-->
+        <!--        item on or off-->
         <tab-foot-done />
-<!--        delete item-->
+        <!--        delete item-->
         <tab-foot-delete @click="deleteSiteUpdate(SiteUpdate.id)" />
       </q-tabs>
     </q-card>
@@ -157,18 +170,18 @@ import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 import AdmInput from 'components/Admin/UI/admInput.vue'
 import TabFootDelete from 'components/Admin/UI/tabFootDelete.vue'
 import TabFootDone from 'components/Admin/UI/tabFootDone.vue'
+import AdmSelect from 'components/Admin/UI/admSelect.vue'
 
 const siteUpdateCollectionRef = collection(db, 'siteUpdates')
-// const siteUpdateCollectionRefColor = collection(db, 'siteUpdates')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateVer = ref('')
 const newSiteUpdateTitle = ref('')
-const newSiteUpdateBody = ref([])
+const newSiteUpdateBody = ref('')
 const newSiteUpdateDate = ref('')
 const newSiteUpdateCount = ref('')
 const newSiteUpdateDateUpd = ref('')
-const newSiteUpdateColorUpd = ref(['black', 'red', 'green'])
-const newSiteUpdateIconUpd = ref('done')
+const newSiteUpdateColorUpd = ref(['black', 'grey', 'orange'])
+const newSiteUpdateIconUpd = ref(['done', 'settings_applications'])
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -183,12 +196,12 @@ const addSiteUpdate = () => {
   })
   newSiteUpdateVer.value = ''
   newSiteUpdateTitle.value = ''
-  newSiteUpdateBody.value = []
+  newSiteUpdateBody.value = ''
   newSiteUpdateDate.value = ''
-  newSiteUpdateColorUpd.value = []
   newSiteUpdateCount.value = ''
-  newSiteUpdateCount.value = ''
-  newSiteUpdateIconUpd.value = ''
+  newSiteUpdateDateUpd.value = ''
+  newSiteUpdateColorUpd.value = ''
+  newSiteUpdateIconUpd.value = null
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
 const deleteSiteUpdate = id => {
@@ -198,7 +211,7 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'NewsSiteContentAdd',
-  components: { TabFootDone, TabFootDelete, AdmInput, BtnAdd },
+  components: { AdmSelect, TabFootDone, TabFootDelete, AdmInput, BtnAdd },
   data () {
     return {
       inputHintVer: 'add ver',
@@ -207,7 +220,10 @@ export default {
       inputHintDate: 'add date',
       inputTypeDate: 'date',
       btnIcon: 'post_add',
-      btnName: 'add update'
+      btnName: 'add update',
+      selectName: ['icon', 'color'],
+      selectColor: String,
+      selectLabel: ['icon', 'color']
     }
   },
   setup () {
@@ -223,8 +239,6 @@ export default {
             title: doc.data().title,
             body: doc.data().body,
             ver: doc.data().ver,
-            icon: doc.data().icon,
-            color: doc.data().color,
             date: doc.data().date,
             done: doc.data().done
           }
@@ -270,6 +284,7 @@ export default {
       newSiteUpdateCount,
       newSiteUpdateDateUpd,
       newSiteUpdateColorUpd,
+      newSiteUpdateIconUpd,
       done: ref(true),
       redModel: ref(false),
       deleteSiteUpdate,
