@@ -107,6 +107,46 @@
           <q-list>
             <q-item >
               <q-item-section>
+                <q-item-label>icon: {{ SiteUpdate.icon }}
+                  <q-popup-edit v-model="SiteUpdate.icon" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateIcon(SiteUpdate.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
+                <q-item-label>icon: {{ SiteUpdate.color }}
+                  <q-popup-edit v-model="SiteUpdate.color" class="bg-accent text-white" v-slot="scope">
+                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                      <template v-slot:append>
+                        <q-icon name="edit" />
+                      </template>
+                    </q-input>
+                  </q-popup-edit>
+                </q-item-label>
+              </q-item-section>
+              <q-item-section avatar>
+                <q-btn @click="updateColor(SiteUpdate.id)"  flat size="xs" icon="done"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-subtitle2">
+          <q-list>
+            <q-item >
+              <q-item-section>
                 <q-item-label>dateupd: {{ SiteUpdate.dateupd }}
                   <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
                     <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
@@ -180,7 +220,7 @@ const newSiteUpdateBody = ref('')
 const newSiteUpdateDate = ref('')
 const newSiteUpdateCount = ref('')
 const newSiteUpdateDateUpd = ref('')
-const newSiteUpdateColorUpd = ref(['black', 'grey', 'orange'])
+const newSiteUpdateColorUpd = ref(['black', 'grey', 'deep-orange-14'])
 const newSiteUpdateIconUpd = ref(['done', 'settings_applications'])
 
 const addSiteUpdate = () => {
@@ -239,6 +279,8 @@ export default {
             title: doc.data().title,
             body: doc.data().body,
             ver: doc.data().ver,
+            color: doc.data().color,
+            icon: doc.data().icon,
             date: doc.data().date,
             done: doc.data().done
           }
@@ -269,6 +311,20 @@ export default {
       })
       console.log('body update', SiteUpdates.value[index].body, 'body id', SiteUpdates.value[index].id)
     }
+    const updateIcon = id => {
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        icon: SiteUpdates.value[index].icon
+      })
+      console.log('icon update', SiteUpdates.value[index].icon, 'icon id', SiteUpdates.value[index].id)
+    }
+    const updateColor = id => {
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        color: SiteUpdates.value[index].color
+      })
+      console.log('color update', SiteUpdates.value[index].color, 'color id', SiteUpdates.value[index].id)
+    }
     const updateDateUpd = id => {
       const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
@@ -295,6 +351,8 @@ export default {
       updateTitle,
       updateBody,
       updateDateUpd,
+      updateColor,
+      updateIcon,
       tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
