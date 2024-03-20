@@ -37,6 +37,13 @@
             :select-label="selectLabel[2]"
             :select-name="selectName[2]"
           />
+          <adm-select
+            v-model="newSiteUpdatePriority"
+            :options="newSiteUpdatePriority"
+            select-color="red"
+            :select-label="selectLabel[3]"
+            :select-name="selectName[3]"
+          />
         </div><br/>
       </q-form>
       <q-separator dark inset />
@@ -199,6 +206,7 @@ const newSiteUpdateDate = ref('')
 const newSiteUpdateColorUpd = ref(['bg-grey', 'bg-orange'])
 const newSiteUpdateIconUpd = ref(['mail', 'done'])
 const newSiteUpdateCategory = ref(['site', 'tech'])
+const newSiteUpdatePriority = ref(['low', 'middle', 'high'])
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -206,6 +214,7 @@ const addSiteUpdate = () => {
     body: [newSiteUpdateBody.value],
     color: newSiteUpdateColorUpd.value,
     category: newSiteUpdateCategory.value,
+    priority: newSiteUpdatePriority.value,
     icon: newSiteUpdateIconUpd.value,
     date: Date.now(),
     done: true
@@ -216,6 +225,7 @@ const addSiteUpdate = () => {
   newSiteUpdateColorUpd.value = []
   newSiteUpdateIconUpd.value = []
   newSiteUpdateCategory.value = []
+  newSiteUpdatePriority.value = []
   console.log('add')
 }
 const deleteSiteUpdate = id => {
@@ -237,7 +247,7 @@ export default {
       btnName: 'add update',
       selectName: ['icon', 'color'],
       selectColor: String,
-      selectLabel: ['icon', 'color']
+      selectLabel: ['icon', 'color', 'category', 'priority']
     }
   },
   setup () {
@@ -253,6 +263,7 @@ export default {
             body: doc.data().body,
             color: doc.data().color,
             category: doc.data().category,
+            priority: doc.data().priority,
             icon: doc.data().icon,
             date: doc.data().date,
             done: doc.data().done
@@ -312,6 +323,7 @@ export default {
       newSiteUpdateColorUpd,
       newSiteUpdateIconUpd,
       newSiteUpdateCategory,
+      newSiteUpdatePriority,
       done: ref(true),
       redModel: ref(false),
       deleteSiteUpdate,
