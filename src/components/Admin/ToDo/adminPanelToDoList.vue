@@ -50,8 +50,8 @@ import { collection, onSnapshot, query, orderBy, updateDoc, doc } from 'firebase
 import { db } from 'src/firebase'
 import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
-const siteUpdateCollectionRef = collection(db, '/adminPanelToDo')
-const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
+const adminPanelToDosCollectionRef = collection(db, '/adminPanelToDo')
+const adminPanelToDosCollectionQuery = query(adminPanelToDosCollectionRef, orderBy('date', 'desc'))
 export default {
   name: 'adminPanelToDoAdd',
   components: { BtnAdd },
@@ -73,7 +73,7 @@ export default {
     const adminPanelToDos = ref([])
     onMounted(async () => {
       // Get data in firebase Module
-      onSnapshot(siteUpdateCollectionQuery, (querySnapshot) => {
+      onSnapshot(adminPanelToDosCollectionQuery, (querySnapshot) => {
         const fbSiteUpdates = []
         querySnapshot.forEach((doc) => {
           const panelToDo = {
@@ -94,7 +94,7 @@ export default {
     })
     const todoDone = id => {
       const index = adminPanelToDos.value.findIndex(panelToDo => panelToDo.id === id)
-      updateDoc(doc(siteUpdateCollectionRef, id), {
+      updateDoc(doc(adminPanelToDosCollectionQuery, id), {
         done: !adminPanelToDos.value[index].done
       })
       console.log('--', adminPanelToDos.value[index])
