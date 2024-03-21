@@ -14,7 +14,17 @@
           { label: 'Смена оформления главной страницы', value: 'changeMainPage' }
         ]"
       />
-
+      <q-separator color="orange" inset />
+      <q-option-group
+        v-model="techPanel"
+        inline
+        :options="[
+          { label: 'Свернуть', value: 'reset' },
+          { label: 'todo info', value: 'todoInfo' },
+          { label: 'todo', value: 'todo' },
+          { label: 'todo add', value: 'todoAdd' }
+        ]"
+      />
       <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders">
         <q-tab-panel name="game">
           <div class="text-h6">Добавить информацию о игре в архив:</div>
@@ -47,6 +57,24 @@
           <change-main-page-logo />
         </q-tab-panel>
       </q-tab-panels>
+      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
+        <q-tab-panel name="todoInfo">
+          <div class="text-h6">To Do Info:</div>
+          <admin-panel-to-do-info />
+        </q-tab-panel>
+      </q-tab-panels>
+      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
+        <q-tab-panel name="todo">
+          <div class="text-h6">To Do List:</div>
+          <admin-panel-to-do-list />
+        </q-tab-panel>
+      </q-tab-panels>
+      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
+        <q-tab-panel name="todoAdd">
+          <div class="text-h6">To Do List:</div>
+          <admin-panel-to-do-add />
+        </q-tab-panel>
+      </q-tab-panels>
     </div>
   </div>
 </template>
@@ -60,12 +88,27 @@ import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd.vue'
 import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd.vue'
 import GamesNowEventEdit from 'components/Admin/gamesNowEventEdit.vue'
 import ChangeMainPageLogo from 'components/Admin/changeMainPageLogo.vue'
+import AdminPanelToDoAdd from 'components/Admin/ToDo/adminPanelToDoAdd.vue'
+import AdminPanelToDoList from 'components/Admin/ToDo/adminPanelToDoList.vue'
+import AdminPanelToDoInfo from 'components/Admin/ToDo/adminPanelToDoInfo.vue'
 
 export default {
-  components: { ChangeMainPageLogo, GamesNowEventEdit, NewsSiteContentAdd, ArchiveGamesAdd, NewsDrawerGNEDateUpdate, NewsDrawerGNTDateUpdate, NewsCardContentAdd },
+  components: {
+    AdminPanelToDoInfo,
+    AdminPanelToDoList,
+    AdminPanelToDoAdd,
+    ChangeMainPageLogo,
+    GamesNowEventEdit,
+    NewsSiteContentAdd,
+    ArchiveGamesAdd,
+    NewsDrawerGNEDateUpdate,
+    NewsDrawerGNTDateUpdate,
+    NewsCardContentAdd
+  },
   setup () {
     return {
-      panel: ref('reset')
+      panel: ref('reset'),
+      techPanel: ref('reset')
     }
   }
 }
