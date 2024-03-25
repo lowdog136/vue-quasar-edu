@@ -46,7 +46,7 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import ResultMatchResultCardAddDataAdmin from 'components/ResultMatchResultCardAddDataAdmin'
-import GamesNowEventAdd from 'components/Admin/GamesNowEventAdd'
+import GamesNowEventAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/GamesNowEventAdd.vue'
 
 export default defineComponent({
   name: 'CarrotAdminPage',

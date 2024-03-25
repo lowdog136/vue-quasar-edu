@@ -1,15 +1,12 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <q-list padding>
-      <q-item-label header>Административная панель управления:</q-item-label>
+      <q-item-label header>{{ labelHeader }}</q-item-label>
       <q-item >
-        <q-item-section avatar>
-          <q-icon color="primary" name="account_circle" />
-        </q-item-section>
         <q-item-section>
           <q-item-label>Привет, {{ $store.getters.userName }} </q-item-label>
           <q-item-label caption>
-            Нужно выбрать раздел для редактирования
+            {{ labelCaption }}
           </q-item-label>
           <q-item-label>
             <admin-edit-list />
@@ -18,15 +15,19 @@
       </q-item>
     </q-list>
   </div>
-  <q-separator spaced />
 </template>
 <script>
 import { onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
-import AdminEditList from 'components/Admin/adminEditList.vue'
-
+import AdminEditList from 'components/Admin/Panels/adminEditList.vue'
 export default {
   components: { AdminEditList },
+  data () {
+    return {
+      labelCaption: 'Нужно выбрать раздел для редактирования',
+      labelHeader: 'Административная панель управления:'
+    }
+  },
   setup () {
     const store = useStore()
     onBeforeMount(() => {

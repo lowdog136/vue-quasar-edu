@@ -14,17 +14,6 @@
           { label: 'Смена оформления главной страницы', value: 'changeMainPage' }
         ]"
       />
-      <q-separator color="orange" inset />
-      <q-option-group
-        v-model="techPanel"
-        inline
-        :options="[
-          { label: 'Свернуть', value: 'reset' },
-          { label: 'todo info', value: 'todoInfo' },
-          { label: 'todo', value: 'todo' },
-          { label: 'todo add', value: 'todoAdd' }
-        ]"
-      />
       <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders">
         <q-tab-panel name="game">
           <div class="text-h6">Добавить информацию о игре в архив:</div>
@@ -57,46 +46,22 @@
           <change-main-page-logo />
         </q-tab-panel>
       </q-tab-panels>
-      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
-        <q-tab-panel name="todoInfo">
-          <div class="text-h6">To Do Info:</div>
-          <admin-panel-to-do-info />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
-        <q-tab-panel name="todo">
-          <div class="text-h6">To Do List:</div>
-          <admin-panel-to-do-list />
-        </q-tab-panel>
-      </q-tab-panels>
-      <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
-        <q-tab-panel name="todoAdd">
-          <div class="text-h6">To Do List:</div>
-          <admin-panel-to-do-add />
-        </q-tab-panel>
-      </q-tab-panels>
     </div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import NewsCardContentAdd from 'components/Admin/NewsCardContentAdd.vue'
-import NewsDrawerGNTDateUpdate from 'components/Admin/NewsDrawerGNTDateUpdate.vue'
-import NewsDrawerGNEDateUpdate from 'components/Admin/NewsDrawerGNEDateUpdate.vue'
-import ArchiveGamesAdd from 'components/Admin/ArchiveGamesAdd.vue'
-import NewsSiteContentAdd from 'components/Admin/NewsSiteContentAdd.vue'
-import GamesNowEventEdit from 'components/Admin/gamesNowEventEdit.vue'
-import ChangeMainPageLogo from 'components/Admin/changeMainPageLogo.vue'
-import AdminPanelToDoAdd from 'components/Admin/ToDo/adminPanelToDoAdd.vue'
-import AdminPanelToDoList from 'components/Admin/ToDo/adminPanelToDoList.vue'
-import AdminPanelToDoInfo from 'components/Admin/ToDo/adminPanelToDoInfo.vue'
-
+import NewsCardContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsCardContentAdd.vue'
+import NewsDrawerGNTDateUpdate from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsDrawerGNTDateUpdate.vue'
+import NewsDrawerGNEDateUpdate from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsDrawerGNEDateUpdate.vue'
+import ArchiveGamesAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/ArchiveGamesAdd.vue'
+import NewsSiteContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsSiteContentAdd.vue'
+import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/gamesNowEventEdit.vue'
+import ChangeMainPageLogo from 'components/Admin/Panels/sitePanel/functionsSitePanel/changeMainPageLogo.vue'
 export default {
+  name: 'adminPanel',
   components: {
-    AdminPanelToDoInfo,
-    AdminPanelToDoList,
-    AdminPanelToDoAdd,
     ChangeMainPageLogo,
     GamesNowEventEdit,
     NewsSiteContentAdd,
@@ -104,6 +69,11 @@ export default {
     NewsDrawerGNEDateUpdate,
     NewsDrawerGNTDateUpdate,
     NewsCardContentAdd
+  },
+  data () {
+    return {
+      tabNameInfo: 'todoInfo'
+    }
   },
   setup () {
     return {
