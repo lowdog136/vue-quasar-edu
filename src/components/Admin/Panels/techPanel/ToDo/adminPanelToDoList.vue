@@ -94,10 +94,10 @@ export default {
     })
     const todoDone = id => {
       const index = adminPanelToDos.value.findIndex(panelToDo => panelToDo.id === id)
-      updateDoc(doc(adminPanelToDosCollectionQuery, id), {
+      updateDoc(doc(collection(db, '/adminPanelToDo'), id), {
         done: !adminPanelToDos.value[index].done
       })
-      console.log('--', adminPanelToDos.value[index])
+      console.log('-', adminPanelToDos.value[index])
     }
     return {
       // done: ref(true),
