@@ -4,24 +4,19 @@
       <q-option-group
           v-model="techPanel"
           inline
-          :options="[
-          { label: 'Свернуть', value: 'reset' },
-          { label: 'todo info', value: 'todoInfo' },
-          { label: 'todo', value: 'todo' },
-          { label: 'todo add', value: 'todoAdd' }
-        ]"
+          :options=tabNameList
       />
       <q-tab-panels v-model="techPanel" animated class="shadow-2 rounded-borders">
         <q-tab-panel :name=tabNameInfo>
-          <div class="text-h6">To Do Info:</div>
+          <div class="text-h6">{{ tabNameInfoText }}</div>
           <admin-panel-to-do-info />
         </q-tab-panel>
         <q-tab-panel name="todo">
-          <div class="text-h6">To Do List:</div>
+          <div class="text-h6">{{ tabNameTodoText }}</div>
           <admin-panel-to-do-list />
         </q-tab-panel>
         <q-tab-panel name="todoAdd">
-          <div class="text-h6">To Do List:</div>
+          <div class="text-h6">{{ tabNameTodoAddText }}</div>
           <admin-panel-to-do-add />
         </q-tab-panel>
       </q-tab-panels>
@@ -43,7 +38,32 @@ export default {
   },
   data () {
     return {
-      tabNameInfo: 'todoInfo'
+      tabNameInfo: 'todoInfo',
+      tabNameInfoText: 'To Do Info:',
+      tabNameTodoText: 'To Do List:',
+      tabNameTodoAddText: 'To Do Add:',
+      tabNameList: [
+        {
+          id: 1,
+          label: 'Свернуть',
+          value: 'reset'
+        },
+        {
+          id: 2,
+          label: 'todo info',
+          value: 'todoInfo'
+        },
+        {
+          id: 3,
+          label: 'todo',
+          value: 'todo'
+        },
+        {
+          id: 4,
+          label: 'todo add',
+          value: 'todoAdd'
+        }
+      ]
     }
   },
   setup () {
