@@ -1,12 +1,17 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
     <q-btn push color="teal" label="Change image" @click="refresh" />
-
     <q-img
-      :src="url[1]"
+      :src="url"
       spinner-color="white"
-      style="height: 340px; max-width: 350px"
+      style="height: 140px; max-width: 150px"
     />
+  </div>
+  <div class="q-pa-md q-gutter-sm">
+    <q-btn push color="teal" label="Change value" @click="refreshV" />
+    <p>
+      {{ myValue }}
+    </p>
   </div>
 </template>
 
@@ -15,12 +20,17 @@ import { ref } from 'vue'
 
 export default {
   setup () {
-    const url = ref(['https://severfans.ru/img/fcsever_logo_ny.f62d4c97.png', 'https://severfans.ru/img/3.2947b614.jpg', 'https://severfans.ru/img/1.59226f80.jpg'])
-    console.log('url:', url.value)
+    const url = ref('https://severfans.ru/img/4.9a3d5f2d.jpg')
+    const myValue = ref('Ololosh')
+
     return {
       url,
+      myValue,
       refresh () {
-        url.value = 'https://severfans.ru/img/1.59226f80.jpg'
+        url.value = 'https://severfans.ru/img/2.7df60b0c.jpg'
+      },
+      refreshV () {
+        myValue.value = '121212'
       }
     }
   }

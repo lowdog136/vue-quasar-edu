@@ -1,36 +1,6 @@
 <template>
-<!--  input block-->
-  <div class="q-pa-md row items-start q-gutter-md">
-
-    <q-card dark bordered class="bg-grey-9 my-card">
-      <q-form
-        class="q-gutter-md"
-      >
-        <div>
-          <q-item-label>NewsDrawerGNTDateUpdate</q-item-label>
-          <q-input
-            v-model='newSiteUpdateVer'
-            hint="add date"
-            lazy-rules
-          />
-        </div><br/>
-      </q-form>
-      <q-separator dark inset />
-      <q-card-section>
-        <btn-add :btn-icon="btnIcon" :btn-name="btnName" @click="addSiteUpdate" />
-        <q-toggle
-          :false-value="false"
-          :label="`Показываем ${redModel}`"
-          :true-value="true"
-          color="red"
-          v-model="redModel"
-        />
-      </q-card-section>
-    </q-card>
-  </div>
   <!--  edit mode block-->
-  <div class="q-pa-md row items-start q-gutter-md" v-if="redModel">
-
+  <div class="q-pa-md row items-start q-gutter-md">
     <q-card
       class="bg-grey-9 my-card"
       v-for="SiteUpdate in SiteUpdates"
@@ -41,19 +11,8 @@
           <q-list>
             <q-item >
               <q-item-section>
+                <q-item-label caption>{{ titleCard }}</q-item-label>
                 <q-item-label caption>id:{{ SiteUpdate.id }}</q-item-label>
-                <q-item-label>{{ SiteUpdate.ver }}
-                  <q-popup-edit v-model="SiteUpdate.ver" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @submit="updateVer(SiteUpdate.ver)" @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
               </q-item-section>
             </q-item>
           </q-list>
@@ -62,7 +21,7 @@
           <q-list>
             <q-item >
               <q-item-section>
-                <q-item-label>datenews: {{ SiteUpdate.datenews }}
+                <q-item-label>{{ valueCard }}: {{ SiteUpdate.datenews }}
                   <q-popup-edit v-model="SiteUpdate.datenews" class="bg-accent text-white" v-slot="scope">
                     <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
                       <template v-slot:append>
@@ -79,52 +38,24 @@
           </q-list>
         </div>
       </q-card-section>
-
-      <q-separator dark inset />
-
-      <q-tabs
-        v-model="tab"
-        class="bg-teal text-yellow shadow-2"
-      >
-        <q-tab  name="mails" icon="arrow_upward" />
-        <q-tab  name="alarms" icon="done" />
-        <q-tab @click="deleteSiteUpdate(SiteUpdate.id)" name="movies" icon="delete" />
-      </q-tabs>
     </q-card>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue'
-import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, orderBy, updateDoc } from 'firebase/firestore'
+import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore'
 import { db } from 'src/firebase'
-import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
-// const siteUpdateCollectionRef = collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/')
-// const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateVer = ref('')
-
-const addSiteUpdate = () => {
-  addDoc(collection(db, '/siteNewsDrawer/GamesNowTable/dateUpdate/'), orderBy('date', 'desc'), {
-    datenews: newSiteUpdateVer.value
-  })
-  newSiteUpdateVer.value = ''
-  console.log('add SiteUpdate', newSiteUpdateVer.value)
-}
-
-const deleteSiteUpdate = id => {
-  deleteDoc(doc(collection(db, '/siteNewsDrawer/GamesNowTable/dateUpdate/'), id))
-  console.log('del SiteUpdate', newSiteUpdateVer.value)
-}
 
 export default {
   name: 'NewsDrawerGNTDateUpdate',
-  components: { BtnAdd },
+  components: { },
   data () {
     return {
-      btnIcon: 'post_add',
-      btnName: 'add date'
+      titleCard: 'Турнирная таблица',
+      valueCard: 'datenews'
     }
   },
   setup () {
@@ -153,34 +84,17 @@ export default {
     }
     return {
       newSiteUpdateVer,
-      done: ref(true),
-      redModel: ref(false),
-      deleteSiteUpdate,
-      deleteDoc,
-      addSiteUpdate,
       SiteUpdates,
-      updateVer,
-      tab: ref(['alarms', 'mails']),
-      expanded: ref(false)
+      updateVer
     }
-  },
-  computed: {
-    ...mapGetters([
-    ])
-  },
-  methods: {
-    ...mapActions([
-    ])
-  },
-
-  props: {}
+  }
 }
 </script>
 
 <style lang="sass" scoped>
 .my-card
   width: 100%
-  max-width: 450px
+  max-width: 100%
   .root
     width: 400px
     margin: 0 auto

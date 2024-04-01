@@ -4,15 +4,7 @@
       <q-option-group
         v-model="panel"
         inline
-        :options="[
-          { label: 'Свернуть', value: 'reset' },
-          { label: 'Игры в архиве', value: 'game' },
-          { label: 'Новость на главную', value: 'team' },
-          { label: 'Правка дат', value: 'date' },
-          { label: 'Обновление сайта', value: 'site' },
-          { label: 'Правка календаря игр', value: 'eventlist' },
-          { label: 'Смена оформления главной страницы', value: 'changeMainPage' }
-        ]"
+        :options=tabNameList
       />
       <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders">
         <q-tab-panel name="game">
@@ -72,7 +64,47 @@ export default {
   },
   data () {
     return {
-      tabNameInfo: 'todoInfo'
+      tabNameInfo: 'todoInfo',
+      tabNameInfoText: 'To Do Info:',
+      tabNameTodoText: 'To Do List:',
+      tabNameTodoAddText: 'To Do Add:',
+      tabNameList: [
+        {
+          id: 1,
+          label: 'Свернуть',
+          value: 'reset'
+        },
+        {
+          id: 2,
+          label: 'Игры в архиве',
+          value: 'game'
+        },
+        {
+          id: 3,
+          label: 'Новость на главную',
+          value: 'team'
+        },
+        {
+          id: 4,
+          label: 'Правка дат',
+          value: 'date'
+        },
+        {
+          id: 5,
+          label: 'Обновление сайта',
+          value: 'site'
+        },
+        {
+          id: 6,
+          label: 'Правка календаря игр',
+          value: 'eventlist'
+        },
+        {
+          id: 7,
+          label: 'Смена оформления главной страницы',
+          value: 'changeMainPage'
+        }
+      ]
     }
   },
   setup () {

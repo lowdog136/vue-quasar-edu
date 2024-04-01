@@ -61,6 +61,7 @@
             <q-tab  @click="countUpEvent(event.id)" name="mails" icon="arrow_upward" />
             <q-tab @click="toggleEvent(event.id)" name="alarms" icon="done" />
             <q-tab @click="deleteEvent(event.id)" name="movies" icon="delete" />
+            <q-tab @click="countZeroEvent(event.id)" name="cached" icon="cached" />
           </q-tabs>
         </q-card>
       </div>
@@ -74,7 +75,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy, limit } from 'firebase/firestore'
 import { db } from 'src/firebase'
 
-const eventCollectionRef = collection(db, 'events')
+const eventCollectionRef = collection(db, 'events2')
 const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'), limit(3))
 const newEventSubTitle = ref('')
 const newEventTitle = ref('')
@@ -152,7 +153,7 @@ export default {
         })
         todos.value = fbTodos
       })
-      onSnapshot(collection(db, 'events'), (querySnapshot) => {
+      onSnapshot(collection(db, 'events2'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const event = {
@@ -182,6 +183,13 @@ export default {
       })
       console.log('countUP', events.value[index].count)
     }
+    const countZeroEvent = id => {
+      const index = events.value.findIndex(event => event.id === id)
+      updateDoc(doc(collection(db, 'events2'), id), {
+        count: events.value[index].count = events.value[index].team1
+      })
+      console.log('countZero', events.value[index].count)
+    }
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       titleMainEvent: 'samething title2',
@@ -196,6 +204,7 @@ export default {
       deleteDoc,
       toggleEvent,
       countUpEvent,
+      countZeroEvent,
       addEvent,
       events,
       todos,

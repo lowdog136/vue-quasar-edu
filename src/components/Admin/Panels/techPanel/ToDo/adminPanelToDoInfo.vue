@@ -1,7 +1,8 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
     <div>
-      Text here
+      <p>Tech - grey</p>
+      <p>Site - orange</p>
     </div>
   </div>
 </template>
