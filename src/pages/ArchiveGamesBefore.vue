@@ -7,7 +7,7 @@
       {{titleMainEventBody }}
     </div>
     <div class="title">
-      <ArchiveGamesViewList />
+      <ArchiveGamesViewList2 />
     </div>
   </div>
 </template>
@@ -15,11 +15,11 @@
 <script>
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import ArchiveGamesViewList from 'components/ArchiveGames/ArchiveGamesViewList'
+import ArchiveGamesViewList2 from 'components/ArchiveGames/ArchiveGamesViewList2'
 
 export default {
   name: 'ArchiveGamesBefore',
-  components: { ArchiveGamesViewList },
+  components: { ArchiveGamesViewList2 },
   data () {
     return {}
   },

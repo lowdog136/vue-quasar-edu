@@ -35,7 +35,6 @@
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.email }} </div>
                   <div class="text-subtitle1 q-mt-md q-mb-xs">{{ $store.state.user.uid }} </div>
-
                 </div>
               </div>
             </q-menu>
