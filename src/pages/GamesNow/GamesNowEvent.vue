@@ -25,7 +25,7 @@ export default {
       bodyMainEvent: '',
       btnSize: 'xs',
       titleMainEvent: 'Календарь игр ФК "Север" в 2024 году',
-      titleCaption: 'ждите обновления'
+      titleCaption: 'начало сезона в мае'
     }
   }
 }

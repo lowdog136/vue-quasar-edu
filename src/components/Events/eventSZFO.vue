@@ -68,7 +68,7 @@ import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  name: 'eventSZFO23',
+  name: 'eventSZFO',
   components: { NewsCardDetailPopUp },
   data () {
     return {
