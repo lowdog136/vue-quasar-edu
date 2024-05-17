@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-table
       flat bordered
-      title="Турнирная таблица, XXV турнир полпреда СЗФО, группа 'Б'"
+      title="Турнирная таблица, XXIX чемпионат СЗФО"
       :rows="rows"
       :columns="columns"
       row-key="id"
@@ -43,35 +43,35 @@ const rows = [
     id: 4,
     name: 'Север',
     colorCode: 'primary',
-    games: 1,
+    games: 0,
     win: 0,
     draw: 0,
-    lose: 1,
-    ball_io: '0-1',
+    lose: 0,
+    ball_io: '0-0',
     score: 0,
-    last_game: 'П'
+    last_game: ''
   },
   {
     id: 2,
-    name: 'СШОР Зенит',
-    games: 1,
+    name: 'Псков',
+    games: 0,
     win: 0,
     draw: 0,
-    lose: 1,
-    ball_io: '1-3',
+    lose: 0,
+    ball_io: '0-0',
     score: 0,
-    last_game: 'П'
+    last_game: ''
   },
   {
     id: 3,
-    name: 'МФК Чисто Питер',
-    games: 1,
-    win: 1,
+    name: 'Тосно',
+    games: 0,
+    win: 0,
     draw: 0,
     lose: 0,
-    ball_io: '3-1',
-    score: 3,
-    last_game: 'В'
+    ball_io: '0-0',
+    score: 0,
+    last_game: ''
   },
   {
     id: 1,
@@ -86,14 +86,36 @@ const rows = [
   },
   {
     id: 2,
-    name: 'Звезда',
-    games: 1,
-    win: 1,
+    name: 'ГОУР-Карелия',
+    games: 0,
+    win: 0,
     draw: 0,
     lose: 0,
-    ball_io: '1-0',
-    score: 3,
-    last_game: 'В'
+    ball_io: '0-0',
+    score: 0,
+    last_game: ''
+  },
+  {
+    id: 2,
+    name: 'Химик',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0-0',
+    score: 0,
+    last_game: ''
+  },
+  {
+    id: 2,
+    name: 'Новград',
+    games: 0,
+    win: 0,
+    draw: 0,
+    lose: 0,
+    ball_io: '0-0',
+    score: 0,
+    last_game: ''
   }
 ]
 
