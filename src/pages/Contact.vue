@@ -27,12 +27,17 @@
        </q-page-container>
     </q-layout>
   </div>
+  <div>
+    <date-countdown :deadlineDate="new Date(2024, 5, 1, 14, 59, 59, 0)"/>
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import DateCountdown from 'components/Admin/dateCountdown.vue'
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: { DateCountdown }
 })
 </script>

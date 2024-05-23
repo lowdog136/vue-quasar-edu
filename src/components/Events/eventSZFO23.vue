@@ -13,6 +13,7 @@
                           :color="item.color"
                           :icon="item.icon"
                           side="left"
+                          class="q-pa-sm wrap rounded-borders"
         >
           <div>
             {{ item.tour}}
@@ -20,7 +21,7 @@
           </div>
           <div>
             <!--          {{ item.title }}-->
-            <q-item>
+            <q-item >
               <q-item-section>
                 <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
                   {{ item.title }}
@@ -109,62 +110,61 @@
         </q-timeline-entry>
       </q-timeline>
     </q-item>
-<!--    <q-item>-->
-<!--      <q-timeline :layout="layout" :side="side" color="secondary">-->
-<!--        <q-timeline-entry heading>-->
-<!--          <div class="title" style="color: #ae0000">-->
-<!--            Июль, 2024-->
-<!--          </div>-->
-<!--        </q-timeline-entry>-->
-<!--        <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"-->
-<!--                          :title="item.eventName"-->
-<!--                          :subtitle="item.date"-->
-<!--                          :color="item.color"-->
-<!--                          :icon="item.icon"-->
-<!--                          side="left"-->
-<!--        >-->
-<!--          <div>-->
-<!--            &lt;!&ndash;          {{ item.title }}&ndash;&gt;-->
-<!--            <q-item>-->
-<!--              <q-item-section>-->
-<!--                {{ item.tour}}-->
-<!--                {{ item.mounth}}-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--            <q-item>-->
-<!--              <q-item-section>-->
-<!--                <q-item-label lines="1" class="q-mt-xs text-body4 text-weight-bold text-primary ">-->
-<!--                  {{ item.title }}-->
-<!--                </q-item-label>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--            <q-item >-->
-<!--              <q-item-section>-->
-<!--                <q-item-label lines="1" class="q-mt-xs text-body2 ">-->
-<!--                  голы: {{ item.scorer }}-->
-<!--                </q-item-label>-->
-<!--                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">-->
-<!--                  планируют посетить: 0-->
-<!--                </q-item-label>-->
-<!--                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">-->
-<!--                <span class="cursor-pointer">-->
-<!--                  <NewsCardDetailPopUp-->
-<!--                    :PopyUpSubTitleNews="item.event"-->
-<!--                    :PopyUpFullNews="item.body"-->
-<!--                    :PopyUpTitleNews="item.title"-->
-<!--                    :PopyUpBtnColor="btnColor"-->
-<!--                    :PopyUpBtnName="btnName"-->
-<!--                    :PopyUpDivMain = "btnDivMain"-->
-<!--                  /></span>-->
-<!--                </q-item-label>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--            &lt;!&ndash;          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>&ndash;&gt;-->
-<!--            &lt;!&ndash;          <q-item-label caption>планируют посетить: 0 </q-item-label>&ndash;&gt;-->
-<!--          </div>-->
-<!--        </q-timeline-entry>-->
-<!--      </q-timeline>-->
-<!--    </q-item>-->
+    <q-item>
+      <q-timeline :layout="layout" :side="side" color="secondary">
+        <q-timeline-entry heading>
+          <div class="title" style="color: #ae0000">
+            Июль, 2024
+          </div>
+        </q-timeline-entry>
+        <q-timeline-entry v-for="item in NewsCardsJl.slice(id)" :key="item.id"
+                          :title="item.eventName"
+                          :subtitle="item.date"
+                          :color="item.color"
+                          :icon="item.icon"
+                          side="left"
+                          class="q-pa-sm wrap rounded-borders"
+        >
+          <div>
+            {{ item.tour}}
+            {{ item.mounth}}
+          </div>
+          <div>
+            <!--          {{ item.title }}-->
+            <q-item >
+              <q-item-section>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary ">
+                  {{ item.title }}
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item >
+              <q-item-section >
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-blue-grey-5 ">
+                  голы: {{ item.scorer }}
+                </q-item-label>
+                <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-grey-5 ">
+                  планируют посетить: 0
+                </q-item-label>
+                <q-item-label lines="1" class="q-pt-xs text-body2 text-weight-bold text-primary text-uppercase">
+                <span class="cursor-pointer">
+                  <NewsCardDetailPopUp
+                    :PopyUpSubTitleNews="item.event"
+                    :PopyUpFullNews="item.body"
+                    :PopyUpTitleNews="item.title"
+                    :PopyUpBtnColor="btnColor"
+                    :PopyUpBtnName="btnName"
+                    :PopyUpDivMain = "btnDivMain"
+                  /></span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!--          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>-->
+            <!--          <q-item-label caption>планируют посетить: 0 </q-item-label>-->
+          </div>
+        </q-timeline-entry>
+      </q-timeline>
+    </q-item>
 <!--    <q-item>-->
 <!--      <q-timeline :layout="layout" :side="side" color="secondary">-->
 <!--        <q-timeline-entry heading>-->
