@@ -4,7 +4,15 @@
       {{ titleMainEvent }}
       <p>
         <q-separator color="orange" inset />
-        {{ titleCaption }}
+     </p>
+      <p>
+        <date-countdown
+          :mainColor = deadlinemainColor
+          :secondFlipColor = deadlinesecondFlipColor
+          :showSeconds="false"
+          :labels=deadlinelabels
+          :deadline = deadline
+        />
       </p>
     </div>
     <p class="text-body1" style="text-align: center">
@@ -15,17 +23,21 @@
 </template>
 
 <script>
-
 import EventSZFO23 from 'components/Events/eventSZFO23'
+import DateCountdown from 'components/Admin/dateCountdown.vue'
 export default {
-  components: { EventSZFO23 },
+  components: { DateCountdown, EventSZFO23 },
   setup () {
     return {
+      deadline: '2024-06-01 15:00:00',
+      deadlinemainColor: 'red',
+      deadlinesecondFlipColor: 'white',
+      deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
       titleEvent: ['Кубок СЗФО'],
       bodyMainEvent: '',
       btnSize: 'xs',
       titleMainEvent: 'Календарь игр ФК "Север" в 2024 году',
-      titleCaption: 'начало сезона в мае'
+      titleCaption: ''
     }
   }
 }

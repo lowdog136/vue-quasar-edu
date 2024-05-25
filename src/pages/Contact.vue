@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: { }
 })
 </script>
