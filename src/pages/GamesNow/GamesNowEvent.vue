@@ -7,11 +7,11 @@
      </p>
       <p>
         <date-countdown
-          mainColor = red
-          secondFlipColor = white
+          :mainColor = deadlinemainColor
+          :secondFlipColor = deadlinesecondFlipColor
           :showSeconds="false"
-          :labels="{ days: '', hours: '', minutes: '', seconds: '', }"
-          deadline='2024-06-01 14:00:00'
+          :labels=deadlinelabels
+          :deadline = deadline
         />
       </p>
     </div>
@@ -27,19 +27,12 @@ import EventSZFO23 from 'components/Events/eventSZFO23'
 import DateCountdown from 'components/Admin/dateCountdown.vue'
 export default {
   components: { DateCountdown, EventSZFO23 },
-  data: () => ({
-    date: ''
-  }),
-  methods: {
-    printDate: function () {
-      return new Date().toLocaleDateString()
-    }
-  },
-  mounted: function () {
-    this.date = this.printDate()
-  },
   setup () {
     return {
+      deadline: '2024-06-01 15:00:00',
+      deadlinemainColor: 'red',
+      deadlinesecondFlipColor: 'white',
+      deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
       titleEvent: ['Кубок СЗФО'],
       bodyMainEvent: '',
       btnSize: 'xs',
