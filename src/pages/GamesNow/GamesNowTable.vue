@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md">
+    <game-table />
     <q-table
       flat bordered
       title="Турнирная таблица, XXIX чемпионат СЗФО"
@@ -19,6 +20,8 @@
 
 <script>
 
+import GameTable from 'components/Admin/Tables/gameTable.vue'
+
 const columns = [
   {
     name: 'desc',
@@ -29,27 +32,61 @@ const columns = [
     format: val => `${val}`,
     sortable: false
   },
-  { name: 'games', align: 'center', label: 'И', field: 'games' },
-  { name: 'win', label: 'В', field: 'win' },
-  { name: 'draw', label: 'Н', field: 'draw' },
-  { name: 'lose', label: 'П', field: 'lose' },
-  { name: 'ball_io', label: 'Разница', field: 'ball_io' },
-  { name: 'score', required: true, label: 'О', field: 'score', sortable: true, sort: (b, a) => parseInt(a, 10) - parseInt(b, 10) },
-  { name: 'last_game', label: 'Форма', field: 'last_game', sortable: false, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+  {
+    name: 'games',
+    align: 'center',
+    label: 'И',
+    field: 'games'
+  },
+  {
+    name: 'win',
+    label: 'В',
+    field: 'win'
+  },
+  {
+    name: 'draw',
+    label: 'Н',
+    field: 'draw'
+  },
+  {
+    name: 'lose',
+    label: 'П',
+    field: 'lose'
+  },
+  {
+    name: 'ball_io',
+    label: 'Разница',
+    field: 'ball_io'
+  },
+  {
+    name: 'score',
+    required: true,
+    label: 'О',
+    field: 'score',
+    sortable: false,
+    sort: (b, a) => parseInt(a, 10) - parseInt(b, 20)
+  },
+  {
+    name: 'last_game',
+    label: 'Форма',
+    field: 'last_game',
+    sortable: false,
+    sort: (a, b) => parseInt(a, 10) - parseInt(b, 20)
+  }
 ]
 
 const rows = [
   {
-    id: 4,
+    id: 21,
     name: 'Север',
     colorCode: 'primary',
-    games: 1,
+    games: 2,
     win: 1,
     draw: 0,
-    lose: 0,
-    ball_io: '2-0',
+    lose: 1,
+    ball_io: '3-2',
     score: 3,
-    last_game: 'В'
+    last_game: 'ВП'
   },
   {
     id: 2,
@@ -63,15 +100,15 @@ const rows = [
     last_game: ''
   },
   {
-    id: 3,
+    id: 1,
     name: 'Тосно',
-    games: 0,
-    win: 0,
+    games: 1,
+    win: 1,
     draw: 0,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    ball_io: '2-1',
+    score: 3,
+    last_game: 'В'
   },
   {
     id: 1,
@@ -90,7 +127,7 @@ const rows = [
     games: 1,
     win: 0,
     draw: 0,
-    lose: 2,
+    lose: 1,
     ball_io: '0-2',
     score: 0,
     last_game: 'П'
@@ -120,6 +157,7 @@ const rows = [
 ]
 
 export default {
+  components: { GameTable },
   setup () {
     return {
       initialPagination: {
@@ -149,6 +187,7 @@ export default {
   thead tr th
     position: sticky
     z-index: 1
+
   thead tr:first-child th
     top: 0
 </style>
