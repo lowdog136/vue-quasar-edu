@@ -78,8 +78,8 @@
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import NewsDrawer from 'components/NewsDrawer'
-import NewsDrawerResultGame from 'components/NewsDrawerResultGame'
+import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
+import NewsDrawerResultGame from 'components/NewsDrawer/NewsDrawerResultGame.vue'
 import AuthPanel from 'components/Auth/AuthPanel'
 import MainToolbarTitle from 'components/MainPage/mainToolbarTitle.vue'
 

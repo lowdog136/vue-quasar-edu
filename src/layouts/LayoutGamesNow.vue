@@ -44,7 +44,7 @@
 <script>
 
 import { defineComponent, ref } from 'vue'
-import NewsDrawer from 'components/NewsDrawer'
+import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
 
 export default defineComponent({
   name: 'MainLayout2',
