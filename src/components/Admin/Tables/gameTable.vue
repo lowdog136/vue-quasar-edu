@@ -61,24 +61,24 @@ const rows = [
     id: 8,
     name: 'Север',
     color: 'primary',
+    games: 3,
+    win: 2,
+    draw: 0,
+    lose: 1,
+    ball_io: '8-2',
+    score: 6,
+    last_game: 'ВПВ'
+  },
+  {
+    id: 5,
+    name: 'ГОУР-Карелия',
     games: 2,
     win: 1,
     draw: 0,
     lose: 1,
-    ball_io: '3-2',
+    ball_io: '4-3',
     score: 3,
-    last_game: 'ВП'
-  },
-  {
-    id: 9,
-    name: 'Псков',
-    games: 0,
-    win: 0,
-    draw: 0,
-    lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    last_game: 'ПВ'
   },
   {
     id: 2,
@@ -88,6 +88,17 @@ const rows = [
     draw: 0,
     lose: 0,
     ball_io: '2-1',
+    score: 3,
+    last_game: 'В'
+  },
+  {
+    id: 9,
+    name: 'Псков',
+    games: 1,
+    win: 1,
+    draw: 0,
+    lose: 0,
+    ball_io: '1-0',
     score: 3,
     last_game: 'В'
   },
@@ -103,37 +114,26 @@ const rows = [
     last_game: ''
   },
   {
-    id: 5,
-    name: 'ГОУР-Карелия',
+    id: 7,
+    name: 'Новград',
     games: 1,
     win: 0,
     draw: 0,
     lose: 1,
-    ball_io: '0-2',
+    ball_io: '0-1',
     score: 0,
     last_game: 'П'
   },
   {
     id: 6,
     name: 'Химик',
-    games: 0,
+    games: 2,
     win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '0-0',
+    lose: 2,
+    ball_io: '1-9',
     score: 0,
-    last_game: ''
-  },
-  {
-    id: 7,
-    name: 'Новград',
-    games: 0,
-    win: 0,
-    draw: 0,
-    lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    last_game: 'ПП'
   }
 ]
 
