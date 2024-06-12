@@ -2,15 +2,15 @@
   <div class="q-pa-md">
     <q-table
       flat bordered
-      title="Турнирная таблица, XXIX чемпионат СЗФО"
+      hide-bottom
+      :title=tableTitle
       :rows="rows"
       :columns="columns"
       :pagination="initialPagination"
-      hide-bottom
-      row-key="name"
-      card-class="bg-grey-1 text-brown"
-      table-class="text-grey-8"
-      table-header-class="text-deep-orange-10"
+      row-key="id"
+      :card-class=tableCSS.cardClass
+      :table-class=tableCSS.tableClass
+      :table-header-class=tableCSS.tableHeaderClass
     />
   </div>
 </template>
@@ -141,6 +141,12 @@ export default {
   name: 'gameTable',
   setup () {
     return {
+      tableTitle: 'Турнирная таблица, XXIX чемпионат СЗФО',
+      tableCSS: {
+        cardClass: 'bg-grey-1 text-brown',
+        tableClass: 'text-grey-8',
+        tableHeaderClass: 'text-deep-orange-10'
+      },
       initialPagination: {
         sortBy: '',
         descending: true,

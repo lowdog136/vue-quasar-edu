@@ -9,56 +9,7 @@
         <q-item-label caption>{{ $store.state.NavigationListMenu[0].Caption }}</q-item-label>
       </q-item-section>
     </q-item>
-    <q-expansion-item
-      v-model="expanded"
-      icon="sports_soccer"
-      label="ФК Север"
-      caption="О клубе, новости, стадион"
-    >
-      <q-item clickable v-ripple :active="active" to="/NewsClub">
-        <q-item-section avatar>
-          <q-icon name="newspaper" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ $store.state.NavigationListMenu[2].Name }}</q-item-label>
-          <q-item-label caption>{{ $store.state.NavigationListMenu[2].Caption }}</q-item-label>
-        </q-item-section>
-        <q-item-section side top>
-          <!--            Блок "Новости клуба". Дата новости -->
-          <q-item-label v-for="NewsCard in NewsCards.slice(0,1)"
-                        :key="NewsCard.id" caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ NewsCard.datenews }}</span>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/HistoryClub">
-        <q-item-section avatar>
-          <q-icon name="people_alt" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ $store.state.NavigationListMenu[3].Name }}</q-item-label>
-          <q-item-label caption>{{ $store.state.NavigationListMenu[3].Caption }}</q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/Achievement">
-        <q-item-section avatar>
-          <q-icon name="celebration" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ $store.state.NavigationListMenu[15].Name }}</q-item-label>
-          <q-item-label caption>{{ $store.state.NavigationListMenu[15].Caption }}</q-item-label>
-        </q-item-section>
-      </q-item>
-<!--      Стадион-->
-      <q-expansion-item
-        v-model="expanded"
-        icon="stadium"
-        label="Стадион"
-        caption="Стадион"
-        to="/Stadium"
-        disable
-      />
-    </q-expansion-item>
+    <news-drawer-club />
 <!--    Текущие соревнования-->
     <q-expansion-item
       v-model="expanded"
@@ -190,6 +141,7 @@
 import { onMounted, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import NewsDrawerClub from 'components/NewsDrawer/Club/newsDrawerClub.vue'
 // NewsCard block
 const newsCardCollectionRef = collection(db, 'siteNews')
 const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
@@ -199,6 +151,7 @@ const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
 
 export default {
   name: 'NewsDrawer',
+  components: { NewsDrawerClub },
   setup () {
     const events = ref([])
     const NewsCards = ref([])
