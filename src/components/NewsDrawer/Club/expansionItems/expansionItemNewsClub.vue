@@ -28,10 +28,8 @@ export default {
   name: 'expansionItemNewsClub',
   components: { },
   setup () {
-    const events = ref([])
     const NewsCards = ref([])
-    const GamesNowEvents = ref([])
-    const GamesNowTables = ref([])
+    const active = ref([])
     onMounted(async () => {
       onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
         const fbNewsCards = []
@@ -47,9 +45,7 @@ export default {
     return {
       labelAboutSite: 'О сайте',
       NewsCards,
-      GamesNowEvents,
-      GamesNowTables,
-      events
+      active
     }
   },
   props: {
