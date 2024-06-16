@@ -10,46 +10,8 @@
       </q-item-section>
     </q-item>
     <news-drawer-club />
+    <news-drawer-event />
 <!--    Текущие соревнования-->
-    <q-expansion-item
-      v-model="expanded"
-      icon="emoji_events"
-      label="Текущие соревнования"
-      caption="Чемпионат СЗФО, Кубок СЗ"
-    >
-      <q-item clickable v-ripple :active="active" to="/GamesNow/GamesNowEvent">
-        <q-item-section avatar>
-          <q-icon name="calendar_month" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Календарь игр</q-item-label>
-          <q-item-label caption>Расписание матчей</q-item-label>
-        </q-item-section>
-        <q-item-section side top>
-          <!--            Блок "Календарь игр". Дата обновления календаря игр -->
-          <q-item-label v-for="GamesNowEvent in GamesNowEvents"
-                        :key="GamesNowEvent.id" caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ GamesNowEvent.datenews }}</span>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-item clickable v-ripple :active="active" to="/GamesNow/GamesNowTable">
-        <q-item-section avatar>
-          <q-icon name="table_chart" />
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>Турнирная таблица</q-item-label>
-          <q-item-label caption>Итоговая таблица</q-item-label>
-        </q-item-section>
-        <q-item-section side top>
-          <!--            Блок "Турнирная таблица". Дата обновления турнирной таблицы -->
-          <q-item-label v-for="GamesNowTable in GamesNowTables"
-                        :key="GamesNowTable.id" caption>
-            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">{{ GamesNowTable.datenews }}</span>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-expansion-item>
     <q-expansion-item
       v-model="expanded"
       icon="perm_identity"
@@ -142,6 +104,7 @@ import { onMounted, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from 'src/firebase'
 import NewsDrawerClub from 'components/NewsDrawer/Club/newsDrawerClub.vue'
+import NewsDrawerEvent from 'components/NewsDrawer/Events/newsDrawerEvent.vue'
 // NewsCard block
 const newsCardCollectionRef = collection(db, 'siteNews')
 const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
@@ -151,7 +114,7 @@ const eventCollectionQuery = query(eventCollectionRef, orderBy('date', 'desc'))
 
 export default {
   name: 'NewsDrawer',
-  components: { NewsDrawerClub },
+  components: { NewsDrawerEvent, NewsDrawerClub },
   setup () {
     const events = ref([])
     const NewsCards = ref([])
