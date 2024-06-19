@@ -29,7 +29,7 @@ export default {
   components: { DateCountdown, EventSZFO23 },
   setup () {
     return {
-      deadline: '2024-06-19 19:00:00',
+      deadline: '2024-07-03 17:00:00',
       deadlinemainColor: 'red',
       deadlinesecondFlipColor: 'white',
       deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
