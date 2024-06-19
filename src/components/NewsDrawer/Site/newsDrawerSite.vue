@@ -54,9 +54,6 @@ export default {
       expansionItemArray,
       propsHistoryArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

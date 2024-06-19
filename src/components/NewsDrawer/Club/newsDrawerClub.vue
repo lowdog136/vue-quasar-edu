@@ -82,9 +82,6 @@ export default {
       propsAchievementArray,
       propsStadiumArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

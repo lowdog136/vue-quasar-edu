@@ -3,7 +3,6 @@
     <news-drawer-home />
     <news-drawer-club />
     <news-drawer-event />
-<!--    Текущие соревнования-->
     <news-drawer-archive />
     <news-drawer-fanat />
     <news-drawer-contact />
@@ -22,15 +21,7 @@ import NewsDrawerArchive from 'components/NewsDrawer/Archives/newsDrawerArchive.
 
 export default {
   name: 'NewsDrawer',
-  components: { NewsDrawerArchive, NewsDrawerSite, NewsDrawerContact, NewsDrawerFanat, NewsDrawerHome, NewsDrawerEvent, NewsDrawerClub },
-  setup () {
-    return {
-      labelAboutSite: 'О сайте'
-    }
-  },
-  props: {
-    text: String
-  }
+  components: { NewsDrawerArchive, NewsDrawerSite, NewsDrawerContact, NewsDrawerFanat, NewsDrawerHome, NewsDrawerEvent, NewsDrawerClub }
 }
 </script>
 

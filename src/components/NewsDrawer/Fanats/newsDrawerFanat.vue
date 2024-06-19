@@ -1,11 +1,11 @@
 <template>
-  <q-item disable clickable v-ripple :active="active" :to=expansionFanatArray.to>
+  <q-item disable clickable v-ripple :active="active" :to=expansionItemArray.to>
     <q-item-section avatar>
-      <q-icon :name=expansionFanatArray.icon />
+      <q-icon :name=expansionItemArray.icon />
     </q-item-section>
     <q-item-section>
-      <q-item-label>{{ expansionFanatArray.label }}</q-item-label>
-      <q-item-label caption>{{ expansionFanatArray.caption }}</q-item-label>
+      <q-item-label>{{ expansionItemArray.label }}</q-item-label>
+      <q-item-label caption>{{ expansionItemArray.caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -17,7 +17,7 @@ export default {
   name: 'newsDrawerFanat',
   components: {},
   setup () {
-    const expansionFanatArray = ref({
+    const expansionItemArray = ref({
       icon: 'emoji_people',
       label: 'Фанаты',
       caption: 'Болельщики клуба',
@@ -26,11 +26,8 @@ export default {
 
     return {
       active: ref(false),
-      expansionFanatArray
+      expansionItemArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

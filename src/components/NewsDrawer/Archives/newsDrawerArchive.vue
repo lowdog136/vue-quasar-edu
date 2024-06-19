@@ -71,9 +71,6 @@ export default {
       propsVideoArray,
       propsGameBeforeArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

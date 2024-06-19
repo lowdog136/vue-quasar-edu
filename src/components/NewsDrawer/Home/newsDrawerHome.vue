@@ -1,11 +1,11 @@
 <template>
-  <q-item clickable v-ripple :active="active" :to=expansionHomeArray.to>
+  <q-item clickable v-ripple :active="active" :to=expansionItemArray.to>
     <q-item-section avatar>
-      <q-icon :name=expansionHomeArray.icon />
+      <q-icon :name=expansionItemArray.icon />
     </q-item-section>
     <q-item-section>
-      <q-item-label>{{ expansionHomeArray.label }}</q-item-label>
-      <q-item-label caption>{{ expansionHomeArray.caption }}</q-item-label>
+      <q-item-label>{{ expansionItemArray.label }}</q-item-label>
+      <q-item-label caption>{{ expansionItemArray.caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -17,7 +17,7 @@ export default {
   name: 'newsDrawerHome',
   components: {},
   setup () {
-    const expansionHomeArray = ref({
+    const expansionItemArray = ref({
       icon: 'home',
       label: 'Главная',
       caption: 'Основная страница',
@@ -26,11 +26,8 @@ export default {
 
     return {
       active: ref(false),
-      expansionHomeArray
+      expansionItemArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

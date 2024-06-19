@@ -1,11 +1,11 @@
 <template>
-  <q-item clickable v-ripple :active="active" :to=expansionContactArray.to>
+  <q-item clickable v-ripple :active="active" :to=expansionItemArray.to>
     <q-item-section avatar>
-      <q-icon :name=expansionContactArray.icon />
+      <q-icon :name=expansionItemArray.icon />
     </q-item-section>
     <q-item-section>
-      <q-item-label>{{ expansionContactArray.label }}</q-item-label>
-      <q-item-label caption>{{ expansionContactArray.caption }}</q-item-label>
+      <q-item-label>{{ expansionItemArray.label }}</q-item-label>
+      <q-item-label caption>{{ expansionItemArray.caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -17,7 +17,7 @@ export default {
   name: 'newsDrawerContact',
   components: {},
   setup () {
-    const expansionContactArray = ref({
+    const expansionItemArray = ref({
       icon: 'email',
       label: 'Контакты',
       caption: 'Связаться',
@@ -26,11 +26,8 @@ export default {
 
     return {
       active: ref(false),
-      expansionContactArray
+      expansionItemArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>

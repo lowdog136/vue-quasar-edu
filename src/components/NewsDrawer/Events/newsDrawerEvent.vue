@@ -54,9 +54,6 @@ export default {
       propsTablesArray,
       propsEventArray
     }
-  },
-  props: {
-    text: String
   }
 }
 </script>
