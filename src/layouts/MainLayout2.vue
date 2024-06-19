@@ -65,7 +65,6 @@
           Навигация
         </q-item-label>
           <NewsDrawer />
-          <NewsDrawerResultGame />
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -79,13 +78,12 @@
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
-import NewsDrawerResultGame from 'components/NewsDrawer/NewsDrawerResultGame.vue'
 import AuthPanel from 'components/Auth/AuthPanel'
 import MainToolbarTitle from 'components/MainPage/mainToolbarTitle.vue'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { MainToolbarTitle, AuthPanel, NewsDrawerResultGame, NewsDrawer },
+  components: { MainToolbarTitle, AuthPanel, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
