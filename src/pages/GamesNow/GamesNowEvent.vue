@@ -17,16 +17,16 @@
     </div>
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
-      <event-s-z-f-o23 />
+      <event-off-season />
     </p>
   </div>
 </template>
 
 <script>
-import EventSZFO23 from 'components/Events/eventSZFO23'
 import DateCountdown from 'components/Admin/dateCountdown.vue'
+import EventOffSeason from 'components/Events/eventOffSeason.vue'
 export default {
-  components: { DateCountdown, EventSZFO23 },
+  components: { EventOffSeason, DateCountdown },
   setup () {
     return {
       deadline: '2024-06-29 18:30:00',
