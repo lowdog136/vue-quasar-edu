@@ -71,7 +71,7 @@ import { db } from 'src/firebase'
 import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp.vue'
 
 export default {
-  name: 'eventSZFO23',
+  name: 'eventMonthList',
   components: { NewsCardDetailPopUp },
   data () {
     return {
