@@ -47,7 +47,7 @@
           <q-input
             v-model='newSiteUpdateDateUpd'
             type="date"
-            hint="add date"
+            hint="add datestamp"
             lazy-rules
           />
           <q-input
