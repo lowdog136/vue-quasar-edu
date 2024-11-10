@@ -18,6 +18,11 @@
             lazy-rules
           />
           <q-input
+            v-model='newSiteUpdateTour'
+            hint="add Tour"
+            lazy-rules
+          />
+          <q-input
             v-model='newSiteUpdateTitle'
             hint="add Title"
             lazy-rules
@@ -155,6 +160,27 @@
                         </q-item>
                     </q-list>
                 </div>
+              <q-separator inset />
+              <div class="text-subtitle2">
+                <q-list>
+                  <q-item >
+                    <q-item-section>
+                      <q-item-label>tour: {{ SiteUpdate.tour }}
+                        <q-popup-edit v-model="SiteUpdate.tour" class="bg-accent text-white" v-slot="scope">
+                          <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                            <template v-slot:append>
+                              <q-icon name="edit" />
+                            </template>
+                          </q-input>
+                        </q-popup-edit>
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section avatar>
+                      <q-btn @click="updateTour(SiteUpdate.id)"  flat size="xs" icon="done"/>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
                 <q-separator inset />
                 <!--        date edit-->
                 <div class="text-subtitle2">
@@ -284,6 +310,7 @@ const siteUpdateCollectionRef = collection(db, 'clubArchiveGames/archive/year')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 const newSiteUpdateEvent = ref('')
 const newSiteUpdateTitle = ref('')
+const newSiteUpdateTour = ref('')
 const newSiteUpdateScore = ref('')
 const newSiteUpdateBody = ref('')
 const newSiteUpdateYear = ref('')
@@ -295,6 +322,7 @@ const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
     event: newSiteUpdateEvent.value,
     title: newSiteUpdateTitle.value,
+    tour: newSiteUpdateTour.value,
     score: newSiteUpdateScore.value,
     body: newSiteUpdateBody.value,
     year: newSiteUpdateYear.value,
@@ -305,6 +333,7 @@ const addSiteUpdate = () => {
   })
   newSiteUpdateEvent.value = ''
   newSiteUpdateTitle.value = ''
+  newSiteUpdateTour.value = ''
   newSiteUpdateScore.value = ''
   newSiteUpdateYear.value = ''
   newSiteUpdateBody.value = ''
@@ -339,6 +368,7 @@ export default {
             id: doc.id,
             dateupd: doc.data().dateupd,
             title: doc.data().title,
+            tour: doc.data().tour,
             result: doc.data().result,
             score: doc.data().score,
             year: doc.data().year,
@@ -375,6 +405,13 @@ export default {
       })
       console.log('title update', SiteUpdates.value[index].title, 'SiteUpdate id', SiteUpdates.value[index].id)
     }
+    const updateTour = id => {
+      const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
+      updateDoc(doc(siteUpdateCollectionRef, id), {
+        tour: SiteUpdates.value[index].tour
+      })
+      console.log('tour update', SiteUpdates.value[index].title, 'SiteUpdate id', SiteUpdates.value[index].id)
+    }
     const updateScore = id => {
       const index = SiteUpdates.value.findIndex(SiteUpdate => SiteUpdate.id === id)
       updateDoc(doc(siteUpdateCollectionRef, id), {
@@ -405,6 +442,7 @@ export default {
     }
     return {
       newSiteUpdateEvent,
+      newSiteUpdateTour,
       newSiteUpdateTitle,
       newSiteUpdateScore,
       newSiteUpdateBody,
@@ -423,6 +461,7 @@ export default {
       updateYear,
       updateResult,
       updateTitle,
+      updateTour,
       updateScore,
       updateDate,
       updateBody,
