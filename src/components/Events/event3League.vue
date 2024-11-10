@@ -86,35 +86,9 @@ export default {
   setup () {
     const $q = useQuasar()
     const matchEvents = ref([])
-    const NewsCards = ref([])
     const NewsCardsJ = ref([])
-    const NewsCardsJl = ref([])
-    const NewsCardsAu = ref([])
-    const NewsCardsSep = ref([])
-    const NewsCardsA = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events/szfo/2024/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCards.value = fbEvents
-        console.log(NewsCards)
-      })
       onSnapshot(collection(db, '/events2'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
@@ -136,82 +110,13 @@ export default {
         NewsCardsJ.value = fbEvents
         console.log(NewsCardsJ)
       })
-      onSnapshot(collection(db, '/events/szfo/2024/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsJl.value = fbEvents
-        console.log(NewsCardsJl)
-      })
-      onSnapshot(collection(db, '/events/szfo/2024/august/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsAu.value = fbEvents
-        console.log(NewsCardsAu)
-      })
-      onSnapshot(collection(db, '/events/szfo/2024/september/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsSep.value = fbEvents
-        console.log(NewsCardsSep)
-      })
     })
 
     return {
       titleEvent: ['XXIV Турнир полпреда СЗФО'],
       titleEventTest: ['1', '2', '3'],
       titleEvent1: 'TitileEventValue1',
-      btnSize: 'xs',
-      NewsCards,
       NewsCardsJ,
-      NewsCardsJl,
-      NewsCardsA,
-      NewsCardsAu,
-      NewsCardsSep,
       matchEvents,
       titleMainEvent: '',
       side: ref('right'),
