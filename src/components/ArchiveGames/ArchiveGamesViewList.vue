@@ -73,6 +73,7 @@ import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
+  name: 'ArchiveGamesViewList',
   components: { BtnChoose, NewsCardDetailPopUp },
   data () {
     return {
