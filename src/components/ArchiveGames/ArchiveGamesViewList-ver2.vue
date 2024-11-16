@@ -25,44 +25,48 @@
         >{{ item.name }} = {{ item.value }}
           <div v-for="itema in archiveGames" :key="itema.id">
             <div v-show="itema.year === item.value">
-              <q-card class="my-card" flat bordered>
-                <q-card-section horizontal>
-                  <q-card-section >
-                    <div class="q-pa-md q-gutter-sm">
-                      <div class="text-overline">{{ itema.event }}</div>
-                      <div class="text-overline text-red-14">{{ itema.date }}</div>
-                      <div class="text-overline text-orange-14">{{ itema.tour }}</div>
-                    </div>
-                    <div class="q-pa-md q-gutter-sm">
-                      <q-avatar square size="100px" font-size="82px" color="teal" text-color="white" icon="directions" />
-                      <q-avatar square size="100px" text-color="primary">{{ itema.score }}</q-avatar>
-                      <q-avatar square size="100px" font-size="82px" color="teal" text-color="white" icon="directions" />
-                    </div>
-                    <div class="q-pa-md q-gutter-sm">
-                      <q-avatar square size="100px" font-size="82px" color="teal" text-color="white" icon="directions" />
-                      <q-avatar square size="100px" text-color="primary">{{ itema.score }}</q-avatar>
-                      <q-avatar square size="100px" font-size="82px" color="teal" text-color="white" icon="directions" />
-                    </div>
-                    <div class="text-h5 q-mt-sm q-mb-xs">{{ itema.title }} {{ itema.score }}</div>
-                  </q-card-section>
-                </q-card-section>
-                <q-separator />
-                <q-card-actions align="right">
-                  <NewsCardDetailPopUp
-                    :PopyUpSubTitleNews="itema.event"
-                    :PopyUpFullNews="itema.body"
-                    :PopyUpTitleNews="itema.title + itema.score"
-                    :PopyUpBtnColor="btnColor"
-                    :PopyUpBtnName="btnName"
-                    :PopyUpDivMain = "btnDivMain"
-                  />
-<!--                  <div class="row no-wrap items-center">-->
-<!--                    <q-rating size="18px" v-model="stars" :max="5" color="primary" />-->
-<!--                    <span class="text-caption text-grey q-ml-sm">4.2 (551)</span>-->
-<!--                  </div>-->
-                </q-card-actions>
-                <q-separator />
-              </q-card>
+              <div class="q-pa-md example-row-variable-width">
+                <div class="row">
+                  <div class="col1 text-red-14">
+                    {{ itema.date }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.event }}
+                  </div>
+                  <div class="col text-orange-14">
+                    {{ itema.tour }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col1">
+                    <q-icon name="style" size="3em" />
+                  </div>
+                  <div class="col2 col-md-auto">
+                    {{ itema.nameTeamHome }}
+                  </div>
+                  <div class="col1 col-md-auto">
+                    {{ itema.nameCityTeamHome }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.goalTeamHome }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col1">
+                    <q-icon name="style" size="3em" />
+                  </div>
+                  <div class="col2 col-md-auto">
+                    {{ itema.nameTeamAway }}
+                  </div>
+                  <div class="col1 col-md-auto">
+                    {{ itema.nameCityTeamAway }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.goalTeamAway }}
+                  </div>
+                </div>
+              </div>
+              <q-separator />
             </div>
           </div>
         </div>
@@ -75,14 +79,13 @@
 import { computed, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
-import NewsCardDetailPopUp from 'components/NewsCard/NewsCardDetailPopUp'
 import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 
 const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
   name: 'ArchiveGamesViewList-ver2',
-  components: { BtnChoose, NewsCardDetailPopUp },
+  components: { BtnChoose },
   data () {
     return {
       btnColor: 'blue-grey-10',
@@ -102,9 +105,19 @@ export default {
           title: doc.data().title,
           year: doc.data().year,
           event: doc.data().event,
-          icon_home: doc.data().icon_home,
-          icon_away: doc.data().icon_away,
+          nameTeamHome: doc.data().nameTeamHome,
+          nameTeamAway: doc.data().nameTeamAway,
+          nameCityTeamHome: doc.data().nameCityTeamHome,
+          nameCityTeamAway: doc.data().nameCityTeamAway,
+          iconHome: doc.data().iconHome,
+          iconAway: doc.data().iconAway,
+          goalTeamHome: doc.data().goalTeamHome,
+          goalTeamAway: doc.data().goalTeamAway,
           score: doc.data().score,
+          scoreTest: {
+            scoreHome: doc.data().scoreHome,
+            scoreAway: doc.data().scoreAway
+          },
           date: doc.data().date,
           result: doc.data().result,
           tour: doc.data().tour,
@@ -238,7 +251,13 @@ export default {
   }
 }
 </script>
-<style lang="sass" scoped>
-.my-card
-  width: 100%
+<style lang="sass">
+.example-row-variable-width
+  .row
+  .row > div
+    padding: 9px 15px
+    background: rgba(#999,.15)
+    border: 1px solid rgba(#999,.2)
+  .row + .row
+    margin-top: 1rem
 </style>
