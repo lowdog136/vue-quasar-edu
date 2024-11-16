@@ -18,58 +18,58 @@
       <q-space />
     </q-form>
     <q-card v-if="submitResult.length > 0" flat bordered class="row items-start">
-      <div
-        v-for="(item, index) in submitResult"
-        :key="index"
-        class="q-px-sm q-py-xs rounded-borders text-left text-overline text-black-9"
-      >{{ item.name }} = {{ item.value }}
-        <div v-for="itema in archiveGames" :key="itema.id">
-          <div v-show="itema.year === item.value">
-            <div class="q-pa-md example-row-variable-width">
-              <div class="row">
-                <div class="col1 text-red-14">
-                  {{ itema.date }}
+        <div
+          v-for="(item, index) in submitResult"
+          :key="index"
+          class="q-px-sm q-py-xs rounded-borders text-left text-overline text-black-9"
+        >{{ item.name }} = {{ item.value }}
+          <div v-for="itema in archiveGames" :key="itema.id">
+            <div v-show="itema.year === item.value">
+              <div class="q-pa-md example-row-variable-width">
+                <div class="row">
+                  <div class="col1 text-red-14">
+                    {{ itema.date }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.event }}
+                  </div>
+                  <div class="col text-orange-14">
+                    {{ itema.tour }}
+                  </div>
                 </div>
-                <div class="col1">
-                  {{ itema.event }}
+                <div class="row">
+                  <div class="col1">
+                    <q-icon name="style" size="3em" />
+                  </div>
+                  <div class="col2 col-md-auto">
+                    {{ itema.nameTeamHome }}
+                  </div>
+                  <div class="col1 col-md-auto">
+                    {{ itema.nameCityTeamHome }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.goalTeamHome }}
+                  </div>
                 </div>
-                <div class="col text-orange-14">
-                  {{ itema.tour }}
+                <div class="row">
+                  <div class="col1">
+                    <q-icon name="style" size="3em" />
+                  </div>
+                  <div class="col2 col-md-auto">
+                    {{ itema.nameTeamAway }}
+                  </div>
+                  <div class="col1 col-md-auto">
+                    {{ itema.nameCityTeamAway }}
+                  </div>
+                  <div class="col1">
+                    {{ itema.goalTeamAway }}
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col1">
-                  <q-icon name="style" size="3em" />
-                </div>
-                <div class="col2 col-md-auto">
-                  {{ itema.nameTeamHome }}
-                </div>
-                <div class="col1 col-md-auto">
-                  {{ itema.nameCityTeamHome }}
-                </div>
-                <div class="col1">
-                  {{ itema.goalTeamHome }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col1">
-                  <q-icon name="style" size="3em" />
-                </div>
-                <div class="col2 col-md-auto">
-                  {{ itema.nameTeamAway }}
-                </div>
-                <div class="col1 col-md-auto">
-                  {{ itema.nameCityTeamAway }}
-                </div>
-                <div class="col1">
-                  {{ itema.goalTeamAway }}
-                </div>
-              </div>
+              <q-separator />
             </div>
-            <q-separator />
           </div>
         </div>
-      </div>
     </q-card>
     <q-space />
   </div>
