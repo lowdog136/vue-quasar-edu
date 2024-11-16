@@ -302,7 +302,7 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { mapActions, mapGetters } from 'vuex'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc } from 'firebase/firestore'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc, Timestamp } from 'firebase/firestore'
 import { db } from 'src/firebase'
 import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 
@@ -328,7 +328,7 @@ const addSiteUpdate = () => {
     year: newSiteUpdateYear.value,
     result: newSiteUpdateResult.value,
     date: newSiteUpdateDate.value,
-    datestamp: Date.now(),
+    datestamp: Timestamp.now(),
     done: true
   })
   newSiteUpdateEvent.value = ''
