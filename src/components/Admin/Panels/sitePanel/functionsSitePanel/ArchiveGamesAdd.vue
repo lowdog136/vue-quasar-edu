@@ -12,10 +12,12 @@
             hint="add Year"
             lazy-rules
           />
-          <q-input
-            v-model='newSiteUpdateEvent'
-            hint="add Event"
-            lazy-rules
+          <adm-select
+            v-model="newSiteUpdateEvent"
+            :options="newSiteUpdateEvent"
+            :select-color="green"
+            :select-label="selectLabel[0]"
+            :select-name="selectName[0]"
           />
           <q-input
             v-model='newSiteUpdateTour'
@@ -23,13 +25,35 @@
             lazy-rules
           />
           <q-input
-            v-model='newSiteUpdateTitle'
-            hint="add Title"
+            v-model='newSiteUpdateNameTeamHome'
+            hint="add nameTeamHome"
             lazy-rules
           />
           <q-input
-            v-model='newSiteUpdateScore'
-            hint="add Score"
+            v-model='newSiteUpdateNameCityTeamHome'
+            hint="add nameCityTeamHome"
+            lazy-rules
+          />
+          <q-input
+            v-model='newSiteUpdateGoalTeamHome'
+            hint="add goalTeamHome"
+            lazy-rules
+          />
+          <q-input
+            v-model='newSiteUpdateNameTeamAway'
+            hint="add nameTeamAway"
+            autogrow
+            lazy-rules
+          />
+          <q-input
+            v-model='newSiteUpdateNameCityTeamAway'
+            hint="add nameCityTeamAway"
+            autogrow
+            lazy-rules
+          />
+          <q-input
+            v-model='newSiteUpdateGoalTeamAway'
+            hint="add goalTeamAway"
             autogrow
             lazy-rules
           />
@@ -305,10 +329,11 @@ import { mapActions, mapGetters } from 'vuex'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc, Timestamp } from 'firebase/firestore'
 import { db } from 'src/firebase'
 import BtnAdd from 'components/Admin/UI/btnAdd.vue'
+import AdmSelect from 'components/Admin/UI/admSelect.vue'
 
 const siteUpdateCollectionRef = collection(db, 'clubArchiveGames/archive/year')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
-const newSiteUpdateEvent = ref('')
+const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
 const newSiteUpdateTitle = ref('')
 const newSiteUpdateTour = ref('')
 const newSiteUpdateScore = ref('')
@@ -317,16 +342,26 @@ const newSiteUpdateYear = ref('')
 const newSiteUpdateResult = ref('')
 const newSiteUpdateDate = ref('')
 const newSiteUpdateDateUpd = ref('')
+const newSiteUpdateNameTeamHome = ref('')
+const newSiteUpdateNameTeamAway = ref('')
+const newSiteUpdateNameCityTeamHome = ref('')
+const newSiteUpdateNameCityTeamAway = ref('')
+const newSiteUpdateGoalTeamHome = ref('')
+const newSiteUpdateGoalTeamAway = ref('')
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
     event: newSiteUpdateEvent.value,
     title: newSiteUpdateTitle.value,
     tour: newSiteUpdateTour.value,
-    score: newSiteUpdateScore.value,
     body: newSiteUpdateBody.value,
     year: newSiteUpdateYear.value,
-    result: newSiteUpdateResult.value,
+    nameTeamHome: newSiteUpdateNameTeamHome.value,
+    nameTeamAway: newSiteUpdateNameTeamAway.value,
+    nameCityTeamHome: newSiteUpdateNameCityTeamHome.value,
+    nameCityTeamAway: newSiteUpdateNameCityTeamAway.value,
+    goalTeamHome: newSiteUpdateGoalTeamHome.value,
+    goalTeamAway: newSiteUpdateGoalTeamAway.value,
     date: newSiteUpdateDate.value,
     datestamp: Timestamp.now(),
     done: true
@@ -334,11 +369,15 @@ const addSiteUpdate = () => {
   newSiteUpdateEvent.value = ''
   newSiteUpdateTitle.value = ''
   newSiteUpdateTour.value = ''
-  newSiteUpdateScore.value = ''
+  newSiteUpdateNameTeamAway.value = ''
   newSiteUpdateYear.value = ''
   newSiteUpdateBody.value = ''
   newSiteUpdateDate.value = ''
-  newSiteUpdateResult.value = ''
+  newSiteUpdateNameTeamHome.value = ''
+  newSiteUpdateNameCityTeamHome.value = ''
+  newSiteUpdateNameCityTeamAway.value = ''
+  newSiteUpdateGoalTeamHome.value = ''
+  newSiteUpdateGoalTeamHome.value = ''
   newSiteUpdateDateUpd.value = ''
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
@@ -350,11 +389,13 @@ const deleteSiteUpdate = id => {
 
 export default {
   name: 'NewsSiteContentAdd',
-  components: { BtnAdd },
+  components: { AdmSelect, BtnAdd },
   data () {
     return {
       btnIcon: 'post_add',
-      btnName: 'add update'
+      btnName: 'add update',
+      selectName: ['event', 'color'],
+      selectLabel: ['event', 'color']
     }
   },
   setup () {
@@ -367,6 +408,12 @@ export default {
           const SiteUpdate = {
             id: doc.id,
             dateupd: doc.data().dateupd,
+            nameTeamHome: doc.data().nameTeamHome,
+            nameTeamAway: doc.data().nameTeamAway,
+            nameCityTeamHome: doc.data().nameCityTeamHome,
+            nameCityTeamAway: doc.data().nameCityTeamAway,
+            goalTeamHome: doc.data().goalTeamHome,
+            goalTeamAway: doc.data().goalTeamAway,
             title: doc.data().title,
             tour: doc.data().tour,
             result: doc.data().result,
@@ -450,6 +497,12 @@ export default {
       newSiteUpdateDate,
       newSiteUpdateResult,
       newSiteUpdateDateUpd,
+      newSiteUpdateNameTeamHome,
+      newSiteUpdateNameTeamAway,
+      newSiteUpdateNameCityTeamHome,
+      newSiteUpdateGoalTeamHome,
+      newSiteUpdateNameCityTeamAway,
+      newSiteUpdateGoalTeamAway,
       done: ref(true),
       redModel: ref(false),
       getYear2024: ref(false),

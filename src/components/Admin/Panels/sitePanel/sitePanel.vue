@@ -24,7 +24,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="site">
-          <div class="text-h6">Добавить новость о сайте:</div>
+          <div class="text-h6">Добавить новость об обновлении на сайте:</div>
           <NewsSiteContentAdd />
         </q-tab-panel>
 

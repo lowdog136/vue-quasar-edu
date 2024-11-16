@@ -253,7 +253,6 @@ export default {
 </script>
 <style lang="sass">
 .example-row-variable-width
-  .row
   .row > div
     padding: 9px 15px
     background: rgba(#999,.15)
