@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-form @submit="onSubmit" class="q-gutter-md">
       <div class="bg-grey-2 q-pa-sm wrap rounded-borders">
-        Выберите год - это 2я версия отображения архива:
+        Выберите год:
         <q-separator color="primary"/>
         <q-option-group
           name="выбран"
@@ -84,7 +84,7 @@ import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
-  name: 'ArchiveGamesViewList-ver2',
+  name: 'ArchiveGamesViewList',
   components: { BtnChoose },
   data () {
     return {
