@@ -17,16 +17,16 @@
     </div>
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
-      <event3-league />
+      <event-off-season />
     </p>
   </div>
 </template>
 
 <script>
 import DateCountdown from 'components/Admin/dateCountdown.vue'
-import Event3League from 'components/Events/event3League.vue'
+import EventOffSeason from 'components/Events/eventOffSeason.vue'
 export default {
-  components: { Event3League, DateCountdown },
+  components: { EventOffSeason, DateCountdown },
   setup () {
     return {
       deadline: '2024-11-11 16:00:00',

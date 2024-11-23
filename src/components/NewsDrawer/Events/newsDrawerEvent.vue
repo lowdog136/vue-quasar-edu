@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
 import { ref } from 'vue'
 import ExpansionItemGamesNowTable from 'components/NewsDrawer/Events/expansionItems/expansionItemGamesNowTable.vue'
 import ExpansionItemGamesNowEvent from 'components/NewsDrawer/Events/expansionItems/expansionItemGamesNowEvent.vue'
@@ -33,7 +32,7 @@ export default {
     const expansionItemArray = ref({
       icon: 'emoji_events',
       label: 'Текущие соревнования',
-      caption: 'Третья лига, Финальный этап'
+      caption: 'Сезон 2024 окончен'
     })
     const propsTablesArray = ref({
       label: 'Турнирная таблица',

@@ -154,7 +154,7 @@ export default {
     )
 
     return {
-      preferred: ref('2010'),
+      preferred: ref('2024'),
       Winirs,
       myTest,
       archiveGames,

@@ -1,14 +1,15 @@
 <template>
   <div class="q-pa-md">
-    <game-table />
+    <event-off-season />
+<!--    <game-table />-->
   </div>
 </template>
 
 <script>
-import GameTable from 'components/Admin/Tables/gameTable.vue'
+import EventOffSeason from 'components/Events/eventOffSeason.vue'
 
 export default {
-  components: { GameTable },
+  components: { EventOffSeason },
   setup () {
     return {}
   }
