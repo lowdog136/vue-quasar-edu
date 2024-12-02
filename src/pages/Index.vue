@@ -1,8 +1,8 @@
 <template>
   <q-page class="flex flex-center">
     <img
-      alt="Quasar logo"
-      src="../assets/image/fcsever_logo.png"
+      alt="SeverFans site logo"
+      src="../assets/image/fcsever_logo_ny.png"
       style="width: 500px; height: 500px"
     >
   </q-page>
