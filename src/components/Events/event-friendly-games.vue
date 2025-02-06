@@ -3,7 +3,7 @@
     <q-timeline :layout="layout" :side="side" color="secondary">
       <q-timeline-entry heading>
         <div class="title" style="color: #ae0000">
-          Февраль, 2024
+          Февраль, 2025
         </div>
       </q-timeline-entry>
       <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
@@ -43,7 +43,7 @@ import { db } from 'src/firebase'
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  name: 'eventPred24',
+  name: 'event-friendly-games',
   components: {},
   data () {
     return {
@@ -65,7 +65,7 @@ export default {
     const NewsCards = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, 'events/polpred/2024'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/events/friendly/2025'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {

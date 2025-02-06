@@ -43,7 +43,7 @@ import { db } from 'src/firebase'
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  name: 'eventPred',
+  name: 'eventPred2',
   components: {},
   data () {
     return {

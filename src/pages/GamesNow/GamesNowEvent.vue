@@ -17,26 +17,26 @@
     </div>
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
-      <event-off-season />
+      <event-friendly-games />
     </p>
   </div>
 </template>
 
 <script>
 import DateCountdown from 'components/Admin/dateCountdown.vue'
-import EventOffSeason from 'components/Events/eventOffSeason.vue'
+import EventFriendlyGames from 'components/Events/event-friendly-games.vue'
 export default {
-  components: { EventOffSeason, DateCountdown },
+  components: { EventFriendlyGames, DateCountdown },
   setup () {
     return {
-      deadline: '2024-11-11 16:00:00',
+      deadline: '2025-02-08 17:30:00',
       deadlinemainColor: 'red',
       deadlinesecondFlipColor: 'white',
       deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
       titleEvent: ['Кубок СЗФО'],
       bodyMainEvent: '',
       btnSize: 'xs',
-      titleMainEvent: 'Календарь игр ФК "Север" в 2024 году',
+      titleMainEvent: 'Календарь игр ФК "Север" в 2025 году',
       titleCaption: ''
     }
   }

@@ -32,7 +32,7 @@ export default {
     const expansionItemArray = ref({
       icon: 'emoji_events',
       label: 'Текущие соревнования',
-      caption: 'Сезон 2024 окончен'
+      caption: 'XXVI турнир полпреда СЗФО'
     })
     const propsTablesArray = ref({
       label: 'Турнирная таблица',
