@@ -3,7 +3,7 @@
     <q-timeline :layout="layout" :side="side" color="secondary">
       <q-timeline-entry heading>
         <div class="title" style="color: #ae0000">
-          Февраль, 2025
+          февраль
         </div>
       </q-timeline-entry>
       <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
@@ -20,7 +20,7 @@
           {{ item.tour}}
           {{ item.mounth}}
         </div>
-        <div>
+        <div style="font-size: 10pt; color: #ae0000">
           {{ item.title }}
           <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
           <q-item-label caption>планируют посетить: 0 </q-item-label>

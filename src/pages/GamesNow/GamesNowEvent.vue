@@ -18,6 +18,7 @@
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
       <event-friendly-games />
+      <event-pred2 />
     </p>
   </div>
 </template>
@@ -25,8 +26,9 @@
 <script>
 import DateCountdown from 'components/Admin/dateCountdown.vue'
 import EventFriendlyGames from 'components/Events/event-friendly-games.vue'
+import EventPred2 from 'components/Events/eventPred2.vue'
 export default {
-  components: { EventFriendlyGames, DateCountdown },
+  components: { EventPred2, EventFriendlyGames, DateCountdown },
   setup () {
     return {
       deadline: '2025-02-08 17:30:00',

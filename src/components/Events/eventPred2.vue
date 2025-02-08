@@ -1,32 +1,32 @@
 <template>
-  <div class="q-px-lg q-pb-md">
-    <q-timeline color="secondary">
-      <q-timeline-entry heading v-for="items in NewsCards" :key="items.id">
-        {{ items.title }}
+  <div class="q-pa-lg">
+    <q-timeline :layout="layout" :side="side" color="secondary">
+      <q-timeline-entry heading>
+        <div class="title" style="color: #ae0000">
+          февраль
+        </div>
       </q-timeline-entry>
-      <div>
-        <q-timeline-entry v-for="items in eventsMounthMarch" :key="items.id"
-                          :title="items.title"
-                          subtitle="March, 1986"
-        >
-          <div >
-            {{ items.mounth }}
-            --
+      <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
+                        :title="item.eventName"
+                        :subtitle="item.date"
+                        :color="item.color"
+                        :icon="item.icon"
+                        side="left"
+      >
+        <div>
+          <div style="font-size: 10pt; color: #414040">
+            {{ item.place}}
           </div>
-        </q-timeline-entry>
-      </div>
+          {{ item.tour}}
+          {{ item.mounth}}
+        </div>
+        <div style="font-size: 10pt; color: #ae0000">
+          {{ item.title }}
+          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
+          <q-item-label caption>планируют посетить: 0 </q-item-label>
+        </div>
+      </q-timeline-entry>
     </q-timeline>
-  </div>
-  <div>
-    <div v-for="items in NewsCards" :key="items.id">
-      {{ items.title }}
-    </div>
-    <div v-for="items in eventsMounthMarch" :key="items.id">
-      {{ items.title }}-{{ items.mounth }}
-    </div>
-    <div v-for="items in eventsMounthFebruary" :key="items.id">
-      {{ items.title }}-{{ items.mounth }}
-    </div>
   </div>
 </template>
 
@@ -43,14 +43,14 @@ import { db } from 'src/firebase'
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 
 export default {
-  name: 'eventPred2',
+  name: 'eventPred24',
   components: {},
   data () {
     return {
       games: [
         {
           id: 1,
-          mounth: 'Февраль, 2023'
+          mounth: 'Февраль'
         },
         {
           id: 1,
@@ -63,17 +63,13 @@ export default {
     const $q = useQuasar()
     const matchEvents = ref([])
     const NewsCards = ref([])
-    const eventsMounthMarch = ref([])
-    const eventsMounthFebruary = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events2/polpred/2023'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, 'events/polpred/2025'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
             id: doc.id,
-            february: doc.data().february,
-            march: doc.data().march,
             title: doc.data().title,
             color: doc.data().color,
             date: doc.data().date,
@@ -81,7 +77,9 @@ export default {
             tour: doc.data().tour,
             eventName: doc.data().eventName,
             time: doc.data().time,
-            icon: doc.data().icon
+            icon: doc.data().icon,
+            scorer: doc.data().scorer,
+            place: doc.data().place
           }
           fbEvents.push(listDateEvent)
         })
@@ -89,59 +87,12 @@ export default {
         console.log(NewsCards)
       })
     })
-    onMounted(async () => {
-      // eventsMounthMarch Module
-      onSnapshot(collection(db, '/events2/polpred/2023/march/games'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon
-          }
-          fbEvents.push(listDateEvent)
-        })
-        eventsMounthMarch.value = fbEvents
-        console.log(eventsMounthMarch)
-      })
-    })
-    onMounted(async () => {
-      // eventsMounth Module
-      onSnapshot(collection(db, '/events2/polpred/2023/february/games'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            february: doc.data().february,
-            march: doc.data().march,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon
-          }
-          fbEvents.push(listDateEvent)
-        })
-        eventsMounthFebruary.value = fbEvents
-        console.log(eventsMounthFebruary)
-      })
-    })
+
     return {
       titleEvent: ['XXIV Турнир полпреда СЗФО'],
       titleEventTest: ['1', '2', '3'],
       titleEvent1: 'TitileEventValue1',
       btnSize: 'xs',
-      eventsMounthMarch,
-      eventsMounthFebruary,
       NewsCards,
       matchEvents,
       titleMainEvent: '',
