@@ -31,7 +31,7 @@ export default {
   components: { EventPred2, EventFriendlyGames, DateCountdown },
   setup () {
     return {
-      deadline: '2025-02-08 17:30:00',
+      deadline: '2025-02-17 10:45:00',
       deadlinemainColor: 'red',
       deadlinesecondFlipColor: 'white',
       deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
