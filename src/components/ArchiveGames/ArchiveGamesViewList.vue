@@ -229,6 +229,12 @@ export default {
           label: '2024',
           value: '2024',
           done: true
+        },
+        {
+          id: 12,
+          label: '2025',
+          value: '2025',
+          done: true
         }
 
       ],
