@@ -1,10 +1,6 @@
 <template>
   <div class="q-pa-sm wrap rounded-borders">
     <eventMonthList />
-    <q-page>
-      <GoogleSignIn />
-    </q-page>
-
   </div>
 </template>
 
@@ -14,7 +10,6 @@ import { computed, onMounted, ref } from 'vue'
 import { collection, onSnapshot, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
 import eventMonthList from 'components/Events/eventMonthList.vue'
-import GoogleSignIn from 'components/Auth/GoogleSignIn.vue'
 
 // import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
 // const newsCardCollectionRef = collection(db, 'events', 'polpred')
@@ -24,7 +19,7 @@ import GoogleSignIn from 'components/Auth/GoogleSignIn.vue'
 
 export default {
   name: 'Test',
-  components: { GoogleSignIn, eventMonthList },
+  components: { eventMonthList },
   data () {
     return {
       btnColor: 'blue-grey-10',

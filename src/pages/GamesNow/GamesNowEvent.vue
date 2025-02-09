@@ -6,12 +6,12 @@
         <q-separator color="orange" inset />
      </p>
       <p>
-        <date-countdown
-          :mainColor = deadlinemainColor
+        <date-countdown v-for="countdown in GamesNowEvents" :key="countdown.id"
+          :mainColor='countdown.datenews'
           :secondFlipColor = deadlinesecondFlipColor
           :showSeconds="false"
           :labels=deadlinelabels
-          :deadline = deadline
+          :deadline = 'countdown.datenews'
         />
       </p>
     </div>
@@ -27,11 +27,32 @@
 import DateCountdown from 'components/Admin/dateCountdown.vue'
 import EventFriendlyGames from 'components/Events/event-friendly-games.vue'
 import EventPred2 from 'components/Events/eventPred2.vue'
+import { ref, onMounted } from 'vue'
+import { collection, onSnapshot, orderBy } from 'firebase/firestore'
+import { db } from 'src/firebase'
+
 export default {
+  name: 'GamesNowEvent',
   components: { EventPred2, EventFriendlyGames, DateCountdown },
   setup () {
+    const NewsCards = ref([])
+    const GamesNowEvents = ref([])
+    onMounted(async () => {
+      onSnapshot(collection(db, '/events/countdown/dateUpdate/'), orderBy('date', 'desc'), (querySnapshot) => {
+        const fbGamesNowEvents = []
+        querySnapshot.forEach((doc) => {
+          const GamesNowEvent = {
+            datenews: doc.data().datenews
+          }
+          fbGamesNowEvents.push(GamesNowEvent)
+        })
+        GamesNowEvents.value = fbGamesNowEvents
+        console.log('Countdown date update', GamesNowEvents)
+      })
+    })
     return {
-      deadline: '2025-02-17 10:45:00',
+      NewsCards,
+      GamesNowEvents,
       deadlinemainColor: 'red',
       deadlinesecondFlipColor: 'white',
       deadlinelabels: '{ days: \'\', hours: \'\', minutes: \'\', seconds: \'\', }',
