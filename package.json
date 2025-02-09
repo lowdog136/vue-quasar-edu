@@ -21,6 +21,7 @@
     "serve": "^13.0.2",
     "uuid": "^8.3.2",
     "vue": "^3.0.0",
+    "vue-cal": "^4.10.2",
     "vue-router": "^4.0.0",
     "vue3-flip-countdown": "^0.1.6",
     "vuex": "^4.0.1"

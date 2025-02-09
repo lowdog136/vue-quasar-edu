@@ -10,19 +10,6 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <!--         <q-btn
-                  flat
-                  dense
-                  round
-                  icon="scoreboard"
-                  aria-label="Menu"
-             @click="toggleLeftDrawer"
-                />
-        <q-footer reveal elevated>
-                  <q-toolbar class="glossy">
-                    <q-toolbar-title>Footer</q-toolbar-title>
-                  </q-toolbar>
-                </q-footer>-->
         <q-toolbar-title>
           <main-toolbar-title />
         </q-toolbar-title>
@@ -31,24 +18,13 @@
             <q-dialog v-model="dialog">
               <q-card>
                 <q-card-section>
-                  <div class="text-h6"><AuthPanel /></div>
+                  <div class="text-h6"><GoogleSignIn /></div>
                 </q-card-section>
                 <q-card-section class="row items-center q-gutter-sm">
                   <q-btn v-close-popup label="Закрыть" color="primary" />
                 </q-card-section>
               </q-card>
             </q-dialog>
-          <q-btn flat dense round icon="logout" @click="dialogLogOut = true" />
-          <q-dialog v-model="dialogLogOut">
-            <q-card>
-              <q-card-section>
-                <div class="text-h6">До свидания, {{ $store.getters.userName }} </div>
-              </q-card-section>
-              <q-card-section class="row items-center q-gutter-sm">
-                <q-btn v-close-popup label="Выйти ?" to="/" @click="$store.dispatch('logout')" color="primary" />
-              </q-card-section>
-            </q-card>
-          </q-dialog>
         </div>
       </q-toolbar>
     </q-header>
@@ -78,12 +54,12 @@
 import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
-import AuthPanel from 'components/Auth/AuthPanel'
 import MainToolbarTitle from 'components/MainPage/mainToolbarTitle.vue'
+import GoogleSignIn from 'components/Auth/GoogleSignIn.vue'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { MainToolbarTitle, AuthPanel, NewsDrawer },
+  components: { GoogleSignIn, MainToolbarTitle, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)

@@ -8,7 +8,7 @@
         <q-icon color="primary" name="account_circle" />
       </q-item-section>
         <q-item-section>
-          <q-item-label>Привет, {{ $store.getters.userName }}</q-item-label>
+          <q-item-label>Привет, {{ user.displayName }}</q-item-label>
           <q-item-label caption>
             Set the content filtering level to restrict
             apps that can be downloaded
@@ -110,7 +110,7 @@
 <script>
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
+import { useStore, mapState } from 'vuex'
 
 export default defineComponent({
   name: 'UserProfile',
@@ -138,7 +138,11 @@ export default defineComponent({
         leftDrawerOpenResultGame.value = !leftDrawerOpenResultGame.value
       }
     }
+  },
+  computed: {
+    ...mapState(['user'])
   }
+
 })
 </script>
 

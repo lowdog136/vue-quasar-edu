@@ -4,7 +4,7 @@
       <q-item-label header>{{ labelHeader }}</q-item-label>
       <q-item >
         <q-item-section>
-          <q-item-label>Привет, {{ $store.getters.userName }} </q-item-label>
+          <q-item-label>Привет, {{ $store.getters.userName }} {{ $store.getters.displayName }}</q-item-label>
           <q-item-label caption>
             {{ labelCaption }}
           </q-item-label>
