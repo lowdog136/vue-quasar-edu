@@ -12,8 +12,8 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import { auth, GoogleAuthProvider, signOut } from 'src/firebase'
-import { signInWithPopup } from 'firebase/auth'
+import { auth, GoogleAuthProvider } from 'src/firebase'
+import { signInWithPopup, signOut } from 'firebase/auth'
 export default {
   setup () {
     const logout = async () => {
