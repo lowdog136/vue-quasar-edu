@@ -1,13 +1,8 @@
 <template>
   <div class="q-pa-lg">
     <q-timeline :layout="layout" :side="side" color="secondary">
-      <q-timeline-entry heading>
-        <div class="title" style="color: #ae0000">
-          февраль
-        </div>
-      </q-timeline-entry>
       <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
-        :title="item.eventName"
+        :title="item.event"
         :subtitle="item.date"
         :color="item.color"
         :icon="item.icon"
@@ -21,7 +16,7 @@
           {{ item.mounth}}
         </div>
         <div style="font-size: 10pt; color: #ae0000">
-          {{ item.title }}
+          {{ item.nameTeamHome }} {{ item.nameCityTeamHome }}  {{ item.goalTeamHome }} - {{ item.goalTeamAway }} {{ item.nameTeamAway }} {{ item.nameCityTeamAway}}
           <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
           <q-item-label caption>планируют посетить: 0 </q-item-label>
         </div>
@@ -65,7 +60,7 @@ export default {
     const NewsCards = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/events/friendly/2025'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(collection(db, '/all-games'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -75,10 +70,16 @@ export default {
             date: doc.data().date,
             mounth: doc.data().mounth,
             tour: doc.data().tour,
-            eventName: doc.data().eventName,
+            event: doc.data().event,
             time: doc.data().time,
             icon: doc.data().icon,
             scorer: doc.data().scorer,
+            nameTeamHome: doc.data().nameTeamHome,
+            nameCityTeamHome: doc.data().nameCityTeamHome,
+            nameCityTeamAway: doc.data().nameCityTeamAway,
+            nameTeamAway: doc.data().nameTeamAway,
+            goalTeamHome: doc.data().goalTeamHome,
+            goalTeamAway: doc.data().goalTeamAway,
             place: doc.data().place
           }
           fbEvents.push(listDateEvent)

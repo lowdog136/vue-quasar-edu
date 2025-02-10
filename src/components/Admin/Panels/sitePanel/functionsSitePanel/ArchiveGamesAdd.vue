@@ -331,9 +331,10 @@ import { db } from 'src/firebase'
 import BtnAdd from 'components/Admin/UI/btnAdd.vue'
 import AdmSelect from 'components/Admin/UI/admSelect.vue'
 
-const siteUpdateCollectionRef = collection(db, 'clubArchiveGames/archive/year')
+// const siteUpdateCollectionRef = collection(db, 'clubArchiveGames/archive/year')
+const siteUpdateCollectionRef = collection(db, '/all-games')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
-const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
+const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
 const newSiteUpdateTitle = ref('')
 const newSiteUpdateTour = ref('')
 const newSiteUpdateScore = ref('')

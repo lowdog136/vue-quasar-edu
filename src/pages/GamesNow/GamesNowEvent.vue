@@ -17,6 +17,7 @@
     </div>
     <p class="text-body1" style="text-align: center">
         {{bodyMainEvent }}
+      <event-test />
       <event-friendly-games />
       <event-pred2 />
     </p>
@@ -30,10 +31,11 @@ import EventPred2 from 'components/Events/eventPred2.vue'
 import { ref, onMounted } from 'vue'
 import { collection, onSnapshot, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
+import EventTest from 'components/Events/eventTest.vue'
 
 export default {
   name: 'GamesNowEvent',
-  components: { EventPred2, EventFriendlyGames, DateCountdown },
+  components: { EventTest, EventPred2, EventFriendlyGames, DateCountdown },
   setup () {
     const NewsCards = ref([])
     const GamesNowEvents = ref([])
