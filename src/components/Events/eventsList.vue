@@ -2,11 +2,11 @@
   <div class="q-pa-lg">
     <q-timeline :layout="layout" :side="side" color="secondary">
       <q-timeline-entry v-for="item in NewsCards.slice(id)" :key="item.id"
-        :title="item.event"
-        :subtitle="item.date"
-        :color="item.color"
-        :icon="item.icon"
-        side="left"
+                        :title="item.event"
+                        :subtitle="item.date"
+                        :color="item.color"
+                        :icon="item.icon"
+                        side="left"
       >
         <div>
           <div style="font-size: 10pt; color: #414040">
@@ -28,31 +28,17 @@
 <script>
 import { useQuasar } from 'quasar'
 import { computed, onMounted, ref } from 'vue'
-import { collection, onSnapshot, orderBy } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from 'src/firebase'
 
-// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-// const newsCardCollectionRef = collection(db, 'events', 'polpred')
-// const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
-
-// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
+const siteUpdateCollectionRef = collection(db, '/all-games')
+const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('datestamp', 'asc'))
 
 export default {
-  name: 'event-friendly-games',
+  name: 'eventsList',
   components: {},
   data () {
-    return {
-      games: [
-        {
-          id: 1,
-          mounth: 'Февраль, 2024'
-        },
-        {
-          id: 1,
-          mounth: 'Март, 2023'
-        }
-      ]
-    }
+    return {}
   },
   setup () {
     const $q = useQuasar()
@@ -60,7 +46,7 @@ export default {
     const NewsCards = ref([])
     onMounted(async () => {
       // NewsCard Module
-      onSnapshot(collection(db, '/all-games'), orderBy('date', 'desc'), (querySnapshot) => {
+      onSnapshot(siteUpdateCollectionQuery, (querySnapshot) => {
         const fbEvents = []
         querySnapshot.forEach((doc) => {
           const listDateEvent = {
@@ -80,6 +66,7 @@ export default {
             nameTeamAway: doc.data().nameTeamAway,
             goalTeamHome: doc.data().goalTeamHome,
             goalTeamAway: doc.data().goalTeamAway,
+            victory: doc.data().victory,
             place: doc.data().place
           }
           fbEvents.push(listDateEvent)
