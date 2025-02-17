@@ -86,28 +86,28 @@ const rows = [
     text_c: 'primary',
     name: 'Север',
     color: 'primary',
-    games: 0,
-    win: 0,
+    games: 1,
+    win: 1,
     draw: 0,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: '-'
+    ball_io: '2-1',
+    score: 3,
+    last_game: 'В'
   },
   {
     id: 2,
     text: 'text-left',
     name: 'СШOP №1 Кристал',
-    games: 0,
+    games: 1,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: '-'
+    ball_io: '3-3',
+    score: 1,
+    last_game: 'Н'
   },
   {
-    id: 3,
+    id: 4,
     text: 'text-left',
     name: 'Псков',
     games: 0,
@@ -119,28 +119,28 @@ const rows = [
     last_game: '-'
   },
   {
-    id: 4,
+    id: 3,
     name: 'Динамо-2',
     text: 'text-left',
-    games: 0,
+    games: 1,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: '-'
+    ball_io: '3-3',
+    score: 1,
+    last_game: 'Н'
   },
   {
     id: 5,
     text: 'text-left',
     name: 'Звезда',
-    games: 0,
+    games: 1,
     win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '0-0',
+    lose: 1,
+    ball_io: '1-2',
     score: 0,
-    last_game: '-'
+    last_game: 'П'
   }
 ]
 
