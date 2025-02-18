@@ -11,16 +11,16 @@
           <div class="text-h6">Добавить информацию о игре в архив:</div>
           <ArchiveGamesAdd />
         </q-tab-panel>
-
         <q-tab-panel name="team">
           <div class="text-h6">Добавить новость о команде:</div>
           <NewsCardContentAdd />
         </q-tab-panel>
 
         <q-tab-panel name="date">
-          <div class="text-h6">Правка дат в NewsDrawer:</div>
+          <div class="text-h6">Правка дат в NewsDrawer и countdown</div>
           <NewsDrawerGNEDateUpdate />
           <NewsDrawerGNTDateUpdate />
+          <CountDown2Events />
         </q-tab-panel>
 
         <q-tab-panel name="site">
@@ -51,9 +51,11 @@ import ArchiveGamesAdd from 'components/Admin/Panels/sitePanel/functionsSitePane
 import NewsSiteContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsSiteContentAdd.vue'
 import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/gamesNowEventEdit.vue'
 import ChangeMainPageLogo from 'components/Admin/Panels/sitePanel/functionsSitePanel/changeMainPageLogo.vue'
+import CountDown2Events from 'components/Admin/Panels/sitePanel/functionsSitePanel/CountDown2Events.vue'
 export default {
   name: 'adminPanel',
   components: {
+    CountDown2Events,
     ChangeMainPageLogo,
     GamesNowEventEdit,
     NewsSiteContentAdd,
