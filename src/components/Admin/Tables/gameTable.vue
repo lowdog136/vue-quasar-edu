@@ -86,61 +86,61 @@ const rows = [
     text_c: 'primary',
     name: 'Север',
     color: 'primary',
-    games: 1,
-    win: 1,
+    games: 2,
+    win: 2,
     draw: 0,
     lose: 0,
-    ball_io: '2-1',
-    score: 3,
-    last_game: 'В'
-  },
-  {
-    id: 2,
-    text: 'text-left',
-    name: 'СШOP №1 Кристал',
-    games: 1,
-    win: 0,
-    draw: 1,
-    lose: 0,
-    ball_io: '3-3',
-    score: 1,
-    last_game: 'Н'
-  },
-  {
-    id: 4,
-    text: 'text-left',
-    name: 'Псков',
-    games: 0,
-    win: 0,
-    draw: 0,
-    lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: '-'
+    ball_io: '3-1',
+    score: 6,
+    last_game: 'ВВ'
   },
   {
     id: 3,
+    text: 'text-left',
+    name: 'СШOP №1 Кристал',
+    games: 2,
+    win: 0,
+    draw: 2,
+    lose: 0,
+    ball_io: '3-3',
+    score: 2,
+    last_game: 'НН'
+  },
+  {
+    id: 5,
+    text: 'text-left',
+    name: 'Псков',
+    games: 2,
+    win: 0,
+    draw: 1,
+    lose: 1,
+    ball_io: '0-2',
+    score: 1,
+    last_game: 'НП'
+  },
+  {
+    id: 4,
     name: 'Динамо-2',
     text: 'text-left',
     games: 1,
     win: 0,
     draw: 1,
-    lose: 0,
-    ball_io: '3-3',
+    lose: 1,
+    ball_io: '3-4',
     score: 1,
-    last_game: 'Н'
+    last_game: 'НП'
   },
   {
-    id: 5,
+    id: 2,
     text: 'text-left',
     name: 'Звезда',
-    games: 1,
-    win: 0,
+    games: 2,
+    win: 1,
     draw: 0,
     lose: 1,
-    ball_io: '1-2',
-    score: 0,
-    last_game: 'П'
+    ball_io: '3-2',
+    score: 3,
+    last_game: 'ПВ'
   }
 ]
 
