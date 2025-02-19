@@ -1,66 +1,36 @@
 <template>
   <!--  edit mode block-->
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card
-      class="bg-grey-9 my-card"
-      v-for="SiteUpdate in SiteUpdates"
-      :key="SiteUpdate.id"
-      dark bordered >
-      <q-card-section>
-        <div class="text-h6">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label caption>{{ titleCard }}</q-item-label>
-                <q-item-label caption>id:{{ SiteUpdate.id }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>{{ valueCard }}: {{ SiteUpdate.datenews }}
-                  <q-popup-edit v-model="SiteUpdate.datenews" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-      </q-card-section>
-    </q-card>
-  </div>
   <div class="q-pa-md" style="max-width: 300px">
+    <div class="text-h6">
+      {{ titleCard }}
+    </div>
+    <!--  date block-->
     <q-input v-for="SiteUpdate in SiteUpdates"
-             :key="SiteUpdate.id" filled v-model="date">
+             :key="SiteUpdate.id" filled v-model="SiteUpdate.datenews">
       <template v-slot:prepend>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date v-model="date" mask="YYYY-MM-DD HH:mm">
+            <q-date v-model="SiteUpdate.datenews" mask="YYYY-MM-DD HH:mm">
               <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
+                <q-item-section avatar>
+                  <q-btn @click="updateVer(SiteUpdate.id)" color="primary" flat size="s" icon="done"/>
+                </q-item-section>
+                <q-btn v-close-popup color="primary" flat size="s" icon="cancel" />
               </div>
             </q-date>
           </q-popup-proxy>
         </q-icon>
       </template>
-
+      <!--  time block-->
       <template v-slot:append>
         <q-icon name="access_time" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-time v-model="date" mask="YYYY-MM-DD HH:mm" format24h>
+            <q-time v-model="SiteUpdate.datenews" mask="YYYY-MM-DD HH:mm" format24h>
               <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
+                <q-item-section avatar>
+                  <q-btn @click="updateVer(SiteUpdate.id)" color="primary" flat size="s" icon="done"/>
+                </q-item-section>
+                <q-btn v-close-popup color="primary" flat size="s" icon="cancel" />
               </div>
             </q-time>
           </q-popup-proxy>
@@ -82,8 +52,7 @@ export default {
   components: { },
   data () {
     return {
-      titleCard: 'Отсчет до следующей игры',
-      valueCard: 'datenews'
+      titleCard: 'Отсчет до следующей игры:'
     }
   },
   setup () {
@@ -108,14 +77,12 @@ export default {
       updateDoc(doc(collection(db, '/events/countdown/dateUpdate'), id), {
         datenews: SiteUpdates.value[index].datenews
       })
-      console.log('date update', SiteUpdates.value, 'ver id', SiteUpdates.value)
+      console.log('date update countdown', SiteUpdates.value, 'ver id', SiteUpdates.value)
     }
     return {
       newSiteUpdateVer,
       SiteUpdates,
       updateVer,
-      tab: ref(['alarms', 'mails']),
-      date: ref('2019-02-01 12:44'),
       expanded: ref(false)
     }
   }
