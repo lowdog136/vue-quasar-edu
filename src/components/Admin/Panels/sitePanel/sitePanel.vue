@@ -1,5 +1,8 @@
 <template>
   <div class="q-pa-md">
+    <div class="text-h6">
+      {{ titlePanel }}
+    </div>
     <div class="q-gutter-y-md">
       <q-option-group
         v-model="panel"
@@ -66,6 +69,7 @@ export default {
   },
   data () {
     return {
+      titlePanel: 'admin panel',
       tabNameInfo: 'todoInfo',
       tabNameInfoText: 'To Do Info:',
       tabNameTodoText: 'To Do List:',

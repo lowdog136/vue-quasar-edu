@@ -1,6 +1,9 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-y-md">
+      <div class="text-h6">
+        {{ titlePanel }}
+      </div>
       <q-option-group
           v-model="techPanel"
           inline
@@ -38,6 +41,7 @@ export default {
   },
   data () {
     return {
+      titlePanel: 'tech panel (todo)',
       tabNameInfo: 'todoInfo',
       tabNameInfoText: 'To Do Info:',
       tabNameTodoText: 'To Do List:',

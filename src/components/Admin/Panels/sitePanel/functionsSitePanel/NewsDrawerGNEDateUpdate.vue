@@ -1,44 +1,27 @@
 <template>
   <!--  edit mode block-->
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card
-      class="bg-grey-9 my-card"
-      v-for="SiteUpdate in SiteUpdates"
-      :key="SiteUpdate.id"
-      dark bordered >
-      <q-card-section>
-        <div class="text-h6">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label caption>{{ titleCard }}</q-item-label>
-                <q-item-label caption>id:{{ SiteUpdate.id }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-        <div class="text-subtitle2">
-          <q-list>
-            <q-item >
-              <q-item-section>
-                <q-item-label>{{ valueCard }}: {{ SiteUpdate.datenews }}
-                  <q-popup-edit v-model="SiteUpdate.datenews" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
-                      <template v-slot:append>
-                        <q-icon name="edit" />
-                      </template>
-                    </q-input>
-                  </q-popup-edit>
-                </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-btn @click="updateVer(SiteUpdate.id)"  flat size="xs" icon="done"/>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-      </q-card-section>
-    </q-card>
+  <div class="q-pa-md" style="max-width: 300px">
+    <div class="text-h6">
+      {{ titleCard }}
+    </div>
+    <!--  date block-->
+    <q-input v-for="SiteUpdate in SiteUpdates"
+             :key="SiteUpdate.id" filled v-model="SiteUpdate.datenews">
+      <template v-slot:prepend>
+        <q-icon name="event" class="cursor-pointer">
+          <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+            <q-date v-model="SiteUpdate.datenews" mask="MMMM DD, YYYY">
+              <div class="row items-center justify-end">
+                <q-item-section avatar>
+                  <q-btn @click="updateVer(SiteUpdate.id)" color="primary" flat size="s" icon="done"/>
+                </q-item-section>
+                <q-btn v-close-popup color="primary" flat size="s" icon="cancel" />
+              </div>
+            </q-date>
+          </q-popup-proxy>
+        </q-icon>
+      </template>
+    </q-input>
   </div>
 </template>
 
@@ -86,7 +69,6 @@ export default {
       newSiteUpdateVer,
       SiteUpdates,
       updateVer,
-      tab: ref(['alarms', 'mails']),
       expanded: ref(false)
     }
   }
