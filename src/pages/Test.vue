@@ -1,201 +1,87 @@
 <template>
-  <div class="q-pa-sm wrap rounded-borders">
-    <eventMonthList />
+  <div class="q-pa-md row items-start q-gutter-md"
+       v-for="todo in adminPanelToDos"
+       :key="todo.id"
+  >
+    <q-card dark bordered class="bg-grey-9 my-card"
+    >
+      <q-card-section horizontal :class=todo.colorField>
+        <q-card-section>
+          {{ todo.stringField }}
+        </q-card-section>
+
+        <q-separator vertical />
+      </q-card-section>
+      <q-card-section>
+        <div class="text-h6">{{ todo.title }}</div>
+        <div class="text-subtitle2">{{ todo.category }}</div>
+        <div class="text-subtitle2">{{ todo.done }}</div>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
-
 <script>
-import { useQuasar } from 'quasar'
-import { computed, onMounted, ref } from 'vue'
-import { collection, onSnapshot, orderBy } from 'firebase/firestore'
+import { ref, onMounted } from 'vue'
+import { mapActions, mapGetters } from 'vuex'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
 import { db } from 'src/firebase'
-import eventMonthList from 'components/Events/eventMonthList.vue'
 
-// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-// const newsCardCollectionRef = collection(db, 'events', 'polpred')
-// const newsCardCollectionQuery = query(newsCardCollectionRef, orderBy('date', 'desc'))
-
-// import NewsCardDetailPopUp from 'components/NewsCardDetailPopUp'
-
+const adminPanelToDosCollectionRef = collection(db, '/trest')
+const adminPanelToDosCollectionQuery = query(adminPanelToDosCollectionRef, orderBy('date', 'desc'))
 export default {
-  name: 'Test',
-  components: { eventMonthList },
+  name: 'test',
+  components: { },
   data () {
     return {
-      btnColor: 'blue-grey-10',
-      btnName: 'Подробно',
-      // кнопка что бы не прилипала к краю
-      btnDivMain: '',
-      divclassFootTab: 'q-pa-m'
+      inputHintVer: 'add ver',
+      inputHintTitle: 'add title',
+      inputHintBody: 'add Body',
+      inputHintDate: 'add date',
+      inputTypeDate: 'date',
+      btnIcon: 'done',
+      btnName: 'done',
+      selectName: ['icon', 'color'],
+      selectColor: String,
+      selectLabel: ['icon', 'color']
     }
   },
-  setup () {
-    const $q = useQuasar()
-    const matchEvents = ref([])
-    const NewsCards = ref([])
-    const NewsCardsJ = ref([])
-    const NewsCardsJl = ref([])
-    const NewsCardsAu = ref([])
-    const NewsCardsSep = ref([])
-    const NewsCardsA = ref([])
+  setup: function () {
+    const adminPanelToDos = ref([])
     onMounted(async () => {
-      // NewsCard Module
-      onSnapshot(collection(db, '/events/szfo/2023/may/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
+      // Get data in firebase Module
+      onSnapshot(adminPanelToDosCollectionQuery, (querySnapshot) => {
+        const fbSiteUpdates = []
         querySnapshot.forEach((doc) => {
-          const listDateEvent = {
+          const panelToDo = {
             id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
+            arrayField: doc.data().arrayField,
+            colorField: doc.data().colorField,
+            stringField: doc.data().stringField,
+            dateField: doc.data().dateField
           }
-          fbEvents.push(listDateEvent)
+          fbSiteUpdates.push(panelToDo)
         })
-        NewsCards.value = fbEvents
-        console.log(NewsCards)
-      })
-      onSnapshot(collection(db, '/events/szfo/2023/june/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsJ.value = fbEvents
-        console.log(NewsCardsJ)
-      })
-      onSnapshot(collection(db, '/events/szfo/2023/jule/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsJl.value = fbEvents
-        console.log(NewsCardsJl)
-      })
-      onSnapshot(collection(db, '/events/szfo/2023/august/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsAu.value = fbEvents
-        console.log(NewsCardsAu)
-      })
-      onSnapshot(collection(db, '/events/szfo/2023/september/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            body: doc.data().body,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsSep.value = fbEvents
-        console.log(NewsCardsSep)
-      })
-      onSnapshot(collection(db, '/events/szfo/2023/april/match'), orderBy('date', 'desc'), (querySnapshot) => {
-        const fbEvents = []
-        querySnapshot.forEach((doc) => {
-          const listDateEvent = {
-            id: doc.id,
-            title: doc.data().title,
-            body: doc.data().body,
-            color: doc.data().color,
-            date: doc.data().date,
-            mounth: doc.data().mounth,
-            tour: doc.data().tour,
-            eventName: doc.data().eventName,
-            time: doc.data().time,
-            icon: doc.data().icon,
-            scorer: doc.data().scorer
-          }
-          fbEvents.push(listDateEvent)
-        })
-        NewsCardsA.value = fbEvents
-        console.log(NewsCardsA)
+        adminPanelToDos.value = fbSiteUpdates
       })
     })
-
     return {
-      titleEvent: ['XXIV Турнир полпреда СЗФО'],
-      titleEventTest: ['1', '2', '3'],
-      titleEvent1: 'TitileEventValue1',
-      btnSize: 'xs',
-      NewsCards,
-      NewsCardsJ,
-      NewsCardsJl,
-      NewsCardsA,
-      NewsCardsAu,
-      NewsCardsSep,
-      matchEvents,
-      titleMainEvent: '',
-      side: ref('right'),
-      layout: computed(() => {
-        return $q.screen.lt.sm ? 'dense' : ($q.screen.lt.md ? 'comfortable' : 'loose')
-      })
+      // done: ref(true),
+      adminPanelToDos
     }
-  }
+  },
+  computed: {
+    ...mapGetters([
+    ])
+  },
+  methods: {
+    ...mapActions([
+    ])
+  },
+
+  props: {}
 }
 </script>
-
 <style lang="sass" scoped>
-.title
-  font-size: 28px
-  text-align: center
-  color: #2c3e50
 .my-card
   width: 100%
-  max-width: 350px
 </style>
