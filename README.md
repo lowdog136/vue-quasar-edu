@@ -1,6 +1,6 @@
 # Quasar App (vue-quasar-edu)
 
-A Quasar Framework app
+SeverFans build on Quasar Framework app
 
 
 
