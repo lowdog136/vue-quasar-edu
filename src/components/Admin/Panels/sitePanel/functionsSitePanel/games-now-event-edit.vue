@@ -2,7 +2,7 @@
   <!--  input block-->
   <div class="q-pa-md row items-start q-gutter-md">
 
-    <q-card dark bordered class="bg-grey-9 my-card">
+    <q-card bordered class="bg-grey-3 my-card">
       <q-form
         class="q-gutter-md"
       >
@@ -12,22 +12,19 @@
             hint="add Year"
             lazy-rules
           />
+          <q-select
+            v-model="selectedColor"
+            :options="colorOptions"
+            label="Выберите соревнование"
+            filled
+            class="q-mb-md"
+          />
           <adm-select
             v-model="newSiteUpdateEvent"
             :options="newSiteUpdateEvent"
             :select-color="green"
             :select-label="selectLabel[0]"
             :select-name="selectName[0]"
-          />
-          <q-input
-            v-model='newSiteUpdateIcon'
-            hint="add icon"
-            lazy-rules
-          />
-          <q-input
-            v-model='newSiteUpdateColor'
-            hint="add color"
-            lazy-rules
           />
           <q-input
             v-model='newSiteUpdatePlace'
@@ -367,6 +364,15 @@ const newSiteUpdatePlace = ref('')
 const newSiteUpdateIcon = ref('bookmark')
 const newSiteUpdateColor = ref('primary')
 const newSiteUpdateScorer = ref('')
+const selectedColor = ref(null)
+const colorOptions = [
+  { label: 'Чемпионат СЗФО', value: 'Чемпионат СЗФО' },
+  { label: 'кубок СЗФО', value: 'кубок СЗФО' },
+  { label: 'XXV турнир полпреда СЗФО', value: 'XXV турнир полпреда СЗФО' },
+  { label: 'XXVI турнир полпреда СЗФО', value: 'XXVI турнир полпреда СЗФО' },
+  { label: 'товарищеский матч', value: 'товарищеский матч' },
+  { label: 'Третья лига, финальный этап', value: 'Третья лига, финальный этап' }
+]
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -387,7 +393,8 @@ const addSiteUpdate = () => {
     icon: newSiteUpdateIcon.value,
     place: newSiteUpdatePlace.value,
     color: newSiteUpdateColor.value,
-    scorer: newSiteUpdateScorer.value
+    scorer: newSiteUpdateScorer.value,
+    colorField: selectedColor.value
   })
   newSiteUpdateEvent.value = null
   newSiteUpdateTitle.value = ''
@@ -403,6 +410,7 @@ const addSiteUpdate = () => {
   newSiteUpdateGoalTeamHome.value = ''
   newSiteUpdateDateUpd.value = ''
   newSiteUpdateIcon.value = ''
+  selectedColor.value = null
   newSiteUpdatePlace.value = ''
   newSiteUpdateColor.value = ''
   newSiteUpdateScorer.value = ''
@@ -554,7 +562,9 @@ export default {
       updateDate,
       updateBody,
       tab: ref(['alarms', 'mails']),
-      expanded: ref(false)
+      expanded: ref(false),
+      colorOptions,
+      selectedColor
     }
   },
   computed: {
