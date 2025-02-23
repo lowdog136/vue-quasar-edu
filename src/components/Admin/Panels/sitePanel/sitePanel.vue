@@ -32,7 +32,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="eventlist">
-          <div class="text-h6">Редактировать календарь игр:</div>
+          <div class="text-h6">Редактор календаря игр:</div>
           <games-now-event-edit />
         </q-tab-panel>
 
@@ -52,15 +52,15 @@ import NewsDrawerGNTDateUpdate from 'components/Admin/Panels/sitePanel/functions
 import NewsDrawerGNEDateUpdate from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsDrawerGNEDateUpdate.vue'
 import ArchiveGamesAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/ArchiveGamesAdd.vue'
 import NewsSiteContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsSiteContentAdd.vue'
-import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/gamesNowEventEdit.vue'
 import ChangeMainPageLogo from 'components/Admin/Panels/sitePanel/functionsSitePanel/changeMainPageLogo.vue'
 import CountDown2Events from 'components/Admin/Panels/sitePanel/functionsSitePanel/CountDown2Events.vue'
+import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/games-now-event-edit.vue'
 export default {
   name: 'adminPanel',
   components: {
+    GamesNowEventEdit,
     CountDown2Events,
     ChangeMainPageLogo,
-    GamesNowEventEdit,
     NewsSiteContentAdd,
     ArchiveGamesAdd,
     NewsDrawerGNEDateUpdate,
