@@ -10,6 +10,19 @@
                         :icon=event.icon
                         :color=event.color
       >
+        <div v-for="(item, id) in event.soloPlayerAwards" :key="item.id" class="text-h7">
+          <q-item clickable v-ripple>
+            <q-item-section side>
+              <q-avatar rounded size="48px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              </q-avatar>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ item }}</q-item-label>
+              <q-item-label caption>{{ id }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
         <q-btn @click="toggleDone(event.id)" flat color="primary" disable>
           Подробнее
         </q-btn>
@@ -67,7 +80,8 @@ export default {
             date: doc.data().date,
             color: doc.data().color,
             icon: doc.data().icon,
-            done: doc.data().done
+            done: doc.data().done,
+            soloPlayerAwards: doc.data().soloPlayerAwards
           }
           fbEvents.push(event)
         })
