@@ -17,7 +17,9 @@
         </div>
         <div style="font-size: 10pt; color: #ae0000">
           {{ item.nameTeamHome }} {{ item.nameCityTeamHome }}  {{ item.goalTeamHome }} - {{ item.goalTeamAway }} {{ item.nameTeamAway }} {{ item.nameCityTeamAway}}
-          <q-item-label caption>голы: {{ item.scorer }} </q-item-label>
+          <q-item-label caption v-for="(item) in item.scorer" :key="item.id">
+            <q-item-label>{{ item[0] }} {{ item[1] }} {{ item[2] }}</q-item-label>
+          </q-item-label>
           <q-item-label caption>планируют посетить: 0 </q-item-label>
         </div>
       </q-timeline-entry>
