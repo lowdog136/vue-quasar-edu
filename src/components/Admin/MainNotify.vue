@@ -10,6 +10,7 @@
 import { useQuasar } from 'quasar'
 
 export default {
+  name: 'mainNotify',
   components: {},
   setup () {
     const $q = useQuasar()
