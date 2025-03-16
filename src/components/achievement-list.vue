@@ -14,7 +14,7 @@
           <q-item clickable v-ripple>
             <q-item-section side>
               <q-avatar rounded size="48px">
-                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+                <img src="../assets/image/football-player.png">
               </q-avatar>
             </q-item-section>
             <q-item-section>

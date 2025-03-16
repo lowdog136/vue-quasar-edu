@@ -1,15 +1,14 @@
 <template>
   <div class="q-pa-md">
-    <game-table />
-<!--    <game-table />-->
+    <silence-table />
   </div>
 </template>
 
 <script>
-import GameTable from 'components/Admin/Tables/gameTable.vue'
+import SilenceTable from 'components/Admin/Tables/silence-table.vue'
 
 export default {
-  components: { GameTable },
+  components: { SilenceTable },
   setup () {
     return {}
   }
