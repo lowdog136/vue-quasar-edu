@@ -23,10 +23,6 @@
             </q-item-section>
           </q-item>
         </div>
-        <q-btn @click="toggleDone(event.id)" flat color="primary" disable>
-          Подробнее
-        </q-btn>
-
         <q-space />
         <q-card v-show="event.done" class="my-card" flat bordered>
           <q-card-section horizontal>
@@ -102,8 +98,6 @@ export default {
       console.log('countUP', events.value[index].count)
     }
     return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      titleMainEvent: 'samething title2',
       newEventVer,
       newEventTitle,
       newEventBody,

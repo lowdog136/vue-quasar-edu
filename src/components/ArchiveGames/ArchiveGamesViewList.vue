@@ -81,7 +81,8 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase'
 import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 
-const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year')
+/* const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year') */
+const archiveGamesRef = collection(db, 'all-games')
 const archiveGamesQuery = query(archiveGamesRef, orderBy('datestamp'))
 export default {
   name: 'ArchiveGamesViewList',
@@ -154,7 +155,7 @@ export default {
     )
 
     return {
-      preferred: ref('2024'),
+      preferred: ref('2025'),
       Winirs,
       myTest,
       archiveGames,
