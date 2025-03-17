@@ -30,11 +30,11 @@
 <script>
 import { useQuasar } from 'quasar'
 import { computed, onMounted, ref } from 'vue'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore'
 import { db } from 'src/firebase'
 
 const siteUpdateCollectionRef = collection(db, '/all-games')
-const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('datestamp', 'asc'))
+const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, where('year', '==', '2025'), orderBy('datestamp', 'asc'))
 
 export default {
   name: 'eventsList',
