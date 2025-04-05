@@ -13,6 +13,7 @@
             {{ item.place}}
           </div>
           {{ item.tour}}
+          {{ item.colorField }}
           {{ item.mounth}}
         </div>
         <div style="font-size: 10pt; color: #ae0000">
@@ -69,7 +70,8 @@ export default {
             goalTeamHome: doc.data().goalTeamHome,
             goalTeamAway: doc.data().goalTeamAway,
             victory: doc.data().victory,
-            place: doc.data().place
+            place: doc.data().place,
+            colorField: doc.data().colorField
           }
           fbEvents.push(listDateEvent)
         })

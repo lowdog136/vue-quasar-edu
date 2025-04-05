@@ -10,10 +10,6 @@
         :options=tabNameList
       />
       <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders">
-        <q-tab-panel name="game">
-          <div class="text-h6">Добавить информацию о игре в архив:</div>
-          <ArchiveGamesAdd />
-        </q-tab-panel>
         <q-tab-panel name="team">
           <div class="text-h6">Добавить новость о команде:</div>
           <NewsCardContentAdd />
@@ -32,7 +28,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="eventlist">
-          <div class="text-h6">Редактор календаря игр:</div>
+          <div class="text-h6">Редактор игр:добавление, правка, удаление</div>
           <games-now-event-edit />
         </q-tab-panel>
 
@@ -50,7 +46,6 @@ import { ref } from 'vue'
 import NewsCardContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsCardContentAdd.vue'
 import NewsDrawerGNTDateUpdate from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsDrawerGNTDateUpdate.vue'
 import NewsDrawerGNEDateUpdate from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsDrawerGNEDateUpdate.vue'
-import ArchiveGamesAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/ArchiveGamesAdd.vue'
 import NewsSiteContentAdd from 'components/Admin/Panels/sitePanel/functionsSitePanel/NewsSiteContentAdd.vue'
 import ChangeMainPageLogo from 'components/Admin/Panels/sitePanel/functionsSitePanel/changeMainPageLogo.vue'
 import CountDown2Events from 'components/Admin/Panels/sitePanel/functionsSitePanel/CountDown2Events.vue'
@@ -62,7 +57,6 @@ export default {
     CountDown2Events,
     ChangeMainPageLogo,
     NewsSiteContentAdd,
-    ArchiveGamesAdd,
     NewsDrawerGNEDateUpdate,
     NewsDrawerGNTDateUpdate,
     NewsCardContentAdd
@@ -82,31 +76,26 @@ export default {
         },
         {
           id: 2,
-          label: 'Игры в архиве',
-          value: 'game'
-        },
-        {
-          id: 3,
           label: 'Новость на главную',
           value: 'team'
         },
         {
-          id: 4,
+          id: 3,
           label: 'Правка дат',
           value: 'date'
         },
         {
-          id: 5,
+          id: 4,
           label: 'Обновление сайта',
           value: 'site'
         },
         {
-          id: 6,
-          label: 'Правка календаря игр',
+          id: 5,
+          label: 'Добавление (правка) игр',
           value: 'eventlist'
         },
         {
-          id: 7,
+          id: 6,
           label: 'Смена оформления главной страницы',
           value: 'changeMainPage'
         }
