@@ -12,62 +12,61 @@
             hint="add Year"
             lazy-rules
           />
-          <q-select
-            v-model="selectedColor"
-            :options="colorOptions"
-            label="Выберите соревнование"
-            filled
-            class="q-mb-md"
-          />
           <adm-select
             v-model="newSiteUpdateEvent"
             :options="newSiteUpdateEvent"
-            :select-color="green"
+            bg-color="red"
             :select-label="selectLabel[0]"
             :select-name="selectName[0]"
           />
           <q-input
             v-model='newSiteUpdatePlace'
-            hint="add place"
+            hint="add place (место проведения)"
             lazy-rules
           />
           <q-input
             v-model='newSiteUpdateTour'
-            hint="add Tour"
+            hint="add Tour (этап розыгрыша)"
             lazy-rules
           />
           <q-input
             v-model='newSiteUpdateNameTeamHome'
             hint="add nameTeamHome"
             lazy-rules
+            bg-color="orange-2"
           />
           <q-input
             v-model='newSiteUpdateNameCityTeamHome'
             hint="add nameCityTeamHome"
             lazy-rules
+            bg-color="orange-2"
           />
           <q-input
             v-model='newSiteUpdateGoalTeamHome'
             hint="add goalTeamHome"
             lazy-rules
+            bg-color="orange-2"
           />
           <q-input
             v-model='newSiteUpdateNameTeamAway'
             hint="add nameTeamAway"
             autogrow
             lazy-rules
+            bg-color="red-3"
           />
           <q-input
             v-model='newSiteUpdateNameCityTeamAway'
             hint="add nameCityTeamAway"
             autogrow
             lazy-rules
+            bg-color="red-3"
           />
           <q-input
             v-model='newSiteUpdateGoalTeamAway'
             hint="add goalTeamAway"
             autogrow
             lazy-rules
+            bg-color="red-3"
           />
           <q-input
             v-model='newSiteUpdateResult'
@@ -77,14 +76,16 @@
           />
           <q-input
             v-model='newSiteUpdateDate'
-            hint="add date"
+            hint="add date (для отображения в календаре)"
             lazy-rules
+            bg-color="blue-2"
           />
           <q-input
             v-model='newSiteUpdateDateUpd'
             type="date"
-            hint="add datestamp"
+            hint="add datestamp(хронология)"
             lazy-rules
+            bg-color="blue-2"
           />
           <q-input
             v-model='newSiteUpdateBody'
@@ -345,6 +346,7 @@ import AdmSelect from 'components/Admin/UI/admSelect.vue'
 
 const siteUpdateCollectionRef = collection(db, '/all-games')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
+// const newSiteUpdateEvent = reactive(ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап']))
 const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
 const newSiteUpdateTitle = ref('')
 const newSiteUpdateTour = ref('')
@@ -393,10 +395,9 @@ const addSiteUpdate = () => {
     icon: newSiteUpdateIcon.value,
     place: newSiteUpdatePlace.value,
     color: newSiteUpdateColor.value,
-    scorer: newSiteUpdateScorer.value,
-    colorField: selectedColor.value
+    scorer: newSiteUpdateScorer.value
   })
-  newSiteUpdateEvent.value = null
+  newSiteUpdateEvent.value = ''
   newSiteUpdateTitle.value = ''
   newSiteUpdateTour.value = ''
   newSiteUpdateNameTeamAway.value = ''
