@@ -35,7 +35,7 @@ import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestor
 import { db } from 'src/firebase'
 
 const siteUpdateCollectionRef = collection(db, '/all-games')
-const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, where('year', '==', '2025'), orderBy('datestamp', 'asc'))
+const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, where('done', '==', false), orderBy('datestamp', 'asc'))
 
 export default {
   name: 'eventsList',
