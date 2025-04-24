@@ -391,7 +391,7 @@ const addSiteUpdate = () => {
     goalTeamAway: newSiteUpdateGoalTeamAway.value,
     date: newSiteUpdateDate.value,
     datestamp: Timestamp.now(),
-    done: true,
+    done: false,
     icon: newSiteUpdateIcon.value,
     place: newSiteUpdatePlace.value,
     color: newSiteUpdateColor.value,
