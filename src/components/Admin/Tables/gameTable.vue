@@ -81,7 +81,7 @@ const columns = [
 ]
 const rows = [
   {
-    id: 1,
+    id: 2,
     text_a: 'text-left',
     text_c: 'primary',
     name: 'Север',
@@ -95,16 +95,16 @@ const rows = [
     last_game: ''
   },
   {
-    id: 2,
+    id: 6,
     text: 'text-left',
     name: 'СШ Ленинградец',
-    games: 0,
+    games: 1,
     win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '0-0',
+    lose: 1,
+    ball_io: '1-2',
     score: 0,
-    last_game: ''
+    last_game: 'П'
   },
   {
     id: 4,
@@ -119,16 +119,16 @@ const rows = [
     last_game: ''
   },
   {
-    id: 3,
+    id: 1,
     name: 'Тосно Спб',
     text: 'text-left',
-    games: 0,
-    win: 0,
+    games: 1,
+    win: 1,
     draw: 0,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    ball_io: '2-1',
+    score: 3,
+    last_game: 'B'
   },
   {
     id: 5,
@@ -143,7 +143,7 @@ const rows = [
     last_game: ''
   },
   {
-    id: 6,
+    id: 5,
     text: 'text-left',
     name: 'Химик',
     games: 0,
