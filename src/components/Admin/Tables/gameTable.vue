@@ -9,10 +9,10 @@
               style="width: 70px"
               :ratio="1"
               class="rounded-borders"
-              src="https://st.joinsport.io/news/1136334/6761566ccf861_910x610.jpg"
+              src="../../../assets/image/world-cup.png"
             />
 
-            <div class="text-h4 q-ml-md text-primary">{{ tableTitle }}</div>
+            <div class="text-h5 q-ml-md text-primary">{{ tableTitle }}</div>
           </div>
         </th>
       </tr>
@@ -86,73 +86,73 @@ const rows = [
     text_c: 'primary',
     name: 'Север',
     color: 'primary',
-    games: 0,
-    win: 0,
+    games: 1,
+    win: 1,
     draw: 0,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    ball_io: '1-0',
+    score: 3,
+    last_game: 'В'
   },
   {
-    id: 6,
+    id: 3,
     text: 'text-left',
     name: 'СШ Ленинградец',
-    games: 1,
-    win: 0,
+    games: 3,
+    win: 1,
     draw: 0,
-    lose: 1,
-    ball_io: '1-2',
-    score: 0,
-    last_game: 'П'
+    lose: 2,
+    ball_io: '4-4',
+    score: 3,
+    last_game: 'ПВП'
   },
   {
     id: 4,
     text: 'text-left',
     name: 'Псков',
-    games: 0,
+    games: 1,
     win: 0,
-    draw: 0,
+    draw: 1,
     lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    ball_io: '2-2',
+    score: 1,
+    last_game: 'Н'
   },
   {
     id: 1,
     name: 'Тосно Спб',
     text: 'text-left',
-    games: 1,
-    win: 1,
+    games: 2,
+    win: 2,
     draw: 0,
     lose: 0,
-    ball_io: '2-1',
-    score: 3,
-    last_game: 'B'
+    ball_io: '4-1',
+    score: 6,
+    last_game: 'ВВ'
   },
   {
     id: 5,
     text: 'text-left',
     name: 'ГОУР Карелия',
-    games: 0,
+    games: 2,
     win: 0,
-    draw: 0,
-    lose: 0,
-    ball_io: '0-0',
-    score: 0,
-    last_game: ''
+    draw: 1,
+    lose: 1,
+    ball_io: '2-4',
+    score: 1,
+    last_game: 'ПН'
   },
   {
-    id: 5,
+    id: 6,
     text: 'text-left',
     name: 'Химик',
-    games: 0,
+    games: 1,
     win: 0,
     draw: 0,
-    lose: 0,
-    ball_io: '0-0',
+    lose: 1,
+    ball_io: '1-3',
     score: 0,
-    last_game: ''
+    last_game: 'П'
   }
 ]
 
