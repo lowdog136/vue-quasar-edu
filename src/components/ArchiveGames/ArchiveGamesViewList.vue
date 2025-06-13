@@ -78,7 +78,7 @@
 <script>
 import { computed, ref } from 'vue'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { db } from 'src/firebase'
 import BtnChoose from 'components/ArchiveGames/UI/btnChoose.vue'
 
 /* const archiveGamesRef = collection(db, 'clubArchiveGames/archive/year') */
@@ -165,6 +165,12 @@ export default {
       cancelEnabled: ref(false),
 
       options: [
+        {
+          id: 0,
+          label: '2006',
+          value: '2006',
+          done: true
+        },
         {
           id: 1,
           label: '2007',
