@@ -1,6 +1,6 @@
 <template>
   <q-expansion-item
-    v-model="expanded"
+    v-model=expanded
     :icon=expansionItemArray.icon
     :label=expansionItemArray.label
     :caption=expansionItemArray.caption
@@ -17,44 +17,58 @@
       :q-item-label=propsTablesArray.label
       :q-item-label-caption=propsTablesArray.caption
     />
+    <expansion-item-stats
+      :icon-name=propsGoalscorersArray.iconName
+      :q-item-to=propsGoalscorersArray.to
+      :q-item-label=propsGoalscorersArray.label
+      :q-item-label-caption=propsGoalscorersArray.caption
+    />
+    <expansion-item-stats
+      :icon-name=propsAssistantsArray.iconName
+      :q-item-to=propsAssistantsArray.to
+      :q-item-label=propsAssistantsArray.label
+      :q-item-label-caption=propsAssistantsArray.caption
+    />
   </q-expansion-item>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 import ExpansionItemGamesNowTable from 'components/NewsDrawer/Events/expansionItems/expansionItemGamesNowTable.vue'
 import ExpansionItemGamesNowEvent from 'components/NewsDrawer/Events/expansionItems/expansionItemGamesNowEvent.vue'
+import ExpansionItemStats from 'components/NewsDrawer/Events/expansionItems/expansion-item-stats.vue'
 
-export default {
-  name: 'newsDrawerEvent',
-  components: { ExpansionItemGamesNowEvent, ExpansionItemGamesNowTable },
-  setup () {
-    const expansionItemArray = ref({
-      icon: 'emoji_events',
-      label: 'Текущие соревнования',
-      caption: 'Чемпионат СЗФО, Кубок СЗФО'
-    })
-    const propsTablesArray = ref({
-      label: 'Турнирная таблица',
-      caption: 'Итоговая таблица',
-      iconName: 'table_chart',
-      to: '/GamesNow/GamesNowTable'
-    })
-    const propsEventArray = ref({
-      label: 'Календарь игр',
-      caption: 'Расписание матчей',
-      iconName: 'calendar_month',
-      to: '/GamesNow/GamesNowEvent'
-    })
+const expansionItemArray = ref({
+  icon: 'emoji_events',
+  label: 'Текущие соревнования',
+  caption: 'Чемпионат СЗФО, Кубок СЗФО'
+})
+const propsTablesArray = ref({
+  label: 'Турнирная таблица',
+  caption: 'Итоговая таблица',
+  iconName: 'table_chart',
+  to: '/GamesNow/GamesNowTable'
+})
+const propsEventArray = ref({
+  label: 'Календарь игр',
+  caption: 'Расписание матчей',
+  iconName: 'calendar_month',
+  to: '/GamesNow/GamesNowEvent'
+})
+const propsGoalscorersArray = ref({
+  label: 'Бомбардиры',
+  caption: 'Забитые мячи',
+  iconName: 'face',
+  to: '/stats-goalscorers'
+})
+const propsAssistantsArray = ref({
+  label: 'Ассистенты',
+  caption: 'Голевые передачи',
+  iconName: 'accessibility',
+  to: '/stats-assistants'
+})
 
-    return {
-      expanded: ref(false),
-      expansionItemArray,
-      propsTablesArray,
-      propsEventArray
-    }
-  }
-}
+const expanded = ref(false)
 </script>
 
 <style scoped lang="sass">
