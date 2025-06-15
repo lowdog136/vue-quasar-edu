@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ResultMatchCard from 'components/ResultMatchCard'
+import ResultMatchCard from 'components/ResultMatchCard.vue'
 import axios from 'axios'
 const baseURL = 'http://localhost:3001'
 

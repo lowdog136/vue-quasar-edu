@@ -28,7 +28,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import Carousel from 'components/Carousel'
+import Carousel from 'components/Carousel.vue'
 
 export default defineComponent({
   name: 'PageIndex',

@@ -24,55 +24,57 @@
       :q-item-label=propsGameBeforeArray.label
       :q-item-label-caption=propsGameBeforeArray.caption
     />
+    <expansion-item-stats
+      :icon-name=propsAuthorsGoalsArray.iconName
+      :q-item-to=propsAuthorsGoalsArray.to
+      :q-item-label=propsAuthorsGoalsArray.label
+      :q-item-label-caption=propsAuthorsGoalsArray.caption
+    />
   </q-expansion-item>
 </template>
 
-<script>
+<script setup>
 
 import { ref } from 'vue'
 import ExpansionItemFoto from 'components/NewsDrawer/Archives/expansionItems/expansionItemFoto.vue'
 import ExpansionItemVideo from 'components/NewsDrawer/Archives/expansionItems/expansionItemVideo.vue'
 import ExpansionItemGameBefore from 'components/NewsDrawer/Archives/expansionItems/expansionItemGameBefore.vue'
+import ExpansionItemStats from 'components/NewsDrawer/Events/expansionItems/expansion-item-stats.vue'
 
-export default {
-  name: 'newsDrawerArchive',
-  components: { ExpansionItemGameBefore, ExpansionItemVideo, ExpansionItemFoto },
-  setup () {
-    const expansionItemArray = ref({
-      icon: 'perm_identity',
-      label: 'Архив',
-      caption: 'Фото, видео, результаты матчей'
-    })
+const expansionItemArray = ref({
+  icon: 'perm_identity',
+  label: 'Архив',
+  caption: 'Фото, видео, результаты матчей'
+})
 
-    const propsFotoArray = ref({
-      label: 'Фото',
-      caption: 'Фотографии',
-      iconName: 'camera_alt',
-      to: '/Foto'
-    })
-    const propsVideoArray = ref({
-      label: 'Видео',
-      caption: 'Видеоматериалы',
-      iconName: 'movie',
-      to: '/Video',
-      disable: true
-    })
-    const propsGameBeforeArray = ref({
-      label: 'Старые записи',
-      caption: 'Все результаты матчей',
-      iconName: 'find_in_page',
-      to: '/ArchiveGamesBefore'
-    })
+const propsFotoArray = ref({
+  label: 'Фото',
+  caption: 'Фотографии',
+  iconName: 'camera_alt',
+  to: '/Foto'
+})
+const propsVideoArray = ref({
+  label: 'Видео',
+  caption: 'Видеоматериалы',
+  iconName: 'movie',
+  to: '/Video',
+  disable: true
+})
+const propsGameBeforeArray = ref({
+  label: 'Старые записи',
+  caption: 'Все результаты матчей',
+  iconName: 'find_in_page',
+  to: '/ArchiveGamesBefore'
+})
 
-    return {
-      expanded: ref(false),
-      expansionItemArray,
-      propsFotoArray,
-      propsVideoArray,
-      propsGameBeforeArray
-    }
-  }
-}
+const propsAuthorsGoalsArray = ref({
+  label: 'Авторы голов',
+  caption: 'Раздел о забивших и отдавших',
+  iconName: 'find_in_page',
+  to: '/authors-goals'
+})
+
+const expanded = ref(false)
 </script>
 
 <style scoped lang="sass">

@@ -347,7 +347,7 @@ import AdmSelect from 'components/Admin/UI/admSelect.vue'
 const siteUpdateCollectionRef = collection(db, '/all-games')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 // const newSiteUpdateEvent = reactive(ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап']))
-const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'Кубок МРО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
+const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'Кубок МРО', 'Кубок СЗФО', 'Кубок Астории', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
 const newSiteUpdateTitle = ref('')
 const newSiteUpdateTour = ref('')
 const newSiteUpdateScore = ref('')

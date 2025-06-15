@@ -203,6 +203,12 @@ export default {
         },
         {
           id: 6,
+          label: '2012',
+          value: '2012',
+          done: true
+        },
+        {
+          id: 6,
           label: '2013',
           value: '2013',
           done: true
