@@ -15,7 +15,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import ArchiveGamesViewList from 'components/ArchiveGames/ArchiveGamesViewList'
+import ArchiveGamesViewList from 'components/ArchiveGames/ArchiveGamesViewList.vue'
 
 export default {
   name: 'ArchiveGamesBefore',
