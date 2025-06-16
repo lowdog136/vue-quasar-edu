@@ -86,37 +86,37 @@ const rows = [
     text_c: 'primary',
     name: 'Север',
     color: 'primary',
-    games: 1,
-    win: 1,
+    games: 2,
+    win: 2,
     draw: 0,
     lose: 0,
-    ball_io: '1-0',
-    score: 3,
-    last_game: 'В'
-  },
-  {
-    id: 3,
-    text: 'text-left',
-    name: 'СШ Ленинградец',
-    games: 3,
-    win: 1,
-    draw: 0,
-    lose: 2,
-    ball_io: '4-4',
-    score: 3,
-    last_game: 'ПВП'
+    ball_io: '2-0',
+    score: 6,
+    last_game: 'ВВ'
   },
   {
     id: 4,
     text: 'text-left',
+    name: 'СШ Ленинградец',
+    games: 4,
+    win: 1,
+    draw: 0,
+    lose: 3,
+    ball_io: '5-6',
+    score: 3,
+    last_game: 'ПВПП'
+  },
+  {
+    id: 3,
+    text: 'text-left',
     name: 'Псков',
-    games: 1,
-    win: 0,
+    games: 2,
+    win: 1,
     draw: 1,
     lose: 0,
-    ball_io: '2-2',
-    score: 1,
-    last_game: 'Н'
+    ball_io: '4-3',
+    score: 4,
+    last_game: 'НВ'
   },
   {
     id: 1,
@@ -134,13 +134,13 @@ const rows = [
     id: 5,
     text: 'text-left',
     name: 'ГОУР Карелия',
-    games: 2,
+    games: 3,
     win: 0,
     draw: 1,
-    lose: 1,
-    ball_io: '2-4',
+    lose: 2,
+    ball_io: '2-5',
     score: 1,
-    last_game: 'ПН'
+    last_game: 'ПНП'
   },
   {
     id: 6,
