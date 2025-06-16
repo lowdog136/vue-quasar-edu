@@ -14,6 +14,7 @@
         <div class="text-h6 q-mb-xs">
           <q-avatar>
             <img alt='player image' src='../../assets/image/football-player.png'>
+<!--            <q-img :src="item.playerUrl" />-->
             <q-badge floating color="primary" v-show="item.old === true">{{ item.status }}</q-badge>
           </q-avatar>
           {{ item.name }} - {{ item.scoreCount}}</div>
