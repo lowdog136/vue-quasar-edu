@@ -365,7 +365,7 @@ const newSiteUpdateGoalTeamAway = ref('')
 const newSiteUpdatePlace = ref('')
 const newSiteUpdateIcon = ref('bookmark')
 const newSiteUpdateColor = ref('primary')
-const newSiteUpdateScorer = ref('')
+const newSiteUpdateScorer = ref({ 1: ['', '', ''], 2: ['', '', ''] })
 const selectedColor = ref(null)
 const colorOptions = [
   { label: 'Чемпионат СЗФО', value: 'Чемпионат СЗФО' },
