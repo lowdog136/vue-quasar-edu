@@ -3,7 +3,7 @@
     <q-markup-table flat bordered>
       <thead class="bg-grey-13 text-primary">
       <tr>
-        <th colspan="8">
+        <th colspan="9">
           <div class="row no-wrap items-center">
             <q-img
               style="width: 70px"
@@ -21,13 +21,19 @@
       </tr>
       </thead>
       <tbody :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
-      <tr v-for="item in sortedItems" :key="item.id">
-        <td :class=item.text_a>{{ item.name }}</td>
+      <tr v-for="item in sortedItems" :key="item.id" :class="getRowClass(item)">
+        <td :class=item.text_a>
+          <div class="row items-center">
+            <q-icon :name="item.icon" size="20px" class="q-mr-sm" />
+            {{ item.name }}
+          </div>
+        </td>
         <td class="text-right">{{ item.games }}</td>
         <td class="text-right">{{ item.win }}</td>
         <td class="text-right">{{ item.draw }}</td>
         <td class="text-right">{{ item.lose }}</td>
-        <td class="text-right">{{ item.ball_io }}</td>
+        <td class="text-right">{{ item.ball_in }}</td>
+        <td class="text-right">{{ item.ball_out }}</td>
         <td class="text-right">{{ item.score }}</td>
         <td class="text-right">{{ item.last_game }}</td>
       </tr>
@@ -37,6 +43,10 @@
 </template>
 
 <script>
+import { ref, onMounted, computed } from 'vue'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { db } from 'src/firebase'
+
 const columns = [
   {
     id: 1,
@@ -66,109 +76,114 @@ const columns = [
   {
     id: 6,
     text: 'text-right',
-    label: 'З/П'
+    label: 'З'
   },
   {
     id: 7,
     text: 'text-right',
-    label: 'О'
+    label: 'П'
   },
   {
     id: 8,
     text: 'text-right',
+    label: 'О'
+  },
+  {
+    id: 9,
+    text: 'text-right',
     label: 'Ф'
-  }
-]
-const rows = [
-  {
-    id: 2,
-    text_a: 'text-left',
-    text_c: 'primary',
-    name: 'Север',
-    color: 'primary',
-    games: 2,
-    win: 2,
-    draw: 0,
-    lose: 0,
-    ball_io: '2-0',
-    score: 6,
-    last_game: 'ВВ'
-  },
-  {
-    id: 4,
-    text: 'text-left',
-    name: 'СШ Ленинградец',
-    games: 4,
-    win: 1,
-    draw: 0,
-    lose: 3,
-    ball_io: '5-6',
-    score: 3,
-    last_game: 'ПВПП'
-  },
-  {
-    id: 3,
-    text: 'text-left',
-    name: 'Псков',
-    games: 2,
-    win: 1,
-    draw: 1,
-    lose: 0,
-    ball_io: '4-3',
-    score: 4,
-    last_game: 'НВ'
-  },
-  {
-    id: 1,
-    name: 'Тосно Спб',
-    text: 'text-left',
-    games: 2,
-    win: 2,
-    draw: 0,
-    lose: 0,
-    ball_io: '4-1',
-    score: 6,
-    last_game: 'ВВ'
-  },
-  {
-    id: 5,
-    text: 'text-left',
-    name: 'ГОУР Карелия',
-    games: 3,
-    win: 0,
-    draw: 1,
-    lose: 2,
-    ball_io: '2-5',
-    score: 1,
-    last_game: 'ПНП'
-  },
-  {
-    id: 6,
-    text: 'text-left',
-    name: 'Химик',
-    games: 1,
-    win: 0,
-    draw: 0,
-    lose: 1,
-    ball_io: '1-3',
-    score: 0,
-    last_game: 'П'
   }
 ]
 
 export default {
   name: 'gameTable',
   setup () {
-    return {
-      tableTitle: 'Чемпионат СЗФО',
-      columns,
-      rows
+    const tableTitle = ref('Чемпионат СЗФО')
+    const rows = ref([])
+    const loading = ref(true)
+
+    // Firebase collection reference
+    const eventTableCollectionRef = collection(db, 'event-table')
+    const eventTableQuery = query(eventTableCollectionRef, orderBy('id', 'asc'))
+
+    onMounted(async () => {
+      // Load data from Firebase
+      onSnapshot(eventTableQuery, (querySnapshot) => {
+        const fbRows = []
+        querySnapshot.forEach((doc) => {
+          const ballIo = doc.data().ball_io || '0-0'
+          const [ballIn, ballOut] = ballIo.split('-').map(num => parseInt(num) || 0)
+
+          const row = {
+            id: doc.data().id,
+            text_a: doc.data().text_a || 'text-left',
+            text_c: doc.data().text_c || 'primary',
+            name: doc.data().name,
+            color: doc.data().color || 'primary',
+            games: doc.data().games || 0,
+            win: doc.data().win || 0,
+            draw: doc.data().draw || 0,
+            lose: doc.data().lose || 0,
+            ball_in: ballIn,
+            ball_out: ballOut,
+            score: doc.data().score || 0,
+            last_game: doc.data().last_game || '',
+            icon: doc.data().icon || 'sports_soccer'
+          }
+          fbRows.push(row)
+        })
+        rows.value = fbRows
+        loading.value = false
+      }, (error) => {
+        console.error('Error loading event table data:', error)
+        loading.value = false
+      })
+    })
+
+    const sortedItems = computed(() => {
+      return [...rows.value].sort((a, b) => {
+        // Первый критерий: score от большего к меньшему
+        if (a.score !== b.score) {
+          return b.score - a.score
+        }
+
+        // Второй критерий: при равенстве очков - разница забитых и пропущенных от меньшей к большей
+        const diffA = a.ball_in - a.ball_out
+        const diffB = b.ball_in - b.ball_out
+        if (diffA !== diffB) {
+          return diffA - diffB
+        }
+
+        // Третий критерий: при равенстве разницы голов - больше забитых голов
+        if (a.ball_in !== b.ball_in) {
+          return b.ball_in - a.ball_in
+        }
+
+        return 0
+      })
+    })
+
+    const getRowClass = (item) => {
+      if (item.name === 'Север') {
+        return 'bg-ae0000'
+      }
+      return ''
     }
-  },
-  computed: {
-    sortedItems: function () {
-      return rows.sort((a, b) => a.id - b.id)
+
+    return {
+      tableTitle,
+      columns,
+      rows,
+      loading,
+      sortedItems,
+      getRowClass
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.bg-ae0000
+  background-color: #ae0000 !important
+  color: white !important
+</style>

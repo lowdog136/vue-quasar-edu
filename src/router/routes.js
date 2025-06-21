@@ -37,6 +37,7 @@ const routes = [
         children: [
           { path: '/Admin/CarrotAdminPage', meta: { requiresAuth: true }, name: 'CarrotAdminPage', component: () => import('pages/Admin/CarrotAdminPage.vue') },
           { path: '/Admin/TomatAdminPage', meta: { requiresAuth: true }, name: 'TomatAdminPage', component: () => import('pages/Admin/TomatAdminPage.vue') },
+          { path: '/Admin/InitEventTable', meta: { requiresAuth: true }, name: 'InitEventTable', component: () => import('pages/Admin/InitEventTable.vue') },
           { path: '/Contact', name: 'Contact', component: () => import('pages/Contact.vue') },
           { path: '/Admin/Exit', name: 'ExitAdmin', component: () => import('pages/Admin/ExitAdmin.vue') }
         ]
