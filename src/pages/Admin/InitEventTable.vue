@@ -1,46 +1,27 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-list padding>
-      <q-item-label header>{{ labelHeader }}</q-item-label>
-      <q-item >
-        <q-item-section>
-          <q-item-label>Привет, {{ $store.getters.userName }} {{ $store.getters.displayName }}</q-item-label>
-          <q-item-label caption>
-            {{ labelCaption }}
-          </q-item-label>
-          <q-item-label>
-            <admin-edit-list />
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-list>
-
-    <!-- Секция управления event-table -->
+  <div class="q-pa-md">
     <q-card class="my-card">
       <q-card-section>
-        <div class="text-h6">Управление таблицей событий</div>
-        <div class="text-subtitle2">Инициализация данных коллекции event-table</div>
+        <div class="text-h6">Инициализация таблицы событий</div>
+        <div class="text-subtitle2">Управление данными коллекции event-table</div>
       </q-card-section>
 
       <q-card-section>
         <div class="row q-gutter-md">
           <q-btn
             color="primary"
-            icon="table_chart"
             label="Инициализировать данные"
             @click="initializeData"
             :loading="loading"
           />
           <q-btn
             color="negative"
-            icon="clear_all"
             label="Очистить коллекцию"
             @click="clearData"
             :loading="loading"
           />
           <q-btn
             color="secondary"
-            icon="visibility"
             label="Проверить данные"
             @click="checkData"
             :loading="loading"
@@ -68,39 +49,21 @@
         </q-list>
       </q-card-section>
     </q-card>
-
-    <!-- Секция редактирования таблицы -->
-    <div class="full-width">
-      <event-table-editor />
-    </div>
   </div>
 </template>
+
 <script>
-import { onBeforeMount, ref } from 'vue'
-import { useStore } from 'vuex'
-import AdminEditList from 'components/Admin/Panels/adminEditList.vue'
-import EventTableEditor from 'components/Admin/Tables/EventTableEditor.vue'
+import { ref } from 'vue'
 import { initEventTable, clearEventTable, db } from 'src/firebase'
 import { collection, getDocs } from 'firebase/firestore'
 
 export default {
-  components: { AdminEditList, EventTableEditor },
-  data () {
-    return {
-      labelCaption: 'Нужно выбрать раздел для редактирования',
-      labelHeader: 'Административная панель управления:'
-    }
-  },
+  name: 'InitEventTable',
   setup () {
-    const store = useStore()
     const loading = ref(false)
     const message = ref('')
     const messageType = ref('success')
     const dataList = ref([])
-
-    onBeforeMount(() => {
-      store.dispatch('fetchUser')
-    })
 
     const showMessage = (text, type = 'success') => {
       message.value = text
@@ -155,13 +118,6 @@ export default {
     }
 
     return {
-      notifyArchiveGames: ref(false),
-      notifyClubNews: ref(false),
-      notifySiteNews: ref(false),
-      notifyUpdateDate: ref(false),
-      notifyEventEdit: ref(false),
-      notifyEventEdit2: ref(false),
-      notifyEventEdit21: ref(false),
       loading,
       message,
       messageType,
@@ -176,6 +132,6 @@ export default {
 
 <style lang="sass" scoped>
 .my-card
-  max-width: 600px
-  margin-top: 16px
+  max-width: 800px
+  margin: 0 auto
 </style>
