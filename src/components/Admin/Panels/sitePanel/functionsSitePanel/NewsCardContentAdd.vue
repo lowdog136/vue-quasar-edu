@@ -35,6 +35,8 @@
             type="date"
             hint="add datenews"
             lazy-rules
+            mask="MMMM DD, YYYY"
+            locale="ru"
           />
           <q-input
             v-model='newNewsCardSrcNews'

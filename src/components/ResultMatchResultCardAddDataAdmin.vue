@@ -41,6 +41,8 @@
         type="date"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Заполните поле']"
+        mask="MMMM DD, YYYY"
+        locale="ru"
       />
       <p>
         <q-input

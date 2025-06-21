@@ -3,6 +3,8 @@
     :hint=inputHint
     :type="inputType"
     lazy-rules
+    :mask="inputType === 'date' ? 'MMMM DD, YYYY' : undefined"
+    :locale="inputType === 'date' ? 'ru' : undefined"
   />
 </template>
 

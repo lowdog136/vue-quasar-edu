@@ -67,12 +67,16 @@
             v-model='newSiteUpdateDate'
             hint="add date"
             lazy-rules
+            mask="MMMM DD, YYYY"
+            locale="ru"
           />
           <q-input
             v-model='newSiteUpdateDateUpd'
             type="date"
             hint="add datestamp"
             lazy-rules
+            mask="MMMM DD, YYYY"
+            locale="ru"
           />
           <q-input
             v-model='newSiteUpdateBody'

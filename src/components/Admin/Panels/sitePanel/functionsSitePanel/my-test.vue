@@ -25,6 +25,8 @@
         label="Выберите дату"
         filled
         class="q-mb-md"
+        mask="MMMM DD, YYYY"
+        locale="ru"
     />
     <q-btn @click="addData" label="Добавить данные" color="primary" />
     <q-banner v-if="successMessage" class="q-mt-md" color="green">

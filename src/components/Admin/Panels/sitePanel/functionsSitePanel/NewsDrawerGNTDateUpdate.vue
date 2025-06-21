@@ -10,7 +10,7 @@
       <template v-slot:prepend>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date v-model="SiteUpdate.datenews" mask="MMMM DD, YYYY">
+            <q-date v-model="SiteUpdate.datenews" mask="MMMM DD, YYYY" locale="ru">
               <div class="row items-center justify-end">
                 <q-item-section avatar>
                   <q-btn @click="updateVer(SiteUpdate.id)" color="primary" flat size="s" icon="done"/>

@@ -1,10 +1,13 @@
 <template>
   <q-select
-    :name=selectName
-    :color=selectColor
+    :model-value="modelValue"
+    :options="options"
+    :name="selectName"
+    :color="selectColor"
     filled
     clearable
-    :label=selectLabel
+    :label="selectLabel"
+    @update:model-value="$emit('update:modelValue', $event)"
   />
 </template>
 
@@ -17,10 +20,13 @@ export default {
     }
   },
   props: {
+    modelValue: [String, Number, Array],
+    options: Array,
     selectName: String,
     selectColor: String,
     selectLabel: String
-  }
+  },
+  emits: ['update:modelValue']
 }
 </script>
 
