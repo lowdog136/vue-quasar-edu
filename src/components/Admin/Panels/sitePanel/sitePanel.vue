@@ -37,6 +37,8 @@
           <change-main-page-logo />
         </q-tab-panel>
       </q-tab-panels>
+      <user-map-editor />
+      <user-map-editor2 />
     </div>
   </div>
 </template>
@@ -50,9 +52,13 @@ import NewsSiteContentAdd from 'components/Admin/Panels/sitePanel/functionsSiteP
 import ChangeMainPageLogo from 'components/Admin/Panels/sitePanel/functionsSitePanel/changeMainPageLogo.vue'
 import CountDown2Events from 'components/Admin/Panels/sitePanel/functionsSitePanel/CountDown2Events.vue'
 import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/games-now-event-edit.vue'
+import UserMapEditor from 'components/Admin/Panels/UserMapEditor.vue'
+import UserMapEditor2 from 'components/Admin/Panels/UserMapEditor2.vue'
 export default {
   name: 'adminPanel',
   components: {
+    UserMapEditor2,
+    UserMapEditor,
     GamesNowEventEdit,
     CountDown2Events,
     ChangeMainPageLogo,

@@ -69,6 +69,12 @@
             bg-color="red-3"
           />
           <q-input
+            v-model='newSiteUpdateScorer'
+            hint="add scorer list"
+            autogrow
+            lazy-rules
+          />
+          <q-input
             v-model='newSiteUpdateResult'
             hint="add result"
             autogrow
