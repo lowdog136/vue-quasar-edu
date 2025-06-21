@@ -4,7 +4,7 @@
       <q-item-label header>{{ headerName }}</q-item-label>
       <q-timeline-entry v-for="update in siteUpdates" :key="update.id"
                         :title=update.title
-                        :subtitle=update.dateupd
+                        :subtitle="formatDate(update.dateupd)"
                         :icon="update.icon"
                         :color="update.color"
       >
@@ -61,6 +61,22 @@ export default {
   },
   setup () {
     const siteUpdates = ref([])
+
+    // Функция форматирования даты в русском формате
+    const formatDate = (dateStr) => {
+      if (!dateStr) return ''
+      const months = [
+        'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+        'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+      ]
+      const d = new Date(dateStr)
+      if (isNaN(d.getTime())) return dateStr // Если дата невалидна, возвращаем как есть
+      const month = months[d.getMonth()]
+      const day = d.getDate()
+      const year = d.getFullYear()
+      return `${month} ${day}, ${year}`
+    }
+
     onMounted(async () => {
       onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbEvents = []
@@ -83,7 +99,8 @@ export default {
       })
     })
     return {
-      siteUpdates
+      siteUpdates,
+      formatDate
     }
   },
 

@@ -14,7 +14,7 @@
           />
           <adm-select
             v-model="newSiteUpdateEvent"
-            :options="newSiteUpdateEvent"
+            :options="['Чемпионат СЗФО', 'Кубок МРО', 'Кубок СЗФО', 'Кубок Астории', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап']"
             bg-color="red"
             :select-label="selectLabel[0]"
             :select-name="selectName[0]"
@@ -85,6 +85,8 @@
             hint="add date (для отображения в календаре)"
             lazy-rules
             bg-color="blue-2"
+            mask="MMMM DD, YYYY"
+            locale="ru"
           />
           <q-input
             v-model='newSiteUpdateDateUpd'
@@ -92,12 +94,28 @@
             hint="add datestamp(хронология)"
             lazy-rules
             bg-color="blue-2"
+            mask="MMMM DD, YYYY"
+            locale="ru"
           />
           <q-input
             v-model='newSiteUpdateBody'
             hint="add Body"
             autogrow
             lazy-rules
+          />
+          <adm-select
+            v-model="newSiteUpdateIcon"
+            :options="['bookmark', 'event', 'sports_soccer', 'flag', 'emoji_events']"
+            :select-color="green"
+            :select-label="selectLabel[1]"
+            :select-name="selectName[1]"
+          />
+          <adm-select
+            v-model="newSiteUpdateColor"
+            :options="['primary', 'secondary', 'accent', 'positive', 'negative', 'info', 'warning']"
+            :select-color="grey"
+            :select-label="selectLabel[2]"
+            :select-name="selectName[2]"
           />
         </div><br/>
       </q-form>
@@ -353,7 +371,7 @@ import AdmSelect from 'components/Admin/UI/admSelect.vue'
 const siteUpdateCollectionRef = collection(db, '/all-games')
 const siteUpdateCollectionQuery = query(siteUpdateCollectionRef, orderBy('date', 'desc'))
 // const newSiteUpdateEvent = reactive(ref(['Чемпионат СЗФО', 'кубок СЗФО', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап']))
-const newSiteUpdateEvent = ref(['Чемпионат СЗФО', 'Кубок МРО', 'Кубок СЗФО', 'Кубок Астории', 'XXV турнир полпреда СЗФО', 'XXVI турнир полпреда СЗФО', 'товарищеский матч', 'Третья лига, финальный этап'])
+const newSiteUpdateEvent = ref('Чемпионат СЗФО')
 const newSiteUpdateTitle = ref('')
 const newSiteUpdateTour = ref('')
 const newSiteUpdateScore = ref('')
@@ -403,11 +421,11 @@ const addSiteUpdate = () => {
     color: newSiteUpdateColor.value,
     scorer: newSiteUpdateScorer.value
   })
-  newSiteUpdateEvent.value = ''
+  newSiteUpdateEvent.value = 'Чемпионат СЗФО'
   newSiteUpdateTitle.value = ''
   newSiteUpdateTour.value = ''
   newSiteUpdateNameTeamAway.value = ''
-  newSiteUpdateYear.value = ''
+  newSiteUpdateYear.value = '2025'
   newSiteUpdateBody.value = ''
   newSiteUpdateDate.value = ''
   newSiteUpdateNameTeamHome.value = ''
@@ -416,11 +434,11 @@ const addSiteUpdate = () => {
   newSiteUpdateGoalTeamHome.value = ''
   newSiteUpdateGoalTeamHome.value = ''
   newSiteUpdateDateUpd.value = ''
-  newSiteUpdateIcon.value = ''
+  newSiteUpdateIcon.value = 'bookmark'
   selectedColor.value = null
   newSiteUpdatePlace.value = ''
-  newSiteUpdateColor.value = ''
-  newSiteUpdateScorer.value = ''
+  newSiteUpdateColor.value = 'primary'
+  newSiteUpdateScorer.value = { 1: ['', '', ''], 2: ['', '', ''] }
   console.log('add new events', newSiteUpdateDate.value)
 }
 
@@ -436,8 +454,8 @@ export default {
     return {
       btnIcon: 'post_add',
       btnName: 'add update',
-      selectName: ['event', 'color'],
-      selectLabel: ['event', 'color']
+      selectName: ['event', 'icon', 'color'],
+      selectLabel: ['event', 'icon', 'color']
     }
   },
   setup () {

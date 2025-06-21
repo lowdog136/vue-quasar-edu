@@ -10,7 +10,7 @@
     <q-item-section side top>
       <!--            Блок "о сайте". Дата новости -->
       <q-item-label caption v-for="event in events.slice(0,1)" :key="event.id">
-        <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders"> {{ event.dateupd }}</span>
+        <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders"> {{ formatDate(event.dateupd) }}</span>
       </q-item-label>
     </q-item-section>
   </q-item>
@@ -29,6 +29,22 @@ export default {
   setup () {
     const events = ref([])
     const active = ref([])
+
+    // Функция форматирования даты в русском формате
+    const formatDate = (dateStr) => {
+      if (!dateStr) return ''
+      const months = [
+        'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+        'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+      ]
+      const d = new Date(dateStr)
+      if (isNaN(d.getTime())) return dateStr // Если дата невалидна, возвращаем как есть
+      const month = months[d.getMonth()]
+      const day = d.getDate()
+      const year = d.getFullYear()
+      return `${month} ${day}, ${year}`
+    }
+
     onMounted(async () => {
       onSnapshot(eventCollectionQuery, (querySnapshot) => {
         const fbEvents = []
@@ -43,7 +59,8 @@ export default {
     })
     return {
       events,
-      active
+      active,
+      formatDate
     }
   },
   props: {

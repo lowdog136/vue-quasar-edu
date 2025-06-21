@@ -26,14 +26,14 @@
           />
           <adm-select
             v-model="newSiteUpdateIconUpd"
-            :options="newSiteUpdateIconUpd"
+            :options="['done', 'settings_applications']"
             :select-color="green"
             :select-label="selectLabel[0]"
             :select-name="selectName[0]"
           />
           <adm-select
             v-model="newSiteUpdateColorUpd"
-            :options="newSiteUpdateColorUpd"
+            :options="['black', 'grey', 'deep-orange-14']"
             :select-color="grey"
             :select-label="selectLabel[1]"
             :select-name="selectName[1]"
@@ -149,9 +149,33 @@
               <q-item-section>
                 <q-item-label>dateupd: {{ SiteUpdate.dateupd }}
                   <q-popup-edit v-model="SiteUpdate.dateupd" class="bg-accent text-white" v-slot="scope">
-                    <q-input dark color="white" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set">
+                    <q-input
+                      dark
+                      color="white"
+                      v-model="scope.value"
+                      dense
+                      autofocus
+                      counter
+                      @keyup.enter="scope.set"
+                      mask="MMMM DD, YYYY"
+                      locale="ru"
+                    >
                       <template v-slot:append>
-                        <q-icon name="edit" />
+                        <q-icon name="event" class="cursor-pointer">
+                          <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                            <q-date
+                              v-model="scope.value"
+                              mask="MMMM DD, YYYY"
+                              locale="ru"
+                              dark
+                            >
+                              <div class="row items-center justify-end">
+                                <q-btn v-close-popup color="primary" flat size="s" icon="done"/>
+                                <q-btn v-close-popup color="primary" flat size="s" icon="cancel" />
+                              </div>
+                            </q-date>
+                          </q-popup-proxy>
+                        </q-icon>
                       </template>
                     </q-input>
                   </q-popup-edit>
@@ -220,8 +244,8 @@ const newSiteUpdateBody = ref('')
 const newSiteUpdateDate = ref('')
 const newSiteUpdateCount = ref('')
 const newSiteUpdateDateUpd = ref('')
-const newSiteUpdateColorUpd = ref(['black', 'grey', 'deep-orange-14'])
-const newSiteUpdateIconUpd = ref(['done', 'settings_applications'])
+const newSiteUpdateColorUpd = ref('black')
+const newSiteUpdateIconUpd = ref('done')
 
 const addSiteUpdate = () => {
   addDoc(siteUpdateCollectionRef, {
@@ -240,8 +264,8 @@ const addSiteUpdate = () => {
   newSiteUpdateDate.value = ''
   newSiteUpdateCount.value = ''
   newSiteUpdateDateUpd.value = ''
-  newSiteUpdateColorUpd.value = ''
-  newSiteUpdateIconUpd.value = null
+  newSiteUpdateColorUpd.value = 'black'
+  newSiteUpdateIconUpd.value = 'done'
   console.log('add SiteUpdate', newSiteUpdateDate.value)
 }
 const deleteSiteUpdate = id => {
