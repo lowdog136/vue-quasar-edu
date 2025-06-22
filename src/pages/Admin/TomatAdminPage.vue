@@ -68,23 +68,17 @@
         </q-list>
       </q-card-section>
     </q-card>
-
-    <!-- Секция редактирования таблицы -->
-    <div class="full-width">
-      <event-table-editor />
-    </div>
   </div>
 </template>
 <script>
 import { onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
 import AdminEditList from 'components/Admin/Panels/adminEditList.vue'
-import EventTableEditor from 'components/Admin/Tables/EventTableEditor.vue'
 import { initEventTable, clearEventTable, db } from 'src/firebase'
 import { collection, getDocs } from 'firebase/firestore'
 
 export default {
-  components: { AdminEditList, EventTableEditor },
+  components: { AdminEditList },
   data () {
     return {
       labelCaption: 'Нужно выбрать раздел для редактирования',

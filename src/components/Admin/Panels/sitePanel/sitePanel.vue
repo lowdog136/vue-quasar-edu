@@ -32,9 +32,19 @@
           <games-now-event-edit />
         </q-tab-panel>
 
+        <q-tab-panel name="calendarEdit">
+          <div class="text-h6">Правка в календаре игр</div>
+          <calendar-games-edit />
+        </q-tab-panel>
+
         <q-tab-panel name="changeMainPage">
           <div class="text-h6">Выбрать оформление:</div>
           <change-main-page-logo />
+        </q-tab-panel>
+
+        <q-tab-panel name="tournamentTable">
+          <div class="text-h6">Редактирование турнирной таблицы</div>
+          <event-table-editor />
         </q-tab-panel>
       </q-tab-panels>
       <user-map-editor />
@@ -54,6 +64,8 @@ import CountDown2Events from 'components/Admin/Panels/sitePanel/functionsSitePan
 import GamesNowEventEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/games-now-event-edit.vue'
 import UserMapEditor from 'components/Admin/Panels/UserMapEditor.vue'
 import UserMapEditor2 from 'components/Admin/Panels/UserMapEditor2.vue'
+import CalendarGamesEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/calendar-games-edit.vue'
+import EventTableEditor from 'components/Admin/Tables/EventTableEditor.vue'
 export default {
   name: 'adminPanel',
   components: {
@@ -65,7 +77,9 @@ export default {
     NewsSiteContentAdd,
     NewsDrawerGNEDateUpdate,
     NewsDrawerGNTDateUpdate,
-    NewsCardContentAdd
+    NewsCardContentAdd,
+    CalendarGamesEdit,
+    EventTableEditor
   },
   data () {
     return {
@@ -102,8 +116,18 @@ export default {
         },
         {
           id: 6,
+          label: 'Правка в календаре игр',
+          value: 'calendarEdit'
+        },
+        {
+          id: 7,
           label: 'Смена оформления главной страницы',
           value: 'changeMainPage'
+        },
+        {
+          id: 8,
+          label: 'Редактирование турнирной таблицы',
+          value: 'tournamentTable'
         }
       ]
     }
