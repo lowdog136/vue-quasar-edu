@@ -46,6 +46,11 @@
           <div class="text-h6">Редактирование турнирной таблицы</div>
           <event-table-editor />
         </q-tab-panel>
+
+        <q-tab-panel name="playerStats">
+          <div class="text-h6">Статистика игроков</div>
+          <player-stats-manager />
+        </q-tab-panel>
       </q-tab-panels>
       <user-map-editor />
       <user-map-editor2 />
@@ -66,6 +71,7 @@ import UserMapEditor from 'components/Admin/Panels/UserMapEditor.vue'
 import UserMapEditor2 from 'components/Admin/Panels/UserMapEditor2.vue'
 import CalendarGamesEdit from 'components/Admin/Panels/sitePanel/functionsSitePanel/calendar-games-edit.vue'
 import EventTableEditor from 'components/Admin/Tables/EventTableEditor.vue'
+import PlayerStatsManager from 'components/Admin/Panels/sitePanel/functionsSitePanel/PlayerStatsManager.vue'
 export default {
   name: 'adminPanel',
   components: {
@@ -79,7 +85,8 @@ export default {
     NewsDrawerGNTDateUpdate,
     NewsCardContentAdd,
     CalendarGamesEdit,
-    EventTableEditor
+    EventTableEditor,
+    PlayerStatsManager
   },
   data () {
     return {
@@ -128,6 +135,11 @@ export default {
           id: 8,
           label: 'Редактирование турнирной таблицы',
           value: 'tournamentTable'
+        },
+        {
+          id: 9,
+          label: 'Статистика игроков',
+          value: 'playerStats'
         }
       ]
     }

@@ -59,13 +59,13 @@ const propsGoalscorersArray = ref({
   label: 'Бомбардиры',
   caption: 'Забитые мячи',
   iconName: 'face',
-  to: '/stats-goalscorers'
+  to: '/authors-goals'
 })
 const propsAssistantsArray = ref({
   label: 'Ассистенты',
   caption: 'Голевые передачи',
   iconName: 'accessibility',
-  to: '/stats-assistants'
+  to: '/authors-goals'
 })
 
 const expanded = ref(false)

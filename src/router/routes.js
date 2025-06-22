@@ -20,8 +20,6 @@ const routes = [
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
       { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
       { path: '/eventList', name: 'eventList', component: () => import('pages/EventsList/eventList.vue') },
-      { path: '/stats-assistants', name: 'stats-assistants', component: () => import('pages/Stats/stats-assistants.vue') },
-      { path: '/stats-goalscorers', name: 'stats-goalscorers', component: () => import('pages/Stats/stats-goalscorers.vue') },
       {
         path: '/User',
         meta: { requiresAuth: true },
