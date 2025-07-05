@@ -35,7 +35,7 @@ const routes = [
         component: () => import('layouts/LayoutAdminPage.vue'),
         children: [
           { path: '/Admin', name: 'AdminDashboard', component: () => import('pages/Admin/Dashboard.vue') },
-          { path: '/Admin/TomatAdminPage', meta: { requiresAuth: true }, name: 'TomatAdminPage', component: () => import('pages/Admin/TomatAdminPage.vue') },
+          { path: '/Admin/Settings', meta: { requiresAuth: true }, name: 'AdminSettings', component: () => import('pages/Admin/Settings.vue') },
           { path: '/Admin/InitEventTable', meta: { requiresAuth: true }, name: 'InitEventTable', component: () => import('pages/Admin/InitEventTable.vue') },
           { path: '/Admin/UserRoleManager', meta: { requiresAuth: true }, name: 'UserRoleManager', component: () => import('pages/Admin/UserRoleManagerPage.vue') },
           { path: '/Admin/MakeMeAdmin', meta: { requiresAuth: true }, name: 'MakeMeAdmin', component: () => import('pages/Admin/MakeMeAdmin.vue') },

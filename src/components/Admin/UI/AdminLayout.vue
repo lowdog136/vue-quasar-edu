@@ -114,8 +114,8 @@
           <q-item
             clickable
             v-ripple
-            :to="{ name: 'TomatAdminPage' }"
-            :active="$route.name === 'TomatAdminPage'"
+            :to="{ name: 'AdminSettings' }"
+            :active="$route.name === 'AdminSettings'"
             class="admin-submenu-item"
           >
             <q-item-section avatar>
@@ -261,7 +261,7 @@ export default defineComponent({
 
         if (segments[1]) {
           const sectionMap = {
-            TomatAdminPage: { label: 'Настройки', icon: 'settings' },
+            AdminSettings: { label: 'Настройки', icon: 'settings' },
             InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
             UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
             MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' }

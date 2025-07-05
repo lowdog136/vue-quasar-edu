@@ -8,7 +8,7 @@
       <q-item-section>{{ settingLists[0].name }}</q-item-section>
     </q-item>
     <q-separator spaced inset />
-    <q-item to="/Admin/TomatAdminPage">
+    <q-item to="/Admin/Settings">
       <q-item-section avatar>
         <q-icon color="primary" :name=settingLists[2].icon />
       </q-item-section>
@@ -50,9 +50,9 @@ export default {
       },
       {
         id: 3,
-        name: 'AdminPage',
-        icon: 'admin_panel_settings',
-        to: '/Admin/TomatAdminPage'
+        name: 'Настройки',
+        icon: 'settings',
+        to: '/Admin/Settings'
       },
       {
         id: 4,

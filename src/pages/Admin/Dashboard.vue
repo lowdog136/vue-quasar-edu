@@ -20,7 +20,7 @@
             label="Настройки"
             variant="default"
             outline
-            to="/Admin/TomatAdminPage"
+            to="/Admin/Settings"
           />
         </div>
       </div>
@@ -153,7 +153,7 @@
                     variant="default"
                     size="sm"
                     outline
-                    to="/Admin/TomatAdminPage"
+                    to="/Admin/Settings"
                     class="full-width"
                   />
                 </div>

@@ -68,7 +68,7 @@
                   <q-item-section>Панель администратора</q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="$router.push('/Admin/TomatAdminPage')">
+                <q-item clickable v-close-popup @click="$router.push('/Admin/Settings')">
                   <q-item-section avatar>
                     <q-icon name="settings" color="primary" />
                   </q-item-section>
