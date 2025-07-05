@@ -35,11 +35,28 @@ const routes = [
         component: () => import('layouts/LayoutAdminPage.vue'),
         children: [
           { path: '/Admin', name: 'AdminDashboard', component: () => import('pages/Admin/Dashboard.vue') },
+
+          // Content Management
+          { path: '/Admin/Content/NewsMainPage', meta: { requiresAuth: true }, name: 'NewsMainPage', component: () => import('pages/Admin/Content/NewsMainPage.vue') },
+          { path: '/Admin/Content/DateEditor', meta: { requiresAuth: true }, name: 'DateEditor', component: () => import('pages/Admin/Content/DateEditor.vue') },
+          { path: '/Admin/Content/SiteUpdate', meta: { requiresAuth: true }, name: 'SiteUpdate', component: () => import('pages/Admin/Content/SiteUpdate.vue') },
+
+          // Games Management
+          { path: '/Admin/Games/GamesEditor', meta: { requiresAuth: true }, name: 'GamesEditor', component: () => import('pages/Admin/Games/GamesEditor.vue') },
+          { path: '/Admin/Games/CalendarEditor', meta: { requiresAuth: true }, name: 'CalendarEditor', component: () => import('pages/Admin/Games/CalendarEditor.vue') },
+          { path: '/Admin/Games/TournamentTable', meta: { requiresAuth: true }, name: 'TournamentTable', component: () => import('pages/Admin/Games/TournamentTable.vue') },
+
+          // Design
+          { path: '/Admin/Design/MainPageDesign', meta: { requiresAuth: true }, name: 'MainPageDesign', component: () => import('pages/Admin/Design/MainPageDesign.vue') },
+
+          // Stats
+          { path: '/Admin/Stats/PlayerStats', meta: { requiresAuth: true }, name: 'PlayerStats', component: () => import('pages/Admin/Stats/PlayerStats.vue') },
+
+          // System
           { path: '/Admin/Settings', meta: { requiresAuth: true }, name: 'AdminSettings', component: () => import('pages/Admin/Settings.vue') },
           { path: '/Admin/InitEventTable', meta: { requiresAuth: true }, name: 'InitEventTable', component: () => import('pages/Admin/InitEventTable.vue') },
           { path: '/Admin/UserRoleManager', meta: { requiresAuth: true }, name: 'UserRoleManager', component: () => import('pages/Admin/UserRoleManagerPage.vue') },
           { path: '/Admin/MakeMeAdmin', meta: { requiresAuth: true }, name: 'MakeMeAdmin', component: () => import('pages/Admin/MakeMeAdmin.vue') },
-          { path: '/Contact', name: 'Contact', component: () => import('pages/Contact.vue') },
           { path: '/Admin/Exit', name: 'ExitAdmin', component: () => import('pages/Admin/ExitAdmin.vue') }
         ]
       },

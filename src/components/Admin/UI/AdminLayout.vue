@@ -78,6 +78,46 @@
           class="admin-menu-group"
         >
           <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'NewsMainPage' }"
+            :active="$route.name === 'NewsMainPage'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="article" size="sm" />
+            </q-item-section>
+            <q-item-section>Новость на главную</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'DateEditor' }"
+            :active="$route.name === 'DateEditor'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="schedule" size="sm" />
+            </q-item-section>
+            <q-item-section>Правка дат</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'SiteUpdate' }"
+            :active="$route.name === 'SiteUpdate'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="update" size="sm" />
+            </q-item-section>
+            <q-item-section>Обновление сайта</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
             v-ripple
             :to="{ name: 'NewsSite' }"
             :active="$route.name === 'NewsSite'"
@@ -100,6 +140,95 @@
               <q-icon name="sports_soccer" size="sm" />
             </q-item-section>
             <q-item-section>Новости клуба</q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <!-- Games Management -->
+        <q-expansion-item
+          icon="sports_soccer"
+          label="Управление играми"
+          :default-opened="$route.path.startsWith('/Admin/Games')"
+          class="admin-menu-group"
+        >
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'GamesEditor' }"
+            :active="$route.name === 'GamesEditor'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="edit" size="sm" />
+            </q-item-section>
+            <q-item-section>Добавление (правка) игр</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'CalendarEditor' }"
+            :active="$route.name === 'CalendarEditor'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="calendar_today" size="sm" />
+            </q-item-section>
+            <q-item-section>Правка в календаре игр</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'TournamentTable' }"
+            :active="$route.name === 'TournamentTable'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="table_chart" size="sm" />
+            </q-item-section>
+            <q-item-section>Турнирная таблица</q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <!-- Design -->
+        <q-expansion-item
+          icon="palette"
+          label="Дизайн"
+          :default-opened="$route.path.startsWith('/Admin/Design')"
+          class="admin-menu-group"
+        >
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'MainPageDesign' }"
+            :active="$route.name === 'MainPageDesign'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="home" size="sm" />
+            </q-item-section>
+            <q-item-section>Оформление главной</q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <!-- Stats -->
+        <q-expansion-item
+          icon="analytics"
+          label="Статистика"
+          :default-opened="$route.path.startsWith('/Admin/Stats')"
+          class="admin-menu-group"
+        >
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'PlayerStats' }"
+            :active="$route.name === 'PlayerStats'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="person" size="sm" />
+            </q-item-section>
+            <q-item-section>Статистика игроков</q-item-section>
           </q-item>
         </q-expansion-item>
 
@@ -171,40 +300,6 @@
           </q-item>
         </q-expansion-item>
 
-        <!-- Analytics -->
-        <q-expansion-item
-          icon="analytics"
-          label="Аналитика"
-          :default-opened="$route.path.startsWith('/Admin/Analytics')"
-          class="admin-menu-group"
-        >
-          <q-item
-            clickable
-            v-ripple
-            :to="{ name: 'AdminAnalytics' }"
-            :active="$route.name === 'AdminAnalytics'"
-            class="admin-submenu-item"
-          >
-            <q-item-section avatar>
-              <q-icon name="bar_chart" size="sm" />
-            </q-item-section>
-            <q-item-section>Статистика</q-item-section>
-          </q-item>
-
-          <q-item
-            clickable
-            v-ripple
-            :to="{ name: 'AdminReports' }"
-            :active="$route.name === 'AdminReports'"
-            class="admin-submenu-item"
-          >
-            <q-item-section avatar>
-              <q-icon name="assessment" size="sm" />
-            </q-item-section>
-            <q-item-section>Отчеты</q-item-section>
-          </q-item>
-        </q-expansion-item>
-
         <!-- Exit -->
         <q-separator class="q-my-md" />
         <q-item
@@ -259,21 +354,72 @@ export default defineComponent({
         breadcrumbItems.push({ label: 'Админка', icon: 'admin_panel_settings', to: '/Admin', clickable: true })
 
         if (segments[1]) {
-          const sectionMap = {
-            AdminSettings: { label: 'Настройки', icon: 'settings' },
-            InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
-            UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
-            MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' }
-          }
+          // Handle nested paths like /Admin/Content/NewsMainPage
+          if (segments[2]) {
+            const sectionMap = {
+              // Content Management
+              NewsMainPage: { label: 'Новость на главную', icon: 'article' },
+              DateEditor: { label: 'Правка дат', icon: 'schedule' },
+              SiteUpdate: { label: 'Обновление сайта', icon: 'update' },
 
-          const section = sectionMap[segments[1]]
-          if (section) {
-            breadcrumbItems.push({
-              label: section.label,
-              icon: section.icon,
-              to: path,
-              clickable: false
-            })
+              // Games Management
+              GamesEditor: { label: 'Редактор игр', icon: 'edit' },
+              CalendarEditor: { label: 'Календарь игр', icon: 'calendar_today' },
+              TournamentTable: { label: 'Турнирная таблица', icon: 'table_chart' },
+
+              // Design
+              MainPageDesign: { label: 'Оформление главной', icon: 'palette' },
+
+              // Stats
+              PlayerStats: { label: 'Статистика игроков', icon: 'person' }
+            }
+
+            const section = sectionMap[segments[2]]
+            if (section) {
+              // Add section group
+              const groupMap = {
+                Content: { label: 'Управление контентом', icon: 'article' },
+                Games: { label: 'Управление играми', icon: 'sports_soccer' },
+                Design: { label: 'Дизайн', icon: 'palette' },
+                Stats: { label: 'Статистика', icon: 'analytics' }
+              }
+
+              const group = groupMap[segments[1]]
+              if (group) {
+                breadcrumbItems.push({
+                  label: group.label,
+                  icon: group.icon,
+                  to: `/Admin/${segments[1]}`,
+                  clickable: true
+                })
+              }
+
+              breadcrumbItems.push({
+                label: section.label,
+                icon: section.icon,
+                to: path,
+                clickable: false
+              })
+            }
+          } else {
+            // Handle direct paths like /Admin/Settings
+            const sectionMap = {
+              // System
+              Settings: { label: 'Настройки', icon: 'settings' },
+              InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
+              UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
+              MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' }
+            }
+
+            const section = sectionMap[segments[1]]
+            if (section) {
+              breadcrumbItems.push({
+                label: section.label,
+                icon: section.icon,
+                to: path,
+                clickable: false
+              })
+            }
           }
         }
       }
