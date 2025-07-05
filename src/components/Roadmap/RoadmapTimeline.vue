@@ -217,15 +217,15 @@ export default defineComponent({
         duration: '1-2 недели',
         description: 'Безопасность Firebase, улучшение аутентификации, базовая TypeScript интеграция',
         status: 'current',
-        progress: 0.3,
-        completedTasks: 3,
+        progress: 0.4,
+        completedTasks: 4,
         totalTasks: 10,
         icon: 'security',
         tasks: [
           { id: 1, title: 'Firebase Configuration Security', completed: true },
           { id: 2, title: 'Authentication Improvements', completed: true },
           { id: 3, title: 'State Management Migration Plan', completed: true },
-          { id: 4, title: 'TypeScript Integration', completed: false },
+          { id: 4, title: 'TypeScript Integration', completed: true },
           { id: 5, title: 'Базовое тестирование', completed: false }
         ],
         details: {

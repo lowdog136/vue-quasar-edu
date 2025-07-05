@@ -54,10 +54,10 @@ VUE_APP_FIREBASE_APP_ID=your_app_id_here
 - [ ] Удалить Vuex после полной миграции
 
 #### 1.4 TypeScript Integration
-- [ ] Добавить TypeScript в проект
-- [ ] Создать базовые типы для данных
-- [ ] Настроить TypeScript конфигурацию
-- [ ] Добавить типы для Firebase
+- [x] Добавить TypeScript в проект
+- [x] Создать базовые типы для данных
+- [x] Настроить TypeScript конфигурацию
+- [x] Добавить типы для Firebase
 
 ---
 
