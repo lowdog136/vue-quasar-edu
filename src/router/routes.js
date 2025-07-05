@@ -18,6 +18,7 @@ const routes = [
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
+      { path: '/TestPinia', name: 'TestPinia', component: () => import('pages/TestPinia.vue') },
       { path: '/NewsClub', name: 'NewsClub', component: () => import('pages/NewsClub.vue') },
       { path: '/eventList', name: 'eventList', component: () => import('pages/EventsList/eventList.vue') },
       {

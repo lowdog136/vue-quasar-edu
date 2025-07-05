@@ -13,6 +13,11 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module'
+      },
       rules: {
         // Отключаем все правила для TypeScript файлов
         'no-undef': 'off',
