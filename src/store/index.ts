@@ -1,8 +1,8 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
-import { auth } from '../firebase'
+import { auth } from '../firebase/index'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import router from 'src/router'
+import router from 'src/router/index'
 
 // import example from './module-example'
 
