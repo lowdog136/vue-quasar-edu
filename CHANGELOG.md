@@ -20,7 +20,27 @@
 
 ---
 
-## [2.0.0] - 2024-01-XX
+## [5.1.0] - 2024-01-XX
+
+### Added
+- Roadmap visualization component
+- Release strategy documentation
+- Interactive timeline for project development
+- Version tracking system
+- Comprehensive changelog
+
+### Changed
+- Updated About page with roadmap section
+- Enhanced project documentation
+- Improved version management
+
+### Fixed
+- Component structure and styling
+- Documentation consistency
+
+---
+
+## [5.0.0] - 2024-01-XX
 
 ### Added
 - Vue 3 + Quasar Framework migration
