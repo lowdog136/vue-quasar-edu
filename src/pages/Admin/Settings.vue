@@ -136,19 +136,6 @@
       </div>
     </div>
 
-    <!-- Admin Panel -->
-    <div class="row q-col-gutter-md">
-      <div class="col-12">
-        <AdminCard
-          title="Панель управления сайтом"
-          subtitle="Управление контентом и настройками сайта"
-          icon="web"
-          icon-color="primary"
-        >
-          <admin-panel />
-        </AdminCard>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -157,7 +144,6 @@ import { defineComponent, ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import AdminCard from 'components/Admin/UI/AdminCard.vue'
 import AdminButton from 'components/Admin/UI/AdminButton.vue'
-import AdminPanel from 'components/Admin/Panels/sitePanel/sitePanel.vue'
 
 import { initEventTable, clearEventTable, db } from 'src/firebase'
 import { collection, getDocs } from 'firebase/firestore'
@@ -166,8 +152,7 @@ export default defineComponent({
   name: 'AdminSettings',
   components: {
     AdminCard,
-    AdminButton,
-    AdminPanel
+    AdminButton
   },
   setup () {
     const store = useStore()
