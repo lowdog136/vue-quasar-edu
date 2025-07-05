@@ -47,7 +47,7 @@
     <!-- Timeline -->
     <div class="timeline-container">
       <div
-        v-for="(phase, index) in phases"
+        v-for="phase in phases"
         :key="phase.id"
         class="timeline-item"
         :class="{ 'completed': phase.status === 'completed', 'current': phase.status === 'current' }"
