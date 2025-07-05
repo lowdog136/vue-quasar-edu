@@ -264,6 +264,19 @@
             </q-item-section>
             <q-item-section>Инициализация таблиц</q-item-section>
           </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            :to="{ name: 'AboutSite' }"
+            :active="$route.name === 'AboutSite'"
+            class="admin-submenu-item"
+          >
+            <q-item-section avatar>
+              <q-icon name="map" size="sm" />
+            </q-item-section>
+            <q-item-section>Дорожная карта</q-item-section>
+          </q-item>
         </q-expansion-item>
 
         <!-- User Management -->
@@ -408,7 +421,8 @@ export default defineComponent({
               Settings: { label: 'Настройки', icon: 'settings' },
               InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
               UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
-              MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' }
+              MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' },
+              AboutSite: { label: 'Дорожная карта', icon: 'map' }
             }
 
             const section = sectionMap[segments[1]]
