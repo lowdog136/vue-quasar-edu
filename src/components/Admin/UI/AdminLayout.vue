@@ -274,11 +274,11 @@ export default defineComponent({
 
         if (segments[1]) {
           const sectionMap = {
-            'CarrotAdminPage': { label: 'Редактор игр', icon: 'edit' },
-            'TomatAdminPage': { label: 'Настройки', icon: 'settings' },
-            'InitEventTable': { label: 'Инициализация таблиц', icon: 'table_chart' },
-            'UserRoleManager': { label: 'Управление ролями', icon: 'admin_panel_settings' },
-            'MakeMeAdmin': { label: 'Назначить администратора', icon: 'person_add' }
+            CarrotAdminPage: { label: 'Редактор игр', icon: 'edit' },
+            TomatAdminPage: { label: 'Настройки', icon: 'settings' },
+            InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
+            UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
+            MakeMeAdmin: { label: 'Назначить администратора', icon: 'person_add' }
           }
 
           const section = sectionMap[segments[1]]
