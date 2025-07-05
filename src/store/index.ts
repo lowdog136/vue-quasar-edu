@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
-import { auth } from '../firebase/index'
+import { auth } from '../firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import router from 'src/router/index'
 
