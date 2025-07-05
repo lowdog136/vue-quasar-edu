@@ -20,7 +20,7 @@
 <script>
 import { ref } from 'vue'
 export default {
-  name: 'Carousel',
+  name: 'AppCarousel',
   setup () {
     return {
       slide: ref(1)

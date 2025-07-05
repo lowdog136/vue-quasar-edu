@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { auth } from 'src/firebase'
+import { auth, db } from 'src/firebase'
+import type { User } from 'src/types'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
-  User as FirebaseUser
+  onAuthStateChanged
 } from 'firebase/auth'
 import {
   doc,
@@ -15,7 +15,6 @@ import {
   collection,
   onSnapshot
 } from 'firebase/firestore'
-import { db } from 'src/firebase'
 
 export interface UserRole {
   uid: string
@@ -27,7 +26,7 @@ export interface UserRole {
 }
 
 export interface AuthState {
-  user: FirebaseUser | null
+  user: User | null
   userRole: UserRole | null
   loading: boolean
   error: string | null
@@ -35,7 +34,7 @@ export interface AuthState {
 
 export const useAuthStore = defineStore('auth', () => {
   // State
-  const user = ref<FirebaseUser | null>(null)
+  const user = ref<User | null>(null)
   const userRole = ref<UserRole | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -190,6 +189,23 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
   }
 
+  const setGuestMode = () => {
+    user.value = {
+      uid: 'guest',
+      email: 'guest@example.com',
+      displayName: 'Гость',
+      photoURL: ''
+    }
+    userRole.value = {
+      uid: 'guest',
+      email: 'guest@example.com',
+      role: 'user',
+      permissions: ['user:read'],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  }
+
   // Helper functions
   const getDefaultPermissions = (role: 'admin' | 'user' | 'moderator'): string[] => {
     switch (role) {
@@ -260,6 +276,7 @@ export const useAuthStore = defineStore('auth', () => {
     makeModerator,
     makeUser,
     initAuth,
-    clearError
+    clearError,
+    setGuestMode
   }
 })

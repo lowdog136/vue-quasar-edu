@@ -69,9 +69,12 @@ module.exports = configure(function (ctx) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack (chain) {
+                        chainWebpack (chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js', 'ts', 'vue'] }])
+          .use(ESLintPlugin, [{
+            extensions: ['js', 'ts', 'vue'],
+            exclude: ['node_modules/**']
+          }])
       }
     },
 
@@ -125,7 +128,7 @@ module.exports = configure(function (ctx) {
 
       chainWebpackWebserver (chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js'] }])
+          .use(ESLintPlugin, [{ files: ['**/*.js'] }])
       },
 
       middlewares: [
@@ -143,7 +146,7 @@ module.exports = configure(function (ctx) {
       // if using workbox in InjectManifest mode
       chainWebpackCustomSW (chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js'] }])
+          .use(ESLintPlugin, [{ files: ['**/*.js'] }])
       },
 
       manifest: {
@@ -220,13 +223,13 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpackMain (chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js'] }])
+          .use(ESLintPlugin, [{ files: ['**/*.js'] }])
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpackPreload (chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js'] }])
+          .use(ESLintPlugin, [{ files: ['**/*.js'] }])
       }
     }
   }

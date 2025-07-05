@@ -18,7 +18,7 @@
       <q-page-container>
         <q-page padding>
           <p v-for="n in 1" :key="n">
-            <carousel />
+            <app-carousel />
           </p>
         </q-page>
       </q-page-container>
@@ -28,10 +28,10 @@
 
 <script>
 import { defineComponent } from 'vue'
-import Carousel from 'components/Carousel.vue'
+import AppCarousel from 'components/AppCarousel.vue'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: { Carousel }
+  components: { AppCarousel }
 })
 </script>

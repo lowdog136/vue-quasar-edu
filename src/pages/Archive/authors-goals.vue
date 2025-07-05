@@ -228,7 +228,7 @@ const processScorersData = (games) => {
             new Date(game.datestamp && typeof game.datestamp.toDate === 'function' ? game.datestamp.toDate() : game.datestamp) > new Date(lastViewedDate.value)
 
           scorer.goals.push({
-            game: game,
+            game,
             goalTime: goalArray[2] || '',
             assistant: goalArray[1] || '',
             isNew: isNewGoal
@@ -273,7 +273,7 @@ const processAssistantsData = (games) => {
             new Date(game.datestamp && typeof game.datestamp.toDate === 'function' ? game.datestamp.toDate() : game.datestamp) > new Date(lastViewedDate.value)
 
           assistant.assists.push({
-            game: game,
+            game,
             goalTime: goalArray[2] || '',
             scorer: goalArray[0] || '',
             isNew: isNewAssist

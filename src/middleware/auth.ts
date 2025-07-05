@@ -1,14 +1,14 @@
 import { useAuthStore } from 'src/stores/auth'
 
-export default function authMiddleware(to: any, from: any, next: any) {
+export default function authMiddleware (to: any, from: any, next: any) {
   const authStore = useAuthStore()
 
   // Check if route requires authentication
   if (to.meta.requiresAuth) {
     // Check if user is authenticated
     if (!authStore.isAuthenticated) {
-      // Redirect to login page
-      next('/')
+      // Redirect to auth page
+      next('/auth')
       return
     }
 

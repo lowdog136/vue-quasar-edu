@@ -1,7 +1,11 @@
 const routes = [
   {
+    path: '/auth',
+    name: 'Auth',
+    component: () => import('pages/AuthPage.vue')
+  },
+  {
     path: '/',
-    meta: { requiresAuth: true },
     component: () => import('layouts/MainLayout2.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
@@ -14,7 +18,7 @@ const routes = [
       { path: '/ArchiveGamesBefore', name: 'ArchiveGamesBefore', component: () => import('pages/Archive/ArchiveGamesBefore.vue') },
       { path: '/authors-goals', name: 'authors-goals', component: () => import('pages/Archive/authors-goals.vue') },
       { path: '/Stadium', name: 'Stadium', component: () => import('pages/Stadium.vue') },
-      { path: '/Achievement', name: 'Achievement', component: () => import('pages/Achievement.vue') },
+      { path: '/Achievement', name: 'Achievement', component: () => import('pages/PageAchievement.vue') },
       { path: '/Video', name: 'Video', component: () => import('pages/Video.vue') },
       { path: '/NewsSite', name: 'NewsSite', component: () => import('pages/NewsSite.vue') },
       { path: '/Test', name: 'Test', component: () => import('pages/Test.vue') },
@@ -58,7 +62,7 @@ const routes = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('pages/AppError404.vue')
   }
 ]
 export default routes

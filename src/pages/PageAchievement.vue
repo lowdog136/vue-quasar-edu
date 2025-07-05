@@ -7,7 +7,7 @@
 <script>
 import achievementlist from 'components/achievement-list'
 export default {
-  name: 'achievement',
+  name: 'PageAchievement',
   components: { achievementlist },
   data () {
     return {}
