@@ -7,7 +7,7 @@
       dense
       icon="account_circle"
       @click="handleProfileClick"
-      :color="isAuthenticated ? 'primary' : 'grey'"
+      color="white"
     >
       <q-tooltip>
         {{ isAuthenticated ? user?.displayName || user?.email : 'Профиль' }}
