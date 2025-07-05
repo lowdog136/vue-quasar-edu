@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAdminStore } from 'src/stores/admin'
+import { useAdminStore } from '../stores/admin.ts'
 
 const adminStore = useAdminStore()
 const { adminToDos, loading, error } = storeToRefs(adminStore)

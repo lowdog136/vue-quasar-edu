@@ -109,8 +109,8 @@
 
 <script>
 import { ref, reactive, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
-import { auth } from 'src/firebase'
+import { useAuthStore } from '../stores/auth'
+import { auth } from '../../firebase'
 
 export default {
   name: 'AuthPanel',
@@ -118,7 +118,7 @@ export default {
     return {}
   },
   setup: function () {
-    const store = useStore()
+    const authStore = useAuthStore()
     const state = reactive({})
     // eslint-disable-next-line camelcase
     const register_form = ref({})

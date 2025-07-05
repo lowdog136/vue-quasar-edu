@@ -42,7 +42,7 @@
 <script>
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '../stores/auth'
 import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
 import MainToolbarTitle from 'components/MainPage/mainToolbarTitle.vue'
 import UserProfileMenu from 'components/UserProfileMenu.vue'
@@ -53,9 +53,11 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
-    const store = useStore()
+    const authStore = useAuthStore()
+
     onBeforeMount(() => {
-      store.dispatch('fetchUser')
+      // Инициализируем auth store вместо старого Vuex store
+      authStore.initAuth()
     })
 
     return {

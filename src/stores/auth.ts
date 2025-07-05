@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { auth, db } from 'src/firebase'
-import type { User } from 'src/types'
+import { auth, db } from '../firebase'
+import type { User } from '../types'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,

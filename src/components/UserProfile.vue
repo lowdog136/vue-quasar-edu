@@ -110,7 +110,7 @@
 <script>
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
-import { useStore, mapState } from 'vuex'
+import { useAuthStore } from '../stores/auth'
 
 export default defineComponent({
   name: 'UserProfile',
@@ -118,9 +118,9 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
-    const store = useStore()
+    const authStore = useAuthStore()
     onBeforeMount(() => {
-      store.dispatch('fetchUser')
+      authStore.initAuth()
     })
     return {
       panelView: ref(true),

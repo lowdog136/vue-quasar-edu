@@ -126,9 +126,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useAuthStore, type UserRole } from 'src/stores/auth'
+import { useAuthStore, type UserRole } from '../../stores/auth'
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
-import { db } from 'src/firebase'
+import { db } from '../../firebase'
 
 const authStore = useAuthStore()
 

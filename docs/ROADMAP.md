@@ -58,6 +58,7 @@ VUE_APP_FIREBASE_APP_ID=your_app_id_here
 - [x] Создать базовые типы для данных
 - [x] Настроить TypeScript конфигурацию
 - [x] Добавить типы для Firebase
+- [x] Исправить ошибки TypeScript компиляции (fork-ts-checker-webpack-plugin)
 
 ---
 

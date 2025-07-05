@@ -52,9 +52,9 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from 'src/stores/auth'
+import { useAuthStore } from '../stores/auth'
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { auth } from 'src/firebase'
+import { auth } from '../firebase'
 
 export default defineComponent({
   name: 'AuthPage',

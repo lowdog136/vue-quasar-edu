@@ -125,7 +125,7 @@
 <script>
 import { defineComponent, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from 'src/stores/auth'
+import { useAuthStore } from '../stores/auth'
 
 export default defineComponent({
   name: 'UserProfileMenu',

@@ -141,7 +141,7 @@
 
 <script>
 import { defineComponent, ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '../../stores/auth'
 import AdminCard from 'components/Admin/UI/AdminCard.vue'
 import AdminButton from 'components/Admin/UI/AdminButton.vue'
 
@@ -155,7 +155,7 @@ export default defineComponent({
     AdminButton
   },
   setup () {
-    const store = useStore()
+    const authStore = useAuthStore()
     const loading = ref(false)
     const message = ref('')
     const messageType = ref('success')

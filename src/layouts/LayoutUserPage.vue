@@ -69,7 +69,7 @@
 <script>
 
 import { defineComponent, ref, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
+import { useAuthStore } from '../stores/auth'
 import SettingsListUser from 'components/Profile/SettingsListUser'
 
 export default defineComponent({
@@ -78,9 +78,9 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
-    const store = useStore()
+    const authStore = useAuthStore()
     onBeforeMount(() => {
-      store.dispatch('fetchUser')
+      authStore.initAuth()
     })
 
     return {

@@ -1,4 +1,4 @@
-import { useAuthStore } from 'src/stores/auth'
+import { useAuthStore } from '../stores/auth'
 
 export default function authMiddleware (to: any, from: any, next: any) {
   const authStore = useAuthStore()

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc, Timestamp } from 'firebase/firestore'
-import { db } from 'src/firebase'
+import { db } from '../firebase'
 
 export interface AdminToDo {
   id: string

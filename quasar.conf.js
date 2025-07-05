@@ -13,7 +13,7 @@ const { configure } = require('quasar/wrappers')
 module.exports = configure(function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
-    supportTS: true,
+    supportTS: true, // Включаем полноценную поддержку TypeScript
 
     // https://quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
@@ -69,7 +69,12 @@ module.exports = configure(function (ctx) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-                        chainWebpack (chain) {
+      chainWebpack (chain) {
+        chain.resolve.extensions
+          .add('.ts')
+          .add('.js')
+          .add('.vue')
+          .add('.json')
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{
             extensions: ['js', 'ts', 'vue'],
