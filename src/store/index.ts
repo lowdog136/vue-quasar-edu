@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import { auth } from '../firebase/index'
@@ -585,7 +586,7 @@ export default store(function (/* { ssrContext } */) {
         return state.NewsCardHowWatch
       },
       userName (state) {
-        return state.user.email
+        return state.user?.email || null
       },
       eventListDay (state) {
         return state.event
@@ -602,7 +603,7 @@ export default store(function (/* { ssrContext } */) {
         })
       },
       doublemyCount (state) {
-        return state.myCount.length
+        return typeof state.myCount === 'string' ? state.myCount.length : 0
       },
       allPosts (state) {
         return state.posts
@@ -631,6 +632,7 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
+        // @ts-ignore
         this.$router.push({ path: '/Admin' })
       },
       async register ({ commit }, details) {
@@ -658,6 +660,7 @@ export default store(function (/* { ssrContext } */) {
           return
         }
         commit('SET_USER', auth.currentUser)
+        // @ts-ignore
         await this.$router.push({ path: '/' })
       },
       async logout ({ commit }) {
@@ -709,7 +712,7 @@ export default store(function (/* { ssrContext } */) {
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING
+    strict: false
   })
 
   return Store

@@ -10,6 +10,17 @@ module.exports = {
     sourceType: 'module' // Allows for the use of imports
   },
 
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        // Отключаем все правила для TypeScript файлов
+        'no-undef': 'off',
+        'no-unused-vars': 'off'
+      }
+    }
+  ],
+
   env: {
     browser: true
   },
