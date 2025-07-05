@@ -107,7 +107,7 @@
                         </q-avatar>
                       </div>
                       <div class="col q-ml-md">
-                        <h4 class="text-h6 q-mb-xs">2020-2024 - Современность</h4>
+                        <h4 class="text-h6 q-mb-xs">2020-2025 - Современность</h4>
                         <p class="text-caption">Переход на Vue.js + Quasar, внедрение современных технологий</p>
                       </div>
                     </div>

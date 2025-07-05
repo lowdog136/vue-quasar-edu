@@ -69,6 +69,10 @@
               <div class="col">
                 <h3 class="text-h6 q-mb-xs">{{ phase.title }}</h3>
                 <p class="text-caption text-grey-6">{{ phase.duration }}</p>
+                <p class="text-caption text-primary" v-if="phase.version">
+                  <q-icon name="tag" size="12px" class="q-mr-xs" />
+                  {{ phase.version }}
+                </p>
               </div>
               <div class="col-auto">
                 <q-chip
@@ -215,6 +219,7 @@ export default defineComponent({
         id: 1,
         title: 'Критические улучшения',
         duration: '1-2 недели',
+        version: 'v2.1.0',
         description: 'Безопасность Firebase, улучшение аутентификации, базовая TypeScript интеграция',
         status: 'current',
         progress: 0.3,
@@ -237,6 +242,7 @@ export default defineComponent({
         id: 2,
         title: 'Структурные улучшения',
         duration: '2-3 недели',
+        version: 'v2.2.0',
         description: 'Реорганизация проекта, создание service layer, улучшение UI/UX',
         status: 'pending',
         progress: 0,
@@ -258,6 +264,7 @@ export default defineComponent({
         id: 3,
         title: 'Производительность',
         duration: '1-2 недели',
+        version: 'v2.3.0',
         description: 'Code splitting, caching strategy, оптимизация изображений',
         status: 'pending',
         progress: 0,
@@ -278,6 +285,7 @@ export default defineComponent({
         id: 4,
         title: 'Тестирование',
         duration: '2-3 недели',
+        version: 'v2.4.0',
         description: 'Unit тесты, component тесты, integration тесты',
         status: 'pending',
         progress: 0,
@@ -298,6 +306,7 @@ export default defineComponent({
         id: 5,
         title: 'Мониторинг и аналитика',
         duration: '1 неделя',
+        version: 'v2.5.0',
         description: 'Error tracking, analytics, performance monitoring',
         status: 'pending',
         progress: 0,
@@ -317,6 +326,7 @@ export default defineComponent({
         id: 6,
         title: 'DevOps и автоматизация',
         duration: '1-2 недели',
+        version: 'v2.6.0',
         description: 'CI/CD pipeline, deployment, monitoring',
         status: 'pending',
         progress: 0,
@@ -336,6 +346,7 @@ export default defineComponent({
         id: 7,
         title: 'Документация',
         duration: '1 неделя',
+        version: 'v2.7.0',
         description: 'Developer документация, user guide, API документация',
         status: 'pending',
         progress: 0,
