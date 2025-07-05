@@ -14,17 +14,7 @@
           <main-toolbar-title />
         </q-toolbar-title>
         <div>
-            <q-btn flat dense round icon="login" @click="dialog = true" />
-            <q-dialog v-model="dialog">
-              <q-card>
-                <q-card-section>
-                  <div class="text-h6"><GoogleSignIn /></div>
-                </q-card-section>
-                <q-card-section class="row items-center q-gutter-sm">
-                  <q-btn v-close-popup label="Закрыть" color="primary" />
-                </q-card-section>
-              </q-card>
-            </q-dialog>
+          <user-profile-menu />
         </div>
       </q-toolbar>
     </q-header>
@@ -55,11 +45,11 @@ import { defineComponent, ref, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import NewsDrawer from 'components/NewsDrawer/NewsDrawer.vue'
 import MainToolbarTitle from 'components/MainPage/mainToolbarTitle.vue'
-import GoogleSignIn from 'components/Auth/GoogleSignIn.vue'
+import UserProfileMenu from 'components/UserProfileMenu.vue'
 
 export default defineComponent({
   name: 'MainLayout2',
-  components: { GoogleSignIn, MainToolbarTitle, NewsDrawer },
+  components: { UserProfileMenu, MainToolbarTitle, NewsDrawer },
   setup () {
     const leftDrawerOpen = ref(false)
     const leftDrawerOpenResultGame = ref(false)
@@ -71,8 +61,6 @@ export default defineComponent({
     return {
       leftDrawerOpen,
       leftDrawerOpenResultGame,
-      dialog: ref(false),
-      dialogLogOut: ref(false),
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },

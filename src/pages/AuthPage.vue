@@ -58,7 +58,7 @@ import { auth } from 'src/firebase'
 
 export default defineComponent({
   name: 'AuthPage',
-  setup() {
+  setup () {
     const router = useRouter()
     const authStore = useAuthStore()
 
