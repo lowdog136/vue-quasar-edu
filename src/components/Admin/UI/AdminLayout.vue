@@ -78,7 +78,6 @@
           class="admin-menu-group"
         >
           <q-item
-            clickable
             v-ripple
             :to="{ name: 'NewsSite' }"
             :active="$route.name === 'NewsSite'"

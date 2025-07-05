@@ -136,10 +136,9 @@
       </div>
     </div>
 
-    <!-- Admin Panels -->
+    <!-- Admin Panel -->
     <div class="row q-col-gutter-md">
-      <!-- Site Panel -->
-      <div class="col-12 col-lg-6">
+      <div class="col-12">
         <AdminCard
           title="Панель управления сайтом"
           subtitle="Управление контентом и настройками сайта"
@@ -147,18 +146,6 @@
           icon-color="primary"
         >
           <admin-panel />
-        </AdminCard>
-      </div>
-
-      <!-- Tech Panel -->
-      <div class="col-12 col-lg-6">
-        <AdminCard
-          title="Техническая панель"
-          subtitle="ToDo задачи и технические операции"
-          icon="build"
-          icon-color="warning"
-        >
-          <tech-panel />
         </AdminCard>
       </div>
     </div>
@@ -171,7 +158,7 @@ import { useStore } from 'vuex'
 import AdminCard from 'components/Admin/UI/AdminCard.vue'
 import AdminButton from 'components/Admin/UI/AdminButton.vue'
 import AdminPanel from 'components/Admin/Panels/sitePanel/sitePanel.vue'
-import TechPanel from 'components/Admin/Panels/techPanel/techPanel.vue'
+
 import { initEventTable, clearEventTable, db } from 'src/firebase'
 import { collection, getDocs } from 'firebase/firestore'
 
@@ -180,8 +167,7 @@ export default defineComponent({
   components: {
     AdminCard,
     AdminButton,
-    AdminPanel,
-    TechPanel
+    AdminPanel
   },
   setup () {
     const store = useStore()

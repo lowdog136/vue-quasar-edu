@@ -91,10 +91,6 @@ export default {
   data () {
     return {
       titlePanel: 'admin panel',
-      tabNameInfo: 'todoInfo',
-      tabNameInfoText: 'To Do Info:',
-      tabNameTodoText: 'To Do List:',
-      tabNameTodoAddText: 'To Do Add:',
       tabNameList: [
         {
           id: 1,
@@ -146,8 +142,7 @@ export default {
   },
   setup () {
     return {
-      panel: ref('reset'),
-      techPanel: ref('reset')
+      panel: ref('reset')
     }
   }
 }
