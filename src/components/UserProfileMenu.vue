@@ -6,7 +6,7 @@
       round
       dense
       icon="account_circle"
-      @click="profileMenu = true"
+      @click="handleProfileClick"
       :color="isAuthenticated ? 'primary' : 'grey'"
     >
       <q-tooltip>
@@ -15,7 +15,7 @@
     </q-btn>
 
     <!-- Диалог профиля -->
-    <q-dialog v-model="profileMenu" position="top-right">
+    <q-dialog v-model="profileMenu" position="standard" @show="onDialogShow" @hide="onDialogHide">
       <q-card style="min-width: 350px">
         <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">Профиль</div>
@@ -156,6 +156,18 @@ export default defineComponent({
       authStore.setGuestMode()
     }
 
+    const handleProfileClick = () => {
+      profileMenu.value = true
+    }
+
+    const onDialogShow = () => {
+      // Dialog shown
+    }
+
+    const onDialogHide = () => {
+      // Dialog hidden
+    }
+
     const getRoleColor = (role) => {
       switch (role) {
         case 'admin': return 'red'
@@ -183,6 +195,9 @@ export default defineComponent({
       isModerator,
       handleLogout,
       continueAsGuest,
+      handleProfileClick,
+      onDialogShow,
+      onDialogHide,
       getRoleColor,
       getRoleLabel
     }

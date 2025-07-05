@@ -1,14 +1,10 @@
 const routes = [
   {
-    path: '/auth',
-    name: 'Auth',
-    component: () => import('pages/AuthPage.vue')
-  },
-  {
     path: '/',
     component: () => import('layouts/MainLayout2.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
+      { path: '/auth', name: 'Auth', component: () => import('pages/AuthPage.vue') },
       { path: '/AboutSite', name: 'AboutSite', component: () => import('pages/AboutSite.vue') },
       { path: '/Contact', name: 'Contact', component: () => import('pages/Contact.vue') },
       { path: '/Fanats', name: 'Fanats', component: () => import('pages/Fanats.vue') },
