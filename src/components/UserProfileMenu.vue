@@ -61,9 +61,9 @@
                 <q-separator />
                 <q-item-label header>Администрирование</q-item-label>
 
-                <q-item clickable v-close-popup @click="$router.push('/Admin/CarrotAdminPage')">
+                <q-item clickable v-close-popup @click="$router.push('/Admin')">
                   <q-item-section avatar>
-                    <q-icon name="admin_panel_settings" color="primary" />
+                    <q-icon name="dashboard" color="primary" />
                   </q-item-section>
                   <q-item-section>Панель администратора</q-item-section>
                 </q-item>

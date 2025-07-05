@@ -15,9 +15,9 @@
       <q-item-section>{{ settingLists[2].name }}</q-item-section>
     </q-item>
     <q-separator spaced inset />
-    <q-item to="/Admin/CarrotAdminPage">
+    <q-item to="/Admin">
       <q-item-section avatar>
-        <q-icon color="primary" name="admin_panel_settings" />
+        <q-icon color="primary" name="dashboard" />
       </q-item-section>
       <q-item-section>{{ settingLists[1].name }}</q-item-section>
     </q-item>
@@ -44,9 +44,9 @@ export default {
       },
       {
         id: 2,
-        name: 'AdminPageE',
-        icon: 'admin_panel_settings',
-        to: '/Admin/CarrotAdminPage'
+        name: 'Панель администратора',
+        icon: 'dashboard',
+        to: '/Admin'
       },
       {
         id: 3,

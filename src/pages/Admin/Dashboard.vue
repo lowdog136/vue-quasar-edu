@@ -106,14 +106,7 @@
               <div class="quick-actions-section">
                 <h6 class="text-subtitle1 q-mb-md">Управление контентом</h6>
                 <div class="column q-gutter-sm">
-                  <AdminButton
-                    icon="add"
-                    label="Добавить игру"
-                    variant="success"
-                    size="sm"
-                    to="/Admin/CarrotAdminPage"
-                    class="full-width"
-                  />
+
                   <AdminButton
                     icon="article"
                     label="Создать новость"

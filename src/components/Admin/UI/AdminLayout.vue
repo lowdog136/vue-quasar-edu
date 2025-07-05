@@ -77,18 +77,7 @@
           :default-opened="$route.path.startsWith('/Admin/Content')"
           class="admin-menu-group"
         >
-          <q-item
-            clickable
-            v-ripple
-            :to="{ name: 'CarrotAdminPage' }"
-            :active="$route.name === 'CarrotAdminPage'"
-            class="admin-submenu-item"
-          >
-            <q-item-section avatar>
-              <q-icon name="edit" size="sm" />
-            </q-item-section>
-            <q-item-section>Редактор игр</q-item-section>
-          </q-item>
+
 
           <q-item
             clickable
@@ -274,7 +263,6 @@ export default defineComponent({
 
         if (segments[1]) {
           const sectionMap = {
-            CarrotAdminPage: { label: 'Редактор игр', icon: 'edit' },
             TomatAdminPage: { label: 'Настройки', icon: 'settings' },
             InitEventTable: { label: 'Инициализация таблиц', icon: 'table_chart' },
             UserRoleManager: { label: 'Управление ролями', icon: 'admin_panel_settings' },
