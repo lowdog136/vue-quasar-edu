@@ -77,8 +77,6 @@
           :default-opened="$route.path.startsWith('/Admin/Content')"
           class="admin-menu-group"
         >
-
-
           <q-item
             clickable
             v-ripple
