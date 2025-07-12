@@ -47,14 +47,14 @@
           icon-color="primary"
           variant="info"
           clickable
-          class="clickable-card"
+          class="stats-card clickable-card"
           @click="$router.push('/Admin/TomatAdminPage')"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="primary" size="2em" />
             <div class="text-caption q-mt-sm">Загрузка данных...</div>
           </div>
-          <div v-else>
+          <div v-else class="stats-content">
             <div class="text-h3 text-primary q-mb-sm">{{ stats.totalGames }}</div>
             <div class="text-caption">
               <q-icon name="trending_up" color="positive" size="sm" />
@@ -76,14 +76,14 @@
           icon-color="success"
           variant="success"
           clickable
-          class="clickable-card"
+          class="stats-card clickable-card"
           @click="$router.push('/Admin/NewsSite')"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="positive" size="2em" />
             <div class="text-caption q-mt-sm">Загрузка данных...</div>
           </div>
-          <div v-else>
+          <div v-else class="stats-content">
             <div class="text-h3 text-positive q-mb-sm">{{ stats.totalNews }}</div>
             <div class="text-caption">
               <q-icon name="schedule" color="grey" size="sm" />
@@ -104,12 +104,13 @@
           icon="people"
           icon-color="warning"
           variant="warning"
+          class="stats-card"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="orange" size="2em" />
             <div class="text-caption q-mt-sm">Загрузка данных...</div>
           </div>
-          <div v-else>
+          <div v-else class="stats-content">
             <div class="text-h3 text-orange q-mb-sm">{{ stats.totalUsers }}</div>
             <div class="text-caption">
               <q-icon name="person_add" color="positive" size="sm" />
@@ -126,12 +127,13 @@
           icon="check_circle"
           icon-color="positive"
           variant="success"
+          class="stats-card"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="positive" size="2em" />
             <div class="text-caption q-mt-sm">Загрузка данных...</div>
           </div>
-          <div v-else>
+          <div v-else class="stats-content">
             <div class="text-h3 text-positive q-mb-sm">{{ stats.systemHealth }}%</div>
             <div class="text-caption">
               <q-icon name="fiber_manual_record" :color="systemStatusColor" size="sm" />
@@ -142,20 +144,21 @@
       </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="row q-col-gutter-md q-mb-lg">
-      <div class="col-12 col-md-8">
+    <!-- Main Content Area -->
+    <div class="row q-col-gutter-md">
+      <!-- Quick Actions -->
+      <div class="col-12 col-lg-8">
         <AdminCard
           title="Быстрые действия"
           icon="flash_on"
           icon-color="warning"
+          class="content-card"
         >
           <div class="row q-col-gutter-md">
             <div class="col-12 col-sm-6">
               <div class="quick-actions-section">
                 <h6 class="text-subtitle1 q-mb-md">Управление контентом</h6>
                 <div class="column q-gutter-sm">
-
                   <AdminButton
                     icon="article"
                     label="Создать новость"
@@ -220,11 +223,13 @@
         </AdminCard>
       </div>
 
-      <div class="col-12 col-md-4">
+      <!-- Recent Actions -->
+      <div class="col-12 col-lg-4">
         <AdminCard
           title="Последние действия"
           icon="history"
           icon-color="grey"
+          class="content-card"
         >
           <div class="recent-actions">
             <div
@@ -249,13 +254,15 @@
       </div>
     </div>
 
-    <!-- System Info -->
-    <div class="row q-col-gutter-md">
+    <!-- Bottom Row -->
+    <div class="row q-col-gutter-md q-mt-md">
+      <!-- System Info -->
       <div class="col-12 col-md-6">
         <AdminCard
           title="Информация о системе"
           icon="info"
           icon-color="info"
+          class="content-card"
         >
           <div class="system-info">
             <div class="row q-mb-sm">
@@ -284,11 +291,13 @@
         </AdminCard>
       </div>
 
+      <!-- Notifications -->
       <div class="col-12 col-md-6">
         <AdminCard
           title="Уведомления"
           icon="notifications"
           icon-color="warning"
+          class="content-card"
         >
           <div class="notifications">
             <div
@@ -577,10 +586,47 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .admin-dashboard {
+  min-height: 100vh;
+  padding: 20px;
+
   .dashboard-header {
     h1 {
       margin: 0;
       color: #333;
+    }
+  }
+
+  // Статистические карточки
+  .stats-card {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+
+    .q-card__section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stats-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  // Контентные карточки
+  .content-card {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+
+    .q-card__section {
+      flex: 1;
     }
   }
 
@@ -623,6 +669,8 @@ export default defineComponent({
 // Responsive
 @media (max-width: 768px) {
   .admin-dashboard {
+    padding: 16px;
+
     .dashboard-header {
       .row {
         flex-direction: column;
@@ -634,6 +682,24 @@ export default defineComponent({
           justify-content: space-between;
         }
       }
+    }
+
+    .stats-card {
+      height: auto;
+      min-height: 180px;
+    }
+
+    .content-card {
+      min-height: 250px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-dashboard {
+    .stats-card {
+      height: auto;
+      min-height: 160px;
     }
   }
 }
@@ -651,6 +717,42 @@ export default defineComponent({
 
     &:active {
       transform: translateY(0);
+    }
+  }
+}
+
+// Улучшенные стили для карточек
+.admin-dashboard {
+  .q-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Стили для статистических карточек
+  .stats-card {
+    .q-card__section {
+      padding: 24px;
+    }
+
+    .text-h3 {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .text-caption {
+      line-height: 1.4;
+    }
+  }
+
+  // Стили для контентных карточек
+  .content-card {
+    .q-card__section {
+      padding: 20px;
     }
   }
 }
