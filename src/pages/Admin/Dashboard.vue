@@ -3,25 +3,25 @@
     <!-- Page Header -->
     <div class="dashboard-header q-mb-lg">
       <div class="row items-center justify-between">
-        <div>
-          <h1 class="text-h4 q-mb-xs">Dashboard</h1>
-          <p class="text-grey-6">Обзор системы и основные метрики</p>
+        <div class="row items-center q-gutter-sm">
+          <q-icon name="dashboard" size="2em" color="primary" />
+          <h1 class="text-h4">Панель управления</h1>
         </div>
-        <div class="row q-gutter-sm">
-          <AdminButton
-            icon="refresh"
-            label="Обновить"
-            variant="info"
-            @click="refreshData"
+        <div class="row items-center q-gutter-sm">
+          <q-btn
             :loading="loading"
-          />
-          <AdminButton
-            icon="settings"
-            label="Настройки"
-            variant="default"
-            outline
-            to="/Admin/Settings"
-          />
+            icon="refresh"
+            color="primary"
+            flat
+            round
+            @click="refreshData"
+            :disable="loading"
+          >
+            <q-tooltip>Обновить данные</q-tooltip>
+          </q-btn>
+          <div v-if="stats.lastUpdated" class="text-caption text-grey">
+            Обновлено: {{ formatLastUpdated(stats.lastUpdated) }}
+          </div>
         </div>
       </div>
     </div>
@@ -308,9 +308,9 @@
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import AdminCard from 'components/Admin/UI/AdminCard.vue'
 import AdminButton from 'components/Admin/UI/AdminButton.vue'
-import { collection, onSnapshot, query, orderBy, where, getDocs } from 'firebase/firestore'
-import { db } from 'src/firebase'
 import { useQuasar } from 'quasar'
+import StatsService from 'src/firebase/statsService'
+import { ensureStatsExist } from 'src/firebase/initStats'
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -330,7 +330,8 @@ export default defineComponent({
       lastNewsDate: '',
       totalUsers: 1247,
       newUsersThisWeek: 23,
-      systemHealth: 98
+      systemHealth: 98,
+      lastUpdated: null
     })
 
     const systemInfo = ref({
@@ -409,91 +410,58 @@ export default defineComponent({
       return `${month} ${day}, ${year}`
     }
 
-    // Загрузка данных игр
-    const loadGamesData = () => {
-      const gamesCollectionRef = collection(db, 'all-games')
-      const gamesQuery = query(gamesCollectionRef, orderBy('datestamp', 'desc'))
+    // Функция для форматирования времени последнего обновления
+    const formatLastUpdated = (timestamp) => {
+      if (!timestamp) return ''
 
-      onSnapshot(gamesQuery, (querySnapshot) => {
-        const games = []
-        querySnapshot.forEach((doc) => {
-          const game = {
-            id: doc.id,
-            ...doc.data()
-          }
-          games.push(game)
-        })
+      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp)
+      const now = new Date()
+      const diffMs = now - date
+      const diffMins = Math.floor(diffMs / 60000)
+      const diffHours = Math.floor(diffMs / 3600000)
+      const diffDays = Math.floor(diffMs / 86400000)
 
-        stats.value.totalGames = games.length
+      if (diffMins < 1) return 'Только что'
+      if (diffMins < 60) return `${diffMins} мин назад`
+      if (diffHours < 24) return `${diffHours} ч назад`
+      if (diffDays < 7) return `${diffDays} дн назад`
 
-        // Подсчет игр за последнюю неделю
-        const weekAgo = getWeekAgo()
-        const recentGames = games.filter(game => {
-          if (game.datestamp) {
-            const gameDate = game.datestamp.toDate ? game.datestamp.toDate() : new Date(game.datestamp)
-            return gameDate >= weekAgo
-          }
-          return false
-        })
-        stats.value.newGamesThisWeek = recentGames.length
-      }, (error) => {
-        console.error('Error loading games data:', error)
-        $q.notify({
-          message: 'Ошибка загрузки данных игр',
-          color: 'negative',
-          icon: 'error',
-          position: 'top'
-        })
+      return date.toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
       })
     }
 
-    // Загрузка данных новостей
-    const loadNewsData = () => {
-      const newsCollectionRef = collection(db, 'siteNews')
-      const newsQuery = query(newsCollectionRef, orderBy('date', 'desc'))
-
-      onSnapshot(newsQuery, (querySnapshot) => {
-        const news = []
-        querySnapshot.forEach((doc) => {
-          const newsItem = {
-            id: doc.id,
-            ...doc.data()
-          }
-          news.push(newsItem)
-        })
-
-        stats.value.totalNews = news.length
-
-        // Получение даты последней новости
-        if (news.length > 0) {
-          const lastNews = news[0]
-          if (lastNews.datenews) {
-            stats.value.lastNewsDate = formatDate(lastNews.datenews)
-          } else if (lastNews.date) {
-            const lastDate = new Date(lastNews.date)
-            const now = new Date()
-            const diffTime = Math.abs(now - lastDate)
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-            if (diffDays === 0) {
-              stats.value.lastNewsDate = 'Сегодня'
-            } else if (diffDays === 1) {
-              stats.value.lastNewsDate = 'Вчера'
-            } else {
-              stats.value.lastNewsDate = `${diffDays} дня назад`
-            }
-          }
+    // Загрузка данных из Firebase
+    const loadStatsData = async () => {
+      try {
+        const statsData = await StatsService.getStatsWithRefresh()
+        stats.value = {
+          totalGames: statsData.totalGames || 0,
+          newGamesThisWeek: statsData.newGamesThisWeek || 0,
+          totalNews: statsData.totalNews || 0,
+          lastNewsDate: statsData.lastNewsDate || '',
+          totalUsers: statsData.totalUsers || 1247,
+          newUsersThisWeek: statsData.newUsersThisWeek || 23,
+          systemHealth: statsData.systemHealth || 98,
+          lastUpdated: statsData.lastUpdated || null
         }
-      }, (error) => {
-        console.error('Error loading news data:', error)
+      } catch (error) {
+        console.error('Error loading stats:', error)
         $q.notify({
-          message: 'Ошибка загрузки данных новостей',
+          message: 'Ошибка загрузки статистики',
           color: 'negative',
           icon: 'error',
           position: 'top'
         })
-      })
+      }
     }
+
+    // Удаляем старые функции loadGamesData и loadNewsData
+    // const loadGamesData = async () => { ... }
+    // const loadNewsData = async () => { ... }
 
     const systemStatus = computed(() => {
       if (stats.value.systemHealth >= 90) return 'Отлично'
@@ -511,9 +479,9 @@ export default defineComponent({
     const refreshData = async () => {
       loading.value = true
       try {
-        // Перезагружаем данные игр и новостей
-        loadGamesData()
-        loadNewsData()
+        // Принудительно обновляем статистику
+        await StatsService.refreshAllStats()
+        await loadStatsData()
 
         // Имитация загрузки для UX
         await new Promise(resolve => setTimeout(resolve, 500))
@@ -537,11 +505,12 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
+    onMounted(async () => {
+      // Убеждаемся, что статистика существует
+      await ensureStatsExist()
+
       // Загрузка данных при монтировании компонента
-      loadGamesData()
-      loadNewsData()
-      refreshData()
+      loadStatsData()
     })
 
     return {
@@ -552,7 +521,8 @@ export default defineComponent({
       notifications,
       systemStatus,
       systemStatusColor,
-      refreshData
+      refreshData,
+      formatLastUpdated
     }
   }
 })
