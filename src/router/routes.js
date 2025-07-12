@@ -35,6 +35,10 @@ const routes = [
         component: () => import('layouts/LayoutAdminPage.vue'),
         children: [
           { path: '/Admin', name: 'AdminDashboard', component: () => import('pages/Admin/Dashboard.vue') },
+          { path: '/Admin/Analytics', name: 'AdminAnalytics', component: () => import('pages/Admin/Analytics.vue') },
+          { path: '/Admin/Content', name: 'AdminContent', component: () => import('pages/Admin/Content.vue') },
+          { path: '/Admin/System', name: 'AdminSystem', component: () => import('pages/Admin/System.vue') },
+          { path: '/Admin/Users', name: 'AdminUsers', component: () => import('pages/Admin/Users.vue') },
 
           // Content Management
           { path: '/Admin/Content/NewsMainPage', meta: { requiresAuth: true }, name: 'NewsMainPage', component: () => import('pages/Admin/Content/NewsMainPage.vue') },

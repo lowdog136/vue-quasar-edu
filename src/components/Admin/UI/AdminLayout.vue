@@ -70,6 +70,62 @@
           <q-item-section>Dashboard</q-item-section>
         </q-item>
 
+        <!-- Analytics Dashboard -->
+        <q-item
+          clickable
+          v-ripple
+          :to="{ name: 'AdminAnalytics' }"
+          :active="$route.name === 'AdminAnalytics'"
+          class="admin-menu-item"
+        >
+          <q-item-section avatar>
+            <q-icon name="analytics" />
+          </q-item-section>
+          <q-item-section>Аналитика</q-item-section>
+        </q-item>
+
+        <!-- Content Dashboard -->
+        <q-item
+          clickable
+          v-ripple
+          :to="{ name: 'AdminContent' }"
+          :active="$route.name === 'AdminContent'"
+          class="admin-menu-item"
+        >
+          <q-item-section avatar>
+            <q-icon name="article" />
+          </q-item-section>
+          <q-item-section>Контент</q-item-section>
+        </q-item>
+
+        <!-- System Dashboard -->
+        <q-item
+          clickable
+          v-ripple
+          :to="{ name: 'AdminSystem' }"
+          :active="$route.name === 'AdminSystem'"
+          class="admin-menu-item"
+        >
+          <q-item-section avatar>
+            <q-icon name="speed" />
+          </q-item-section>
+          <q-item-section>Система</q-item-section>
+        </q-item>
+
+        <!-- Users Dashboard -->
+        <q-item
+          clickable
+          v-ripple
+          :to="{ name: 'AdminUsers' }"
+          :active="$route.name === 'AdminUsers'"
+          class="admin-menu-item"
+        >
+          <q-item-section avatar>
+            <q-icon name="people" />
+          </q-item-section>
+          <q-item-section>Пользователи</q-item-section>
+        </q-item>
+
         <!-- Content Management -->
         <q-expansion-item
           icon="article"
