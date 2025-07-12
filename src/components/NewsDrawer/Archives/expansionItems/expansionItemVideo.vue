@@ -25,7 +25,10 @@ export default {
     qItemLabel: String,
     qItemLabelCaption: String,
     qItemTo: String,
-    disable: String
+    disable: {
+      type: [String, Boolean],
+      default: false
+    }
   }
 }
 </script>

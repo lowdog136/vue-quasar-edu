@@ -1,5 +1,5 @@
 <template>
-  <q-item disable clickable v-ripple :active="active" :to=expansionItemArray.to>
+  <q-item :disable="true" clickable v-ripple :active="active" :to=expansionItemArray.to>
     <q-item-section avatar>
       <q-icon :name=expansionItemArray.icon />
     </q-item-section>

@@ -28,7 +28,7 @@ export default {
   components: { },
   setup () {
     const events = ref([])
-    const active = ref([])
+    const active = ref(false)
 
     // Функция форматирования даты в русском формате
     const formatDate = (dateStr) => {

@@ -29,7 +29,7 @@ export default {
   components: { },
   setup () {
     const NewsCards = ref([])
-    const active = ref([])
+    const active = ref(false)
     onMounted(async () => {
       onSnapshot(newsCardCollectionQuery, (querySnapshot) => {
         const fbNewsCards = []

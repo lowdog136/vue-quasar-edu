@@ -15,7 +15,7 @@ import { ref } from 'vue'
 export default {
   name: 'expansionItemHistory',
   setup () {
-    const active = ref([])
+    const active = ref(false)
     return {
       active
     }

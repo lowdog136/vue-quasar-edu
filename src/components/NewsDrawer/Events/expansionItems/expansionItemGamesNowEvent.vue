@@ -27,7 +27,7 @@ export default {
   setup () {
     const NewsCards = ref([])
     const GamesNowEvents = ref([])
-    const active = ref([])
+    const active = ref(false)
     onMounted(async () => {
       onSnapshot(collection(db, '/siteNewsDrawer/GamesNowEvent/dateUpdate/'), orderBy('date', 'desc'), (querySnapshot) => {
         const fbGamesNowEvents = []

@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable v-ripple disable :active="active" :to=qItemTo>
+  <q-item clickable v-ripple :disable="true" :active="active" :to=qItemTo>
     <q-item-section avatar>
       <q-icon :name=iconName />
     </q-item-section>
@@ -15,7 +15,7 @@ import { ref } from 'vue'
 export default {
   name: 'expansionItemStadium',
   setup () {
-    const active = ref([])
+    const active = ref(false)
     return {
       active
     }

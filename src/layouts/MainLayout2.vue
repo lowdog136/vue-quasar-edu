@@ -19,7 +19,7 @@
       </q-toolbar>
     </q-header>
     <q-drawer
-      width="320"
+      :width="320"
       v-model="leftDrawerOpen"
       show-if-above
       bordered
