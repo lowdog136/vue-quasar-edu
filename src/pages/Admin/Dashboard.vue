@@ -36,10 +36,16 @@
           icon-color="primary"
           variant="info"
         >
-          <div class="text-h3 text-primary q-mb-sm">{{ stats.totalGames }}</div>
-          <div class="text-caption">
-            <q-icon name="trending_up" color="positive" size="sm" />
-            <span class="q-ml-xs">+{{ stats.newGamesThisWeek }} за неделю</span>
+          <div v-if="loading" class="text-center q-pa-md">
+            <q-spinner color="primary" size="2em" />
+            <div class="text-caption q-mt-sm">Загрузка данных...</div>
+          </div>
+          <div v-else>
+            <div class="text-h3 text-primary q-mb-sm">{{ stats.totalGames }}</div>
+            <div class="text-caption">
+              <q-icon name="trending_up" color="positive" size="sm" />
+              <span class="q-ml-xs">+{{ stats.newGamesThisWeek }} за неделю</span>
+            </div>
           </div>
         </AdminCard>
       </div>
@@ -52,10 +58,16 @@
           icon-color="success"
           variant="success"
         >
-          <div class="text-h3 text-positive q-mb-sm">{{ stats.totalNews }}</div>
-          <div class="text-caption">
-            <q-icon name="schedule" color="grey" size="sm" />
-            <span class="q-ml-xs">{{ stats.lastNewsDate }}</span>
+          <div v-if="loading" class="text-center q-pa-md">
+            <q-spinner color="positive" size="2em" />
+            <div class="text-caption q-mt-sm">Загрузка данных...</div>
+          </div>
+          <div v-else>
+            <div class="text-h3 text-positive q-mb-sm">{{ stats.totalNews }}</div>
+            <div class="text-caption">
+              <q-icon name="schedule" color="grey" size="sm" />
+              <span class="q-ml-xs">{{ stats.lastNewsDate || 'Нет данных' }}</span>
+            </div>
           </div>
         </AdminCard>
       </div>
@@ -68,10 +80,16 @@
           icon-color="warning"
           variant="warning"
         >
-          <div class="text-h3 text-orange q-mb-sm">{{ stats.totalUsers }}</div>
-          <div class="text-caption">
-            <q-icon name="person_add" color="positive" size="sm" />
-            <span class="q-ml-xs">+{{ stats.newUsersThisWeek }} за неделю</span>
+          <div v-if="loading" class="text-center q-pa-md">
+            <q-spinner color="orange" size="2em" />
+            <div class="text-caption q-mt-sm">Загрузка данных...</div>
+          </div>
+          <div v-else>
+            <div class="text-h3 text-orange q-mb-sm">{{ stats.totalUsers }}</div>
+            <div class="text-caption">
+              <q-icon name="person_add" color="positive" size="sm" />
+              <span class="q-ml-xs">+{{ stats.newUsersThisWeek }} за неделю</span>
+            </div>
           </div>
         </AdminCard>
       </div>
@@ -84,10 +102,16 @@
           icon-color="positive"
           variant="success"
         >
-          <div class="text-h3 text-positive q-mb-sm">{{ stats.systemHealth }}%</div>
-          <div class="text-caption">
-            <q-icon name="fiber_manual_record" :color="systemStatusColor" size="sm" />
-            <span class="q-ml-xs">{{ systemStatus }}</span>
+          <div v-if="loading" class="text-center q-pa-md">
+            <q-spinner color="positive" size="2em" />
+            <div class="text-caption q-mt-sm">Загрузка данных...</div>
+          </div>
+          <div v-else>
+            <div class="text-h3 text-positive q-mb-sm">{{ stats.systemHealth }}%</div>
+            <div class="text-caption">
+              <q-icon name="fiber_manual_record" :color="systemStatusColor" size="sm" />
+              <span class="q-ml-xs">{{ systemStatus }}</span>
+            </div>
           </div>
         </AdminCard>
       </div>
@@ -113,6 +137,14 @@
                     variant="info"
                     size="sm"
                     to="/Admin/NewsSite"
+                    class="full-width"
+                  />
+                  <AdminButton
+                    icon="sports_soccer"
+                    label="Управление играми"
+                    variant="primary"
+                    size="sm"
+                    to="/Admin/TomatAdminPage"
                     class="full-width"
                   />
                   <AdminButton
@@ -262,6 +294,9 @@
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import AdminCard from 'components/Admin/UI/AdminCard.vue'
 import AdminButton from 'components/Admin/UI/AdminButton.vue'
+import { collection, onSnapshot, query, orderBy, where, getDocs } from 'firebase/firestore'
+import { db } from 'src/firebase'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -270,14 +305,15 @@ export default defineComponent({
     AdminButton
   },
   setup () {
+    const $q = useQuasar()
     const loading = ref(false)
 
-    // Mock data - в реальном приложении это будет загружаться из API
+    // Реальные данные из Firebase
     const stats = ref({
-      totalGames: 156,
-      newGamesThisWeek: 12,
-      totalNews: 89,
-      lastNewsDate: '2 дня назад',
+      totalGames: 0,
+      newGamesThisWeek: 0,
+      totalNews: 0,
+      lastNewsDate: '',
       totalUsers: 1247,
       newUsersThisWeek: 23,
       systemHealth: 98
@@ -336,6 +372,115 @@ export default defineComponent({
       }
     ])
 
+    // Функция для получения даты неделю назад
+    const getWeekAgo = () => {
+      const weekAgo = new Date()
+      weekAgo.setDate(weekAgo.getDate() - 7)
+      return weekAgo
+    }
+
+    // Функция для форматирования даты
+    const formatDate = (date) => {
+      if (!date) return ''
+      const d = new Date(date)
+      if (isNaN(d.getTime())) return date
+
+      const months = [
+        'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+        'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+      ]
+      const month = months[d.getMonth()]
+      const day = d.getDate()
+      const year = d.getFullYear()
+      return `${month} ${day}, ${year}`
+    }
+
+    // Загрузка данных игр
+    const loadGamesData = () => {
+      const gamesCollectionRef = collection(db, 'all-games')
+      const gamesQuery = query(gamesCollectionRef, orderBy('datestamp', 'desc'))
+
+      onSnapshot(gamesQuery, (querySnapshot) => {
+        const games = []
+        querySnapshot.forEach((doc) => {
+          const game = {
+            id: doc.id,
+            ...doc.data()
+          }
+          games.push(game)
+        })
+
+        stats.value.totalGames = games.length
+
+        // Подсчет игр за последнюю неделю
+        const weekAgo = getWeekAgo()
+        const recentGames = games.filter(game => {
+          if (game.datestamp) {
+            const gameDate = game.datestamp.toDate ? game.datestamp.toDate() : new Date(game.datestamp)
+            return gameDate >= weekAgo
+          }
+          return false
+        })
+        stats.value.newGamesThisWeek = recentGames.length
+      }, (error) => {
+        console.error('Error loading games data:', error)
+        $q.notify({
+          message: 'Ошибка загрузки данных игр',
+          color: 'negative',
+          icon: 'error',
+          position: 'top'
+        })
+      })
+    }
+
+    // Загрузка данных новостей
+    const loadNewsData = () => {
+      const newsCollectionRef = collection(db, 'siteNews')
+      const newsQuery = query(newsCollectionRef, orderBy('date', 'desc'))
+
+      onSnapshot(newsQuery, (querySnapshot) => {
+        const news = []
+        querySnapshot.forEach((doc) => {
+          const newsItem = {
+            id: doc.id,
+            ...doc.data()
+          }
+          news.push(newsItem)
+        })
+
+        stats.value.totalNews = news.length
+
+        // Получение даты последней новости
+        if (news.length > 0) {
+          const lastNews = news[0]
+          if (lastNews.datenews) {
+            stats.value.lastNewsDate = formatDate(lastNews.datenews)
+          } else if (lastNews.date) {
+            const lastDate = new Date(lastNews.date)
+            const now = new Date()
+            const diffTime = Math.abs(now - lastDate)
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+            if (diffDays === 0) {
+              stats.value.lastNewsDate = 'Сегодня'
+            } else if (diffDays === 1) {
+              stats.value.lastNewsDate = 'Вчера'
+            } else {
+              stats.value.lastNewsDate = `${diffDays} дня назад`
+            }
+          }
+        }
+      }, (error) => {
+        console.error('Error loading news data:', error)
+        $q.notify({
+          message: 'Ошибка загрузки данных новостей',
+          color: 'negative',
+          icon: 'error',
+          position: 'top'
+        })
+      })
+    }
+
     const systemStatus = computed(() => {
       if (stats.value.systemHealth >= 90) return 'Отлично'
       if (stats.value.systemHealth >= 70) return 'Хорошо'
@@ -351,13 +496,37 @@ export default defineComponent({
 
     const refreshData = async () => {
       loading.value = true
-      // Имитация загрузки данных
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      loading.value = false
+      try {
+        // Перезагружаем данные игр и новостей
+        loadGamesData()
+        loadNewsData()
+
+        // Имитация загрузки для UX
+        await new Promise(resolve => setTimeout(resolve, 500))
+
+        $q.notify({
+          message: 'Данные успешно обновлены',
+          color: 'positive',
+          icon: 'check_circle',
+          position: 'top'
+        })
+      } catch (error) {
+        console.error('Error refreshing data:', error)
+        $q.notify({
+          message: 'Ошибка при обновлении данных',
+          color: 'negative',
+          icon: 'error',
+          position: 'top'
+        })
+      } finally {
+        loading.value = false
+      }
     }
 
     onMounted(() => {
       // Загрузка данных при монтировании компонента
+      loadGamesData()
+      loadNewsData()
       refreshData()
     })
 
