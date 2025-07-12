@@ -437,7 +437,10 @@ export default defineComponent({
     // Загрузка данных из Firebase
     const loadStatsData = async () => {
       try {
+        console.log('🔄 Начинаем загрузку статистики...')
         const statsData = await StatsService.getStatsWithRefresh()
+        console.log('📊 Полученные данные статистики:', statsData)
+
         stats.value = {
           totalGames: statsData.totalGames || 0,
           newGamesThisWeek: statsData.newGamesThisWeek || 0,
@@ -448,8 +451,10 @@ export default defineComponent({
           systemHealth: statsData.systemHealth || 98,
           lastUpdated: statsData.lastUpdated || null
         }
+
+        console.log('📈 Обновленная статистика в компоненте:', stats.value)
       } catch (error) {
-        console.error('Error loading stats:', error)
+        console.error('❌ Ошибка загрузки статистики:', error)
         $q.notify({
           message: 'Ошибка загрузки статистики',
           color: 'negative',

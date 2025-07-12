@@ -83,14 +83,31 @@ class StatsService {
    */
   async updateGamesStats () {
     try {
+      console.log('🔍 Начинаем обновление статистики игр...')
+
       // Получаем все игры
       const gamesRef = collection(db, 'all-games')
+      console.log('📊 Запрашиваем коллекцию all-games...')
+
       const gamesSnap = await getDocs(gamesRef)
       const totalGames = gamesSnap.size
+      console.log(`📈 Найдено игр в базе: ${totalGames}`)
+
+      // Выводим информацию о каждой игре для отладки
+      gamesSnap.forEach((doc, index) => {
+        const gameData = doc.data()
+        console.log(`🎮 Игра ${index + 1}:`, {
+          id: doc.id,
+          event: gameData.event,
+          date: gameData.date,
+          datestamp: gameData.datestamp
+        })
+      })
 
       // Подсчитываем игры за последнюю неделю
       const weekAgo = new Date()
       weekAgo.setDate(weekAgo.getDate() - 7)
+      console.log(`📅 Неделю назад: ${weekAgo.toLocaleDateString()}`)
 
       let newGamesThisWeek = 0
       gamesSnap.forEach(doc => {
@@ -99,21 +116,27 @@ class StatsService {
           const gameDate = gameData.datestamp.toDate ? gameData.datestamp.toDate() : new Date(gameData.datestamp)
           if (gameDate >= weekAgo) {
             newGamesThisWeek++
+            console.log(`🆕 Новая игра за неделю: ${gameData.event} (${gameDate.toLocaleDateString()})`)
           }
         }
       })
 
+      console.log(`📊 Игр за неделю: ${newGamesThisWeek}`)
+
       // Обновляем статистику
       const currentStats = await this.getStats()
+      console.log('📋 Текущая статистика:', currentStats)
+
       await this.updateStats({
         ...currentStats,
         totalGames,
         newGamesThisWeek
       })
 
+      console.log('✅ Статистика игр обновлена успешно')
       return { totalGames, newGamesThisWeek }
     } catch (error) {
-      console.error('Error updating games stats:', error)
+      console.error('❌ Ошибка обновления статистики игр:', error)
       throw error
     }
   }
