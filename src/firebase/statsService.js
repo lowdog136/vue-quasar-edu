@@ -251,21 +251,28 @@ class StatsService {
    */
   async getStatsWithRefresh () {
     try {
+      console.log('🔄 Получаем статистику с автообновлением...')
       const stats = await this.getStats()
+      console.log('📊 Текущая статистика из Firebase:', stats)
 
       // Проверяем, когда последний раз обновлялась статистика
       const lastUpdated = stats.lastUpdated?.toDate ? stats.lastUpdated.toDate() : new Date(stats.lastUpdated)
       const now = new Date()
       const hoursSinceUpdate = (now - lastUpdated) / (1000 * 60 * 60)
 
+      console.log(`⏰ Последнее обновление: ${lastUpdated.toLocaleString()}`)
+      console.log(`⏱️ Прошло часов с обновления: ${hoursSinceUpdate.toFixed(2)}`)
+
       // Обновляем статистику, если прошло больше часа
       if (hoursSinceUpdate > 1) {
+        console.log('🔄 Обновляем статистику (прошло больше часа)...')
         return await this.refreshAllStats()
       }
 
+      console.log('✅ Возвращаем кэшированную статистику')
       return stats
     } catch (error) {
-      console.error('Error getting stats with refresh:', error)
+      console.error('❌ Ошибка получения статистики с автообновлением:', error)
       throw error
     }
   }

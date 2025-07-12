@@ -311,6 +311,7 @@ import AdminButton from 'components/Admin/UI/AdminButton.vue'
 import { useQuasar } from 'quasar'
 import StatsService from 'src/firebase/statsService'
 import { ensureStatsExist } from 'src/firebase/initStats'
+import { testFirebaseConnection, testFirebaseWithSnapshot } from 'src/firebase/testConnection'
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -513,6 +514,11 @@ export default defineComponent({
     onMounted(async () => {
       // Убеждаемся, что статистика существует
       await ensureStatsExist()
+
+      // Запускаем тест Firebase для диагностики
+      console.log('🧪 Запускаем тест Firebase...')
+      await testFirebaseConnection()
+      testFirebaseWithSnapshot()
 
       // Загрузка данных при монтировании компонента
       loadStatsData()
