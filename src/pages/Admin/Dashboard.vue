@@ -19,6 +19,17 @@
           >
             <q-tooltip>Обновить данные</q-tooltip>
           </q-btn>
+          <q-btn
+            :loading="loading"
+            icon="sync"
+            color="warning"
+            flat
+            round
+            @click="forceRefreshStats"
+            :disable="loading"
+          >
+            <q-tooltip>Принудительно обновить статистику</q-tooltip>
+          </q-btn>
           <div v-if="stats.lastUpdated" class="text-caption text-grey">
             Обновлено: {{ formatLastUpdated(stats.lastUpdated) }}
           </div>
@@ -511,6 +522,30 @@ export default defineComponent({
       }
     }
 
+    const forceRefreshStats = async () => {
+      loading.value = true
+      try {
+        await StatsService.forceRefreshStats()
+        await loadStatsData()
+        $q.notify({
+          message: 'Статистика принудительно обновлена',
+          color: 'positive',
+          icon: 'sync',
+          position: 'top'
+        })
+      } catch (error) {
+        console.error('Error forcing stats refresh:', error)
+        $q.notify({
+          message: 'Ошибка при принудительном обновлении статистики',
+          color: 'negative',
+          icon: 'error',
+          position: 'top'
+        })
+      } finally {
+        loading.value = false
+      }
+    }
+
     onMounted(async () => {
       // Убеждаемся, что статистика существует
       await ensureStatsExist()
@@ -533,7 +568,8 @@ export default defineComponent({
       systemStatus,
       systemStatusColor,
       refreshData,
-      formatLastUpdated
+      formatLastUpdated,
+      forceRefreshStats
     }
   }
 })
