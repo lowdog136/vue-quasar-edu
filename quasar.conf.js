@@ -80,6 +80,13 @@ module.exports = configure(function (ctx) {
             extensions: ['js', 'ts', 'vue'],
             exclude: ['node_modules/**']
           }])
+
+        // Добавляем Vue feature flags для устранения предупреждений
+        chain.plugin('define')
+          .tap(args => {
+            args[0].__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = JSON.stringify(false)
+            return args
+          })
       }
     },
 
