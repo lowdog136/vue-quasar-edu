@@ -607,6 +607,8 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 20px;
+      overflow: hidden;
     }
 
     .stats-content {
@@ -616,6 +618,27 @@ export default defineComponent({
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
+
+      .text-h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1;
+      }
+
+      .text-caption {
+        line-height: 1.3;
+        margin-bottom: 4px;
+        word-wrap: break-word;
+        max-width: 100%;
+
+        &:last-child {
+          margin-bottom: 0;
+          font-size: 0.75rem;
+          opacity: 0.7;
+        }
+      }
     }
   }
 
@@ -667,6 +690,25 @@ export default defineComponent({
 }
 
 // Responsive
+@media (max-width: 1024px) {
+  .admin-dashboard {
+    .stats-card {
+      height: auto;
+      min-height: 160px;
+
+      .stats-content {
+        .text-h3 {
+          font-size: 2rem;
+        }
+
+        .text-caption {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 16px;
@@ -686,20 +728,25 @@ export default defineComponent({
 
     .stats-card {
       height: auto;
-      min-height: 180px;
+      min-height: 140px;
+
+      .stats-content {
+        .text-h3 {
+          font-size: 1.8rem;
+        }
+
+        .text-caption {
+          font-size: 0.75rem;
+
+          &:last-child {
+            font-size: 0.7rem;
+          }
+        }
+      }
     }
 
     .content-card {
       min-height: 250px;
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .admin-dashboard {
-    .stats-card {
-      height: auto;
-      min-height: 160px;
     }
   }
 }
@@ -730,22 +777,6 @@ export default defineComponent({
 
     &:hover {
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    }
-  }
-
-  // Стили для статистических карточек
-  .stats-card {
-    .q-card__section {
-      padding: 24px;
-    }
-
-    .text-h3 {
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .text-caption {
-      line-height: 1.4;
     }
   }
 
