@@ -35,6 +35,9 @@
           icon="sports_soccer"
           icon-color="primary"
           variant="info"
+          clickable
+          class="clickable-card"
+          @click="$router.push('/Admin/TomatAdminPage')"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="primary" size="2em" />
@@ -45,6 +48,10 @@
             <div class="text-caption">
               <q-icon name="trending_up" color="positive" size="sm" />
               <span class="q-ml-xs">+{{ stats.newGamesThisWeek }} за неделю</span>
+            </div>
+            <div class="text-caption text-grey q-mt-xs">
+              <q-icon name="touch_app" size="xs" />
+              <span class="q-ml-xs">Нажмите для управления</span>
             </div>
           </div>
         </AdminCard>
@@ -57,6 +64,9 @@
           icon="article"
           icon-color="success"
           variant="success"
+          clickable
+          class="clickable-card"
+          @click="$router.push('/Admin/NewsSite')"
         >
           <div v-if="loading" class="text-center q-pa-md">
             <q-spinner color="positive" size="2em" />
@@ -67,6 +77,10 @@
             <div class="text-caption">
               <q-icon name="schedule" color="grey" size="sm" />
               <span class="q-ml-xs">{{ stats.lastNewsDate || 'Нет данных' }}</span>
+            </div>
+            <div class="text-caption text-grey q-mt-xs">
+              <q-icon name="touch_app" size="xs" />
+              <span class="q-ml-xs">Нажмите для управления</span>
             </div>
           </div>
         </AdminCard>
@@ -603,6 +617,23 @@ export default defineComponent({
           justify-content: space-between;
         }
       }
+    }
+  }
+}
+
+// Анимации для кликабельных карточек
+.admin-dashboard {
+  .clickable-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }
