@@ -67,13 +67,16 @@ class StatsService {
    */
   async updateStats (newStats) {
     try {
+      console.log('📝 Обновляем статистику в Firebase:', newStats)
       const statsRef = doc(db, this.statsCollection, this.statsDoc)
       await setDoc(statsRef, {
         ...newStats,
         lastUpdated: serverTimestamp()
       })
+      console.log('✅ Статистика успешно обновлена в Firebase')
+      return newStats
     } catch (error) {
-      console.error('Error updating stats:', error)
+      console.error('❌ Ошибка обновления статистики:', error)
       throw error
     }
   }
@@ -127,14 +130,17 @@ class StatsService {
       const currentStats = await this.getStats()
       console.log('📋 Текущая статистика:', currentStats)
 
-      await this.updateStats({
+      const updatedStats = {
         ...currentStats,
         totalGames,
         newGamesThisWeek
-      })
+      }
+      console.log('🔄 Обновленная статистика для сохранения:', updatedStats)
+
+      await this.updateStats(updatedStats)
 
       console.log('✅ Статистика игр обновлена успешно')
-      return { totalGames, newGamesThisWeek }
+      return updatedStats
     } catch (error) {
       console.error('❌ Ошибка обновления статистики игр:', error)
       throw error
@@ -168,13 +174,15 @@ class StatsService {
 
       // Обновляем статистику
       const currentStats = await this.getStats()
-      await this.updateStats({
+      const updatedStats = {
         ...currentStats,
         totalNews,
         lastNewsDate
-      })
+      }
 
-      return { totalNews, lastNewsDate }
+      await this.updateStats(updatedStats)
+
+      return updatedStats
     } catch (error) {
       console.error('Error updating news stats:', error)
       throw error
@@ -234,14 +242,23 @@ class StatsService {
    */
   async refreshAllStats () {
     try {
-      await Promise.all([
-        this.updateGamesStats(),
-        this.updateNewsStats()
-      ])
+      console.log('🔄 Начинаем обновление всей статистики...')
 
-      return await this.getStats()
+      // Обновляем статистику игр
+      const gamesStats = await this.updateGamesStats()
+      console.log('🎮 Статистика игр обновлена:', gamesStats)
+
+      // Обновляем статистику новостей
+      const newsStats = await this.updateNewsStats()
+      console.log('📰 Статистика новостей обновлена:', newsStats)
+
+      // Получаем финальную статистику
+      const finalStats = await this.getStats()
+      console.log('📊 Финальная статистика:', finalStats)
+
+      return finalStats
     } catch (error) {
-      console.error('Error refreshing all stats:', error)
+      console.error('❌ Ошибка обновления всей статистики:', error)
       throw error
     }
   }
@@ -283,16 +300,37 @@ class StatsService {
 
       // Проверяем, актуальны ли данные
       const isDataStale = stats.totalGames === 0 || hoursSinceUpdate > 1
+      console.log(`🔍 Проверка актуальности данных: totalGames=${stats.totalGames}, hoursSinceUpdate=${hoursSinceUpdate.toFixed(2)}, isDataStale=${isDataStale}`)
 
       if (isDataStale) {
         console.log('🔄 Обновляем статистику (данные устарели или пустые)...')
-        return await this.refreshAllStats()
+        const refreshedStats = await this.refreshAllStats()
+        console.log('✅ Обновленная статистика:', refreshedStats)
+        return refreshedStats
       }
 
       console.log('✅ Возвращаем кэшированную статистику')
       return stats
     } catch (error) {
       console.error('❌ Ошибка получения статистики с автообновлением:', error)
+      throw error
+    }
+  }
+
+  /**
+   * Тестовая функция для проверки обновления статистики
+   */
+  async testStatsUpdate () {
+    try {
+      console.log('🧪 Тестируем обновление статистики...')
+
+      // Принудительно обновляем статистику
+      const updatedStats = await this.forceRefreshStats()
+
+      console.log('✅ Тест завершен. Обновленная статистика:', updatedStats)
+      return updatedStats
+    } catch (error) {
+      console.error('❌ Ошибка тестирования статистики:', error)
       throw error
     }
   }
