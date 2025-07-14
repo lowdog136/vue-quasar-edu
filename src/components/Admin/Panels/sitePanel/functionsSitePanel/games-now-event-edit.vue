@@ -8,13 +8,42 @@
         </q-card-section>
         <q-card-section>
           <q-form class="q-gutter-md">
-            <q-input
+            <q-select
               v-model="newGame.year"
+              :options="yearOptions"
               label="Год"
               hint="Год проведения"
               outlined
               dense
-            />
+              use-input
+              input-debounce="0"
+              @new-value="addNewYear"
+              @filter="onYearFilter"
+              @blur="saveFieldValue('year', newGame.year)"
+            >
+              <template v-slot:append>
+                <q-icon name="history" class="cursor-pointer" @click="showSavedValues('year')" />
+              </template>
+            </q-select>
+
+            <div class="row q-gutter-sm q-mt-xs">
+              <q-btn
+                @click="setAsDefaultYear"
+                color="primary"
+                icon="save"
+                label="Установить как год по умолчанию"
+                size="sm"
+                dense
+              />
+              <q-btn
+                @click="resetToCurrentYear"
+                color="secondary"
+                icon="refresh"
+                label="Сбросить к текущему году"
+                size="sm"
+                dense
+              />
+            </div>
 
             <q-select
               v-model="newGame.event"
@@ -1137,8 +1166,8 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc, Timestamp } from 'firebase/firestore'
-import { db } from 'src/firebase'
+import { collection, onSnapshot, addDoc, doc, deleteDoc, query, orderBy, updateDoc, Timestamp, getDoc, setDoc } from 'firebase/firestore'
+import { db, auth } from 'src/firebase'
 
 export default {
   name: 'GamesNowEventEdit',
@@ -1178,7 +1207,8 @@ export default {
         0: ['', '', '']
       },
       result: '',
-      date: today,
+      date: today, // для выбора
+      dateISO: today, // для хранения ISO
       body: '',
       icon: 'bookmark',
       color: 'primary'
@@ -1196,6 +1226,97 @@ export default {
       'Третья лига, финальный этап',
       'Второй дивизион, зона "Запад"'
     ]
+
+    // Опции для годов (реактивный массив)
+    const yearOptions = ref(['2025', '2024', '2023', '2022', '2021', '2020'])
+
+    // Функция для добавления нового года
+    const addNewYear = (value, done) => {
+      if (value && !yearOptions.value.includes(value)) {
+        yearOptions.value.unshift(value) // добавляем в начало списка
+        // Сохраняем в localStorage
+        const storageKey = 'savedValues_year'
+        let savedYears = JSON.parse(localStorage.getItem(storageKey) || '[]')
+        savedYears = savedYears.filter(v => v !== value)
+        savedYears.unshift(value)
+        if (savedYears.length > 100) {
+          savedYears = savedYears.slice(0, 100)
+        }
+        localStorage.setItem(storageKey, JSON.stringify(savedYears))
+      }
+      if (done) {
+        done(value)
+      }
+    }
+
+    // Функция для обработки фильтрации в поле года
+    const onYearFilter = (val, update, abort) => {
+      // Если введено значение, сохраняем его
+      if (val && val.trim()) {
+        newGame.value.year = val.trim()
+      }
+      update()
+    }
+
+    // Загружаем сохраненные годы при инициализации
+    const loadSavedYears = () => {
+      const storageKey = 'savedValues_year'
+      const savedYears = JSON.parse(localStorage.getItem(storageKey) || '[]')
+      if (savedYears.length > 0) {
+        yearOptions.value = [...savedYears, ...yearOptions.value.filter(year => !savedYears.includes(year))]
+      }
+    }
+
+    // Вызываем загрузку сохраненных годов
+    loadSavedYears()
+
+    // Функции для работы с настройками пользователя
+    const getUserId = () => {
+      return auth.currentUser?.uid || 'admin'
+    }
+
+    const loadUserDefaultYear = async () => {
+      try {
+        const userId = getUserId()
+        const userSettingsRef = doc(db, 'user-settings', userId)
+        const userSettingsDoc = await getDoc(userSettingsRef)
+
+        if (userSettingsDoc.exists() && userSettingsDoc.data().defaultYear) {
+          newGame.value.year = userSettingsDoc.data().defaultYear
+          // Обновляем опции годов, если года нет в списке
+          if (!yearOptions.value.includes(newGame.value.year)) {
+            yearOptions.value.unshift(newGame.value.year)
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user default year:', error)
+      }
+    }
+
+    const saveUserDefaultYear = async (year) => {
+      try {
+        const userId = getUserId()
+        const userSettingsRef = doc(db, 'user-settings', userId)
+        await setDoc(userSettingsRef, {
+          defaultYear: year,
+          lastUpdated: Timestamp.now()
+        }, { merge: true })
+      } catch (error) {
+        console.error('Error saving user default year:', error)
+      }
+    }
+
+    const resetToCurrentYear = () => {
+      const currentYear = new Date().getFullYear().toString()
+      newGame.value.year = currentYear
+      saveUserDefaultYear(currentYear)
+    }
+
+    const setAsDefaultYear = () => {
+      if (newGame.value.year) {
+        saveUserDefaultYear(newGame.value.year)
+      }
+    }
 
     const iconOptions = [
       'bookmark',
@@ -1215,9 +1336,21 @@ export default {
       'warning'
     ]
 
+    // Функция для форматирования даты в виде 'июль 14'
+    function formatDateRu (dateStr) {
+      const months = [
+        'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+        'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+      ]
+      const [year, month, day] = dateStr.split('-')
+      const monthName = months[parseInt(month, 10) - 1] || ''
+      return `${monthName} ${parseInt(day, 10)}`
+    }
+
     // Функции для работы с сохраненными значениями
     const getFieldLabel = (field) => {
       const labels = {
+        year: 'Год проведения',
         place: 'Место проведения',
         tour: 'Тур/Этап',
         nameTeamHome: 'Домашняя команда',
@@ -1237,15 +1370,18 @@ export default {
       const storageKey = `savedValues_${field}`
       let savedValuesArray = JSON.parse(localStorage.getItem(storageKey) || '[]')
 
-      // Добавляем значение, если его еще нет
-      if (!savedValuesArray.includes(value.trim())) {
-        savedValuesArray.push(value.trim())
-        // Ограничиваем количество сохраненных значений до 20
-        if (savedValuesArray.length > 20) {
-          savedValuesArray = savedValuesArray.slice(-20)
-        }
-        localStorage.setItem(storageKey, JSON.stringify(savedValuesArray))
+      // Удаляем значение, если оно уже есть (чтобы потом добавить в конец)
+      savedValuesArray = savedValuesArray.filter(v => v !== value.trim())
+
+      // Добавляем значение в конец (самое свежее)
+      savedValuesArray.push(value.trim())
+
+      // Ограничиваем количество сохраненных значений до 100
+      if (savedValuesArray.length > 100) {
+        savedValuesArray = savedValuesArray.slice(-100)
       }
+
+      localStorage.setItem(storageKey, JSON.stringify(savedValuesArray))
     }
 
     const showSavedValues = (field) => {
@@ -1261,6 +1397,13 @@ export default {
       let activeGoalIndex, activeGoalIndex2
 
       switch (currentField.value) {
+        case 'year':
+          if (editAllDialog.value && editingGame.value) {
+            editingGame.value.year = value
+          } else {
+            newGame.value.year = value
+          }
+          break
         case 'place':
           if (editAllDialog.value && editingGame.value) {
             editingGame.value.place = value
@@ -1457,6 +1600,10 @@ export default {
         }
       }
 
+      // Формируем значения дат
+      const dateISO = newGame.value.date // YYYY-MM-DD
+      const dateForUser = formatDateRu(dateISO)
+      const datestamp = new Date(dateISO)
       addDoc(gamesCollectionRef, {
         event: newGame.value.event,
         title: newGame.value.title || '',
@@ -1469,8 +1616,9 @@ export default {
         nameCityTeamAway: newGame.value.nameCityTeamAway,
         goalTeamHome: newGame.value.goalTeamHome,
         goalTeamAway: newGame.value.goalTeamAway,
-        date: newGame.value.date,
-        datestamp: Timestamp.now(),
+        date: dateForUser, // строка для пользователя
+        dateISO, // ISO-строка
+        datestamp: Timestamp.fromDate(datestamp), // timestamp выбранной даты
         done: false,
         icon: newGame.value.icon,
         place: newGame.value.place,
@@ -1480,10 +1628,11 @@ export default {
         result: newGame.value.result
       })
 
-      // Сброс формы с текущей датой
+      // Сброс формы с сохранением текущего года пользователя
       const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD формат
+      const currentUserYear = newGame.value.year // Сохраняем текущий год пользователя
       newGame.value = {
-        year: '2025',
+        year: currentUserYear, // Используем год пользователя вместо '2025'
         event: 'Чемпионат СЗФО',
         place: '',
         tour: '',
@@ -1498,6 +1647,7 @@ export default {
         },
         result: '',
         date: today,
+        dateISO: today,
         body: '',
         icon: 'bookmark',
         color: 'primary'
@@ -1629,6 +1779,7 @@ export default {
         })
         games.value = fbGames
       })
+      loadUserDefaultYear() // Загружаем настройки пользователя при монтировании
     })
 
     // Функция открытия диалога редактирования всех полей
@@ -1711,6 +1862,7 @@ export default {
       editingGame,
       newGame,
       eventOptions,
+      yearOptions,
       iconOptions,
       colorOptions,
       formatDate,
@@ -1736,7 +1888,10 @@ export default {
       showSavedValues,
       selectSavedValue,
       removeSavedValue,
-      clearAllSavedValues
+      clearAllSavedValues,
+      onYearFilter,
+      resetToCurrentYear,
+      setAsDefaultYear
     }
   }
 }
